@@ -252,6 +252,9 @@
                             <p style="margin:0; color:var(--text-soft);">Respond to user interactions</p>
                         </div>
                     </div>
+                    <aside class="notes">
+                        Overview of today's 6 pillars. Emphasize that by end of day they'll be able to build a small interactive app. Each topic builds on the previous.
+                    </aside>
                 </section>
 
                 <section>
@@ -279,6 +282,9 @@
                             <p style="margin:0; color:var(--text-soft);">Updates only what changed — stays fast.</p>
                         </div>
                     </div>
+                    <aside class="notes">
+                        Key distinction: React is a LIBRARY, not a framework (unlike Angular). It handles just the View layer. "Declarative" means you describe the end state and React figures out the DOM changes. Virtual DOM is a lightweight JS representation — diffing algorithm compares old vs new tree.
+                    </aside>
                 </section>
 
                 <section>
@@ -311,6 +317,9 @@
                     <style>
                         @keyframes spa-pulse { 0%,100%{opacity:0.35} 50%{opacity:1} }
                     </style>
+                    <aside class="notes">
+                        Traditional multi-page app: every click = full page reload from server. SPA loads ONE HTML shell, then JS handles all navigation. Mention tradeoffs: initial load can be heavier, SEO requires extra work (hence SSR/Next.js later). CSR is the default for Vite + React. Ask class: "Who has used Gmail or Google Maps?" — those are SPAs.
+                    </aside>
                 </section>
 
                 <section>
@@ -336,6 +345,9 @@
                     <p class="small-text" style="margin-top:0.75rem; text-align:center;">
                         React is the most widely used UI library — backed by Meta, used at scale worldwide.
                     </p>
+                    <aside class="notes">
+                        Emphasize the job-market angle: React dominates job listings. Ecosystem is massive — React Router, Redux/Zustand, React Query, testing with Vitest/RTL. Compare briefly: Angular = opinionated full framework, Vue = similar but smaller community. React lets you pick your own tools.
+                    </aside>
                 </section>
 
                 <section>
@@ -345,6 +357,9 @@
                              alt="fast typing"
                              style="width:520px; border-radius:12px; border:2px solid rgba(97,218,251,0.3); margin-top:0.5rem;">
                     </div>
+                    <aside class="notes">
+                        Transition slide — pause here. Ask if there are questions about the theory before we move to hands-on. From here on it's code-focused.
+                    </aside>
                 </section>
 
                 <section>
@@ -373,6 +388,9 @@ npm run dev</code></pre>
                             </div>
                         </div>
                     </div>
+                    <aside class="notes">
+                        Walk through each command live in the terminal. Explain that `--template react-ts` gives us TypeScript out of the box. After `npm run dev`, show the browser at localhost:5173. Point out the instant startup — no webpack bundling wait. If students have issues, common fix: make sure Node >= 18.
+                    </aside>
                 </section>
 
                 <section>
@@ -400,6 +418,9 @@ npm run dev</code></pre>
                             <p style="margin:0; color:var(--text-soft);">Production bundle is minified and tree-shaken automatically</p>
                         </div>
                     </div>
+                    <aside class="notes">
+                        Vite (French for "fast") uses native ES modules in dev — no bundling needed. Only the file you changed gets sent to the browser. In production, it uses Rollup under the hood for optimized output. CRA is deprecated since 2023 — Vite is the recommended replacement. Mention esbuild for dependency pre-bundling (Go-based, extremely fast).
+                    </aside>
                 </section>
 
                 <section>
@@ -410,6 +431,9 @@ npm run dev</code></pre>
                              alt="demo time"
                              style="max-width:820px; max-height:420px; border-radius:12px; border:2px solid rgba(97,218,251,0.25);">
                     </div>
+                    <aside class="notes">
+                        DEMO: Run `npm create vite@latest demo-app -- --template react-ts` live. Show the generated folder structure: src/App.tsx, main.tsx, vite.config.ts. Edit App.tsx to show HMR in action — change the text and watch the browser update without reload. ~5 minutes.
+                    </aside>
                 </section>
 
                 <section>
@@ -441,6 +465,9 @@ export default Greeting;
                     <p class="fragment small-text" style="margin-top:0.6rem;">
                         💡 Components let you break the UI into small, independent, reusable pieces.
                     </p>
+                    <aside class="notes">
+                        Stress the naming convention: PascalCase = component (Greeting), camelCase = regular function. React distinguishes components from HTML elements by the capital letter. The `import React` line is no longer needed in React 17+ with the new JSX transform, but shown here for clarity. Ask: "What happens if we name it `greeting` lowercase?" — React treats it as an HTML tag.
+                    </aside>
                 </section>
 
                 <section>
@@ -463,6 +490,9 @@ _jsx("h1", { children: ["Hello, ", name, "!"] });
                             </code></pre>
                         </div>
                     </div>
+                    <aside class="notes">
+                        JSX is NOT HTML — it's syntactic sugar that compiles to function calls. Key JSX rules: 1) Must return a single root element (use Fragment <> if needed), 2) All tags must close, 3) Use className not class, htmlFor not for. Curly braces {} let you embed any JS expression. The new JSX transform (React 17+) means you don't need `import React` at the top anymore.
+                    </aside>
                 </section>
 
                                 <section>
@@ -485,6 +515,9 @@ _jsx("h1", { children: ["Hello, ", name, "!"] });
                                                         </div>
                                                 </div>
                                         </div>
+                                        <aside class="notes">
+                                                Think of it like a family tree. App is the grandparent. Each component can have children. This tree structure is how React knows what to render and in what order. Draw parallel to HTML DOM tree — same concept, but with your custom components. Ask: "If Greeting re-renders, does Header also re-render?" Answer: by default no, only the subtree.
+                                        </aside>
                                 </section>
 
                                 <section>
@@ -510,6 +543,57 @@ export default App;
                                                 </code></pre>
                                                 <p class="small-text"><code>App</code> is the root — it composes <code>Header</code>, <code>Greeting</code>, and <code>Footer</code> into a single UI tree.</p>
                                         </div>
+                                        <aside class="notes">
+                                                Show this in the actual demo project. Open App.tsx and point out: imports at top, function body returns JSX, self-closing tags for components. The wrapping div is needed because JSX must return one root. Mention Fragment shorthand as alternative. Ask students to create their own component file and import it into App.
+                                        </aside>
+                                </section>
+
+                                <!-- EXERCISE SLIDE -->
+                                <section>
+                                        <div style="display:flex; flex-direction:column; gap:1.2rem; align-items:center; text-align:center;">
+                                                <h3 style="margin:0;">&#x1F6D2; Your Turn &mdash; Build a Product Card</h3>
+                                                <p style="margin:0; font-size:0.82em; color:var(--text-soft);">Create a <code>ProductCard</code> component with <strong style="color:var(--accent);">3 sub-components</strong> &mdash; sell the world's most ridiculous product</p>
+
+                                                <div style="display:flex; gap:1rem; align-items:stretch; margin-top:0.4rem;">
+                                                        <div class="card" style="font-size:0.8em; text-align:center; flex:1;">
+                                                                <div style="font-size:1.8em;">&#x2728;</div>
+                                                                <p style="margin:0.3rem 0 0; color:var(--accent); font-weight:700;">ProductTitle.tsx</p>
+                                                                <p style="margin:0.2rem 0 0; color:var(--text-soft);">Returns an <code>&lt;h2&gt;</code> with<br>a ridiculous product name<br><em style="font-size:0.85em;">"Invisible Umbrella 3000"</em></p>
+                                                        </div>
+                                                        <div class="card" style="font-size:0.8em; text-align:center; flex:1;">
+                                                                <div style="font-size:1.8em;">&#x1F5BC;&#xFE0F;</div>
+                                                                <p style="margin:0.3rem 0 0; color:var(--accent); font-weight:700;">ProductImage.tsx</p>
+                                                                <p style="margin:0.2rem 0 0; color:var(--text-soft);">Returns an <code>&lt;img&gt;</code> tag<br>(use any placeholder URL)<br><em style="font-size:0.85em;">or just an emoji &#x1F984;</em></p>
+                                                        </div>
+                                                        <div class="card" style="font-size:0.8em; text-align:center; flex:1;">
+                                                                <div style="font-size:1.8em;">&#x1F4B8;</div>
+                                                                <p style="margin:0.3rem 0 0; color:var(--accent); font-weight:700;">ProductPrice.tsx</p>
+                                                                <p style="margin:0.2rem 0 0; color:var(--text-soft);">Returns a <code>&lt;p&gt;</code> with<br>an absurd price<br><em style="font-size:0.85em;">"Only $9,999,999.99"</em></p>
+                                                        </div>
+                                                </div>
+
+                                                <pre style="margin:0; font-size:0.72em; text-align:left;"><code class="tsx">// ProductCard.tsx
+import ProductTitle from './ProductTitle';
+import ProductImage from './ProductImage';
+import ProductPrice from './ProductPrice';
+
+function ProductCard() {
+  return (
+    &lt;div&gt;
+      &lt;ProductTitle /&gt;
+      &lt;ProductImage /&gt;
+      &lt;ProductPrice /&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default ProductCard;</code></pre>
+
+                                                <p style="margin:0; font-size:0.72em; color:var(--text-soft);">&#x23F1;&#xFE0F; 5 minutes &mdash; the weirder the product, the better! &#x1F3C6;</p>
+                                        </div>
+                                        <aside class="notes">
+                                                Fun exercise &mdash; encourage silly products (Solar-Powered Flashlight, Waterproof Sponge, Diet Water). The real goal is muscle-memory: create file, write function, export, import, compose. Walk around and make sure everyone's dev server is running. If someone finishes early, challenge them to import ProductCard into App.tsx or add a 4th sub-component (ProductReviews.tsx with fake 1-star reviews?).
+                                        </aside>
                                 </section>
 
                                 <section>
@@ -560,6 +644,9 @@ export default App;
                                                         </div>
                                                 </div>
                                         </div>
+                                        <aside class="notes">
+                                                Props are how parents talk to children. One-way data flow is a core React principle — makes debugging easy because data always flows downhill. If a child needs to communicate back, it calls a callback function passed as a prop (we'll see this later with lifting state up).
+                                        </aside>
                                 </section>
 
                                 <section>
@@ -595,6 +682,9 @@ export default App;
                                                 </div>
                                                 <p class="small-text">The type <code>GreetingProps</code> enforces the shape — TypeScript will error if <code>name</code> is missing or the wrong type.</p>
                                         </div>
+                                        <aside class="notes">
+                                                Walk through both sides: child declares what it expects via a type, parent passes the actual value. Show what happens if you omit `name` or pass a number — TS red squiggles. Destructuring in the function signature is the idiomatic React pattern. Mention: you can also use `interface` instead of `type`.
+                                        </aside>
                                 </section>
 
                                 <!-- SLIDE 13 – Events: HTML vs React -->
@@ -634,6 +724,9 @@ export default MyButton;
                                                 </div>
                                                 <p class="small-text">React uses <span class="highlight">camelCase</span> prop names and expects a <span class="highlight">function reference</span>, not a string.</p>
                                         </div>
+                                        <aside class="notes">
+                                                Key differences from HTML: 1) camelCase (onClick not onclick), 2) Pass a function reference, don't call it, 3) No quotes around the handler. React uses synthetic events that wrap native browser events for cross-browser consistency. The event object is passed automatically as the first argument.
+                                        </aside>
                                 </section>
 
                                 <!-- SLIDE 14 – Event Rules -->
@@ -676,6 +769,9 @@ export default MyButton;
                                                         </code></pre>
                                                 </div>
                                         </div>
+                                        <aside class="notes">
+                                                Common mistake: writing onClick={handleClick()} — this CALLS the function immediately on render instead of waiting for a click. The inline arrow form is useful when you need to pass arguments. Walk through each rule with the class.
+                                        </aside>
                                 </section>
 
                                 <!-- SLIDE 15 – State & useState -->
@@ -718,6 +814,9 @@ export default MyButton;
                                                 </div>
 
                                         </div>
+                                        <aside class="notes">
+                                                State is the BIG concept of the day. Props = data from outside, State = data owned internally. When state changes, React re-renders the component automatically. The useState hook returns a tuple: [currentValue, setterFunction]. The initial value is only used on the very first render.
+                                        </aside>
                                 </section>
 
                                 <!-- SLIDE 16 – useState Step 1: Declaration & Initial Render -->
@@ -748,6 +847,9 @@ export default Counter;
                                                         </div>
                                                 </div>
                                         </div>
+                                        <aside class="notes">
+                                                Walk through the Counter step by step. useState(0) sets initial count to 0. The button's onClick fires setCount with a functional update. Show this live in the demo project — students should follow along.
+                                        </aside>
                                 </section>
 
                                 <!-- SLIDE 16 – useState Step 2: Button Click & Setter Called -->
@@ -778,6 +880,9 @@ export default Counter;
                                                         </div>
                                                 </div>
                                         </div>
+                                        <aside class="notes">
+                                                When the button is clicked, setCount is called. React doesn't update immediately — it queues the update and schedules a re-render. The functional form (c => c + 1) ensures we always read the latest value.
+                                        </aside>
                                 </section>
 
                                 <!-- SLIDE 16 – useState Step 3: Re-render with new value -->
@@ -808,6 +913,9 @@ export default Counter;
                                                         </div>
                                                 </div>
                                         </div>
+                                        <aside class="notes">
+                                                On re-render, React calls Counter() again. This time useState returns [1, setCount]. The button text updates. This cycle repeats every click. Key insight: the component function runs again from top to bottom on every re-render.
+                                        </aside>
                                 </section>
 
                                 <!-- SLIDE 17 – Functional Updates -->
@@ -836,6 +944,9 @@ setCount(prev =&gt; prev + 1);
                                                         </div>
                                                 </div>
                                         </div>
+                                        <aside class="notes">
+                                                This trips up many beginners. If you call setCount(count + 1) twice in the same event handler, you get count+1 both times (not count+2) because count is a stale closure. The functional form always receives the actual current value. Rule of thumb: if new state depends on old state, use the functional form.
+                                        </aside>
                                 </section>
 
                                 <!-- SLIDE 18 – Rules of Hooks -->
@@ -873,6 +984,9 @@ if (isLoggedIn) { /* use x here */ }
                                                         </div>
                                                 </div>
                                         </div>
+                                        <aside class="notes">
+                                                React relies on call ORDER to track which hook is which. If you put a hook inside an if-statement, the order could change between renders and everything breaks. The ESLint plugin `eslint-plugin-react-hooks` catches this automatically. We'll see more hooks (useEffect, useRef) in later days.
+                                        </aside>
                                 </section>
 
                                 <!-- SLIDE 19 – State with Objects & Arrays -->
@@ -907,6 +1021,9 @@ setItems(prev =&gt; prev.filter(i =&gt; i !== 'b'));
                                                 </div>
                                                 <p class="small-text">Never mutate state directly — always return a <span class="highlight">new reference</span> so React detects the change.</p>
                                         </div>
+                                        <aside class="notes">
+                                                This is the #1 state bug beginners hit. React uses reference equality (===) to detect changes. If you mutate the same object, the reference doesn't change and React skips the re-render. Spread operator creates a shallow copy — that's a new reference. For arrays: use map/filter/spread, never push/splice directly.
+                                        </aside>
                                 </section>
 
                                 <!-- SLIDE 20 – Lifting State Up -->
@@ -951,6 +1068,9 @@ function Parent() {
                                                         </div>
                                                 </div>
                                         </div>
+                                        <aside class="notes">
+                                                Lifting state up is how siblings share data. Find the closest common ancestor, put useState there, pass value down as props and setter as a callback. This pattern appears everywhere in React apps. Preview: when prop-drilling gets deep, we'll use Context (Day 3).
+                                        </aside>
                                 </section>
             </section>
         </div>
