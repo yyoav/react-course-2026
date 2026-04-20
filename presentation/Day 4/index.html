@@ -1,0 +1,585 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Day 4 - Performance Optimization</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/black.min.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/highlight/monokai.min.css">
+    
+    <style>
+        :root {
+            --accent: #61dafb;
+            --accent-soft: rgba(97, 218, 251, 0.14);
+            --text-soft: #c8d2de;
+            --surface: rgba(255, 255, 255, 0.05);
+            --surface-border: rgba(255, 255, 255, 0.14);
+        }
+        .reveal {
+            background: radial-gradient(circle at 10% 15%, #1f2f47 0%, #10131a 45%, #080a0f 100%);
+        }
+        .reveal h1, .reveal h2, .reveal h3 { text-transform: none; letter-spacing: 0.01em; }
+        .reveal h1 { text-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+        .reveal ul { font-size: 0.86em; }
+        .reveal code { font-size: 0.9em; }
+        .reveal pre {
+            border-radius: 12px;
+            border: 1px solid var(--surface-border);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
+        }
+        .reveal table {
+            font-size: 0.75em;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--surface-border);
+        }
+        .reveal table th,
+        .reveal table td {
+            padding: 0.5rem 0.7rem;
+            border-color: rgba(255,255,255,0.12);
+        }
+        .small-text { font-size: 0.7em; color: var(--text-soft); }
+        .highlight { color: var(--accent); }
+        .two-col { display: flex; gap: 1.5rem; align-items: flex-start; }
+        .two-col > div { flex: 1; }
+        .card {
+            padding: 0.9rem 1rem;
+            border: 1px solid var(--surface-border);
+            border-radius: 12px;
+            background: var(--surface);
+            backdrop-filter: blur(4px);
+        }
+        .step-card { font-size: 0.82em; line-height: 1.4; }
+        .step-card ol { margin: 0; padding-left: 1.2rem; }
+        .code-card pre { margin: 0; font-size: 0.7em; }
+        .hero {
+            display: grid;
+            grid-template-columns: 1.25fr 1fr;
+            gap: 1.6rem;
+            align-items: center;
+            text-align: left;
+        }
+        .hero p { color: var(--text-soft); }
+        .hero-visual {
+            padding: 1rem;
+            border: 1px solid var(--surface-border);
+            border-radius: 16px;
+            background: linear-gradient(160deg, rgba(97,218,251,0.14), rgba(30,41,59,0.35));
+            text-align: center;
+        }
+        .hero-visual img {
+            width: min(200px, 100%);
+            height: auto;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.35));
+        }
+        .logo-row {
+            margin-top: 0.8rem;
+            display: flex;
+            gap: 0.8rem;
+            align-items: center;
+        }
+        .logo-row img {
+            width: 34px;
+            height: 34px;
+            object-fit: contain;
+            opacity: 0.92;
+        }
+        .image-frame {
+            border: 1px solid var(--surface-border);
+            border-radius: 14px;
+            background: rgba(15, 23, 42, 0.55);
+            padding: 0.8rem;
+            text-align: center;
+        }
+        .concept-img {
+            width: min(240px, 100%);
+            height: auto;
+        }
+        .diagram-svg {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            background: rgba(10, 16, 26, 0.55);
+        }
+        .badge {
+            display: inline-block;
+            padding: 0.2rem 0.55rem;
+            border-radius: 999px;
+            background: var(--accent-soft);
+            color: var(--accent);
+            font-size: 0.5em;
+            border: 1px solid rgba(97,218,251,0.45);
+            margin-top: 0.5rem;
+        }
+        .roadmap {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.8rem;
+        }
+        .roadmap span {
+            font-size: 0.45em;
+            border: 1px solid rgba(97,218,251,0.4);
+            background: rgba(97,218,251,0.1);
+            color: #d5f6ff;
+            border-radius: 999px;
+            padding: 0.23rem 0.55rem;
+        }
+        .check-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            font-size: 0.78em;
+            line-height: 1.65;
+        }
+        .check-list li::before {
+            content: "✓ ";
+            color: var(--accent);
+        }
+        .adv-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.7rem;
+            margin-top: 0.7rem;
+            text-align: left;
+            font-size: 0.58em;
+        }
+        .adv-item {
+            border: 1px solid var(--surface-border);
+            border-radius: 10px;
+            background: rgba(15, 23, 42, 0.45);
+            padding: 0.55rem;
+        }
+        .flow-caption {
+            margin-top: 0.45rem;
+            font-size: 0.5em;
+            color: var(--text-soft);
+        }
+        .split-code {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.9rem;
+            text-align: left;
+            margin-top: 0.75rem;
+        }
+        .label {
+            font-size: 0.5em;
+            color: #8fb5d8;
+            margin-bottom: 0.2rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+        .mini {
+            font-size: 0.62em;
+            line-height: 1.5;
+            color: var(--text-soft);
+            margin-top: 0.5rem;
+        }
+        @media (max-width: 900px) {
+            .hero,
+            .two-col {
+                grid-template-columns: 1fr;
+                display: block;
+            }
+            .split-code,
+            .adv-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero-visual,
+            .two-col > div + div {
+                margin-top: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <section>
+                <section>
+                    <div class="hero">
+                        <div>
+                            <h1>Day 4</h1>
+                            <h3>Performance Optimization</h3>
+                            <p>Memoization, Rendering, and React Compiler</p>
+                            <span class="badge">Measure, then optimize</span>
+                        </div>
+                        <div class="hero-visual">
+                            <svg class="diagram-svg" viewBox="0 0 520 220" role="img" aria-label="Performance chart illustration">
+                                <rect x="55" y="55" width="60" height="130" rx="8" fill="#334155"/>
+                                <rect x="145" y="90" width="60" height="95" rx="8" fill="#334155"/>
+                                <rect x="235" y="120" width="60" height="65" rx="8" fill="#334155"/>
+                                <rect x="325" y="75" width="60" height="110" rx="8" fill="#334155"/>
+                                <rect x="415" y="105" width="60" height="80" rx="8" fill="#61dafb"/>
+                                <text x="260" y="32" fill="#dbeafe" text-anchor="middle" font-size="16">Fewer unnecessary renders = smoother UI</text>
+                            </svg>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h3>Slide 1 – Why Performance Optimization Matters</h3>
+                    <ul>
+                        <li>Large component trees and frequent re-renders</li>
+                        <li>Expensive calculations or passing functions as props</li>
+                        <li>Slow UI interactions</li>
+                        <li>React is fast, but unnecessary re-renders hurt</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>Slide 2 – How React Renders (Quick Refresher)</h3>
+                    <ul>
+                        <li>A component re-renders when its state changes</li>
+                        <li>When its props change</li>
+                        <li>When its parent re-renders</li>
+                        <li>By default: parent render triggers child renders</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>Slide 3 – What Is an Unnecessary Re-render?</h3>
+                    <pre><code class="tsx">
+function Parent() {
+  const [count, setCount] = useState(0);
+  return (
+    <>
+      <button onClick={() => setCount(count + 1)}>+</button>
+      <Heavy Component />
+    </>
+  );
+}
+                    </code></pre>
+                    <p class="small-text">HeavyComponent re-renders even though it does not use count. Optimization helps.</p>
+                </section>
+
+                <section>
+                    <h3>Slide 4 – Optimization Tools Overview</h3>
+                    <table>
+                        <thead><tr><th>Tool</th><th>Purpose</th></tr></thead>
+                        <tbody>
+                            <tr><td>React.memo</td><td>Prevent unnecessary re-renders</td></tr>
+                            <tr><td>useMemo</td><td>Cache expensive calculations</td></tr>
+                            <tr><td>useCallback</td><td>Cache function references</td></tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <section>
+                    <h3>Slide 5 – What Is React.memo?</h3>
+                    <ul>
+                        <li>Higher-order component</li>
+                        <li>Memoizes a component</li>
+                        <li>Skips re-render if props did not change</li>
+                    </ul>
+                    <pre><code class="tsx">
+const MyComponent = React.memo(Component);
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h3>Slide 6 – React.memo Example</h3>
+                    <pre><code class="tsx">
+const Greeting = React.memo(function Greeting({ name }: { name: string }) {
+  console.log("Greeting rendered");
+  return <h1>Hello {name}</h1>;
+});
+                    </code></pre>
+                    <p class="small-text">Re-renders only if name changes.</p>
+                </section>
+
+                <section>
+                    <h3>Slide 7 – Without vs With React.memo</h3>
+                    <ul>
+                        <li>Without: parent renders → child renders always</li>
+                        <li>With: parent renders → child renders only if props changed</li>
+                        <li>React.memo uses shallow prop comparison</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>Slide 8 – When React.memo Helps</h3>
+                    <ul>
+                        <li>Heavy components or long lists</li>
+                        <li>UI components with stable props</li>
+                        <li>Not useful when props change often or component is cheap</li>
+                        <li>Rule: measure first, optimize second</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>Slide 9 – What Is useMemo?</h3>
+                    <ul>
+                        <li>Memoizes a value</li>
+                        <li>Avoids recalculating expensive logic on every render</li>
+                    </ul>
+                    <pre><code class="tsx">
+const value = useMemo(() => compute(), [deps]);
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h3>Slide 10 – Problem: Expensive Calculation</h3>
+                    <pre><code class="tsx">
+function Component({ items }: { items: number[] }) {
+  const total = items.reduce((sum, n) => sum + n, 0);
+  return <p>Total: {total}</p>;
+}
+                    </code></pre>
+                    <p class="small-text">Recalculated on every render even if items did not change.</p>
+                </section>
+
+                <section>
+                    <h3>Slide 11 – useMemo Example</h3>
+                    <pre><code class="tsx">
+const total = useMemo(() => {
+  return items.reduce((sum, n) => sum + n, 0);
+}, [items]);
+                    </code></pre>
+                    <p class="small-text">Recalculates only when items changes.</p>
+                </section>
+
+                <section>
+                    <h3>Slide 12 – What useMemo Actually Does</h3>
+                    <ul>
+                        <li>Caches the result, not the function</li>
+                        <li>Dependency array controls recomputation</li>
+                        <li>Wrong dependencies cause bugs</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>Slide 13 – When to Use useMemo</h3>
+                    <ul>
+                        <li>Expensive calculations used in rendering</li>
+                        <li>Dependencies are stable</li>
+                        <li>Skip for simple calculations or premature optimization</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>Slide 14 – Why useCallback Exists</h3>
+                    <ul>
+                        <li>Functions are recreated on every render</li>
+                        <li>New function references make props appear changed</li>
+                    </ul>
+                    <pre><code class="tsx">
+const handleClick = () => setCount(count + 1);
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h3>Slide 15 – useCallback Explained</h3>
+                    <pre><code class="tsx">
+const fn = useCallback(() => {
+  /* logic */
+}, [deps]);
+                    </code></pre>
+                    <p class="small-text">Memoizes a function to keep the same reference between renders.</p>
+                </section>
+
+                <section>
+                    <h3>Slide 16 – useCallback Example</h3>
+                    <pre><code class="tsx">
+const handleClick = useCallback(() => {
+  setCount(prev => prev + 1);
+}, []);
+                    </code></pre>
+                    <p class="small-text">Stable function reference; great for memoized children.</p>
+                </section>
+
+                <section>
+                    <h3>Slide 17 – React.memo + useCallback Together</h3>
+                    <pre><code class="tsx">
+const Button = React.memo(({ onClick }) => {
+  return <button onClick={onClick}>Click</button>;
+});
+
+const onClick = useCallback(() => {
+  setCount(c => c + 1);
+}, []);
+                    </code></pre>
+                    <p class="small-text">Common pattern: memoized child + stable handler.</p>
+                </section>
+
+                <section>
+                    <h3>Slide 18 – useMemo vs useCallback</h3>
+                    <table>
+                        <thead><tr><th>useMemo</th><th>useCallback</th></tr></thead>
+                        <tbody>
+                            <tr><td>Memoizes a value</td><td>Memoizes a function</td></tr>
+                            <tr><td>Returns the result</td><td>Returns the function</td></tr>
+                            <tr><td>useMemo(() =&gt; value)</td><td>useCallback(() =&gt; fn)</td></tr>
+                        </tbody>
+                    </table>
+                    <p class="small-text">useCallback(fn) is roughly useMemo(() =&gt; fn).</p>
+                </section>
+
+                <section>
+                    <h3>Slide 19 – Common Mistakes</h3>
+                    <ul>
+                        <li>Overusing memo hooks</li>
+                        <li>Missing dependencies</li>
+                        <li>Optimizing too early</li>
+                        <li>Memoizing everything "just in case"</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>Slide 20 – Performance Rules of Thumb</h3>
+                    <ul>
+                        <li>React is fast by default</li>
+                        <li>Optimize only real problems</li>
+                        <li>Use DevTools Profiler</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>Slide 21 – Real-World Example (Summary)</h3>
+                    <ul>
+                        <li>List component → React.memo</li>
+                        <li>Expensive filtering → useMemo</li>
+                        <li>Event handlers → useCallback</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <div style="display:flex; flex-direction:column; gap:0.8rem;">
+                        <span style="font-size:0.72em; text-transform:uppercase; letter-spacing:0.12em; color:var(--accent);">Module 5 — Performance</span>
+                        <h2 style="margin:0; font-size:1.9em; font-weight:800;">React Compiler</h2>
+                        <div class="two-col">
+                            <div style="display:flex; flex-direction:column; gap:0.6rem;">
+                                <div class="card" style="font-size:0.82em;">
+                                    <strong class="highlight">🔧 Compile-time tool</strong>
+                                    <p style="margin:0.4rem 0 0; color:var(--text-soft);">Automatically optimizes re-renders at build time.</p>
+                                </div>
+                                <div class="card" style="font-size:0.82em;">
+                                    <strong class="highlight">💤 Less boilerplate</strong>
+                                    <p style="margin:0.4rem 0 0; color:var(--text-soft);">Reduces the need for manual <code>useMemo</code> and <code>useCallback</code>.</p>
+                                </div>
+                                <div class="card" style="font-size:0.82em;">
+                                    <strong class="highlight">🔍 Transparent</strong>
+                                    <p style="margin:0.4rem 0 0; color:var(--text-soft);">Works behind the scenes — no API changes needed.</p>
+                                </div>
+                            </div>
+                            <div class="image-frame">
+                                <svg class="diagram-svg" viewBox="0 0 500 220" role="img" aria-label="Compiler pipeline illustration">
+                                    <rect x="20" y="85" width="130" height="50" rx="9" fill="#1f2937" stroke="#61dafb"/>
+                                    <text x="85" y="116" fill="#dbeafe" text-anchor="middle" font-size="14">Source Code</text>
+                                    <rect x="185" y="70" width="130" height="80" rx="9" fill="#0f172a" stroke="#61dafb"/>
+                                    <text x="250" y="116" fill="#dbeafe" text-anchor="middle" font-size="14">React Compiler</text>
+                                    <rect x="350" y="85" width="130" height="50" rx="9" fill="#1f2937" stroke="#61dafb"/>
+                                    <text x="415" y="116" fill="#dbeafe" text-anchor="middle" font-size="14">Optimized UI</text>
+                                    <line x1="150" y1="110" x2="185" y2="110" stroke="#61dafb" stroke-width="3"/>
+                                    <line x1="315" y1="110" x2="350" y2="110" stroke="#61dafb" stroke-width="3"/>
+                                </svg>
+                                <p class="small-text">Memoization applied automatically at compile time.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <div style="display:flex; flex-direction:column; gap:0.8rem;">
+                        <span style="font-size:0.72em; text-transform:uppercase; letter-spacing:0.12em; color:var(--accent);">Module 5 — Performance</span>
+                        <h2 style="margin:0; font-size:1.9em; font-weight:800;">Before the Compiler</h2>
+                        <pre><code class="tsx" data-line-numbers="2-4">
+// Parent.tsx
+function Parent({ value }: { value: number }) {
+  const expensive = useMemo(() =&gt; {
+    return heavyCalculation(value);
+  }, [value]);
+
+  return &lt;Child data={expensive} /&gt;;
+}
+                        </code></pre>
+                        <p class="small-text">Manual <code>useMemo</code> adds cognitive overhead and boilerplate to every component.</p>
+                    </div>
+                </section>
+
+                <section>
+                    <h3>Slide 24 – Example: With React Compiler</h3>
+                    <pre><code class="tsx">
+function Parent({ value }) {
+  const expensive = heavyCalculation(value);
+  return <Child data={expensive} />;
+}
+                    </code></pre>
+                    <ul>
+                        <li>No useMemo needed</li>
+                        <li>Same performance with cleaner code</li>
+                        <li>Compiler tracks dependencies and memoizes</li>
+                    </ul>
+                </section>
+
+                                <section>
+                                        <h3>Slide 25 – How to Add the React Compiler</h3>
+                                        <div class="two-col" style="align-items: center;">
+                                                <div style="font-size: 0.9em; text-align: left;">
+                                                        <div style="margin-bottom: 1.5rem;">
+                                                                <p style="margin: 0 0 0.5rem 0;"><strong>1. Upgrade & Install</strong></p>
+                                                                <pre style="width: 100%; margin: 0; box-shadow: none;"><code class="bash" style="padding: 0.8rem; font-size: 0.8em; border-radius: 6px;">npm install react@latest react-dom@latest
+npm install babel-plugin-react-compiler</code></pre>
+                                                        </div>
+                                                        <div>
+                                                                <p style="margin: 0 0 0.5rem 0;"><strong>2. Update Config</strong></p>
+                                                                <p style="font-size: 0.8em; opacity: 0.7; margin: 0;">Add the babel plugin to your Vite config.</p>
+                                                        </div>
+                                                </div>
+                                                <div style="flex: 1.3;">
+                                                        <div style="background: #1e1e1e; border-radius: 8px; overflow: hidden; border: 1px solid #333;">
+                                                                <div style="background: #252526; padding: 4px 10px; font-size: 0.6em; color: #888; font-family: monospace; border-bottom: 1px solid #333;">vite.config.ts</div>
+                                                                <pre style="margin: 0;"><code class="ts" style="padding: 1rem; font-size: 0.8em; line-height: 1.4; max-height: none;">import react from "@vitejs/plugin-react";
+
+export default {
+  plugins: [
+    react({
+      babel: {
+        plugins: ["babel-plugin-react-compiler"],
+      },
+    }),
+  ],
+};</code></pre>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                        <div style="margin-top: 1.5rem; padding: 0.8rem; background: rgba(97, 218, 251, 0.08); border-radius: 6px; font-size: 0.75em; text-align: left;">
+                                                <p style="margin: 0; color: #aaddff;">💡 <strong>Pro Tip:</strong> Once configured, the compiler automatically memoizes components and hooks—reducing the need for <code>useMemo</code> and <code>useCallback</code>.</p>
+                                        </div>
+                                </section>
+
+                <section>
+                    <div class="hero">
+                        <div>
+                            <h2>Thank You!</h2>
+                            <p>Q&A and next steps</p>
+                        </div>
+                        <div class="hero-visual">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" alt="React logo thank you">
+                        </div>
+                    </div>
+                    <aside class="notes">
+                        Encourage students to review the code examples, try building a small SPA with routing, and experiment with memoization patterns.
+                    </aside>
+                </section>
+
+            </section>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/highlight/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/notes/notes.min.js"></script> 
+    
+    <script>
+        Reveal.initialize({
+            hash: true,
+            slideNumber: true,
+            plugins: [ RevealHighlight, RevealNotes ] // Ensure RevealNotes is listed here
+        });
+    </script>
+</body>
+</html>
