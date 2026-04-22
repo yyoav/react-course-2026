@@ -1,0 +1,1366 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Day 2 - State, Events, Lists, and Effects</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/black.min.css"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/highlight/monokai.min.css"
+    />
+
+    <style>
+      :root {
+        --accent: #61dafb;
+        --accent-soft: rgba(97, 218, 251, 0.14);
+        --text-soft: #c8d2de;
+        --surface: rgba(255, 255, 255, 0.05);
+        --surface-border: rgba(255, 255, 255, 0.14);
+      }
+      .reveal {
+        background: radial-gradient(
+          circle at 10% 15%,
+          #1f2f47 0%,
+          #10131a 45%,
+          #080a0f 100%
+        );
+      }
+      .reveal h1,
+      .reveal h2,
+      .reveal h3 {
+        text-transform: none;
+        letter-spacing: 0.01em;
+      }
+      .reveal h1 {
+        text-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+      }
+      .reveal ul {
+        font-size: 0.86em;
+      }
+      .reveal code {
+        font-size: 0.9em;
+      }
+      .reveal pre {
+        border-radius: 12px;
+        border: 1px solid var(--surface-border);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
+      }
+      .reveal table {
+        font-size: 0.75em;
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid var(--surface-border);
+      }
+      .reveal table th,
+      .reveal table td {
+        padding: 0.5rem 0.7rem;
+        border-color: rgba(255, 255, 255, 0.12);
+      }
+      .small-text {
+        font-size: 0.7em;
+        color: var(--text-soft);
+      }
+      .highlight {
+        color: var(--accent);
+      }
+      .two-col {
+        display: flex;
+        gap: 1.5rem;
+        align-items: flex-start;
+      }
+      .two-col > div {
+        flex: 1;
+      }
+      .card {
+        padding: 0.9rem 1rem;
+        border: 1px solid var(--surface-border);
+        border-radius: 12px;
+        background: var(--surface);
+        backdrop-filter: blur(4px);
+      }
+      @media (max-width: 900px) {
+        .two-col {
+          display: block;
+        }
+        .two-col > div + div {
+          margin-top: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <!-- Slide 1: Title -->
+          <section>
+            <div
+              style="
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                gap: 1.4rem;
+                padding: 1.5rem 0;
+              "
+            >
+              <div
+                style="
+                  position: relative;
+                  display: inline-flex;
+                  align-items: center;
+                  justify-content: center;
+                "
+              >
+                <div
+                  style="
+                    position: absolute;
+                    width: 130px;
+                    height: 130px;
+                    border-radius: 50%;
+                    background: radial-gradient(
+                      circle,
+                      rgba(97, 218, 251, 0.18) 0%,
+                      transparent 70%
+                    );
+                  "
+                ></div>
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg"
+                  style="
+                    width: 80px;
+                    position: relative;
+                    filter: drop-shadow(0 0 30px rgba(97, 218, 251, 0.6));
+                  "
+                  alt="React"
+                />
+              </div>
+              <div>
+                <h1
+                  style="
+                    margin: 0;
+                    font-size: 2.6em;
+                    font-weight: 800;
+                    letter-spacing: -0.01em;
+                    line-height: 1.05;
+                  "
+                >
+                  State, Events, Lists,<br />and
+                  <span style="color: var(--accent)">Effects</span>
+                </h1>
+                <p
+                  style="
+                    margin-top: 0.8rem;
+                    font-size: 0.75em;
+                    color: var(--text-soft);
+                  "
+                >
+                  Instructor: Avraham Hamu (~5 hours)
+                </p>
+              </div>
+              <div
+                style="
+                  width: 40px;
+                  height: 2px;
+                  background: var(--accent);
+                  border-radius: 2px;
+                  opacity: 0.6;
+                "
+              ></div>
+            </div>
+          </section>
+
+          <!-- Slide 2: Syllabus -->
+          <section>
+            <h3>What We Cover Today</h3>
+            <div
+              style="
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 0.65rem;
+                margin-top: 0.9rem;
+              "
+            >
+              <div class="card" style="font-size: 0.78em; text-align: center">
+                <div
+                  style="
+                    font-size: 1.8em;
+                    margin-bottom: 0.3rem;
+                    color: var(--accent);
+                  "
+                >
+                  01
+                </div>
+                <p
+                  style="
+                    margin: 0 0 0.2rem;
+                    color: var(--accent);
+                    font-weight: 600;
+                  "
+                >
+                  Rendering Lists & Keys
+                </p>
+                <p style="margin: 0; color: var(--text-soft)">40 min</p>
+              </div>
+              <div class="card" style="font-size: 0.78em; text-align: center">
+                <div
+                  style="
+                    font-size: 1.8em;
+                    margin-bottom: 0.3rem;
+                    color: var(--accent);
+                  "
+                >
+                  02
+                </div>
+                <p
+                  style="
+                    margin: 0 0 0.2rem;
+                    color: var(--accent);
+                    font-weight: 600;
+                  "
+                >
+                  Conditional Rendering
+                </p>
+                <p style="margin: 0; color: var(--text-soft)">30 min</p>
+              </div>
+              <div class="card" style="font-size: 0.78em; text-align: center">
+                <div
+                  style="
+                    font-size: 1.8em;
+                    margin-bottom: 0.3rem;
+                    color: var(--accent);
+                  "
+                >
+                  03
+                </div>
+                <p
+                  style="
+                    margin: 0 0 0.2rem;
+                    color: var(--accent);
+                    font-weight: 600;
+                  "
+                >
+                  Reconciliation & Virtual DOM
+                </p>
+                <p style="margin: 0; color: var(--text-soft)">20 min</p>
+              </div>
+              <div class="card" style="font-size: 0.78em; text-align: center">
+                <div
+                  style="
+                    font-size: 1.8em;
+                    margin-bottom: 0.3rem;
+                    color: var(--accent);
+                  "
+                >
+                  04
+                </div>
+                <p
+                  style="
+                    margin: 0 0 0.2rem;
+                    color: var(--accent);
+                    font-weight: 600;
+                  "
+                >
+                  Rules of Hooks
+                </p>
+                <p style="margin: 0; color: var(--text-soft)">10 min</p>
+              </div>
+              <div class="card" style="font-size: 0.78em; text-align: center">
+                <div
+                  style="
+                    font-size: 1.8em;
+                    margin-bottom: 0.3rem;
+                    color: var(--accent);
+                  "
+                >
+                  05
+                </div>
+                <p
+                  style="
+                    margin: 0 0 0.2rem;
+                    color: var(--accent);
+                    font-weight: 600;
+                  "
+                >
+                  useEffect
+                </p>
+                <p style="margin: 0; color: var(--text-soft)">50 min</p>
+              </div>
+              <div class="card" style="font-size: 0.78em; text-align: center">
+                <div
+                  style="
+                    font-size: 1.8em;
+                    margin-bottom: 0.3rem;
+                    color: var(--accent);
+                  "
+                >
+                  06
+                </div>
+                <p
+                  style="
+                    margin: 0 0 0.2rem;
+                    color: var(--accent);
+                    font-weight: 600;
+                  "
+                >
+                  Custom Hooks
+                </p>
+                <p style="margin: 0; color: var(--text-soft)">30 min</p>
+              </div>
+              <div class="card" style="font-size: 0.78em; text-align: center">
+                <div
+                  style="
+                    font-size: 1.8em;
+                    margin-bottom: 0.3rem;
+                    color: var(--accent);
+                  "
+                >
+                  07
+                </div>
+                <p
+                  style="
+                    margin: 0 0 0.2rem;
+                    color: var(--accent);
+                    font-weight: 600;
+                  "
+                >
+                  useRef
+                </p>
+                <p style="margin: 0; color: var(--text-soft)">20 min</p>
+              </div>
+              <div class="card" style="font-size: 0.78em; text-align: center">
+                <div
+                  style="
+                    font-size: 1.8em;
+                    margin-bottom: 0.3rem;
+                    color: var(--accent);
+                  "
+                >
+                  08
+                </div>
+                <p
+                  style="
+                    margin: 0 0 0.2rem;
+                    color: var(--accent);
+                    font-weight: 600;
+                  "
+                >
+                  🧪 Exercises & Practice
+                </p>
+                <p style="margin: 0; color: var(--text-soft)">1 h</p>
+              </div>
+              <div class="card" style="font-size: 0.78em; text-align: center">
+                <div
+                  style="
+                    font-size: 1.8em;
+                    margin-bottom: 0.3rem;
+                    color: var(--accent);
+                  "
+                >
+                  09
+                </div>
+                <p
+                  style="
+                    margin: 0 0 0.2rem;
+                    color: var(--accent);
+                    font-weight: 600;
+                  "
+                >
+                  Q&A / Buffer
+                </p>
+                <p style="margin: 0; color: var(--text-soft)">40 min</p>
+              </div>
+            </div>
+          </section>
+
+          <!-- Slide 3: Rendering Lists -->
+          <section>
+            <h3>
+              Rendering Lists with .map() & Keys
+              <span class="small-text">(40 min)</span>
+            </h3>
+            <div style="text-align: left; font-size: 0.85em; margin-top: 1rem">
+              <div class="card" style="margin-bottom: 1rem">
+                <h4 style="color: var(--accent); margin: 0 0 0.5rem">
+                  Why .map() is used in React
+                </h4>
+                <ul style="margin: 0; padding-left: 1.5rem">
+                  <li>
+                    In React, you rarely manually create repetitive HTML.
+                    Instead, we use JavaScript arrays and <code>.map()</code> to
+                    generate lists dynamically.
+                  </li>
+                  <li>
+                    <code>.map()</code> iterates through an array and returns a
+                    JSX element for each item.
+                  </li>
+                  <li>
+                    <strong>Example analogy:</strong> Think of a bakery conveyor
+                    belt – each item (JSX) is created from a recipe (array
+                    item).
+                  </li>
+                </ul>
+              </div>
+
+              <div class="card" style="margin-bottom: 1rem">
+                <h4 style="color: var(--accent); margin: 0 0 0.5rem">
+                  The importance of keys
+                </h4>
+                <ul style="margin: 0; padding-left: 1.5rem">
+                  <li>
+                    Keys help React identify which items changed, were added, or
+                    removed.
+                  </li>
+                  <li>
+                    Without keys, React might re-render the entire list
+                    unnecessarily, causing performance issues or even bugs.
+                  </li>
+                  <li>
+                    Keys must be unique among siblings and ideally stable across
+                    renders.
+                  </li>
+                  <li>
+                    <strong>Example:</strong> Using index as a key is okay for
+                    static lists but not for dynamic lists where items may move
+                    or be deleted.
+                  </li>
+                </ul>
+              </div>
+
+              <div class="card">
+                <h4 style="color: var(--accent); margin: 0 0 0.5rem">
+                  Best Practices for Keys
+                </h4>
+                <ul style="margin: 0; padding-left: 1.5rem">
+                  <li>
+                    Prefer unique IDs over array indexes (id from API or DB).
+                  </li>
+                  <li>
+                    Ensure keys do not change between renders unless the item is
+                    truly new.
+                  </li>
+                  <li>
+                    Avoid using random numbers because they defeat React's
+                    diffing optimization.
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <p class="small-text" style="margin-top: 1rem">
+              💡 Show a visual comparison: list without keys vs list with keys
+            </p>
+          </section>
+
+          <!-- Slide 4: Code Example - FruitList -->
+          <section>
+            <h3>Example: Rendering a Fruit List</h3>
+            <div class="two-col" style="margin-top: 1rem">
+              <div>
+                <div
+                  class="small-text"
+                  style="margin-bottom: 0.5rem; color: var(--accent)"
+                >
+                  JavaScript/JSX
+                </div>
+                <pre><code class="language-jsx">const fruits = ["Apple", "Banana", "Cherry"];
+
+function FruitList() {
+  return (
+    &lt;ul className="fruit-list"&gt;
+      {fruits.map((fruit, index) =&gt; (
+        &lt;li key={index}&gt;{fruit}&lt;/li&gt;
+      ))}
+    &lt;/ul&gt;
+  );
+}</code></pre>
+              </div>
+              <div>
+                <div
+                  class="small-text"
+                  style="margin-bottom: 0.5rem; color: var(--accent)"
+                >
+                  CSS
+                </div>
+                <pre><code class="language-css">.fruit-list {
+  list-style: none;
+  padding: 0;
+
+  li {
+    padding: 0.5rem 1rem;
+    background: #f0f0f0;
+    margin-bottom: 0.5rem;
+    border-radius: 6px;
+  }
+}</code></pre>
+              </div>
+            </div>
+          </section>
+
+          <!-- Slide 5: Exercise - TaskList -->
+          <section>
+            <h3>Exercise</h3>
+            <div
+              class="card"
+              style="margin-top: 2rem; padding: 2rem; text-align: center"
+            >
+              <h4 style="color: var(--accent); margin: 0 0 1rem">Task</h4>
+              <p style="font-size: 1.1em; margin: 0">
+                Render a list of tasks <code>{ id, title, done }</code> and
+                display "✅" if <code>done</code> is true.
+              </p>
+            </div>
+          </section>
+
+          <!-- Slide 6: Solution - TaskList -->
+          <section>
+            <h3>Solution: Task List with Completion Status</h3>
+            <div class="two-col" style="margin-top: 1rem">
+              <div>
+                <div
+                  class="small-text"
+                  style="margin-bottom: 0.5rem; color: var(--accent)"
+                >
+                  JavaScript/JSX
+                </div>
+                <pre><code class="language-jsx">const tasks = [
+  { id: 1, title: "Learn React", done: true },
+  { id: 2, title: "Read Docs", done: false },
+  { id: 3, title: "Build Project", done: false },
+];
+
+export default function TaskList() {
+  return (
+    &lt;ul className="task-list"&gt;
+      {tasks.map((task) =&gt; (
+        &lt;li key={task.id}&gt;
+          {task.title} {task.done && "✅"}
+        &lt;/li&gt;
+      ))}
+    &lt;/ul&gt;
+  );
+}</code></pre>
+              </div>
+              <div>
+                <div
+                  class="small-text"
+                  style="margin-bottom: 0.5rem; color: var(--accent)"
+                >
+                  CSS
+                </div>
+                <pre><code class="language-css">.task-list {
+  list-style: none;
+  padding: 0;
+
+  li {
+    padding: 0.5rem;
+    border-bottom: 1px solid #ddd;
+  }
+}</code></pre>
+              </div>
+            </div>
+          </section>
+
+          <!-- Slide 7: Conditional Rendering -->
+          <section>
+            <h3>
+              Conditional Rendering <span class="small-text">(30 min)</span>
+            </h3>
+            <div style="text-align: left; font-size: 0.85em; margin-top: 1rem">
+              <div class="card" style="margin-bottom: 1rem">
+                <h4 style="color: var(--accent); margin: 0 0 0.5rem">
+                  What is conditional rendering?
+                </h4>
+                <ul style="margin: 0; padding-left: 1.5rem">
+                  <li>
+                    Conditional rendering is the ability to show or hide
+                    components or elements based on certain conditions (state,
+                    props, or data).
+                  </li>
+                  <li>
+                    It is similar to if/else statements in programming but
+                    adapted for JSX.
+                  </li>
+                </ul>
+              </div>
+
+              <div class="card" style="margin-bottom: 1rem">
+                <h4 style="color: var(--accent); margin: 0 0 0.5rem">
+                  Ternary Operator (? :)
+                </h4>
+                <ul style="margin: 0; padding-left: 1.5rem">
+                  <li>
+                    <strong>Syntax:</strong>
+                    <code
+                      >condition ? renderThisIfTrue : renderThisIfFalse</code
+                    >
+                  </li>
+                  <li>Use for choosing between two options.</li>
+                  <li>
+                    <strong>Example:</strong> Show "Welcome back" if logged in,
+                    else show "Please log in".
+                  </li>
+                </ul>
+              </div>
+
+              <div class="card" style="margin-bottom: 1rem">
+                <h4 style="color: var(--accent); margin: 0 0 0.5rem">
+                  Logical AND (&&)
+                </h4>
+                <ul style="margin: 0; padding-left: 1.5rem">
+                  <li>
+                    <strong>Syntax:</strong>
+                    <code>condition && renderThisIfTrue</code>
+                  </li>
+                  <li>
+                    Use for rendering something only if a condition is true.
+                  </li>
+                  <li>
+                    <strong>Example:</strong> Show "Premium badge" only for
+                    premium users.
+                  </li>
+                </ul>
+              </div>
+
+              <div class="card">
+                <h4 style="color: var(--accent); margin: 0 0 0.5rem">
+                  Why conditional rendering matters
+                </h4>
+                <ul style="margin: 0; padding-left: 1.5rem">
+                  <li>Improves UX by showing context-sensitive content.</li>
+                  <li>
+                    Avoids unnecessary DOM elements and reduces render load.
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <p class="small-text" style="margin-top: 1rem">
+              💡 Show side-by-side code example of ? : vs && and explain when
+              each is preferable
+            </p>
+          </section>
+
+          <!-- Slide 8: Example - Greeting -->
+          <section>
+            <h3>Example: Conditional Greeting</h3>
+            <div class="two-col" style="margin-top: 1rem">
+              <div>
+                <div
+                  class="small-text"
+                  style="margin-bottom: 0.5rem; color: var(--accent)"
+                >
+                  JavaScript/JSX
+                </div>
+                <pre><code class="language-jsx">function Greeting({ isLoggedIn }) {
+  return (
+    &lt;div className="greeting"&gt;
+      {isLoggedIn ? (
+        &lt;h1&gt;Welcome back!&lt;/h1&gt;
+      ) : (
+        &lt;h1&gt;Please log in&lt;/h1&gt;
+      )}
+      {isLoggedIn && (
+        &lt;p&gt;You have new notifications!&lt;/p&gt;
+      )}
+    &lt;/div&gt;
+  );
+}</code></pre>
+              </div>
+              <div>
+                <div
+                  class="small-text"
+                  style="margin-bottom: 0.5rem; color: var(--accent)"
+                >
+                  CSS
+                </div>
+                <pre><code class="language-css">.greeting {
+  h1 {
+    color: #0070f3;
+  }
+
+  p {
+    color: #555;
+    font-style: italic;
+  }
+}</code></pre>
+              </div>
+            </div>
+          </section>
+
+          <!-- Slide 9: Exercise - Premium Badge -->
+          <section>
+            <h3>Exercise</h3>
+            <div
+              class="card"
+              style="margin-top: 2rem; padding: 2rem; text-align: center"
+            >
+              <h4 style="color: var(--accent); margin: 0 0 1rem">Task</h4>
+              <p style="font-size: 1.1em; margin: 0">
+                Show a "Premium Badge" only if <code>user.isPremium</code> is
+                true.
+              </p>
+            </div>
+          </section>
+
+          <!-- Slide 10: Solution - UserProfile -->
+          <section>
+            <h3>Solution: Premium Badge</h3>
+            <div class="two-col" style="margin-top: 1rem">
+              <div>
+                <div
+                  class="small-text"
+                  style="margin-bottom: 0.5rem; color: var(--accent)"
+                >
+                  JavaScript/JSX
+                </div>
+                <pre><code class="language-jsx">const user = {
+  name: "Avraham",
+  isPremium: true
+};
+
+function UserProfile() {
+  return (
+    &lt;div className="user-profile"&gt;
+      &lt;h2&gt;{user.name}&lt;/h2&gt;
+      {user.isPremium && (
+        &lt;span className="badge"&gt;
+          🌟 Premium
+        &lt;/span&gt;
+      )}
+    &lt;/div&gt;
+  );
+}</code></pre>
+              </div>
+              <div>
+                <div
+                  class="small-text"
+                  style="margin-bottom: 0.5rem; color: var(--accent)"
+                >
+                  CSS
+                </div>
+                <pre><code class="language-css">.user-profile {
+  .badge {
+    background: gold;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    margin-left: 0.5rem;
+  }
+}</code></pre>
+              </div>
+            </div>
+          </section>
+
+          <!-- Slide 11: Reconciliation & Virtual DOM -->
+          <section>
+            <h3>
+              Reconciliation & Virtual DOM
+              <span class="small-text">(20 min)</span>
+            </h3>
+            <div style="text-align: left; font-size: 0.85em; margin-top: 1rem">
+              <div class="card" style="margin-bottom: 1rem">
+                <h4 style="color: var(--accent); margin: 0 0 0.5rem">
+                  What is the Virtual DOM?
+                </h4>
+                <ul style="margin: 0; padding-left: 1.5rem">
+                  <li>
+                    React maintains a Virtual DOM, a lightweight copy of the
+                    real DOM stored in memory.
+                  </li>
+                  <li>
+                    Think of it as a blueprint of the UI React can compare
+                    quickly.
+                  </li>
+                </ul>
+              </div>
+
+              <div class="card" style="margin-bottom: 1rem">
+                <h4 style="color: var(--accent); margin: 0 0 0.5rem">
+                  How React updates the UI efficiently
+                </h4>
+                <p style="margin: 0 0 0.5rem">
+                  When a component state or prop changes:
+                </p>
+                <ol style="margin: 0; padding-left: 1.5rem">
+                  <li>React creates a new Virtual DOM tree.</li>
+                  <li>
+                    Compares it to the previous Virtual DOM (this is called
+                    <strong>diffing</strong>).
+                  </li>
+                  <li>
+                    Only updates the actual DOM elements that changed, instead
+                    of re-rendering everything.
+                  </li>
+                </ol>
+                <p style="margin: 0.5rem 0 0">
+                  <strong>Analogy:</strong> Instead of repainting an entire
+                  wall, React only touches the bricks that are cracked.
+                </p>
+              </div>
+
+              <div class="card">
+                <h4 style="color: var(--accent); margin: 0 0 0.5rem">
+                  Importance of keys in reconciliation
+                </h4>
+                <ul style="margin: 0; padding-left: 1.5rem">
+                  <li>
+                    Keys allow React to match elements between renders, making
+                    diffing fast and accurate.
+                  </li>
+                  <li>
+                    Without keys, React may re-render the whole list even if
+                    only one item changed.
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div
+              style="
+                margin-top: 1.5rem;
+                padding: 1rem;
+                background: var(--accent-soft);
+                border-radius: 8px;
+                text-align: center;
+                font-size: 0.75em;
+                color: var(--text-soft);
+              "
+            >
+              <strong style="color: var(--accent)">Diagram Concept:</strong>
+              State Change → New Virtual DOM → Diff → Minimal DOM update →
+              Render
+            </div>
+          </section>
+
+          <!-- Slide 12: Example Concept -->
+          <section>
+            <h3>Reconciliation in Action</h3>
+            <div
+              class="card"
+              style="margin-top: 2rem; padding: 2rem; text-align: center"
+            >
+              <h4 style="color: var(--accent); margin: 0 0 1.5rem">
+                Example Concept
+              </h4>
+              <p style="font-size: 1.1em; margin: 0; line-height: 1.6">
+                If a list of
+                <strong style="color: var(--accent)">10 items</strong> changes
+                only the
+                <strong style="color: var(--accent)">3rd item</strong>,<br />
+                React updates
+                <strong style="color: var(--accent)">only that element</strong>,
+                not all 10.
+              </p>
+            </div>
+            <div
+              style="
+                margin-top: 2rem;
+                display: flex;
+                justify-content: center;
+                gap: 0.5rem;
+                align-items: center;
+                font-size: 2em;
+              "
+            >
+              <span style="opacity: 0.3">📄</span>
+              <span style="opacity: 0.3">📄</span>
+              <span style="color: var(--accent); opacity: 1">📄</span>
+              <span style="opacity: 0.3">📄</span>
+              <span style="opacity: 0.3">📄</span>
+              <span style="opacity: 0.3">📄</span>
+              <span style="opacity: 0.3">📄</span>
+              <span style="opacity: 0.3">📄</span>
+              <span style="opacity: 0.3">📄</span>
+              <span style="opacity: 0.3">📄</span>
+            </div>
+          </section>
+
+          <!-- Slide 13: Rules of Hooks -->
+          <section>
+            <h3>
+              Rules of Hooks Overview <span class="small-text">(10 min)</span>
+            </h3>
+            <div style="text-align: left; font-size: 0.85em; margin-top: 1rem">
+              <div class="card" style="margin-bottom: 1rem">
+                <h4 style="color: var(--accent); margin: 0 0 0.5rem">
+                  Why hooks exist
+                </h4>
+                <p style="margin: 0">
+                  Hooks let us use state and lifecycle features in functional
+                  components, which previously were only available in class
+                  components.
+                </p>
+              </div>
+
+              <div class="card" style="margin-bottom: 1rem">
+                <h4 style="color: var(--accent); margin: 0 0 0.5rem">
+                  Rules of Hooks
+                </h4>
+                <ol style="margin: 0; padding-left: 1.5rem">
+                  <li>
+                    <strong>Call Hooks at the top level:</strong> Don't put
+                    Hooks inside loops, conditions, or nested functions. This
+                    ensures that Hooks are called in the same order every
+                    render.
+                  </li>
+                  <li>
+                    <strong>Call Hooks only in React functions:</strong> Only
+                    inside functional components or custom hooks.
+                  </li>
+                  <li>
+                    <strong>Hooks order must stay the same:</strong> Changing
+                    order will break React's internal tracking of state and
+                    effects.
+                  </li>
+                </ol>
+              </div>
+
+              <div class="card">
+                <h4 style="color: var(--accent); margin: 0 0 0.5rem">
+                  Common mistakes
+                </h4>
+                <ul style="margin: 0; padding-left: 1.5rem">
+                  <li>Calling <code>useState</code> inside if statements.</li>
+                  <li>Using Hooks inside non-component functions.</li>
+                </ul>
+              </div>
+            </div>
+            <div
+              style="
+                margin-top: 1rem;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem;
+              "
+            >
+              <div
+                style="
+                  padding: 1rem;
+                  background: rgba(239, 68, 68, 0.1);
+                  border: 1px solid rgba(239, 68, 68, 0.3);
+                  border-radius: 8px;
+                "
+              >
+                <div
+                  style="
+                    color: #ef4444;
+                    font-weight: bold;
+                    margin-bottom: 0.5rem;
+                  "
+                >
+                  ❌ Wrong
+                </div>
+                <pre style="margin: 0; font-size: 0.7em"><code>if (loggedIn)
+  const [state, setState] = useState();</code></pre>
+              </div>
+              <div
+                style="
+                  padding: 1rem;
+                  background: rgba(34, 197, 94, 0.1);
+                  border: 1px solid rgba(34, 197, 94, 0.3);
+                  border-radius: 8px;
+                "
+              >
+                <div
+                  style="
+                    color: #22c55e;
+                    font-weight: bold;
+                    margin-bottom: 0.5rem;
+                  "
+                >
+                  ✅ Right
+                </div>
+                <pre
+                  style="margin: 0; font-size: 0.7em"
+                ><code>const [state, setState] = useState();
+if (loggedIn) { ... }</code></pre>
+              </div>
+            </div>
+          </section>
+
+          <!-- Slide 14: useEffect -->
+          <section>
+            <h3>
+              useEffect for Side Effects
+              <span class="small-text">(50 min)</span>
+            </h3>
+            <div style="text-align: left; font-size: 0.85em; margin-top: 1rem">
+              <div class="card" style="margin-bottom: 1rem">
+                <h4 style="color: var(--accent); margin: 0 0 0.5rem">
+                  What is a side effect?
+                </h4>
+                <p style="margin: 0 0 0.5rem">
+                  Any operation that interacts outside the component or affects
+                  something outside its scope.
+                </p>
+                <p style="margin: 0">
+                  <strong>Examples:</strong> Fetching data, timers,
+                  subscriptions, manual DOM manipulation.
+                </p>
+              </div>
+
+              <div class="card" style="margin-bottom: 1rem">
+                <h4 style="color: var(--accent); margin: 0 0 0.5rem">
+                  When does useEffect run?
+                </h4>
+                <ul style="margin: 0; padding-left: 1.5rem">
+                  <li>After the component renders.</li>
+                  <li>
+                    With dependencies, it runs only when those dependencies
+                    change.
+                  </li>
+                  <li>
+                    Empty dependency array <code>[]</code> → runs once after
+                    first render (similar to componentDidMount in class
+                    components).
+                  </li>
+                </ul>
+              </div>
+
+              <div class="card">
+                <h4 style="color: var(--accent); margin: 0 0 0.5rem">
+                  Cleanup function
+                </h4>
+                <ul style="margin: 0; padding-left: 1.5rem">
+                  <li>
+                    Return a function from <code>useEffect</code> to clean up
+                    resources like intervals, subscriptions, or event listeners.
+                  </li>
+                  <li>Prevents memory leaks.</li>
+                </ul>
+              </div>
+            </div>
+            <p class="small-text" style="margin-top: 1rem">
+              💡 Show example with timer: effect sets interval → cleanup clears
+              interval
+            </p>
+          </section>
+
+          <!-- Slide 15: Example - Clock -->
+          <section>
+            <h3>Example: Clock with useEffect</h3>
+            <div class="two-col" style="margin-top: 1rem">
+              <div>
+                <div
+                  class="small-text"
+                  style="margin-bottom: 0.5rem; color: var(--accent)"
+                >
+                  JavaScript/JSX
+                </div>
+                <pre><code class="language-jsx">import { useState, useEffect } from "react";
+
+export default function Clock() {
+  const [time, setTime] = useState(new Date());
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTime(new Date());
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    &lt;h1&gt;{time.toLocaleTimeString()}&lt;/h1&gt;
+  );
+}</code></pre>
+              </div>
+              <div>
+                <div
+                  class="small-text"
+                  style="margin-bottom: 0.5rem; color: var(--accent)"
+                >
+                  CSS
+                </div>
+                <pre><code class="language-css">h1 {
+  font-size: 2rem;
+  color: #333;
+}</code></pre>
+              </div>
+            </div>
+          </section>
+
+          <!-- Slide 16: Custom Hooks -->
+          <section>
+            <h3>Custom Hooks <span class="small-text">(30 min)</span></h3>
+            <div style="text-align: left; font-size: 0.85em; margin-top: 1rem">
+              <div class="card" style="margin-bottom: 1rem">
+                <h4 style="color: var(--accent); margin: 0 0 0.5rem">
+                  What is a custom hook?
+                </h4>
+                <ul style="margin: 0; padding-left: 1.5rem">
+                  <li>
+                    A JavaScript function that starts with <code>use</code> and
+                    reuses component logic.
+                  </li>
+                  <li>
+                    Can use other hooks inside it (<code>useState</code>,
+                    <code>useEffect</code>, etc.).
+                  </li>
+                </ul>
+              </div>
+
+              <div class="card" style="margin-bottom: 1rem">
+                <h4 style="color: var(--accent); margin: 0 0 0.5rem">
+                  Why use custom hooks
+                </h4>
+                <ul style="margin: 0; padding-left: 1.5rem">
+                  <li>Avoid repeating code.</li>
+                  <li>Separate logic from UI.</li>
+                  <li>Makes code cleaner and easier to test.</li>
+                </ul>
+              </div>
+
+              <div class="card">
+                <h4 style="color: var(--accent); margin: 0 0 0.5rem">
+                  Example
+                </h4>
+                <p style="margin: 0">
+                  <code>useFetch</code> encapsulates data fetching logic, so any
+                  component can just call
+                  <code>const { data, loading } = useFetch(url)</code>.
+                </p>
+              </div>
+            </div>
+            <p class="small-text" style="margin-top: 1rem">
+              💡 Show example: component without custom hook (repeated fetch
+              code) vs component with custom hook
+            </p>
+          </section>
+
+          <!-- Slide 17: Example - useFetch -->
+          <section>
+            <h3>Example: useFetch Custom Hook</h3>
+            <div style="margin-top: 1rem">
+              <pre><code class="language-jsx">import { useState, useEffect } from "react";
+
+export function useFetch(url) {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch(url)
+      .then((res) => res.json())
+      .then((json) => setData(json))
+      .finally(() => setLoading(false));
+  }, [url]);
+
+  return { data, loading };
+}</code></pre>
+            </div>
+          </section>
+
+          <!-- Slide 18: useRef -->
+          <section>
+            <h3>
+              useRef for Mutable References & DOM Access
+              <span class="small-text">(20 min)</span>
+            </h3>
+            <div style="text-align: left; font-size: 0.85em; margin-top: 1rem">
+              <div class="card" style="margin-bottom: 1rem">
+                <h4 style="color: var(--accent); margin: 0 0 0.5rem">
+                  What is useRef?
+                </h4>
+                <ul style="margin: 0; padding-left: 1.5rem">
+                  <li>
+                    A hook that holds a mutable object whose
+                    <code>.current</code> property persists across renders.
+                  </li>
+                  <li>Can store DOM elements or mutable values.</li>
+                </ul>
+              </div>
+
+              <div class="card" style="margin-bottom: 1rem">
+                <h4 style="color: var(--accent); margin: 0 0 0.5rem">
+                  Use cases
+                </h4>
+                <ul style="margin: 0; padding-left: 1.5rem">
+                  <li>
+                    <strong>DOM access:</strong> Focus input, scroll to element,
+                    measure element size.
+                  </li>
+                  <li>
+                    <strong>Mutable storage:</strong> Store previous state or
+                    timer ID without triggering re-renders.
+                  </li>
+                </ul>
+              </div>
+
+              <div class="card">
+                <h4 style="color: var(--accent); margin: 0 0 0.5rem">
+                  Important rules
+                </h4>
+                <ul style="margin: 0; padding-left: 1.5rem">
+                  <li>
+                    Updating <code>.current</code> does not trigger a render.
+                  </li>
+                  <li>Useful for performance-sensitive operations.</li>
+                </ul>
+              </div>
+            </div>
+            <p class="small-text" style="margin-top: 1rem">
+              💡 Show visual: component renders, useRef stores a DOM element →
+              manipulate it without re-rendering
+            </p>
+          </section>
+
+          <!-- Slide 19: Example - FocusInput -->
+          <section>
+            <h3>Example: Focus Input with useRef</h3>
+            <div class="two-col" style="margin-top: 1rem">
+              <div>
+                <div
+                  class="small-text"
+                  style="margin-bottom: 0.5rem; color: var(--accent)"
+                >
+                  JavaScript/JSX
+                </div>
+                <pre><code class="language-jsx">import { useRef } from "react";
+
+function FocusInput() {
+  const inputRef = useRef();
+
+  const handleFocus = () => {
+    inputRef.current.focus();
+  };
+
+  return (
+    &lt;div className="focus-container"&gt;
+      &lt;input
+        ref={inputRef}
+        type="text"
+        placeholder="Type here..."
+      /&gt;
+      &lt;button onClick={handleFocus}&gt;
+        Focus Input
+      &lt;/button&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+              </div>
+              <div>
+                <div
+                  class="small-text"
+                  style="margin-bottom: 0.5rem; color: var(--accent)"
+                >
+                  CSS
+                </div>
+                <pre><code class="language-css">.focus-container {
+  display: flex;
+  gap: 0.5rem;
+
+  input {
+    padding: 0.5rem;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+
+  button {
+    padding: 0.5rem 1rem;
+    background: #0070f3;
+    color: white;
+    border: none;
+    border-radius: 4px;
+  }
+}</code></pre>
+              </div>
+            </div>
+          </section>
+
+          <!-- Slide 20: Exercise - Fetch and Render -->
+          <section>
+            <h3>
+              Exercise: Fetch and Render a List
+              <span class="small-text">(1h)</span>
+            </h3>
+            <div
+              class="card"
+              style="margin-top: 2rem; padding: 2rem; text-align: left"
+            >
+              <h4 style="color: var(--accent); margin: 0 0 1rem">Task</h4>
+              <ul style="font-size: 1.1em; margin: 0; padding-left: 1.5rem">
+                <li>Fetch posts from JSONPlaceholder.</li>
+                <li>Display the title in a list.</li>
+                <li>Use a custom hook <code>useFetch</code>.</li>
+              </ul>
+            </div>
+            <p class="small-text" style="margin-top: 1rem">
+              💡 Consider splitting into two exercises
+            </p>
+          </section>
+
+          <!-- Slide 21: Solution - PostList -->
+          <section>
+            <h3>Solution: Fetch and Render a List</h3>
+            <div class="two-col" style="margin-top: 1rem">
+              <div>
+                <div
+                  class="small-text"
+                  style="margin-bottom: 0.5rem; color: var(--accent)"
+                >
+                  JavaScript/JSX
+                </div>
+                <pre><code class="language-jsx">import { useFetch } from "./useFetch";
+
+export default function PostList() {
+  const { data: posts, loading } = useFetch(
+    "https://jsonplaceholder.typicode.com/posts"
+  );
+
+  if (loading) {
+    return &lt;p&gt;Loading...&lt;/p&gt;;
+  }
+
+  return (
+    &lt;ul className="post-list"&gt;
+      {posts.map((post) =&gt; (
+        &lt;li key={post.id}&gt;{post.title}&lt;/li&gt;
+      ))}
+    &lt;/ul&gt;
+  );
+}</code></pre>
+              </div>
+              <div>
+                <div
+                  class="small-text"
+                  style="margin-bottom: 0.5rem; color: var(--accent)"
+                >
+                  CSS
+                </div>
+                <pre><code class="language-css">.post-list li {
+  padding: 0.5rem;
+  border-bottom: 1px solid #ddd;
+
+  &:hover {
+    background: #f9f9f9;
+  }
+}</code></pre>
+              </div>
+            </div>
+          </section>
+        </section>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/highlight/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/notes/notes.min.js"></script>
+    <script>
+      Reveal.initialize({
+        hash: true,
+        plugins: [RevealHighlight, RevealNotes],
+        center: true,
+        transition: "slide",
+        slideNumber: true,
+      });
+    </script>
+  </body>
+</html>
