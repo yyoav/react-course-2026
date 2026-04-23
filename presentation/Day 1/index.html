@@ -207,9 +207,9 @@
                                  style="width:80px; position:relative; filter:drop-shadow(0 0 30px rgba(97,218,251,0.6));" alt="React">
                         </div>
                         <div>
-                            <h1 style="margin:0; font-size:2.6em; font-weight:800; letter-spacing:-0.01em; line-height:1.05;">
+                            <h2 style="margin:0; font-weight:800; letter-spacing:-0.01em; line-height:1.05;">
                                 Introduction to<br><span style="color:var(--accent);">React</span>
-                            </h1>
+                            </h2>
                         </div>
                         <div style="width:40px; height:2px; background:var(--accent); border-radius:2px; opacity:0.6;"></div>
                     </div>
@@ -219,7 +219,7 @@
                 </section>
 
                 <section>
-                    <h3>Slide 1 – What We Cover Today</h3>
+                    <h2 class="slide-title">What We Cover Today</h2>
                     <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:0.65rem; margin-top:0.9rem;">
                         <div class="card" style="font-size:0.78em; text-align:center;">
                             <div style="font-size:1.8em; margin-bottom:0.3rem; color:var(--accent);">01</div>
@@ -258,7 +258,7 @@
                 </section>
 
                 <section>
-                    <h3>Slide 2 – What is React?</h3>
+                    <h2 class="slide-title">What is React?</h2>
                     <div style="border-left:4px solid var(--accent); padding:0.5rem 0.9rem; margin:0.5rem 0 1rem; background:var(--accent-soft); border-radius:0 6px 6px 0;">
                         <p style="margin:0; font-size:0.82em; line-height:1.5; color:#e2e8f0;">
                             A <strong style="color:var(--accent);">JavaScript library</strong> for building user interfaces —
@@ -288,7 +288,7 @@
                 </section>
 
                 <section>
-                    <h3>Slide 3 – Single Page Applications (SPA)</h3>
+                    <h2 class="slide-title">Single Page Applications (SPA)</h2>
                     <div style="display:flex; flex-direction:column; align-items:center; gap:1.6rem; margin-top:1rem;">
 
                         <!-- Flow steps -->
@@ -323,7 +323,7 @@
                 </section>
 
                 <section>
-                    <h3>Slide 4 – Why React?</h3>
+                    <h2 class="slide-title">Why React?</h2>
                     <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem; margin-top:0.8rem;">
                         <div class="card" style="font-size:0.8em;">
                             <p style="margin:0 0 0.3rem; color:var(--accent); font-size:1.1em;">⚡ Build faster</p>
@@ -352,7 +352,7 @@
 
                 <section>
                     <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1rem; text-align:center;">
-                        <h2 style="margin:0; font-size:2em; font-weight:800; color:var(--accent);">Let's see some code. 🚀</h2>
+                        <h2 style="margin:0; font-weight:800; color:var(--accent);">Let's see some code. 🚀</h2>
                         <img src="https://media.giphy.com/media/13HgwGsXF0aiGY/giphy.gif"
                              alt="fast typing"
                              style="width:520px; border-radius:12px; border:2px solid rgba(97,218,251,0.3); margin-top:0.5rem;">
@@ -363,7 +363,7 @@
                 </section>
 
                 <section>
-                    <h3>Slide 5 – Setting Up React with Vite + TypeScript</h3>
+                    <h2 class="slide-title">Setting Up React with Vite + TypeScript</h2>
                     <div style="margin-top:0.8rem;">
                         <pre style="font-size:0.75em;"><code class="bash">npm create vite@latest my-app -- --template react-ts
 cd my-app
@@ -394,7 +394,7 @@ npm run dev</code></pre>
                 </section>
 
                 <section>
-                    <h3>Slide 6 – What is Vite?</h3>
+                    <h2 class="slide-title">What is Vite?</h2>
                     <div style="display:flex; gap:1.5rem; align-items:center; margin-top:0.8rem; overflow:visible;">
                         <img src="https://vitejs.dev/logo.svg" style="width:72px; flex-shrink:0; padding:12px; box-sizing:content-box; overflow:visible; filter:drop-shadow(0 0 16px rgba(255,180,50,0.5));" alt="Vite logo">
                         <div style="border-left:3px solid rgba(97,218,251,0.3); padding-left:1rem;">
@@ -425,7 +425,7 @@ npm run dev</code></pre>
 
                 <section>
                     <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1.2rem; text-align:center;">
-                        <h2 style="margin:0; font-size:1.9em; font-weight:800;">🛠️ Demo Time</h2>
+                        <h2 style="margin:0; font-weight:800;">🛠️ Demo Time</h2>
                         <p style="margin:0; font-size:0.78em; color:var(--text-soft);">Let's scaffold a real project and see Vite in action.</p>
                         <img src="https://media.giphy.com/media/VbnUQpnihPSIgIXuZv/giphy.gif"
                              alt="demo time"
@@ -437,7 +437,7 @@ npm run dev</code></pre>
                 </section>
 
                 <section>
-                    <h3>Slide 7 – Your First Function Component</h3>
+                    <h2 class="slide-title">Your First Function Component</h2>
                     <div class="two-col" style="margin-top:0.8rem; align-items:center;">
                         <div style="flex:1;">
                             <ul>
@@ -448,7 +448,7 @@ npm run dev</code></pre>
                             </ul>
                         </div>
                         <div style="flex:0.85;">
-                            <pre><code class="tsx" data-line-numbers="1-2|4-8|10">
+                            <pre><code class="tsx" data-line-numbers>
 // Greeting.tsx
 import React from 'react';
 
@@ -471,13 +471,14 @@ export default Greeting;
                 </section>
 
                 <section>
-                    <h3>Slide 8 – JSX</h3>
+                    <h2 class="slide-title">JSX</h2>
                     <div style="display:flex; flex-direction:column; gap:0.7rem; margin-top:0.8rem;">
                         <div>
                             <p style="font-size:0.78em; color:var(--accent); text-transform:uppercase; letter-spacing:0.1em; margin:0 0 0.3rem;">✍️ You write</p>
                             <pre style="margin:0;"><code class="tsx">
 // Greeting.tsx
-function Greeting({ name }: { name: string }) {
+function Greeting() {
+  const name = 'React';
   return &lt;h1&gt;Hello, {name}!&lt;/h1&gt;;
 }
                             </code></pre>
@@ -486,18 +487,66 @@ function Greeting({ name }: { name: string }) {
                             <p style="font-size:0.78em; color:var(--text-soft); text-transform:uppercase; letter-spacing:0.1em; margin:0 0 0.3rem;">⚙️ Under the hood — React 19 JSX transform</p>
                             <pre style="margin:0;"><code class="tsx">
 import { jsx as _jsx } from 'react/jsx-runtime';
+const name = 'React';
 _jsx("h1", { children: ["Hello, ", name, "!"] });
                             </code></pre>
                         </div>
                     </div>
                     <aside class="notes">
-                        JSX is NOT HTML — it's syntactic sugar that compiles to function calls. Key JSX rules: 1) Must return a single root element (use Fragment <> if needed), 2) All tags must close, 3) Use className not class, htmlFor not for. Curly braces {} let you embed any JS expression. The new JSX transform (React 17+) means you don't need `import React` at the top anymore.
+                        JSX is NOT HTML — it's syntactic sugar that compiles to function calls. This transformation is done by Babel (or SWC in Vite) at build time — it converts JSX into regular JavaScript function calls. The new JSX transform (React 17+) means you don't need `import React` at the top anymore. We'll cover the key JSX syntax rules on the next slide.
+                    </aside>
+                </section>
+
+                <!-- JSX Rules -->
+                <section>
+                    <div style="display:flex; flex-direction:column; gap:0.8rem;">
+                        <h2 class="slide-title">JSX Rules</h2>
+
+                        <!-- Rule 1: Single root -->
+                        <div class="fragment" style="display:flex; align-items:center; gap:1rem; background:var(--surface); border:1px solid var(--surface-border); border-radius:10px; padding:0.4rem 0.9rem;">
+                            <div style="flex:0 0 220px;">
+                                <strong class="highlight" style="font-size:0.82em;">Single root element</strong>
+                                <p style="margin:0.15rem 0 0; font-size:0.62em; color:var(--text-soft);">Wrap siblings in a <code>&lt;div&gt;</code> or Fragment</p>
+                            </div>
+                            <pre style="margin:0 auto; flex:1; font-size:0.52em; display:flex; align-items:center; justify-content:center;"><code class="tsx">// ❌ Two roots
+return &lt;h1&gt;Hi&lt;/h1&gt; &lt;p&gt;Bye&lt;/p&gt;;
+
+// ✅ Fragment wrapper
+return &lt;&gt;&lt;h1&gt;Hi&lt;/h1&gt;&lt;p&gt;Bye&lt;/p&gt;&lt;/&gt;;</code></pre>
+                        </div>
+
+                        <!-- Rule 2: className & htmlFor -->
+                        <div class="fragment" style="display:flex; align-items:center; gap:1rem; background:var(--surface); border:1px solid var(--surface-border); border-radius:10px; padding:0.4rem 0.9rem;">
+                            <div style="flex:0 0 220px;">
+                                <strong class="highlight" style="font-size:0.82em;">className &amp; htmlFor</strong>
+                                <p style="margin:0.15rem 0 0; font-size:0.62em; color:var(--text-soft);">HTML reserved words are renamed</p>
+                            </div>
+                            <pre style="margin:0 auto; flex:1; font-size:0.52em; display:flex; align-items:center; justify-content:center;"><code class="tsx">&lt;div className="card"&gt;   // ✅
+&lt;div class="card"&gt;      // ❌
+
+&lt;label htmlFor="email"&gt; // ✅
+&lt;label for="email"&gt;    // ❌</code></pre>
+                        </div>
+
+                        <!-- Rule 4: Curly braces -->
+                        <div class="fragment" style="display:flex; align-items:center; gap:1rem; background:var(--surface); border:1px solid var(--surface-border); border-radius:10px; padding:0.4rem 0.9rem;">
+                            <div style="flex:0 0 220px;">
+                                <strong class="highlight" style="font-size:0.82em;">{} for expressions</strong>
+                                <p style="margin:0.15rem 0 0; font-size:0.62em; color:var(--text-soft);">Embed any JS expression</p>
+                            </div>
+                            <pre style="margin:0 auto; flex:1; font-size:0.52em; display:flex; align-items:center; justify-content:center;"><code class="tsx">&lt;h1&gt;{user.name}&lt;/h1&gt;          // ✅
+&lt;p&gt;{2 + 2}&lt;/p&gt;                 // ✅
+&lt;img src={avatarUrl} /&gt;       // ✅</code></pre>
+                        </div>
+                    </div>
+                    <aside class="notes">
+                        Walk through each rule. 1) Single root — JSX compiles to a function call, and a function can only return one value; Fragment avoids extra DOM nodes. 2) All tags must close — unlike HTML, JSX is strict like XML. 3) className/htmlFor — because `class` and `for` are reserved words in JavaScript. 4) Curly braces are the "escape hatch" into JavaScript — any expression works (variables, math, function calls, ternaries) but NOT statements (if/for).
                     </aside>
                 </section>
 
                                 <section>
                                         <div style="display:flex; flex-direction:column; gap:1rem;">
-                                                <h3 style="margin:0;">Slide 9 – App Component (Concept)</h3>
+                                                <h2 class="slide-title">App Component (Concept)</h2>
                                                 <div class="two-col">
                                                         <ul style="margin:0;">
                                                                 <li><code>App.tsx</code> is the <span class="highlight">root component</span></li>
@@ -522,8 +571,8 @@ _jsx("h1", { children: ["Hello, ", name, "!"] });
 
                                 <section>
                                         <div style="display:flex; flex-direction:column; gap:0.8rem;">
-                                                <h3 style="margin:0;">Slide 10 – App Component (Code)</h3>
-                                                <pre><code class="ts" data-line-numbers="7-15">
+                                                <h2 class="slide-title">App Component (Code)</h2>
+                                                <pre><code class="ts">
 // App.tsx
 import Header from './Header';
 import Greeting from './Greeting';
@@ -551,7 +600,7 @@ export default App;
                                 <!-- EXERCISE SLIDE -->
                                 <section>
                                         <div style="display:flex; flex-direction:column; gap:1.2rem; align-items:center; text-align:center;">
-                                                <h3 style="margin:0;">&#x1F6D2; Your Turn &mdash; Build a Product Card</h3>
+                                                <h2 style="margin:0;">&#x1F6D2; Your Turn &mdash; Build a Product Card</h2>
                                                 <p style="margin:0; font-size:0.82em; color:var(--text-soft);">Create a <code>ProductCard</code> component with <strong style="color:var(--accent);">3 sub-components</strong> &mdash; sell the world's most ridiculous product</p>
 
                                                 <div style="display:flex; gap:1rem; align-items:stretch; margin-top:0.4rem;">
@@ -598,7 +647,7 @@ export default ProductCard;</code></pre>
 
                                 <section>
                                         <div style="display:flex; flex-direction:column; gap:1rem;">
-                                                <h3 style="margin:0;">Slide 11 – Props Overview</h3>
+                                                <h2 class="slide-title">Props Overview</h2>
 
                                                 <!-- Flow diagram -->
                                                 <div style="display:flex; align-items:center; justify-content:center; margin:0.2rem 0;">
@@ -651,24 +700,11 @@ export default ProductCard;</code></pre>
 
                                 <section>
                                         <div style="display:flex; flex-direction:column; gap:0.8rem;">
-                                                <h3 style="margin:0;">Slide 12 – Props Example</h3>
+                                                <h2 class="slide-title">Props Example</h2>
                                                 <div class="two-col" style="align-items:flex-start; gap:1.2rem;">
                                                         <div style="display:flex; flex-direction:column; gap:0.4rem;">
-                                                                <span style="font-size:0.68em; text-transform:uppercase; letter-spacing:0.1em; color:var(--accent);">Child — Greeting.tsx</span>
-                                                                <pre style="margin:0;"><code class="ts" data-line-numbers="3|5-7">
-// Greeting.tsx
-type GreetingProps = { name: string };
-
-function Greeting({ name }: GreetingProps) {
-  return &lt;h1&gt;Hello, {name}!&lt;/h1&gt;;
-}
-
-export default Greeting;
-                                                                </code></pre>
-                                                        </div>
-                                                        <div style="display:flex; flex-direction:column; gap:0.4rem;">
                                                                 <span style="font-size:0.68em; text-transform:uppercase; letter-spacing:0.1em; color:var(--accent);">Parent — App.tsx</span>
-                                                                <pre style="margin:0;"><code class="ts" data-line-numbers="6">
+                                                                <pre style="margin:0;"><code class="ts">
 // App.tsx
 import Greeting from './Greeting';
 
@@ -677,6 +713,19 @@ function App() {
 }
 
 export default App;
+                                                                </code></pre>
+                                                        </div>
+                                                        <div style="display:flex; flex-direction:column; gap:0.4rem;">
+                                                                <span style="font-size:0.68em; text-transform:uppercase; letter-spacing:0.1em; color:var(--accent);">Child — Greeting.tsx</span>
+                                                                <pre style="margin:0;"><code class="ts" data-line-numbers>
+// Greeting.tsx
+type GreetingProps = { name: string };
+
+function Greeting({ name }: GreetingProps) {
+  return &lt;h1&gt;Hello, {name}!&lt;/h1&gt;;
+}
+
+export default Greeting;
                                                                 </code></pre>
                                                         </div>
                                                 </div>
@@ -690,23 +739,17 @@ export default App;
                                 <!-- SLIDE 13 – Events: HTML vs React -->
                                 <section>
                                         <div style="display:flex; flex-direction:column; gap:1rem;">
-                                                <h3 style="margin:0;">Slide 13 – Events in React</h3>
+                                                <h2 class="slide-title">Events in React</h2>
                                                 <div class="two-col" style="align-items:flex-start; gap:1.4rem;">
-                                                        <div style="display:flex; flex-direction:column; gap:0.5rem;">
+                                                        <div style="display:flex; flex-direction:column; gap:0.5rem; flex:0.35;">
                                                                 <span style="font-size:0.68em; text-transform:uppercase; letter-spacing:0.1em; color:#f87171;">HTML</span>
-                                                                <pre style="margin:0;"><code class="html">
-function handleClick() {
-  alert('Clicked!');
-}
-
-&lt;button onclick="handleClick()"&gt;
+                                                                <pre style="margin:0; font-size:0.6em;"><code class="html">&lt;button onclick="handleClick()"&gt;
   Click me
-&lt;/button&gt;
-                                                                </code></pre>
+&lt;/button&gt;</code></pre>
                                                         </div>
-                                                        <div style="display:flex; flex-direction:column; gap:0.5rem;">
+                                                        <div style="display:flex; flex-direction:column; gap:0.5rem; flex:1;">
                                                                 <span style="font-size:0.68em; text-transform:uppercase; letter-spacing:0.1em; color:var(--accent);">React</span>
-                                                                <pre style="margin:0;"><code class="ts" data-line-numbers="3-5|7-9">
+                                                                <pre style="margin:0;"><code class="ts" data-line-numbers>
 // MyButton.tsx
 function MyButton() {
   const handleClick = () =&gt; {
@@ -732,7 +775,7 @@ export default MyButton;
                                 <!-- SLIDE 14 – Event Rules -->
                                 <section>
                                         <div style="display:flex; flex-direction:column; gap:0.6rem;">
-                                                <h3 style="margin:0;">Slide 14 – Event Handler Rules</h3>
+                                                <h2 class="slide-title">Event Handler Rules</h2>
 
                                                 <!-- Rule 1 -->
                                                 <div class="fragment" style="display:flex; align-items:center; gap:1rem; background:var(--surface); border:1px solid var(--surface-border); border-radius:10px; padding:0.4rem 0.9rem;">
@@ -778,15 +821,20 @@ export default MyButton;
                                 <section>
                                         <div style="display:flex; flex-direction:column; gap:0.9rem;">
 
-                                                <!-- Step 1: title + anatomy bar + tuple -->
-                                                <h3 style="margin:0; font-size:1.3em; font-weight:800;">Slide 15 -State &amp; useState</h3>
+                                                <h2 class="slide-title">State &amp; useState</h2>
 
-                                                <div style="background:var(--accent-soft); border:1px solid rgba(97,218,251,0.3); border-radius:10px; padding:0.6rem 1.2rem; text-align:center;">
-                                                        <code style="font-size:0.95em; color:var(--accent);">const [<span style="color:#ffcc66;">value</span>, <span style="color:#b5f0a5;">setValue</span>] = useState(<span style="color:#c8d2de;">initialValue</span>)</code>
+                                                <!-- Step 1: What is state? -->
+                                                <div class="card">
+                                                        <strong class="highlight">🗃️ What is state?</strong>
+                                                        <p style="margin:0.3rem 0 0; font-size:0.78em; color:var(--text-soft);">Data <em>owned</em> by a component that can change over time.</p>
                                                 </div>
 
-                                                <!-- Tuple explanation row -->
-                                                <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:0.7rem; font-size:0.78em;">
+                                                <!-- Step 2: anatomy bar + tuple -->
+                                                <div class="fragment" style="background:var(--accent-soft); border:1px solid rgba(97,218,251,0.3); border-radius:10px; padding:0.5rem 1rem; text-align:center;">
+                                                        <code style="font-size:0.82em; color:var(--accent);">const [<span style="color:#ffcc66;">value</span>, <span style="color:#b5f0a5;">setValue</span>] = useState(<span style="color:#c8d2de;">initialValue</span>)</code>
+                                                </div>
+
+                                                <div class="fragment" style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:0.7rem; font-size:0.72em;">
                                                         <div class="card" style="text-align:center;">
                                                                 <span style="color:#ffcc66; font-weight:700;">value</span>
                                                                 <p style="margin:0.3rem 0 0; color:var(--text-soft);">Current state value</p>
@@ -799,12 +847,6 @@ export default MyButton;
                                                                 <span style="color:#c8d2de; font-weight:700;">initialValue</span>
                                                                 <p style="margin:0.3rem 0 0; color:var(--text-soft);">Used on first render only</p>
                                                         </div>
-                                                </div>
-
-                                                <!-- Step 2: What is state? -->
-                                                <div class="fragment card">
-                                                        <strong class="highlight">🗃️ What is state?</strong>
-                                                        <p style="margin:0.3rem 0 0; font-size:0.78em; color:var(--text-soft);">Data <em>owned</em> by a component that can change over time.</p>
                                                 </div>
 
                                                 <!-- Step 3: Re-renders on change -->
@@ -822,9 +864,9 @@ export default MyButton;
                                 <!-- SLIDE 16 – useState Step 1: Declaration & Initial Render -->
                                 <section data-auto-animate>
                                         <div style="display:flex; flex-direction:column; gap:0.7rem;">
-                                                <h2 data-id="s16-title" style="margin:0; font-size:1.9em; font-weight:800;">useState in Action</h2>
+                                                <h2 data-id="s16-title" style="margin:0; font-weight:800;">useState in Action</h2>
                                                 <div style="display:flex; gap:1.4rem; align-items:flex-start;">
-                                                        <pre data-id="s16-code" style="margin:0; flex:1.1;"><code class="tsx" data-line-numbers="4-12">
+                                                        <pre data-id="s16-code" style="margin:0; flex:1.4;"><code class="tsx">
 // Counter.tsx
 import { useState } from 'react';
 
@@ -832,7 +874,7 @@ function Counter() {
   const [count, setCount] = useState(0);
 
   return (
-    &lt;button onClick={() =&gt; setCount(c =&gt; c + 1)}&gt;
+    &lt;button onClick={() =&gt; setCount(count + 1)}&gt;
       Clicked {count} times
     &lt;/button&gt;
   );
@@ -848,16 +890,16 @@ export default Counter;
                                                 </div>
                                         </div>
                                         <aside class="notes">
-                                                Walk through the Counter step by step. useState(0) sets initial count to 0. The button's onClick fires setCount with a functional update. Show this live in the demo project — students should follow along.
+                                                Walk through the Counter step by step. useState(0) sets initial count to 0. The button's onClick fires setCount with count + 1. Show this live in the demo project — students should follow along.
                                         </aside>
                                 </section>
 
                                 <!-- SLIDE 16 – useState Step 2: Button Click & Setter Called -->
                                 <section data-auto-animate>
                                         <div style="display:flex; flex-direction:column; gap:0.7rem;">
-                                                <h2 data-id="s16-title" style="margin:0; font-size:1.9em; font-weight:800;">useState in Action</h2>
+                                                <h2 data-id="s16-title" style="margin:0; font-weight:800;">useState in Action</h2>
                                                 <div style="display:flex; gap:1.4rem; align-items:flex-start;">
-                                                        <pre data-id="s16-code" style="margin:0; flex:1.1;"><code class="tsx" data-line-numbers="4-12">
+                                                        <pre data-id="s16-code" style="margin:0; flex:1.4;"><code class="tsx">
 // Counter.tsx
 import { useState } from 'react';
 
@@ -865,7 +907,7 @@ function Counter() {
   const [count, setCount] = useState(0);
 
   return (
-    &lt;button onClick={() =&gt; setCount(c =&gt; c + 1)}&gt;
+    &lt;button onClick={() =&gt; setCount(count + 1)}&gt;
       Clicked {count} times
     &lt;/button&gt;
   );
@@ -875,22 +917,22 @@ export default Counter;
                                                         </code></pre>
                                                         <div style="flex:1; display:flex; flex-direction:column; gap:0.6rem; justify-content:center; font-size:0.86em;">
                                                                 <p style="margin:0;">🖱️ <strong style="color:#f59e0b;">Button Clicked</strong></p>
-                                                                <p style="margin:0; color:var(--text-soft);"><code>setCount(c =&gt; c + 1)</code> fires.</p>
+                                                                <p style="margin:0; color:var(--text-soft);"><code>setCount(count + 1)</code> fires.</p>
                                                                 <p style="margin:0; color:var(--text-soft);">React queues <strong style="color:#fff;">0 → 1</strong> &amp; re-renders.</p>
                                                         </div>
                                                 </div>
                                         </div>
                                         <aside class="notes">
-                                                When the button is clicked, setCount is called. React doesn't update immediately — it queues the update and schedules a re-render. The functional form (c => c + 1) ensures we always read the latest value.
+                                                When the button is clicked, setCount is called with count + 1. React doesn't update immediately — it queues the update and schedules a re-render. Note: this direct form works fine for simple cases. We'll see the functional updater form next, which is safer when updates depend on previous state.
                                         </aside>
                                 </section>
 
                                 <!-- SLIDE 16 – useState Step 3: Re-render with new value -->
                                 <section data-auto-animate>
                                         <div style="display:flex; flex-direction:column; gap:0.7rem;">
-                                                <h2 data-id="s16-title" style="margin:0; font-size:1.9em; font-weight:800;">useState in Action</h2>
+                                                <h2 data-id="s16-title" style="margin:0; font-weight:800;">useState in Action</h2>
                                                 <div style="display:flex; gap:1.4rem; align-items:flex-start;">
-                                                        <pre data-id="s16-code" style="margin:0; flex:1.1;"><code class="tsx" data-line-numbers="4-12">
+                                                        <pre data-id="s16-code" style="margin:0; flex:1.4;"><code class="tsx">
 // Counter.tsx
 import { useState } from 'react';
 
@@ -898,7 +940,7 @@ function Counter() {
   const [count, setCount] = useState(0);
 
   return (
-    &lt;button onClick={() =&gt; setCount(c =&gt; c + 1)}&gt;
+    &lt;button onClick={() =&gt; setCount(count + 1)}&gt;
       Clicked {count} times
     &lt;/button&gt;
   );
@@ -921,10 +963,10 @@ export default Counter;
                                 <!-- SLIDE 17 – Functional Updates -->
                                 <section>
                                         <div style="display:flex; flex-direction:column; gap:0.8rem;">
-                                                <h3 style="margin:0;">Slide 17 – Functional Updates</h3>
+                                                <h2 class="slide-title">Functional Updates</h2>
                                                 <div class="two-col" style="align-items:center; gap:1.4rem;">
                                                         <div style="display:flex; flex-direction:column; gap:0.6rem;">
-                                                                <pre style="margin:0;"><code class="ts" data-line-numbers="1|3-5">
+                                                                <pre style="margin:0;"><code class="ts" data-line-numbers>
 // ❌ Direct — can read stale value
 setCount(count + 1);
 
@@ -949,54 +991,92 @@ setCount(prev =&gt; prev + 1);
                                         </aside>
                                 </section>
 
-                                <!-- SLIDE 18 – Rules of Hooks -->
+                                <!-- SLIDE 18a – Rule 1: Top Level Only -->
                                 <section>
-                                        <div style="display:flex; flex-direction:column; gap:1rem;">
-                                                <h3 style="margin:0;">Slide 18 – Rules of Hooks</h3>
-                                                <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
-                                                        <div class="card" style="border:1.5px solid rgba(239,68,68,0.5);">
-                                                                <strong style="color:#f87171;">❌ Wrong</strong>
-                                                                <pre style="margin:0.5rem 0 0; background:none; box-shadow:none; font-size:0.78em;"><code class="ts">
-if (isLoggedIn) {
-  // 🚫 hook inside condition
+                                        <div style="display:flex; flex-direction:column; gap:0.4rem;">
+                                                <h2 class="slide-title">Rules of Hooks <span style="font-size:0.6em; color:var(--text-soft);">(1/2)</span></h2>
+                                                <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; align-items:start;">
+                                                        <div style="display:flex; flex-direction:column; gap:0.4rem;">
+                                                                <div class="card" style="border:1.5px solid rgba(239,68,68,0.5); padding:0.4rem 0.6rem;">
+                                                                        <strong style="color:#f87171; font-size:0.65em;">❌ Wrong</strong>
+                                                                        <pre style="margin:0.2rem 0 0; background:none; box-shadow:none; font-size:0.58em;"><code class="ts">if (isLoggedIn) {
   const [x, setX] = useState(0);
 }
-                                                                </code></pre>
+for (const id of ids) {
+  useEffect(() =&gt; fetch(id));
+}</code></pre>
+                                                                </div>
+                                                                <div class="card" style="border:1.5px solid rgba(34,197,94,0.5); padding:0.4rem 0.6rem;">
+                                                                        <strong style="color:#4ade80; font-size:0.65em;">✅ Correct</strong>
+                                                                        <pre style="margin:0.2rem 0 0; background:none; box-shadow:none; font-size:0.58em;"><code class="ts">const [x, setX] = useState(0);
+useEffect(() =&gt; { /* ... */ });
+if (isLoggedIn) { /* use x */ }</code></pre>
+                                                                </div>
                                                         </div>
-                                                        <div class="card" style="border:1.5px solid rgba(34,197,94,0.5);">
-                                                                <strong style="color:#4ade80;">✅ Correct</strong>
-                                                                <pre style="margin:0.5rem 0 0; background:none; box-shadow:none; font-size:0.78em;"><code class="ts">
-// Always at the top level
-const [x, setX] = useState(0);
-
-if (isLoggedIn) { /* use x here */ }
-                                                                </code></pre>
-                                                        </div>
-                                                </div>
-                                                <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
-                                                        <div class="card" style="font-size:0.82em;">
-                                                                <strong class="highlight">📏 Rule 1 — Top level only</strong>
-                                                                <p style="margin:0.4rem 0 0; color:var(--text-soft);">Never call hooks inside loops, conditions, or nested functions.</p>
-                                                        </div>
-                                                        <div class="card" style="font-size:0.82em;">
-                                                                <strong class="highlight">⚛️ Rule 2 — React functions only</strong>
-                                                                <p style="margin:0.4rem 0 0; color:var(--text-soft);">Only call hooks inside function components or custom hooks.</p>
+                                                        <div style="display:flex; flex-direction:column; gap:0.4rem;">
+                                                                <div class="card" style="font-size:0.72em; padding:0.5rem 0.7rem;">
+                                                                        <strong class="highlight">📏 Top level only</strong>
+                                                                        <p style="margin:0.3rem 0 0; color:var(--text-soft); line-height:1.45;">
+                                                                                Never call hooks inside <strong style="color:#fff;">loops</strong>, <strong style="color:#fff;">conditions</strong>, or <strong style="color:#fff;">nested functions</strong>.
+                                                                        </p>
+                                                                </div>
                                                         </div>
                                                 </div>
                                         </div>
                                         <aside class="notes">
-                                                React relies on call ORDER to track which hook is which. If you put a hook inside an if-statement, the order could change between renders and everything breaks. The ESLint plugin `eslint-plugin-react-hooks` catches this automatically. We'll see more hooks (useEffect, useRef) in later days.
+                                                React relies on call ORDER to track which hook is which. If you wrap hook #2 in an if-statement that's false, hook #3 shifts to index #2 — state is corrupted.
                                         </aside>
                                 </section>
 
-                                <!-- SLIDE 19 – State with Objects & Arrays -->
+                                <!-- SLIDE 18b – Rule 2: React Functions Only -->
+                                <section>
+                                        <div style="display:flex; flex-direction:column; gap:0.4rem;">
+                                                <h2 class="slide-title">Rules of Hooks <span style="font-size:0.6em; color:var(--text-soft);">(2/2)</span></h2>
+                                                <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; align-items:start;">
+                                                        <div style="display:flex; flex-direction:column; gap:0.4rem;">
+                                                                <div class="card" style="border:1.5px solid rgba(239,68,68,0.5); padding:0.4rem 0.6rem;">
+                                                                        <strong style="color:#f87171; font-size:0.65em;">❌ Wrong</strong>
+                                                                        <pre style="margin:0.2rem 0 0; background:none; box-shadow:none; font-size:0.58em;"><code class="ts">function calcTotal(items) {
+  const [sum, setSum] = useState(0);
+}</code></pre>
+                                                                </div>
+                                                                <div class="card" style="border:1.5px solid rgba(34,197,94,0.5); padding:0.4rem 0.6rem;">
+                                                                        <strong style="color:#4ade80; font-size:0.65em;">✅ Correct</strong>
+                                                                        <pre style="margin:0.2rem 0 0; background:none; box-shadow:none; font-size:0.58em;"><code class="ts">function Panel() {
+  const [open, setOpen] = useState(true);
+  return &lt;div&gt;{open &amp;&amp; '...'}&lt;/div&gt;;
+}
+function useToggle(init = false) {
+  const [on, setOn] = useState(init);
+  return [on, () =&gt; setOn(p =&gt; !p)];
+}</code></pre>
+                                                                </div>
+                                                        </div>
+                                                        <div style="display:flex; flex-direction:column; gap:0.4rem;">
+                                                                <div class="card" style="font-size:0.72em; padding:0.5rem 0.7rem;">
+                                                                        <strong class="highlight">⚛️ React functions only</strong>
+                                                                        <p style="margin:0.3rem 0 0; color:var(--text-soft); line-height:1.45;">
+                                                                                Only call hooks from <strong style="color:#fff;">function components</strong> or <strong style="color:#fff;">custom hooks</strong> (<code>use</code> prefix).
+                                                                        </p>
+                                                                </div>
+                                                                <div class="card" style="font-size:0.68em; padding:0.4rem 0.7rem; border-color:rgba(97,218,251,0.3);">
+                                                                        <strong class="highlight">🔌</strong> <code style="font-size:0.9em;">eslint-plugin-react-hooks</code> <span style="color:var(--text-soft);">catches both rules automatically.</span>
+                                                                </div>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                        <aside class="notes">
+                                                Hooks are attached to React's internal fiber tree. A plain JS function has no fiber — useState has nowhere to store state. The `use` prefix is a convention AND enforced by the linter.
+                                        </aside>
+                                </section>
+
+                                <!-- SLIDE 19a – State with Objects -->
                                 <section>
                                         <div style="display:flex; flex-direction:column; gap:0.8rem;">
-                                                <h3 style="margin:0;">Slide 19 – State with Objects &amp; Arrays</h3>
-                                                <div class="two-col" style="align-items:flex-start; gap:1.2rem;">
-                                                        <div style="display:flex; flex-direction:column; gap:0.4rem;">
-                                                                <span style="font-size:0.68em; text-transform:uppercase; letter-spacing:0.1em; color:var(--accent);">Objects — spread to update</span>
-                                                                <pre style="margin:0;"><code class="ts" data-line-numbers="1|4-6">
+                                                <h2 class="slide-title">State with Objects</h2>
+                                                <div class="two-col" style="align-items:flex-start; gap:1.4rem;">
+                                                        <div style="display:flex; flex-direction:column; gap:0.6rem;">
+                                                                <pre style="margin:0;"><code class="ts" data-line-numbers>
 const [user, setUser] = useState({ name: 'Dan', age: 30 });
 
 // ✅ spread — creates a new object
@@ -1006,9 +1086,30 @@ setUser(prev =&gt; ({ ...prev, age: 31 }));
 user.age = 31;
                                                                 </code></pre>
                                                         </div>
-                                                        <div style="display:flex; flex-direction:column; gap:0.4rem;">
-                                                                <span style="font-size:0.68em; text-transform:uppercase; letter-spacing:0.1em; color:var(--accent);">Arrays — map / filter</span>
-                                                                <pre style="margin:0;"><code class="ts" data-line-numbers="1|3|5">
+                                                        <div class="card" style="font-size:0.82em;">
+                                                                <strong class="highlight">Why spread?</strong>
+                                                                <ul style="margin:0.5rem 0 0; color:var(--text-soft);">
+                                                                        <li>React uses <code>===</code> to detect changes</li>
+                                                                        <li>Mutating the same object keeps the same reference</li>
+                                                                        <li>Spread creates a <strong style="color:#fff;">new object</strong> — React sees the change</li>
+                                                                        <li>Only the updated property changes; the rest is copied</li>
+                                                                </ul>
+                                                        </div>
+                                                </div>
+                                                <p class="small-text">Never mutate state directly — always return a <span class="highlight">new reference</span> so React detects the change.</p>
+                                        </div>
+                                        <aside class="notes">
+                                                This is the #1 state bug beginners hit. React uses reference equality (===) to detect changes. If you mutate the same object, the reference doesn't change and React skips the re-render. Spread operator creates a shallow copy — that's a new reference. Show in the console: `const a = {x:1}; const b = a; a === b` is true, but `{...a} === a` is false. That's why spread works.
+                                        </aside>
+                                </section>
+
+                                <!-- SLIDE 19b – State with Arrays -->
+                                <section>
+                                        <div style="display:flex; flex-direction:column; gap:0.8rem;">
+                                                <h2 class="slide-title">State with Arrays</h2>
+                                                <div class="two-col" style="align-items:flex-start; gap:1.4rem;">
+                                                        <div style="display:flex; flex-direction:column; gap:0.6rem;">
+                                                                <pre style="margin:0;"><code class="ts" data-line-numbers>
 const [items, setItems] = useState(['a', 'b', 'c']);
 
 // ✅ add
@@ -1016,20 +1117,35 @@ setItems(prev =&gt; [...prev, 'd']);
 
 // ✅ remove
 setItems(prev =&gt; prev.filter(i =&gt; i !== 'b'));
+
+// ✅ update one item
+setItems(prev =&gt;
+  prev.map(i =&gt; i === 'a' ? 'z' : i)
+);
                                                                 </code></pre>
                                                         </div>
+                                                        <div style="display:flex; flex-direction:column; gap:0.7rem;">
+                                                                <div class="card" style="font-size:0.78em; border:1.5px solid rgba(34,197,94,0.5);">
+                                                                        <strong style="color:#4ade80;">✅ Immutable methods</strong>
+                                                                        <p style="margin:0.3rem 0 0; color:var(--text-soft);"><code>map</code>, <code>filter</code>, <code>spread</code>, <code>slice</code>, <code>concat</code></p>
+                                                                </div>
+                                                                <div class="card" style="font-size:0.78em; border:1.5px solid rgba(239,68,68,0.5);">
+                                                                        <strong style="color:#f87171;">❌ Mutating methods</strong>
+                                                                        <p style="margin:0.3rem 0 0; color:var(--text-soft);"><code>push</code>, <code>pop</code>, <code>splice</code>, <code>sort</code> (in-place), <code>reverse</code></p>
+                                                                </div>
+                                                        </div>
                                                 </div>
-                                                <p class="small-text">Never mutate state directly — always return a <span class="highlight">new reference</span> so React detects the change.</p>
+                                                <p class="small-text">Same rule as objects — always return a <span class="highlight">new array</span> so React sees the update.</p>
                                         </div>
                                         <aside class="notes">
-                                                This is the #1 state bug beginners hit. React uses reference equality (===) to detect changes. If you mutate the same object, the reference doesn't change and React skips the re-render. Spread operator creates a shallow copy — that's a new reference. For arrays: use map/filter/spread, never push/splice directly.
+                                                For arrays: use map/filter/spread, never push/splice directly. The immutable vs mutating table is a handy cheat sheet — the left column returns a new array, the right column modifies in place. If you need sort, do [...items].sort() to copy first. Ask class: "What does filter return?" — a new array with items that pass the test.
                                         </aside>
                                 </section>
 
                                 <!-- SLIDE 20 – Lifting State Up -->
                                 <section>
                                         <div style="display:flex; flex-direction:column; gap:0.8rem;">
-                                                <h3 style="margin:0;">Slide 20 – Lifting State Up</h3>
+                                                <h2 class="slide-title">Lifting State Up</h2>
                                                 <div class="two-col" style="align-items:flex-start; gap:1.4rem;">
                                                         <div style="display:flex; flex-direction:column; gap:0.6rem;">
                                                                 <p style="margin:0; font-size:0.84em; color:var(--text-soft);">When two siblings need the same state, <span class="highlight">move it to their common parent</span> and pass it down as props.</p>
@@ -1054,7 +1170,7 @@ setItems(prev =&gt; prev.filter(i =&gt; i !== 'b'));
                                                         </div>
                                                         <div style="display:flex; flex-direction:column; gap:0.4rem;">
                                                                 <span style="font-size:0.68em; text-transform:uppercase; letter-spacing:0.1em; color:var(--accent);">Example</span>
-                                                                <pre style="margin:0;"><code class="ts" data-line-numbers="2|5|6">
+                                                                <pre style="margin:0;"><code class="ts" data-line-numbers>
 // Parent.tsx
 function Parent() {
   const [name, setName] = useState('');
@@ -1070,6 +1186,53 @@ function Parent() {
                                         </div>
                                         <aside class="notes">
                                                 Lifting state up is how siblings share data. Find the closest common ancestor, put useState there, pass value down as props and setter as a callback. This pattern appears everywhere in React apps. Preview: when prop-drilling gets deep, we'll use Context (Day 3).
+                                        </aside>
+                                </section>
+
+                                <!-- CONCLUSION SLIDE -->
+                                <section>
+                                        <div style="display:flex; flex-direction:column; align-items:center; gap:1.2rem; text-align:center;">
+                                                <h2 style="margin:0; font-weight:800; color:var(--accent);">Day 1 — Wrap-Up</h2>
+                                                <p style="margin:0; font-size:0.82em; color:var(--text-soft);">What we covered today</p>
+
+                                                <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:0.65rem; margin-top:0.4rem; width:100%;">
+                                                        <div class="card" style="font-size:0.76em; text-align:center;">
+                                                                <div style="font-size:1.4em; margin-bottom:0.2rem;">⚛️</div>
+                                                                <strong class="highlight">React &amp; SPAs</strong>
+                                                                <p style="margin:0.3rem 0 0; color:var(--text-soft);">Declarative UI library, Virtual DOM, single-page architecture</p>
+                                                        </div>
+                                                        <div class="card" style="font-size:0.76em; text-align:center;">
+                                                                <div style="font-size:1.4em; margin-bottom:0.2rem;">⚡</div>
+                                                                <strong class="highlight">Vite + TypeScript</strong>
+                                                                <p style="margin:0.3rem 0 0; color:var(--text-soft);">Fast dev server, HMR, modern project setup</p>
+                                                        </div>
+                                                        <div class="card" style="font-size:0.76em; text-align:center;">
+                                                                <div style="font-size:1.4em; margin-bottom:0.2rem;">🧩</div>
+                                                                <strong class="highlight">Components &amp; JSX</strong>
+                                                                <p style="margin:0.3rem 0 0; color:var(--text-soft);">Function components, JSX syntax, component composition</p>
+                                                        </div>
+                                                        <div class="card" style="font-size:0.76em; text-align:center;">
+                                                                <div style="font-size:1.4em; margin-bottom:0.2rem;">📦</div>
+                                                                <strong class="highlight">Props</strong>
+                                                                <p style="margin:0.3rem 0 0; color:var(--text-soft);">One-way data flow, read-only, TypeScript typing</p>
+                                                        </div>
+                                                        <div class="card" style="font-size:0.76em; text-align:center;">
+                                                                <div style="font-size:1.4em; margin-bottom:0.2rem;">🗃️</div>
+                                                                <strong class="highlight">State &amp; useState</strong>
+                                                                <p style="margin:0.3rem 0 0; color:var(--text-soft);">Component-owned data, immutable updates, functional setters</p>
+                                                        </div>
+                                                        <div class="card" style="font-size:0.76em; text-align:center;">
+                                                                <div style="font-size:1.4em; margin-bottom:0.2rem;">🔗</div>
+                                                                <strong class="highlight">Lifting State Up</strong>
+                                                                <p style="margin:0.3rem 0 0; color:var(--text-soft);">Sharing state between siblings via a common parent</p>
+                                                        </div>
+                                                </div>
+
+                                                <div style="width:40px; height:2px; background:var(--accent); border-radius:2px; opacity:0.6; margin-top:0.4rem;"></div>
+                                                <p style="margin:0; font-size:0.72em; color:var(--text-soft);">Tomorrow: <strong style="color:#fff;">Conditional Rendering, Lists &amp; Keys, Forms, and useEffect</strong></p>
+                                        </div>
+                                        <aside class="notes">
+                                                Quick recap of all six topics. Ask if there are any lingering questions. Remind students to practise by building small components on their own tonight. Preview Day 2: conditional rendering, rendering lists with map/key, controlled forms, and the useEffect hook for side effects.
                                         </aside>
                                 </section>
             </section>
