@@ -1,340 +1,601 @@
 ﻿<!doctype html>
 <html lang="en">
+
 <head>
-    <meta charset="utf-8">
-    <title>Day 3 - React Router Basics</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/black.min.css">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/highlight/monokai.min.css">
-    
-    <style>
-        :root {
-            --accent: #61dafb;
-            --accent-soft: rgba(97, 218, 251, 0.14);
-            --text-soft: #c8d2de;
-            --surface: rgba(255, 255, 255, 0.05);
-            --surface-border: rgba(255, 255, 255, 0.14);
-        }
-        .reveal {
-            background: radial-gradient(circle at 10% 15%, #1f2f47 0%, #10131a 45%, #080a0f 100%);
-        }
-        .reveal h1, .reveal h2, .reveal h3 { text-transform: none; letter-spacing: 0.01em; }
-        .reveal h1 { text-shadow: 0 8px 24px rgba(0,0,0,0.35); }
-        .reveal ul { font-size: 0.86em; }
-        .reveal code { font-size: 0.9em; }
-        .reveal pre {
-            border-radius: 12px;
-            border: 1px solid var(--surface-border);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
-        }
-        .reveal table {
-            font-size: 0.75em;
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid var(--surface-border);
-        }
-        .reveal table th,
-        .reveal table td {
-            padding: 0.5rem 0.7rem;
-            border-color: rgba(255,255,255,0.12);
-        }
-        .small-text { font-size: 0.7em; color: var(--text-soft); }
-        .highlight { color: var(--accent); }
-        .two-col { display: flex; gap: 1.5rem; align-items: flex-start; }
-        .two-col > div { flex: 1; }
-        .card {
-            padding: 0.9rem 1rem;
-            border: 1px solid var(--surface-border);
-            border-radius: 12px;
-            background: var(--surface);
-            backdrop-filter: blur(4px);
-        }
-        .step-card { font-size: 0.82em; line-height: 1.4; }
-        .step-card ol { margin: 0; padding-left: 1.2rem; }
-        .code-card pre { margin: 0; font-size: 0.7em; }
-        .hero {
-            display: grid;
-            grid-template-columns: 1.25fr 1fr;
-            gap: 1.6rem;
-            align-items: center;
-            text-align: left;
-        }
-        .hero p { color: var(--text-soft); }
-        .hero-visual {
-            padding: 1rem;
-            border: 1px solid var(--surface-border);
-            border-radius: 16px;
-            background: linear-gradient(160deg, rgba(97,218,251,0.14), rgba(30,41,59,0.35));
-            text-align: center;
-        }
-        .hero-visual img {
-            width: min(200px, 100%);
-            height: auto;
-            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.35));
-        }
-        .logo-row {
-            margin-top: 0.8rem;
-            display: flex;
-            gap: 0.8rem;
-            align-items: center;
-        }
-        .logo-row img {
-            width: 34px;
-            height: 34px;
-            object-fit: contain;
-            opacity: 0.92;
-        }
-        .image-frame {
-            border: 1px solid var(--surface-border);
-            border-radius: 14px;
-            background: rgba(15, 23, 42, 0.55);
-            padding: 0.8rem;
-            text-align: center;
-        }
-        .concept-img {
-            width: min(240px, 100%);
-            height: auto;
-        }
-        .diagram-svg {
-            width: 100%;
-            height: auto;
-            border-radius: 10px;
-            background: rgba(10, 16, 26, 0.55);
-        }
-        .badge {
-            display: inline-block;
-            padding: 0.2rem 0.55rem;
-            border-radius: 999px;
-            background: var(--accent-soft);
-            color: var(--accent);
-            font-size: 0.5em;
-            border: 1px solid rgba(97,218,251,0.45);
-            margin-top: 0.5rem;
-        }
-        .roadmap {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 0.8rem;
-        }
-        .roadmap span {
-            font-size: 0.45em;
-            border: 1px solid rgba(97,218,251,0.4);
-            background: rgba(97,218,251,0.1);
-            color: #d5f6ff;
-            border-radius: 999px;
-            padding: 0.23rem 0.55rem;
-        }
-        .check-list {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            font-size: 0.78em;
-            line-height: 1.65;
-        }
-        .check-list li::before {
-            content: "✓ ";
-            color: var(--accent);
-        }
-        .adv-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0.7rem;
-            margin-top: 0.7rem;
-            text-align: left;
-            font-size: 0.58em;
-        }
-        .adv-item {
-            border: 1px solid var(--surface-border);
-            border-radius: 10px;
-            background: rgba(15, 23, 42, 0.45);
-            padding: 0.55rem;
-        }
-        .flow-caption {
-            margin-top: 0.45rem;
-            font-size: 0.5em;
-            color: var(--text-soft);
-        }
-        .split-code {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0.9rem;
-            text-align: left;
-            margin-top: 0.75rem;
-        }
-        .label {
-            font-size: 0.5em;
-            color: #8fb5d8;
-            margin-bottom: 0.2rem;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-        }
-        .mini {
-            font-size: 0.62em;
-            line-height: 1.5;
-            color: var(--text-soft);
-            margin-top: 0.5rem;
-        }
-        @media (max-width: 900px) {
-            .hero,
-            .two-col {
-                grid-template-columns: 1fr;
-                display: block;
-            }
-            .split-code,
-            .adv-grid {
-                grid-template-columns: 1fr;
-            }
-            .hero-visual,
-            .two-col > div + div {
-                margin-top: 1rem;
-            }
-        }
-    </style>
+  <meta charset="utf-8">
+  <title>Day 3 - React Router Basics</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/black.min.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/highlight/monokai.min.css">
+
+  <style>
+    :root {
+      --accent: #61dafb;
+      --accent-soft: rgba(97, 218, 251, 0.14);
+      --text-soft: #c8d2de;
+      --surface: rgba(255, 255, 255, 0.05);
+      --surface-border: rgba(255, 255, 255, 0.14);
+    }
+
+    .reveal {
+      background: radial-gradient(circle at 10% 15%, #1f2f47 0%, #10131a 45%, #080a0f 100%);
+    }
+
+    .reveal h1,
+    .reveal h2,
+    .reveal h3 {
+      text-transform: none;
+      letter-spacing: 0.01em;
+    }
+
+    .reveal h1 {
+      text-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+    }
+
+    .reveal ul {
+      font-size: 0.86em;
+    }
+
+    .reveal code {
+      font-size: 0.9em;
+    }
+
+    .reveal pre {
+      border-radius: 12px;
+      border: 1px solid var(--surface-border);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
+    }
+
+    .reveal table {
+      font-size: 0.75em;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--surface-border);
+    }
+
+    .reveal table th,
+    .reveal table td {
+      padding: 0.5rem 0.7rem;
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+
+    .small-text {
+      font-size: 0.7em;
+      color: var(--text-soft);
+    }
+
+    .highlight {
+      color: var(--accent);
+    }
+
+    .two-col {
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+    }
+
+    .two-col>div {
+      flex: 1;
+    }
+
+    .card {
+      padding: 0.9rem 1rem;
+      border: 1px solid var(--surface-border);
+      border-radius: 12px;
+      background: var(--surface);
+      backdrop-filter: blur(4px);
+    }
+
+    .step-card {
+      font-size: 0.82em;
+      line-height: 1.4;
+    }
+
+    .step-card ol {
+      margin: 0;
+      padding-left: 1.2rem;
+    }
+
+    .code-card pre {
+      margin: 0;
+      font-size: 0.7em;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.25fr 1fr;
+      gap: 1.6rem;
+      align-items: center;
+      text-align: left;
+    }
+
+    .hero p {
+      color: var(--text-soft);
+    }
+
+    .hero-visual {
+      padding: 1rem;
+      border: 1px solid var(--surface-border);
+      border-radius: 16px;
+      background: linear-gradient(160deg, rgba(97, 218, 251, 0.14), rgba(30, 41, 59, 0.35));
+      text-align: center;
+    }
+
+    .hero-visual img {
+      width: min(200px, 100%);
+      height: auto;
+      filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.35));
+    }
+
+    .logo-row {
+      margin-top: 0.8rem;
+      display: flex;
+      gap: 0.8rem;
+      align-items: center;
+    }
+
+    .logo-row img {
+      width: 34px;
+      height: 34px;
+      object-fit: contain;
+      opacity: 0.92;
+    }
+
+    .image-frame {
+      border: 1px solid var(--surface-border);
+      border-radius: 14px;
+      background: rgba(15, 23, 42, 0.55);
+      padding: 0.8rem;
+      text-align: center;
+    }
+
+    .concept-img {
+      width: min(240px, 100%);
+      height: auto;
+    }
+
+    .diagram-svg {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      background: rgba(10, 16, 26, 0.55);
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 0.5em;
+      border: 1px solid rgba(97, 218, 251, 0.45);
+      margin-top: 0.5rem;
+    }
+
+    .roadmap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.8rem;
+    }
+
+    .roadmap span {
+      font-size: 0.45em;
+      border: 1px solid rgba(97, 218, 251, 0.4);
+      background: rgba(97, 218, 251, 0.1);
+      color: #d5f6ff;
+      border-radius: 999px;
+      padding: 0.23rem 0.55rem;
+    }
+
+    .check-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      font-size: 0.78em;
+      line-height: 1.65;
+    }
+
+    .check-list li::before {
+      content: "✓ ";
+      color: var(--accent);
+    }
+
+    .adv-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.7rem;
+      margin-top: 0.7rem;
+      text-align: left;
+      font-size: 0.58em;
+    }
+
+    .adv-item {
+      border: 1px solid var(--surface-border);
+      border-radius: 10px;
+      background: rgba(15, 23, 42, 0.45);
+      padding: 0.55rem;
+    }
+
+    .flow-caption {
+      margin-top: 0.45rem;
+      font-size: 0.5em;
+      color: var(--text-soft);
+    }
+
+    .split-code {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.9rem;
+      text-align: left;
+      margin-top: 0.75rem;
+    }
+
+    .label {
+      font-size: 0.5em;
+      color: #8fb5d8;
+      margin-bottom: 0.2rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .mini {
+      font-size: 0.62em;
+      line-height: 1.5;
+      color: var(--text-soft);
+      margin-top: 0.5rem;
+    }
+
+    @media (max-width: 900px) {
+
+      .hero,
+      .two-col {
+        grid-template-columns: 1fr;
+        display: block;
+      }
+
+      .split-code,
+      .adv-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-visual,
+      .two-col>div+div {
+        margin-top: 1rem;
+      }
+    }
+  </style>
 </head>
+
 <body>
-    <div class="reveal">
-        <div class="slides">
-            <section>
-                <section>
-                    <div class="hero">
-                        <div>
-                            <h1>Day 3</h1>
-                            <h3>React Router Basics</h3>
-                            <p>Client-side navigation, links, params, and nested routes</p>
-                            <span class="badge">Navigation without reloads</span>
-                        </div>
-                        <div class="hero-visual">
-                            <svg class="diagram-svg" viewBox="0 0 520 220" role="img" aria-label="Routing map illustration">
-                                <rect x="20" y="40" width="130" height="52" rx="10" fill="#1f2937" stroke="#61dafb"/>
-                                <text x="85" y="72" fill="#dbeafe" text-anchor="middle" font-size="15">/</text>
-                                <rect x="195" y="40" width="130" height="52" rx="10" fill="#1f2937" stroke="#61dafb"/>
-                                <text x="260" y="72" fill="#dbeafe" text-anchor="middle" font-size="15">/about</text>
-                                <rect x="370" y="40" width="130" height="52" rx="10" fill="#1f2937" stroke="#61dafb"/>
-                                <text x="435" y="72" fill="#dbeafe" text-anchor="middle" font-size="15">/products/:id</text>
-                                <line x1="85" y1="120" x2="85" y2="182" stroke="#61dafb" stroke-width="2"/>
-                                <line x1="260" y1="120" x2="260" y2="182" stroke="#61dafb" stroke-width="2"/>
-                                <line x1="435" y1="120" x2="435" y2="182" stroke="#61dafb" stroke-width="2"/>
-                                <text x="260" y="205" fill="#a9b7c9" text-anchor="middle" font-size="14">One SPA, multiple routes</text>
-                            </svg>
-                        </div>
-                    </div>
-                </section>
+  <div class="reveal">
+    <div class="slides">
+      <section>
+        <section>
+          <div class="hero">
+            <div>
+              <h1>Day 3</h1>
+              <h3>React Router Basics</h3>
+              <p>Client-side navigation, links, params, and nested routes</p>
+              <span class="badge">Navigation without reloads</span>
+            </div>
+            <div class="hero-visual">
+              <svg class="diagram-svg" viewBox="0 0 520 220" role="img" aria-label="Routing map illustration">
+                <rect x="20" y="40" width="130" height="52" rx="10" fill="#1f2937" stroke="#61dafb" />
+                <text x="85" y="72" fill="#dbeafe" text-anchor="middle" font-size="15">/</text>
+                <rect x="195" y="40" width="130" height="52" rx="10" fill="#1f2937" stroke="#61dafb" />
+                <text x="260" y="72" fill="#dbeafe" text-anchor="middle" font-size="15">/about</text>
+                <rect x="370" y="40" width="130" height="52" rx="10" fill="#1f2937" stroke="#61dafb" />
+                <text x="435" y="72" fill="#dbeafe" text-anchor="middle" font-size="15">/products/:id</text>
+                <line x1="85" y1="120" x2="85" y2="182" stroke="#61dafb" stroke-width="2" />
+                <line x1="260" y1="120" x2="260" y2="182" stroke="#61dafb" stroke-width="2" />
+                <line x1="435" y1="120" x2="435" y2="182" stroke="#61dafb" stroke-width="2" />
+                <text x="260" y="205" fill="#a9b7c9" text-anchor="middle" font-size="14">One SPA, multiple routes</text>
+              </svg>
+            </div>
+          </div>
+          <aside class="notes">
+            Introduce Day 3 as the point where the app stops feeling like a single screen and starts behaving like a
+            real product.
+            Explain that React Router lets us switch views by URL without a full browser refresh.
+            Preview the five ideas for today: route definitions, path matching, navigation links, route parameters, and
+            nested layouts.
+          </aside>
+        </section>
 
-                <section>
-                    <h3>Slide 1 – React Router: Introduction</h3>
-                    <p>🚦 What is React Router?</p>
-                    <ul>
-                        <li>Library for handling navigation in React</li>
-                        <li>Adds multiple screens without page reloads</li>
-                        <li>Changes the URL while keeping state and context</li>
-                        <li>Core for building SPAs</li>
-                    </ul>
-                </section>
+        <section>
+          <h2 class="slide-title">React Router: Introduction</h2>
+          <p>🚦 What is React Router?</p>
+          <ul>
+            <li>Library for handling navigation in React</li>
+            <li>Adds multiple screens without page reloads</li>
+            <li>Changes the URL while keeping state and context</li>
+            <li>Core for building SPAs</li>
+          </ul>
+          <aside class="notes">
+            Define React Router as the library that maps a URL to a React component tree.
+            Contrast this with traditional multi-page navigation where the whole document reloads.
+            Emphasize that in a single-page app, navigation feels fast because React swaps views instead of rebuilding
+            the entire page from the server.
+          </aside>
+        </section>
 
-                <section>
-                    <h3>Slide 2 – Setting Up React Router</h3>
-                    <pre><code class="tsx">
+        <section>
+          <h2 class="slide-title">Setting Up React Router</h2>
+          <pre><code class="tsx">
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./Home";
 import About from "./About";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-      </Routes>
-    </BrowserRouter>
+        &lt;BrowserRouter&gt;
+            &lt;Routes&gt;
+                &lt;Route path="/" element={&lt;Home /&gt;} /&gt;
+                &lt;Route path="/about" element={&lt;About /&gt;} /&gt;
+            &lt;/Routes&gt;
+        &lt;/BrowserRouter&gt;
   );
 }
                     </code></pre>
-                    <div class="small-text">
-                        <p>BrowserRouter enables routing; Routes wraps all routes; Route maps URL to component via element.</p>
-                    </div>
-                </section>
+          <div class="small-text">
+            <p>BrowserRouter enables routing</p>
+            <p>Routes wraps all routes</p>
+            <p> Route maps URL to component via element</p>
 
-                <section>
-                    <h3>Slide 3 – Navigation with Links</h3>
-                    <pre><code class="tsx">
+          </div>
+          <aside class="notes">
+            Walk through the code from outside in.
+            Explain that BrowserRouter listens to the browser address bar and history API.
+            Mention that Routes is the matcher and each Route pairs a path with the UI to render.
+            Call out that this is usually placed near the root of the app, often in App.tsx or main.tsx depending on
+            project structure.
+          </aside>
+        </section>
+
+        <section>
+          <h2 class="slide-title">How Path Matching Works</h2>
+          <pre><code class="tsx">
+&lt;Routes&gt;
+    &lt;Route path="/" element={&lt;Home /&gt;} /&gt;
+    &lt;Route path="/about" element={&lt;About /&gt;} /&gt;
+    &lt;Route path="/products/:id" element={&lt;ProductPage /&gt;} /&gt;
+    &lt;Route path="*" element={&lt;NotFound /&gt;} /&gt;
+&lt;/Routes&gt;
+                    </code></pre>
+          <div class="small-text">
+            <ul>
+              <li>Exact path segments match fixed URLs like <code>/</code> and <code>/about</code>.</li>
+              <li>Dynamic segments like <code>:id</code> capture values from the URL.</li>
+              <li><code>*</code> works as a fallback when no other route matches.</li>
+            </ul>
+          </div>
+          <aside class="notes">
+            Explain that React Router checks the current URL against the route patterns inside Routes.
+            Point out that static paths like slash and slash-about are straightforward, while products slash something
+            uses a dynamic segment.
+            Mention that the star route is the fallback for anything that does not match the earlier patterns.
+            Keep this practical: students mainly need to know that route patterns define what URLs the app understands.
+          </aside>
+        </section>
+
+        <section>
+          <h2 class="slide-title">Route Matching Priorities</h2>
+          <pre><code class="tsx">
+&lt;Routes&gt;
+    &lt;Route path="/new" element={&lt;NewProduct /&gt;} /&gt;
+    &lt;Route path="/:id" element={&lt;ProductPage /&gt;} /&gt;
+    &lt;Route path="*" element={&lt;NotFound /&gt;} /&gt;
+&lt;/Routes&gt;
+          </code></pre>
+          <div class="two-col mini">
+            <div class="card">
+              <div class="label">Question</div>
+              <p>What happens when we navigate to <code>/new</code>?</p>
+              <p>If we swap the order of <code>/new</code> and <code>/:id</code>, does the result change?</p>
+            </div>
+            <div class="card fragment" data-fragment-index="1">
+              <div class="label">Answer + Rule</div>
+              <p><code>/new</code> matches <code>NewProduct</code>. Static paths are more specific than
+                <code>/:id</code>, so changing the order does not change the result.</p>
+            </div>
+          </div>
+          <aside class="notes">
+            Explain that students often worry about route order, but the important idea is specificity.
+            Ask the class what they expect for slash-new before revealing the answer.
+            Point out that the explicit static route for new is more specific than the dynamic id route.
+            Clarify that in this example, changing the order does not change the result because React Router prefers the
+            more specific match.
+            End by reinforcing that the wildcard route is the catch-all fallback.
+          </aside>
+        </section>
+
+        <section>
+          <h2 class="slide-title">Navigation with Links</h2>
+          <pre><code class="tsx">
 import { Link } from "react-router-dom";
 
 function Navbar() {
   return (
-    <nav>
-      <Link to="/">Home</Link>
-      <Link to="/about">About</Link>
-    </nav>
+        &lt;nav&gt;
+            &lt;Link to="/"&gt;Home&lt;/Link&gt;
+            &lt;Link to="/about"&gt;About&lt;/Link&gt;
+        &lt;/nav&gt;
   );
 }
                     </code></pre>
-                    <div class="small-text">
-                        <p>Use Link instead of anchor tags to avoid full page reloads and preserve state.</p>
-                    </div>
-                </section>
+          <div class="small-text">
+            <p>Use Link instead of anchor tags to avoid full page reloads and preserve state.</p>
+          </div>
+          <aside class="notes">
+            Explain why normal anchor tags are a problem in client-side apps: they trigger a full page refresh.
+            Show that Link updates the URL and renders the next route while keeping the React app alive.
+            If useful, mention that NavLink is a related component for active link styling, but keep the focus here on
+            Link.
+          </aside>
+        </section>
 
-                <section>
-                    <h3>Slide 4 – URL Parameters (Dynamic Routes)</h3>
-                    <pre><code class="tsx">
+        <section>
+          <h2 class="slide-title">URL Parameters</h2>
+          <h3 class="slide-title"> (Dynamic Routes)</h2>
+            <pre><code class="tsx">
 // Route definition
-<Route path="/products/:id" element={<ProductPage />} />
+&lt;Route path="/products/:id" element={&lt;ProductPage /&gt;} /&gt;
 
 // Inside ProductPage.tsx
 import { useParams } from "react-router-dom";
 
 function ProductPage() {
   const { id } = useParams();
-  return <h1>Product ID: {id}</h1>;
+    return &lt;h1&gt;Product ID: {id}&lt;/h1&gt;;
 }
                     </code></pre>
-                    <div class="small-text">
-                        <p>Use dynamic params for product pages, user profiles, blog posts, or any ID-based route.</p>
-                    </div>
-                </section>
+            <div class="small-text">
+              <p>Use dynamic params for product pages, user profiles, blog posts, or any ID-based route.</p>
+            </div>
+            <aside class="notes">
+              Explain the colon syntax in the route path and make clear that id is a variable segment.
+              Show how useParams reads the matched value from the current URL.
+              Give practical examples like product details, blog post pages, or user profile pages.
+              Mention that params are strings by default, so conversion may be needed before numeric comparisons or API
+              requests.
+            </aside>
+        </section>
 
-                <section>
-                    <h3>Slide 5 – Nested Routes (Children)</h3>
-                    <pre><code class="tsx">
-<Route path="/dashboard" element={<DashboardLayout />}>
-  <Route path="analytics" element={<Analytics />} />
-  <Route path="reports" element={<Reports />} />
-</Route>
+        <section>
+          <h2 class="slide-title">Query Params vs URL Params</h2>
+          <div class="small-text">
+            <ul>
+              <li>URL params are part of the path, like <code>/products/42</code>.</li>
+              <li>Query params come after <code>?</code>, like <code>/products?category=shoes&amp;sort=price</code>.
+              </li>
+              <li>Use URL params for resource identity, and query params for filters, search, sorting, or pagination.
+              </li>
+            </ul>
+          </div>
+          <pre><code class="tsx">
+import { useSearchParams } from "react-router-dom";
+
+function ProductsPage() {
+  const [searchParams] = useSearchParams();
+  const category = searchParams.get("category");
+  const sort = searchParams.get("sort");
+
+  return &lt;p&gt;Category: {category}, Sort: {sort}&lt;/p&gt;;
+}
+          </code></pre>
+          <aside class="notes">
+            Contrast the two concepts clearly.
+            Explain that slash-products-slash-42 points to one specific product, while query params usually modify how a
+            list or page is displayed.
+            Use examples students already know: filters, search keywords, sort order, and page number.
+            Mention that React Router provides useSearchParams for reading and updating query string values.
+          </aside>
+        </section>
+
+        <section>
+          <h2 class="slide-title">Nested Routes Structure</h2>
+          <pre><code class="tsx">
+&lt;Route path="/dashboard" element={&lt;DashboardLayout /&gt;}&gt;
+    &lt;Route path="analytics" element={&lt;Analytics /&gt;} /&gt;
+    &lt;Route path="reports" element={&lt;Reports /&gt;} /&gt;
+&lt;/Route&gt;
                     </code></pre>
-                    <pre><code class="tsx">
+          <div class="small-text">
+            <ul>
+              <li><code>/dashboard</code> is the parent route.</li>
+              <li><code>analytics</code> and <code>reports</code> are child routes under that parent.</li>
+              <li>These become URLs like <code>/dashboard/analytics</code> and <code>/dashboard/reports</code>.</li>
+            </ul>
+          </div>
+          <aside class="notes">
+            Start with the route tree itself before talking about Outlet.
+            Explain that child paths are relative to the parent route, so analytics becomes
+            slash-dashboard-slash-analytics.
+            Make the connection to dashboards, settings pages, and admin areas where several screens share one parent
+            section.
+          </aside>
+        </section>
+
+        <section>
+          <h2 class="slide-title">Nested Routes with Outlet</h2>
+          <div class="image-frame" style="margin-bottom: 0.9rem;">
+            <svg class="diagram-svg" viewBox="0 0 760 220" role="img" aria-label="Nested routes outlet demo">
+              <rect x="20" y="20" width="320" height="180" rx="16" fill="#0f172a" stroke="#61dafb" />
+              <text x="38" y="36" fill="#7dd3fc" font-size="13">Dashboard Layout</text>
+              <rect x="42" y="42" width="276" height="34" rx="10" fill="#1e293b" stroke="#8fb5d8" />
+              <text x="180" y="64" fill="#dbeafe" text-anchor="middle" font-size="16">Dashboard Header</text>
+              <rect x="60" y="95" width="240" height="72" rx="12" fill="#082f49" stroke="#61dafb" />
+              <text x="180" y="124" fill="#d5f6ff" text-anchor="middle" font-size="16">&lt;Outlet /&gt;</text>
+              <text x="180" y="148" fill="#7dd3fc" text-anchor="middle" font-size="12">Child route renders inside the layout</text>
+
+              <path d="M380 110 L430 110" stroke="#61dafb" stroke-width="3" marker-end="url(#arrowhead)" />
+
+              <rect x="430" y="34" width="150" height="44" rx="12" fill="#1f2937" stroke="#61dafb" />
+              <text x="505" y="61" fill="#dbeafe" text-anchor="middle" font-size="14">/dashboard/analytics</text>
+              <rect x="590" y="34" width="150" height="44" rx="12" fill="#1f2937" stroke="#61dafb" />
+              <text x="665" y="61" fill="#dbeafe" text-anchor="middle" font-size="14">/dashboard/reports</text>
+
+              <rect x="460" y="102" width="120" height="60" rx="12" fill="#082f49" stroke="#61dafb" />
+              <text x="520" y="128" fill="#d5f6ff" text-anchor="middle" font-size="14">Analytics</text>
+              <text x="520" y="148" fill="#7dd3fc" text-anchor="middle" font-size="12">inside Outlet</text>
+
+              <rect x="610" y="102" width="120" height="60" rx="12" fill="#082f49" stroke="#61dafb" />
+              <text x="670" y="128" fill="#d5f6ff" text-anchor="middle" font-size="14">Reports</text>
+              <text x="670" y="148" fill="#7dd3fc" text-anchor="middle" font-size="12">inside Outlet</text>
+
+              <defs>
+                <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                  <polygon points="0 0, 10 3.5, 0 7" fill="#61dafb" />
+                </marker>
+              </defs>
+            </svg>
+          </div>
+          <pre><code class="tsx">
 // DashboardLayout.tsx
 import { Outlet } from "react-router-dom";
 
 function DashboardLayout() {
   return (
-    <div>
-      <h1>Dashboard</h1>
-      <Outlet />
-    </div>
+        &lt;div&gt;
+            &lt;h1&gt;Dashboard&lt;/h1&gt;
+            &lt;Outlet /&gt;
+        &lt;/div&gt;
   );
 }
                     </code></pre>
-                    <div class="small-text">
-                        <p>Outlet renders the matched child route while keeping shared layout visible.</p>
-                    </div>
-                </section>
-            </section>
-        </div>
+          <div class="small-text">
+            <ul>
+              <li><code>Dashboard</code> stays visible as shared layout content.</li>
+              <li><code>&lt;Outlet /&gt;</code> is the placeholder for the matched child route.</li>
+              <li>Only the inner page changes when moving between nested routes.</li>
+            </ul>
+          </div>
+          <aside class="notes">
+            Now explain the rendering behavior.
+            Point out that the layout component is what makes nested routes useful because the shell stays on screen.
+            Explain that Outlet is where Analytics or Reports will render depending on the current child route.
+            Connect this to real apps with shared sidebars, tabs, headers, or admin layouts.
+          </aside>
+        </section>
+      </section>
     </div>
+  </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/highlight/highlight.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/notes/notes.min.js"></script> 
-    
-    <script>
-        Reveal.initialize({
-            hash: true,
-            slideNumber: true,
-            plugins: [ RevealHighlight, RevealNotes ] // Ensure RevealNotes is listed here
-        });
-    </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/highlight/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/notes/notes.min.js"></script>
+
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: true,
+      plugins: [RevealHighlight, RevealNotes] // Ensure RevealNotes is listed here
+    });
+  </script>
 </body>
+
 </html>
