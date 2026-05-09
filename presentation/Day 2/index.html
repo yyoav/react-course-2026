@@ -48,12 +48,14 @@
         font-size: 0.86em;
       }
       .reveal code {
-        font-size: 0.9em;
+        font-size: 0.7em;
       }
       .reveal pre {
         border-radius: 12px;
         border: 1px solid var(--surface-border);
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
+        width: 100%;
+        max-width: none;
       }
       .reveal table {
         font-size: 0.75em;
@@ -187,12 +189,12 @@
             <div
               style="
                 display: grid;
-                grid-template-columns: repeat(3, 1fr);
-                gap: 0.65rem;
-                margin-top: 0.9rem;
+                grid-template-columns: repeat(5, 1fr);
+                gap: 0.5rem;
+                margin-top: 0.7rem;
               "
             >
-              <div class="card" style="font-size: 0.78em; text-align: center">
+              <div class="card" style="font-size: 0.85em; text-align: center">
                 <div
                   style="
                     font-size: 1.8em;
@@ -384,17 +386,14 @@
             </div>
           </section>
 
-          <!-- Slide 3: Rendering Lists -->
+          <!-- Slide 3: Why .map() is used in React -->
           <section>
             <h3>
-              Rendering Lists with .map() & Keys
-              <span class="small-text">(40 min)</span>
+              Why .map() is used in React
+              <span class="small-text">(20 min)</span>
             </h3>
             <div style="text-align: left; font-size: 0.85em; margin-top: 1rem">
               <div class="card" style="margin-bottom: 1rem">
-                <h4 style="color: var(--accent); margin: 0 0 0.5rem">
-                  Why .map() is used in React
-                </h4>
                 <ul style="margin: 0; padding-left: 1.5rem">
                   <li>
                     In React, you rarely manually create repetitive HTML.
@@ -412,11 +411,162 @@
                   </li>
                 </ul>
               </div>
+            </div>
+            <p class="small-text" style="margin-top: 1rem">
+              💡 Let's see the wrong way vs the correct way
+            </p>
+          </section>
 
+          <!-- Slide 3b: Example - Product Gallery Wrong Way -->
+          <section>
+            <h3>Example: Product Gallery - ❌ Wrong Way</h3>
+            <div class="two-col" style="margin-top: 1rem">
+              <div>
+                <div
+                  class="small-text"
+                  style="margin-bottom: 0.5rem; color: var(--accent)"
+                >
+                  JavaScript/JSX
+                </div>
+                <pre><code class="language-jsx">function ProductGallery() {
+  return (
+    &lt;div className="gallery"&gt;
+      &lt;div className="product"&gt;
+        &lt;span className="icon"&gt;📱&lt;/span&gt;
+        &lt;h3&gt;iPhone&lt;/h3&gt;
+        &lt;p&gt;$999&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div className="product"&gt;
+        &lt;span className="icon"&gt;💻&lt;/span&gt;
+        &lt;h3&gt;MacBook&lt;/h3&gt;
+        &lt;p&gt;$1,499&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div className="product"&gt;
+        &lt;span className="icon"&gt;⌚&lt;/span&gt;
+        &lt;h3&gt;Apple Watch&lt;/h3&gt;
+        &lt;p&gt;$399&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div className="product"&gt;
+        &lt;span className="icon"&gt;🎧&lt;/span&gt;
+        &lt;h3&gt;AirPods&lt;/h3&gt;
+        &lt;p&gt;$249&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+              </div>
+              <div>
+                <div
+                  class="small-text"
+                  style="margin-bottom: 0.5rem; color: var(--accent)"
+                >
+                  CSS
+                </div>
+                <pre><code class="language-css">.gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+
+  .product {
+    padding: 1rem;
+    background: #f5f5f5;
+    border-radius: 8px;
+    text-align: center;
+
+    .icon {
+      font-size: 2rem;
+    }
+
+    h3 {
+      margin: 0.5rem 0;
+    }
+
+    p {
+      color: #0070f3;
+      font-weight: bold;
+    }
+  }
+}</code></pre>
+              </div>
+            </div>
+          </section>
+
+          <!-- Slide 3c: Example - Product Gallery Right Way -->
+          <section>
+            <h3>Example: Product Gallery - ✅ Right Way</h3>
+            <div class="two-col" style="margin-top: 1rem">
+              <div>
+                <div
+                  class="small-text"
+                  style="margin-bottom: 0.5rem; color: var(--accent)"
+                >
+                  JavaScript/JSX
+                </div>
+                <pre><code class="language-jsx">const products = [
+  { id: 1, name: "iPhone", icon: "📱", price: 999 },
+  { id: 2, name: "MacBook", icon: "💻", price: 1499 },
+  { id: 3, name: "Apple Watch", icon: "⌚", price: 399 },
+  { id: 4, name: "AirPods", icon: "🎧", price: 249 }
+];
+
+function ProductGallery() {
+  return (
+    &lt;div className="gallery"&gt;
+      {products.map((product) =&gt; (
+        &lt;div key={product.id} className="product"&gt;
+          &lt;span className="icon"&gt;{product.icon}&lt;/span&gt;
+          &lt;h3&gt;{product.name}&lt;/h3&gt;
+          &lt;p&gt;${product.price}&lt;/p&gt;
+        &lt;/div&gt;
+      ))}
+    &lt;/div&gt;
+  );
+}</code></pre>
+              </div>
+              <div>
+                <div
+                  class="small-text"
+                  style="margin-bottom: 0.5rem; color: var(--accent)"
+                >
+                  CSS
+                </div>
+                <pre><code class="language-css">.gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+
+  .product {
+    padding: 1rem;
+    background: #f5f5f5;
+    border-radius: 8px;
+    text-align: center;
+
+    .icon {
+      font-size: 2rem;
+    }
+
+    h3 {
+      margin: 0.5rem 0;
+    }
+
+    p {
+      color: #0070f3;
+      font-weight: bold;
+    }
+  }
+}</code></pre>
+              </div>
+            </div>
+          </section>
+
+          <!-- Slide 3d: Why Keys Matter -->
+          <section>
+            <h3>
+              Why Keys Matter
+              <span class="small-text">(10 min)</span>
+            </h3>
+            <div style="text-align: left; font-size: 0.85em; margin-top: 1rem">
               <div class="card" style="margin-bottom: 1rem">
-                <h4 style="color: var(--accent); margin: 0 0 0.5rem">
-                  The importance of keys
-                </h4>
                 <ul style="margin: 0; padding-left: 1.5rem">
                   <li>
                     Keys help React identify which items changed, were added, or
@@ -437,29 +587,877 @@
                   </li>
                 </ul>
               </div>
+            </div>
+            <p class="small-text" style="margin-top: 1rem">
+              💡 Let's see what happens without proper keys
+            </p>
+          </section>
 
-              <div class="card">
+          <!-- Slide 3d2a: What are Index Keys? -->
+          <section>
+            <h3>Understanding Keys: Index vs Unique ID</h3>
+            <div style="text-align: left; font-size: 0.5em; margin-top: 1rem">
+              <div class="card" style="margin-bottom: 1rem; padding: 1rem">
+                <h4 style="color: var(--accent); margin: 0 0 0.75rem">
+                  What happens when you use array index as key?
+                </h4>
+                <p
+                  style="
+                    margin: 0 0 0.75rem;
+                    line-height: 1.8;
+                    font-size: 1.1em;
+                  "
+                >
+                  When you use the array index as a key, React identifies each
+                  element by its <strong>position in the array</strong>, not by
+                  what it actually contains.
+                </p>
+                <div
+                  style="
+                    background: rgba(255, 255, 255, 0.05);
+                    padding: 0.75rem;
+                    border-radius: 8px;
+                    font-family: monospace;
+                    font-size: 0.95em;
+                  "
+                >
+                  <div style="color: var(--text-soft); margin-bottom: 0.4rem">
+                    Array with indexes:
+                  </div>
+                  <div style="line-height: 2">
+                    <span style="color: #888">[0]</span> → Buy Eggs<br />
+                    <span style="color: #888">[1]</span> → Buy Milk<br />
+                    <span style="color: #888">[2]</span> → Buy Bread
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Slide 3d2b: The Problem with Index Keys -->
+          <section>
+            <h3>The Problem with Index Keys</h3>
+            <div style="text-align: left; font-size: 0.5em; margin-top: 1rem">
+              <div
+                class="card"
+                style="
+                  margin-bottom: 1rem;
+                  padding: 1rem;
+                  background: rgba(239, 68, 68, 0.08);
+                "
+              >
+                <h4 style="color: #ef4444; margin: 0 0 0.75rem">
+                  🐛 What goes wrong when list items are deleted?
+                </h4>
+                <p
+                  style="
+                    margin: 0 0 0.75rem;
+                    line-height: 1.8;
+                    font-size: 1.05em;
+                  "
+                >
+                  If you delete an item from the middle of the list, all items
+                  after it shift up and get <strong>new indexes</strong>.
+                </p>
+                <div
+                  style="
+                    background: rgba(255, 255, 255, 0.9);
+                    padding: 0.75rem;
+                    border-radius: 8px;
+                    color: #333;
+                    font-family: monospace;
+                    font-size: 0.95em;
+                    margin-bottom: 0.75rem;
+                  "
+                >
+                  <div style="font-weight: bold; margin-bottom: 0.4rem">
+                    Before deleting "Buy Milk":
+                  </div>
+                  <div style="line-height: 2; margin-bottom: 0.6rem">
+                    <span style="color: #888">[0]</span> → Buy Eggs<br />
+                    <span
+                      style="
+                        color: #888;
+                        background: rgba(239, 68, 68, 0.15);
+                        padding: 0.2rem 0.4rem;
+                      "
+                      >[1]</span
+                    >
+                    →
+                    <span
+                      style="
+                        background: rgba(239, 68, 68, 0.15);
+                        padding: 0.2rem 0.4rem;
+                      "
+                      >Buy Milk 🗑️</span
+                    ><br />
+                    <span style="color: #888">[2]</span> → Buy Bread
+                  </div>
+                  <div style="font-weight: bold; margin-bottom: 0.4rem">
+                    After deleting:
+                  </div>
+                  <div style="line-height: 2">
+                    <span style="color: #888">[0]</span> → Buy Eggs<br />
+                    <span
+                      style="
+                        color: #888;
+                        background: rgba(239, 68, 68, 0.15);
+                        padding: 0.2rem 0.4rem;
+                      "
+                      >[1]</span
+                    >
+                    → Buy Bread
+                    <span style="color: #ef4444"
+                      >← Changed from [2] to [1]!</span
+                    >
+                  </div>
+                </div>
+                <p
+                  style="
+                    margin: 0;
+                    line-height: 1.8;
+                    font-size: 1.05em;
+                    background: rgba(239, 68, 68, 0.15);
+                    padding: 0.6rem;
+                    border-radius: 6px;
+                    border-left: 4px solid #ef4444;
+                  "
+                >
+                  <strong style="color: #ef4444">React thinks:</strong> "The
+                  item at index [1] changed from 'Buy Milk' to 'Buy Bread', so
+                  I'll re-render it but keep its old state (like input values)!"
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <!-- Slide 3d2c: The Solution - Unique IDs -->
+          <section>
+            <h3>The Solution: Use Unique IDs</h3>
+            <div style="text-align: left; font-size: 0.5em; margin-top: 1rem">
+              <div
+                class="card"
+                style="
+                  margin-bottom: 1rem;
+                  padding: 1rem;
+                  background: rgba(34, 197, 94, 0.08);
+                "
+              >
+                <h4 style="color: #22c55e; margin: 0 0 0.75rem">
+                  ✅ Unique IDs stay with each item
+                </h4>
+                <p
+                  style="
+                    margin: 0 0 0.75rem;
+                    line-height: 1.8;
+                    font-size: 1.05em;
+                  "
+                >
+                  Use unique IDs that stay with each item
+                  <strong>regardless of its position</strong>. When an item is
+                  deleted, React knows exactly which one is gone.
+                </p>
+                <div
+                  style="
+                    background: rgba(255, 255, 255, 0.9);
+                    padding: 0.75rem;
+                    border-radius: 8px;
+                    color: #333;
+                    font-family: monospace;
+                    font-size: 0.95em;
+                    margin-bottom: 0.75rem;
+                  "
+                >
+                  <div style="font-weight: bold; margin-bottom: 0.4rem">
+                    Before deleting "Buy Milk":
+                  </div>
+                  <div style="line-height: 2; margin-bottom: 0.6rem">
+                    <span style="color: #888">key={101}</span> → Buy Eggs<br />
+                    <span
+                      style="
+                        color: #888;
+                        background: rgba(34, 197, 94, 0.15);
+                        padding: 0.2rem 0.4rem;
+                      "
+                      >key={102}</span
+                    >
+                    →
+                    <span
+                      style="
+                        background: rgba(34, 197, 94, 0.15);
+                        padding: 0.2rem 0.4rem;
+                      "
+                      >Buy Milk 🗑️</span
+                    ><br />
+                    <span style="color: #888">key={103}</span> → Buy Bread
+                  </div>
+                  <div style="font-weight: bold; margin-bottom: 0.4rem">
+                    After deleting:
+                  </div>
+                  <div style="line-height: 2">
+                    <span style="color: #888">key={101}</span> → Buy Eggs<br />
+                    <span style="color: #888">key={103}</span> → Buy Bread
+                    <span style="color: #22c55e"
+                      >← Still key={103}, just moved up!</span
+                    >
+                  </div>
+                </div>
+                <p
+                  style="
+                    margin: 0;
+                    line-height: 1.8;
+                    font-size: 1.05em;
+                    background: rgba(34, 197, 94, 0.15);
+                    padding: 0.6rem;
+                    border-radius: 6px;
+                    border-left: 4px solid #22c55e;
+                  "
+                >
+                  <strong style="color: #22c55e">React knows:</strong>
+                  "key={102} was removed, key={103} is still the same item, just
+                  preserve its state!"
+                </p>
+              </div>
+              <div
+                style="
+                  text-align: center;
+                  padding: 0.5rem;
+                  background: var(--accent-soft);
+                  border-radius: 8px;
+                "
+              >
+                <strong style="color: var(--accent)">Next:</strong>
+                <span style="color: var(--text-soft)"
+                  >Let's see this bug in action with actual code →</span
+                >
+              </div>
+            </div>
+          </section>
+
+          <!-- Slide 3e: Keys Problem Illustration -->
+          <section>
+            <h3 style="font-size: 1.2em; margin-bottom: 0.3rem">
+              The Bug: Index Keys in Action
+            </h3>
+            <div style="margin-top: 0.3rem">
+              <div
+                class="card"
+                style="
+                  margin-bottom: 0.4rem;
+                  padding: 0.5rem 0.8rem;
+                  background: rgba(239, 68, 68, 0.05);
+                "
+              >
+                <h4
+                  style="
+                    color: var(--accent);
+                    margin: 0 0 0.4rem;
+                    text-align: center;
+                    font-size: 0.8em;
+                  "
+                >
+                  🎯 Scenario: Todo list with inputs. Deleting "Buy Milk"
+                </h4>
+
+                <div
+                  style="
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 0.8rem;
+                    font-size: 0.55em;
+                  "
+                >
+                  <!-- Wrong Way -->
+                  <div>
+                    <div
+                      style="
+                        background: rgba(239, 68, 68, 0.15);
+                        border: 2px solid rgba(239, 68, 68, 0.4);
+                        border-radius: 5px;
+                        padding: 0.4rem;
+                      "
+                    >
+                      <div
+                        style="
+                          color: #ef4444;
+                          font-weight: bold;
+                          margin-bottom: 0.3rem;
+                          text-align: center;
+                          font-size: 1.1em;
+                        "
+                      >
+                        ❌ Using index as key
+                      </div>
+
+                      <div
+                        style="
+                          background: rgba(255, 255, 255, 0.9);
+                          padding: 0.35rem;
+                          border-radius: 3px;
+                          margin-bottom: 0.3rem;
+                        "
+                      >
+                        <div
+                          style="
+                            color: #333;
+                            font-weight: bold;
+                            margin-bottom: 0.3rem;
+                            font-size: 1em;
+                          "
+                        >
+                          BEFORE Delete:
+                        </div>
+                        <div
+                          style="
+                            font-family: monospace;
+                            font-size: 0.95em;
+                            line-height: 1.4;
+                          "
+                        >
+                          <div
+                            style="
+                              display: flex;
+                              align-items: center;
+                              gap: 0.4rem;
+                              margin-bottom: 0.2rem;
+                            "
+                          >
+                            <span style="color: #888; min-width: 52px"
+                              >key={0}</span
+                            >
+                            <span style="color: #333">📝 Buy Eggs</span>
+                            <input
+                              type="text"
+                              value="2 dozen"
+                              disabled
+                              style="
+                                border: 1px solid #ccc;
+                                padding: 0.15rem 0.25rem;
+                                font-size: 0.88em;
+                                width: 70px;
+                              "
+                            />
+                          </div>
+                          <div
+                            style="
+                              display: flex;
+                              align-items: center;
+                              gap: 0.4rem;
+                              margin-bottom: 0.2rem;
+                              background: rgba(239, 68, 68, 0.1);
+                              padding: 0.2rem;
+                              border-radius: 3px;
+                            "
+                          >
+                            <span style="color: #888; min-width: 52px"
+                              >key={1}</span
+                            >
+                            <span style="color: #333">🥛 Buy Milk</span>
+                            <input
+                              type="text"
+                              value="1 gallon"
+                              disabled
+                              style="
+                                border: 1px solid #ccc;
+                                padding: 0.15rem 0.25rem;
+                                font-size: 0.88em;
+                                width: 70px;
+                              "
+                            />
+                            <span style="color: #ef4444">🗑️</span>
+                          </div>
+                          <div
+                            style="
+                              display: flex;
+                              align-items: center;
+                              gap: 0.4rem;
+                            "
+                          >
+                            <span style="color: #888; min-width: 52px"
+                              >key={2}</span
+                            >
+                            <span style="color: #333">🍞 Buy Bread</span>
+                            <input
+                              type="text"
+                              value="whole wheat"
+                              disabled
+                              style="
+                                border: 1px solid #ccc;
+                                padding: 0.15rem 0.25rem;
+                                font-size: 0.88em;
+                                width: 70px;
+                              "
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      <div
+                        style="
+                          text-align: center;
+                          font-size: 1.3em;
+                          margin: 0.25rem 0;
+                        "
+                      >
+                        ⬇️
+                      </div>
+
+                      <div
+                        style="
+                          background: rgba(255, 255, 255, 0.9);
+                          padding: 0.5rem;
+                          border-radius: 4px;
+                        "
+                      >
+                        <div
+                          style="
+                            color: #333;
+                            font-weight: bold;
+                            margin-bottom: 0.3rem;
+                            font-size: 1em;
+                          "
+                        >
+                          AFTER Delete:
+                        </div>
+                        <div
+                          style="
+                            font-family: monospace;
+                            font-size: 0.95em;
+                            line-height: 1.4;
+                          "
+                        >
+                          <div
+                            style="
+                              display: flex;
+                              align-items: center;
+                              gap: 0.4rem;
+                              margin-bottom: 0.2rem;
+                            "
+                          >
+                            <span style="color: #888; min-width: 52px"
+                              >key={0}</span
+                            >
+                            <span style="color: #333">📝 Buy Eggs</span>
+                            <input
+                              type="text"
+                              value="2 dozen"
+                              disabled
+                              style="
+                                border: 1px solid #ccc;
+                                padding: 0.15rem 0.25rem;
+                                font-size: 0.88em;
+                                width: 70px;
+                              "
+                            />
+                            <span style="color: #22c55e">✓</span>
+                          </div>
+                          <div
+                            style="
+                              display: flex;
+                              align-items: center;
+                              gap: 0.4rem;
+                              background: rgba(239, 68, 68, 0.2);
+                              padding: 0.2rem;
+                              border-radius: 3px;
+                            "
+                          >
+                            <span style="color: #888; min-width: 52px"
+                              >key={1}</span
+                            >
+                            <span style="color: #333">🍞 Buy Bread</span>
+                            <input
+                              type="text"
+                              value="1 gallon"
+                              disabled
+                              style="
+                                border: 1px solid #ef4444;
+                                padding: 0.15rem 0.25rem;
+                                font-size: 0.88em;
+                                width: 70px;
+                                background: #ffe0e0;
+                              "
+                            />
+                            <span style="color: #ef4444">⚠️</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div
+                        style="
+                          margin-top: 0.5rem;
+                          padding: 0.5rem;
+                          background: rgba(239, 68, 68, 0.15);
+                          border-radius: 4px;
+                          border-left: 3px solid #ef4444;
+                        "
+                      >
+                        <div
+                          style="
+                            color: #ef4444;
+                            font-weight: bold;
+                            margin-bottom: 0.2rem;
+                          "
+                        >
+                          🐛 THE BUG:
+                        </div>
+                        <div
+                          style="
+                            color: #fff;
+                            font-size: 0.92em;
+                            line-height: 1.3;
+                          "
+                        >
+                          React thinks key={1} changed from "Buy Milk" to "Buy
+                          Bread"<br />
+                          → It <strong>re-renders</strong> the component but
+                          keeps the old input value!<br />
+                          → Input shows "1 gallon" for Bread 😱
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Right Way -->
+                  <div>
+                    <div
+                      style="
+                        background: rgba(34, 197, 94, 0.15);
+                        border: 2px solid rgba(34, 197, 94, 0.4);
+                        border-radius: 6px;
+                        padding: 0.6rem;
+                      "
+                    >
+                      <div
+                        style="
+                          color: #22c55e;
+                          font-weight: bold;
+                          margin-bottom: 0.4rem;
+                          text-align: center;
+                          font-size: 1.15em;
+                        "
+                      >
+                        ✅ Using unique ID as key
+                      </div>
+
+                      <div
+                        style="
+                          background: rgba(255, 255, 255, 0.9);
+                          padding: 0.5rem;
+                          border-radius: 4px;
+                          margin-bottom: 0.4rem;
+                        "
+                      >
+                        <div
+                          style="
+                            color: #333;
+                            font-weight: bold;
+                            margin-bottom: 0.3rem;
+                            font-size: 1em;
+                          "
+                        >
+                          BEFORE Delete:
+                        </div>
+                        <div
+                          style="
+                            font-family: monospace;
+                            font-size: 0.95em;
+                            line-height: 1.4;
+                          "
+                        >
+                          <div
+                            style="
+                              display: flex;
+                              align-items: center;
+                              gap: 0.4rem;
+                              margin-bottom: 0.2rem;
+                            "
+                          >
+                            <span style="color: #888; min-width: 58px"
+                              >key={101}</span
+                            >
+                            <span style="color: #333">📝 Buy Eggs</span>
+                            <input
+                              type="text"
+                              value="2 dozen"
+                              disabled
+                              style="
+                                border: 1px solid #ccc;
+                                padding: 0.15rem 0.25rem;
+                                font-size: 0.88em;
+                                width: 70px;
+                              "
+                            />
+                          </div>
+                          <div
+                            style="
+                              display: flex;
+                              align-items: center;
+                              gap: 0.4rem;
+                              margin-bottom: 0.2rem;
+                              background: rgba(34, 197, 94, 0.1);
+                              padding: 0.2rem;
+                              border-radius: 3px;
+                            "
+                          >
+                            <span style="color: #888; min-width: 58px"
+                              >key={102}</span
+                            >
+                            <span style="color: #333">🥛 Buy Milk</span>
+                            <input
+                              type="text"
+                              value="1 gallon"
+                              disabled
+                              style="
+                                border: 1px solid #ccc;
+                                padding: 0.15rem 0.25rem;
+                                font-size: 0.88em;
+                                width: 70px;
+                              "
+                            />
+                            <span style="color: #ef4444">🗑️</span>
+                          </div>
+                          <div
+                            style="
+                              display: flex;
+                              align-items: center;
+                              gap: 0.4rem;
+                            "
+                          >
+                            <span style="color: #888; min-width: 58px"
+                              >key={103}</span
+                            >
+                            <span style="color: #333">🍞 Buy Bread</span>
+                            <input
+                              type="text"
+                              value="whole wheat"
+                              disabled
+                              style="
+                                border: 1px solid #ccc;
+                                padding: 0.15rem 0.25rem;
+                                font-size: 0.88em;
+                                width: 70px;
+                              "
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      <div
+                        style="
+                          text-align: center;
+                          font-size: 1.3em;
+                          margin: 0.25rem 0;
+                        "
+                      >
+                        ⬇️
+                      </div>
+
+                      <div
+                        style="
+                          background: rgba(255, 255, 255, 0.9);
+                          padding: 0.5rem;
+                          border-radius: 4px;
+                        "
+                      >
+                        <div
+                          style="
+                            color: #333;
+                            font-weight: bold;
+                            margin-bottom: 0.3rem;
+                            font-size: 1em;
+                          "
+                        >
+                          AFTER Delete:
+                        </div>
+                        <div
+                          style="
+                            font-family: monospace;
+                            font-size: 0.95em;
+                            line-height: 1.4;
+                          "
+                        >
+                          <div
+                            style="
+                              display: flex;
+                              align-items: center;
+                              gap: 0.4rem;
+                              margin-bottom: 0.2rem;
+                            "
+                          >
+                            <span style="color: #888; min-width: 58px"
+                              >key={101}</span
+                            >
+                            <span style="color: #333">📝 Buy Eggs</span>
+                            <input
+                              type="text"
+                              value="2 dozen"
+                              disabled
+                              style="
+                                border: 1px solid #ccc;
+                                padding: 0.15rem 0.25rem;
+                                font-size: 0.88em;
+                                width: 70px;
+                              "
+                            />
+                            <span style="color: #22c55e">✓</span>
+                          </div>
+                          <div
+                            style="
+                              display: flex;
+                              align-items: center;
+                              gap: 0.4rem;
+                              background: rgba(34, 197, 94, 0.1);
+                              padding: 0.2rem;
+                              border-radius: 3px;
+                            "
+                          >
+                            <span style="color: #888; min-width: 58px"
+                              >key={103}</span
+                            >
+                            <span style="color: #333">🍞 Buy Bread</span>
+                            <input
+                              type="text"
+                              value="whole wheat"
+                              disabled
+                              style="
+                                border: 1px solid #22c55e;
+                                padding: 0.15rem 0.25rem;
+                                font-size: 0.88em;
+                                width: 70px;
+                                background: #e0ffe0;
+                              "
+                            />
+                            <span style="color: #22c55e">✓</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div
+                        style="
+                          margin-top: 0.5rem;
+                          padding: 0.5rem;
+                          background: rgba(34, 197, 94, 0.15);
+                          border-radius: 4px;
+                          border-left: 3px solid #22c55e;
+                        "
+                      >
+                        <div
+                          style="
+                            color: #22c55e;
+                            font-weight: bold;
+                            margin-bottom: 0.2rem;
+                          "
+                        >
+                          ✅ WORKS CORRECTLY:
+                        </div>
+                        <div
+                          style="
+                            color: #fff;
+                            font-size: 0.92em;
+                            line-height: 1.3;
+                          "
+                        >
+                          React knows key={102} was removed<br />
+                          → key={103} (Bread) didn't change, just moved up<br />
+                          → Input keeps correct value "whole wheat" ✅
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                style="
+                  text-align: center;
+                  padding: 0.6rem;
+                  background: var(--accent-soft);
+                  border-radius: 6px;
+                  font-size: 0.75em;
+                "
+              >
+                <strong style="color: var(--accent)">💡 Key Takeaway:</strong>
+                <span style="color: var(--text-soft)">
+                  With index keys, React confuses items when the list changes.
+                  With unique IDs, React tracks each item correctly!
+                </span>
+              </div>
+            </div>
+          </section>
+
+          <!-- Slide 3f: Best Practices for Keys -->
+          <section>
+            <h3>
+              Best Practices for Keys
+              <span class="small-text">(10 min)</span>
+            </h3>
+            <div style="text-align: left; font-size: 0.6em; margin-top: 1rem">
+              <div class="card" style="margin-bottom: 1rem">
                 <h4 style="color: var(--accent); margin: 0 0 0.5rem">
-                  Best Practices for Keys
+                  ✅ Do's
                 </h4>
                 <ul style="margin: 0; padding-left: 1.5rem">
                   <li>
-                    Prefer unique IDs over array indexes (id from API or DB).
+                    <strong>Use unique IDs from your data</strong> (from API or
+                    database)
+                    <pre
+                      style="margin: 0.5rem 0 0; font-size: 0.85em"
+                    ><code>key={item.id}</code></pre>
                   </li>
                   <li>
-                    Ensure keys do not change between renders unless the item is
-                    truly new.
+                    <strong>Ensure keys are stable</strong> across renders
+                    (don't change unless the item is truly new)
                   </li>
                   <li>
-                    Avoid using random numbers because they defeat React's
-                    diffing optimization.
+                    <strong>Use index as key ONLY for static lists</strong> that
+                    never change order or get filtered
+                  </li>
+                </ul>
+              </div>
+
+              <div class="card">
+                <h4 style="color: var(--accent); margin: 0 0 0.5rem">
+                  ❌ Don'ts
+                </h4>
+                <ul style="margin: 0; padding-left: 1.5rem">
+                  <li>
+                    <strong>Avoid random numbers</strong> (defeats React's
+                    diffing)
+                    <pre
+                      style="margin: 0.5rem 0 0; font-size: 0.85em"
+                    ><code>key={Math.random()} // ❌ Wrong!</code></pre>
+                  </li>
+                  <li>
+                    <strong>Don't use array index</strong> for lists where items
+                    can be added, removed, or reordered
+                  </li>
+                  <li>
+                    <strong>Don't skip keys</strong> in lists - React will show
+                    a warning in the console
+                    <pre
+                      style="margin: 0.5rem 0 0; font-size: 0.85em"
+                    ><code>// ❌ This will trigger a warning:
+{items.map(item => &lt;li&gt;{item}&lt;/li&gt;)}
+
+// ✅ Always provide a key:
+{items.map(item => &lt;li key={item.id}&gt;{item}&lt;/li&gt;)}</code></pre>
+                    <p
+                      style="
+                        margin: 0.5rem 0 0;
+                        font-size: 0.9em;
+                        color: var(--text-soft);
+                      "
+                    >
+                      Console warning:
+                      <em
+                        >"Warning: Each child in a list should have a unique
+                        'key' prop."</em
+                      >
+                    </p>
                   </li>
                 </ul>
               </div>
             </div>
-            <p class="small-text" style="margin-top: 1rem">
-              💡 Show a visual comparison: list without keys vs list with keys
-            </p>
           </section>
 
           <!-- Slide 4: Code Example - FruitList -->
@@ -571,83 +1569,267 @@ export default function TaskList() {
             </div>
           </section>
 
-          <!-- Slide 7: Conditional Rendering -->
+          <!-- Slide 7: Conditional Rendering Introduction -->
           <section>
             <h3>
               Conditional Rendering <span class="small-text">(30 min)</span>
             </h3>
-            <div style="text-align: left; font-size: 0.85em; margin-top: 1rem">
-              <div class="card" style="margin-bottom: 1rem">
-                <h4 style="color: var(--accent); margin: 0 0 0.5rem">
+            <div style="text-align: left; font-size: 0.9em; margin-top: 1.5rem">
+              <div class="card" style="margin-bottom: 1.5rem; padding: 1.5rem">
+                <h4 style="color: var(--accent); margin: 0 0 1rem">
                   What is conditional rendering?
                 </h4>
-                <ul style="margin: 0; padding-left: 1.5rem">
-                  <li>
-                    Conditional rendering is the ability to show or hide
-                    components or elements based on certain conditions (state,
-                    props, or data).
-                  </li>
-                  <li>
-                    It is similar to if/else statements in programming but
-                    adapted for JSX.
-                  </li>
-                </ul>
+                <p style="margin: 0 0 0.8rem; line-height: 1.6">
+                  Conditional rendering is the ability to show or hide
+                  components or elements based on certain conditions (state,
+                  props, or data).
+                </p>
+                <p style="margin: 0; line-height: 1.6">
+                  It is similar to if/else statements in programming but adapted
+                  for JSX.
+                </p>
               </div>
+            </div>
+          </section>
 
-              <div class="card" style="margin-bottom: 1rem">
-                <h4 style="color: var(--accent); margin: 0 0 0.5rem">
-                  Ternary Operator (? :)
-                </h4>
-                <ul style="margin: 0; padding-left: 1.5rem">
-                  <li>
-                    <strong>Syntax:</strong>
-                    <code
-                      >condition ? renderThisIfTrue : renderThisIfFalse</code
-                    >
+          <!-- Slide 7a: Why Conditional Rendering Matters -->
+          <section>
+            <h3>Why Conditional Rendering Matters</h3>
+            <div style="text-align: left; font-size: 0.9em; margin-top: 2rem">
+              <div class="card" style="padding: 2rem">
+                <ul
+                  style="
+                    margin: 0;
+                    padding-left: 1.5rem;
+                    line-height: 1.8;
+                    font-size: 1.1em;
+                  "
+                >
+                  <li style="margin-bottom: 1rem">
+                    <strong style="color: var(--accent)">Better UX:</strong>
+                    Shows context-sensitive content that's relevant to the
+                    user's current state
                   </li>
-                  <li>Use for choosing between two options.</li>
-                  <li>
-                    <strong>Example:</strong> Show "Welcome back" if logged in,
-                    else show "Please log in".
-                  </li>
-                </ul>
-              </div>
-
-              <div class="card" style="margin-bottom: 1rem">
-                <h4 style="color: var(--accent); margin: 0 0 0.5rem">
-                  Logical AND (&&)
-                </h4>
-                <ul style="margin: 0; padding-left: 1.5rem">
-                  <li>
-                    <strong>Syntax:</strong>
-                    <code>condition && renderThisIfTrue</code>
+                  <li style="margin-bottom: 1rem">
+                    <strong style="color: var(--accent)">Performance:</strong>
+                    Avoids unnecessary DOM elements and reduces render load
                   </li>
                   <li>
-                    Use for rendering something only if a condition is true.
-                  </li>
-                  <li>
-                    <strong>Example:</strong> Show "Premium badge" only for
-                    premium users.
-                  </li>
-                </ul>
-              </div>
-
-              <div class="card">
-                <h4 style="color: var(--accent); margin: 0 0 0.5rem">
-                  Why conditional rendering matters
-                </h4>
-                <ul style="margin: 0; padding-left: 1.5rem">
-                  <li>Improves UX by showing context-sensitive content.</li>
-                  <li>
-                    Avoids unnecessary DOM elements and reduces render load.
+                    <strong style="color: var(--accent)">Dynamic UI:</strong>
+                    Makes your interface responsive to user state and
+                    interactions
                   </li>
                 </ul>
               </div>
             </div>
-            <p class="small-text" style="margin-top: 1rem">
-              💡 Show side-by-side code example of ? : vs && and explain when
-              each is preferable
-            </p>
+          </section>
+
+          <!-- Slide 7b: Ternary Operator -->
+          <section>
+            <h3>Ternary Operator (? :)</h3>
+            <div style="margin-top: 1.5rem">
+              <div class="card" style="margin-bottom: 1.5rem; padding: 1.5rem">
+                <h4 style="color: var(--accent); margin: 0 0 1rem">
+                  When to use it
+                </h4>
+                <p style="margin: 0 0 0.8rem; line-height: 1.6">
+                  Use the ternary operator when you need to
+                  <strong>choose between two options</strong>.
+                </p>
+                <p
+                  style="
+                    margin: 0;
+                    line-height: 1.6;
+                    font-family: monospace;
+                    background: rgba(255, 255, 255, 0.05);
+                    padding: 0.5rem;
+                    border-radius: 4px;
+                  "
+                >
+                  <strong>Syntax:</strong>
+                  <code style="color: var(--accent)"
+                    >condition ? renderThisIfTrue : renderThisIfFalse</code
+                  >
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <!-- Slide 7b2: Ternary Operator Example -->
+          <section>
+            <h3>Ternary Operator - Example</h3>
+            <div style="margin-top: 1.5rem">
+              <pre><code class="language-jsx">function LoginButton({ isLoggedIn }) {
+  return (
+    &lt;button&gt;
+      {isLoggedIn ? 'Logout' : 'Login'}
+    &lt;/button&gt;
+  );
+}
+
+// If isLoggedIn is true → shows "Logout"
+// If isLoggedIn is false → shows "Login"</code></pre>
+            </div>
+          </section>
+
+          <!-- Slide 7c: Logical AND Operator -->
+          <section>
+            <h3>Logical AND (&&)</h3>
+            <div style="margin-top: 1.5rem">
+              <div class="card" style="margin-bottom: 1.5rem; padding: 1.5rem">
+                <h4 style="color: var(--accent); margin: 0 0 1rem">
+                  When to use it
+                </h4>
+                <p style="margin: 0 0 0.8rem; line-height: 1.6">
+                  Use the logical AND operator when you want to render something
+                  <strong>only if a condition is true</strong>.
+                </p>
+                <p
+                  style="
+                    margin: 0;
+                    line-height: 1.6;
+                    font-family: monospace;
+                    background: rgba(255, 255, 255, 0.05);
+                    padding: 0.5rem;
+                    border-radius: 4px;
+                  "
+                >
+                  <strong>Syntax:</strong>
+                  <code style="color: var(--accent)"
+                    >condition && renderThisIfTrue</code
+                  >
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <!-- Slide 7c2: Logical AND Example -->
+          <section>
+            <h3>Logical AND - Example</h3>
+            <div style="margin-top: 1.5rem">
+              <pre><code class="language-jsx">function Notification({ hasMessages }) {
+  return (
+    &lt;div&gt;
+      {hasMessages && (
+        &lt;span className="badge"&gt;
+          You have new messages!
+        &lt;/span&gt;
+      )}
+    &lt;/div&gt;
+  );
+}
+
+// If hasMessages is true → shows the badge
+// If hasMessages is false → shows nothing</code></pre>
+            </div>
+          </section>
+
+          <!-- Slide 7d: Comparing ? : vs && -->
+          <section>
+            <h3>Ternary vs Logical AND</h3>
+            <div style="margin-top: 1.5rem">
+              <div
+                class="card"
+                style="
+                  margin-bottom: 1.5rem;
+                  padding: 1.5rem;
+                  background: rgba(97, 218, 251, 0.08);
+                "
+              >
+                <h4
+                  style="
+                    color: var(--accent);
+                    margin: 0 0 1rem;
+                    text-align: center;
+                  "
+                >
+                  When to use which?
+                </h4>
+                <div
+                  style="
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 1.5rem;
+                  "
+                >
+                  <div
+                    style="
+                      background: rgba(255, 255, 255, 0.05);
+                      padding: 1rem;
+                      border-radius: 6px;
+                      border: 1px solid var(--surface-border);
+                    "
+                  >
+                    <div
+                      style="
+                        color: var(--accent);
+                        font-weight: bold;
+                        margin-bottom: 0.5rem;
+                      "
+                    >
+                      ✅ Use ? :
+                    </div>
+                    <ul
+                      style="
+                        margin: 0;
+                        padding-left: 1.2rem;
+                        font-size: 0.9em;
+                        line-height: 1.6;
+                      "
+                    >
+                      <li>When you have TWO alternatives</li>
+                      <li>Show A or show B</li>
+                      <li>Need an "else" case</li>
+                    </ul>
+                  </div>
+                  <div
+                    style="
+                      background: rgba(255, 255, 255, 0.05);
+                      padding: 1rem;
+                      border-radius: 6px;
+                      border: 1px solid var(--surface-border);
+                    "
+                  >
+                    <div
+                      style="
+                        color: var(--accent);
+                        font-weight: bold;
+                        margin-bottom: 0.5rem;
+                      "
+                    >
+                      ✅ Use &&
+                    </div>
+                    <ul
+                      style="
+                        margin: 0;
+                        padding-left: 1.2rem;
+                        font-size: 0.9em;
+                        line-height: 1.6;
+                      "
+                    >
+                      <li>When you have ONE option</li>
+                      <li>Show something or nothing</li>
+                      <li>No "else" needed</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Slide 7d2: Ternary vs Logical AND - Examples -->
+          <section>
+            <h3>Ternary vs Logical AND - Examples</h3>
+            <div style="margin-top: 1.5rem">
+              <pre><code class="language-jsx">// ✅ Good: Two options → use ternary
+{isLoggedIn ? &lt;Dashboard /&gt; : &lt;LoginForm /&gt;}
+
+// ✅ Good: One option → use &&
+{isPremium && &lt;PremiumFeatures /&gt;}
+
+// ❌ Awkward: Don't use ternary when you only want one option
+{isPremium ? &lt;PremiumFeatures /&gt; : null}</code></pre>
+            </div>
           </section>
 
           <!-- Slide 8: Example - Greeting -->
@@ -760,83 +1942,197 @@ function UserProfile() {
             </div>
           </section>
 
-          <!-- Slide 11: Reconciliation & Virtual DOM -->
+          <!-- Slide 11: Virtual DOM -->
           <section>
             <h3>
-              Reconciliation & Virtual DOM
-              <span class="small-text">(20 min)</span>
+              What is the Virtual DOM?
+              <span class="small-text">(10 min)</span>
             </h3>
-            <div style="text-align: left; font-size: 0.85em; margin-top: 1rem">
-              <div class="card" style="margin-bottom: 1rem">
-                <h4 style="color: var(--accent); margin: 0 0 0.5rem">
-                  What is the Virtual DOM?
-                </h4>
-                <ul style="margin: 0; padding-left: 1.5rem">
-                  <li>
-                    React maintains a Virtual DOM, a lightweight copy of the
-                    real DOM stored in memory.
+            <div
+              style="text-align: left; font-size: 0.85em; margin-top: 1.5rem"
+            >
+              <div class="card" style="margin-bottom: 1.5rem; padding: 1.5rem">
+                <ul style="margin: 0; padding-left: 1.5rem; line-height: 1.8">
+                  <li style="margin-bottom: 1rem">
+                    React maintains a <strong>Virtual DOM</strong>, a
+                    lightweight copy of the real DOM stored in memory.
                   </li>
                   <li>
-                    Think of it as a blueprint of the UI React can compare
-                    quickly.
+                    Think of it as a <strong>blueprint of the UI</strong> React
+                    can compare quickly without touching the actual browser DOM.
                   </li>
                 </ul>
               </div>
+              <div
+                style="
+                  text-align: center;
+                  padding: 2rem;
+                  background: var(--accent-soft);
+                  border-radius: 8px;
+                  font-size: 1.2em;
+                "
+              >
+                <div
+                  style="
+                    margin-bottom: 1rem;
+                    color: var(--accent);
+                    font-weight: bold;
+                  "
+                >
+                  💡 Visual Concept
+                </div>
+                <div
+                  style="
+                    display: flex;
+                    justify-content: center;
+                    gap: 2rem;
+                    align-items: center;
+                  "
+                >
+                  <div style="text-align: center">
+                    <div style="font-size: 3em">🌳</div>
+                    <div style="margin-top: 0.5rem; color: var(--text-soft)">
+                      Real DOM<br />(Heavy)
+                    </div>
+                  </div>
+                  <div style="font-size: 2em; color: var(--accent)">↔️</div>
+                  <div style="text-align: center">
+                    <div style="font-size: 3em">📄</div>
+                    <div style="margin-top: 0.5rem; color: var(--text-soft)">
+                      Virtual DOM<br />(Lightweight)
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
 
-              <div class="card" style="margin-bottom: 1rem">
-                <h4 style="color: var(--accent); margin: 0 0 0.5rem">
-                  How React updates the UI efficiently
-                </h4>
-                <p style="margin: 0 0 0.5rem">
+          <!-- Slide 11a: How React Updates UI Efficiently -->
+          <section>
+            <h3>
+              How React Updates the UI Efficiently
+              <span class="small-text">(10 min)</span>
+            </h3>
+            <div
+              style="text-align: left; font-size: 0.85em; margin-top: 1.5rem"
+            >
+              <div class="card" style="margin-bottom: 1.5rem; padding: 1.5rem">
+                <h4 style="color: var(--accent); margin: 0 0 1rem">
                   When a component state or prop changes:
-                </p>
-                <ol style="margin: 0; padding-left: 1.5rem">
-                  <li>React creates a new Virtual DOM tree.</li>
-                  <li>
-                    Compares it to the previous Virtual DOM (this is called
-                    <strong>diffing</strong>).
+                </h4>
+                <ol style="margin: 0; padding-left: 1.5rem; line-height: 1.8">
+                  <li style="margin-bottom: 0.8rem">
+                    React creates a <strong>new Virtual DOM tree</strong>
                   </li>
-                  <li>
-                    Only updates the actual DOM elements that changed, instead
-                    of re-rendering everything.
+                  <li style="margin-bottom: 0.8rem">
+                    Compares it to the previous Virtual DOM (this is called
+                    <strong style="color: var(--accent)">diffing</strong>)
+                  </li>
+                  <li style="margin-bottom: 0.8rem">
+                    Only updates the
+                    <strong>actual DOM elements that changed</strong>, instead
+                    of re-rendering everything
                   </li>
                 </ol>
-                <p style="margin: 0.5rem 0 0">
-                  <strong>Analogy:</strong> Instead of repainting an entire
-                  wall, React only touches the bricks that are cracked.
+                <p
+                  style="
+                    margin: 1.5rem 0 0;
+                    padding: 1rem;
+                    background: rgba(97, 218, 251, 0.1);
+                    border-radius: 6px;
+                  "
+                >
+                  <strong style="color: var(--accent)">Analogy:</strong> Instead
+                  of repainting an entire wall, React only touches the bricks
+                  that are cracked.
                 </p>
               </div>
+              <div
+                style="
+                  text-align: center;
+                  padding: 1.5rem;
+                  background: var(--accent-soft);
+                  border-radius: 8px;
+                  font-size: 0.9em;
+                "
+              >
+                <div
+                  style="
+                    color: var(--accent);
+                    font-weight: bold;
+                    margin-bottom: 1rem;
+                  "
+                >
+                  🔄 The Process
+                </div>
+                <div
+                  style="
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 0.8rem;
+                    flex-wrap: wrap;
+                  "
+                >
+                  <span
+                    style="
+                      padding: 0.5rem 1rem;
+                      background: rgba(255, 255, 255, 0.1);
+                      border-radius: 4px;
+                    "
+                    >State Change</span
+                  >
+                  <span style="color: var(--accent)">→</span>
+                  <span
+                    style="
+                      padding: 0.5rem 1rem;
+                      background: rgba(255, 255, 255, 0.1);
+                      border-radius: 4px;
+                    "
+                    >New Virtual DOM</span
+                  >
+                  <span style="color: var(--accent)">→</span>
+                  <span
+                    style="
+                      padding: 0.5rem 1rem;
+                      background: rgba(255, 255, 255, 0.1);
+                      border-radius: 4px;
+                    "
+                    >Diff</span
+                  >
+                  <span style="color: var(--accent)">→</span>
+                  <span
+                    style="
+                      padding: 0.5rem 1rem;
+                      background: rgba(255, 255, 255, 0.1);
+                      border-radius: 4px;
+                    "
+                    >Minimal DOM Update</span
+                  >
+                </div>
+              </div>
+            </div>
+          </section>
 
-              <div class="card">
-                <h4 style="color: var(--accent); margin: 0 0 0.5rem">
-                  Importance of keys in reconciliation
-                </h4>
-                <ul style="margin: 0; padding-left: 1.5rem">
-                  <li>
-                    Keys allow React to match elements between renders, making
-                    diffing fast and accurate.
+          <!-- Slide 11b: Keys in Reconciliation -->
+          <section>
+            <h3>Importance of Keys in Reconciliation</h3>
+            <div
+              style="text-align: left; font-size: 0.85em; margin-top: 1.5rem"
+            >
+              <div class="card" style="padding: 1.5rem">
+                <ul style="margin: 0; padding-left: 1.5rem; line-height: 1.8">
+                  <li style="margin-bottom: 1rem">
+                    <strong style="color: var(--accent)">Keys</strong> allow
+                    React to match elements between renders, making diffing fast
+                    and accurate
                   </li>
                   <li>
                     Without keys, React may re-render the whole list even if
-                    only one item changed.
+                    only one item changed
                   </li>
                 </ul>
               </div>
-            </div>
-            <div
-              style="
-                margin-top: 1.5rem;
-                padding: 1rem;
-                background: var(--accent-soft);
-                border-radius: 8px;
-                text-align: center;
-                font-size: 0.75em;
-                color: var(--text-soft);
-              "
-            >
-              <strong style="color: var(--accent)">Diagram Concept:</strong>
-              State Change → New Virtual DOM → Diff → Minimal DOM update →
-              Render
             </div>
           </section>
 
@@ -883,35 +2179,64 @@ function UserProfile() {
             </div>
           </section>
 
-          <!-- Slide 13: Rules of Hooks -->
+          <!-- Slide 13: Why Hooks Exist -->
           <section>
-            <h3>
-              Rules of Hooks Overview <span class="small-text">(10 min)</span>
-            </h3>
-            <div style="text-align: left; font-size: 0.85em; margin-top: 1rem">
-              <div class="card" style="margin-bottom: 1rem">
-                <h4 style="color: var(--accent); margin: 0 0 0.5rem">
-                  Why hooks exist
+            <h3>Why Hooks Exist <span class="small-text">(5 min)</span></h3>
+            <div style="text-align: left; font-size: 0.9em; margin-top: 2rem">
+              <div class="card" style="margin-bottom: 1.5rem; padding: 2rem">
+                <h4 style="color: var(--accent); margin: 0 0 1.5rem">
+                  The Problem Before Hooks
                 </h4>
-                <p style="margin: 0">
-                  Hooks let us use state and lifecycle features in functional
-                  components, which previously were only available in class
-                  components.
+                <p
+                  style="
+                    margin: 0 0 1.5rem;
+                    line-height: 1.8;
+                    font-size: 1.05em;
+                  "
+                >
+                  Before React 16.8,
+                  <strong>state and lifecycle features</strong> were only
+                  available in
+                  <strong style="color: var(--accent)">class components</strong
+                  >.
+                </p>
+                <p style="margin: 0; line-height: 1.8; font-size: 1.05em">
+                  Functional components were "stateless" - they could only
+                  receive props and return JSX.
                 </p>
               </div>
-
-              <div class="card" style="margin-bottom: 1rem">
-                <h4 style="color: var(--accent); margin: 0 0 0.5rem">
-                  Rules of Hooks
+              <div
+                class="card"
+                style="padding: 2rem; background: var(--accent-soft)"
+              >
+                <h4 style="color: var(--accent); margin: 0 0 1.5rem">
+                  The Solution: Hooks
                 </h4>
-                <ol style="margin: 0; padding-left: 1.5rem">
-                  <li>
+                <p style="margin: 0; line-height: 1.8; font-size: 1.05em">
+                  Hooks let us use
+                  <strong>state, effects, and other React features</strong> in
+                  functional components, making them simpler and more powerful.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <!-- Slide 13a: Rules of Hooks -->
+          <section>
+            <h3>Rules of Hooks <span class="small-text">(5 min)</span></h3>
+            <div style="text-align: left; font-size: 0.85em; margin-top: 1rem">
+              <div class="card" style="margin-bottom: 1rem; padding: 1.5rem">
+                <h4 style="color: var(--accent); margin: 0 0 1rem">
+                  The Rules
+                </h4>
+                <ol style="margin: 0; padding-left: 1.5rem; line-height: 1.8">
+                  <li style="margin-bottom: 0.8rem">
                     <strong>Call Hooks at the top level:</strong> Don't put
                     Hooks inside loops, conditions, or nested functions. This
                     ensures that Hooks are called in the same order every
                     render.
                   </li>
-                  <li>
+                  <li style="margin-bottom: 0.8rem">
                     <strong>Call Hooks only in React functions:</strong> Only
                     inside functional components or custom hooks.
                   </li>
@@ -923,8 +2248,8 @@ function UserProfile() {
                 </ol>
               </div>
 
-              <div class="card">
-                <h4 style="color: var(--accent); margin: 0 0 0.5rem">
+              <div class="card" style="padding: 1.5rem">
+                <h4 style="color: var(--accent); margin: 0 0 0.8rem">
                   Common mistakes
                 </h4>
                 <ul style="margin: 0; padding-left: 1.5rem">
@@ -992,8 +2317,8 @@ if (loggedIn) { ... }</code></pre>
               useEffect for Side Effects
               <span class="small-text">(50 min)</span>
             </h3>
-            <div style="text-align: left; font-size: 0.85em; margin-top: 1rem">
-              <div class="card" style="margin-bottom: 1rem">
+            <div style="text-align: left; font-size: 0.75em; margin-top: 1rem">
+              <div class="card" style="margin-bottom: 1rem; padding: 1rem">
                 <h4 style="color: var(--accent); margin: 0 0 0.5rem">
                   What is a side effect?
                 </h4>
@@ -1007,7 +2332,7 @@ if (loggedIn) { ... }</code></pre>
                 </p>
               </div>
 
-              <div class="card" style="margin-bottom: 1rem">
+              <div class="card" style="margin-bottom: 1rem; padding: 1rem">
                 <h4 style="color: var(--accent); margin: 0 0 0.5rem">
                   When does useEffect run?
                 </h4>
@@ -1025,7 +2350,7 @@ if (loggedIn) { ... }</code></pre>
                 </ul>
               </div>
 
-              <div class="card">
+              <div class="card" style="padding: 1rem">
                 <h4 style="color: var(--accent); margin: 0 0 0.5rem">
                   Cleanup function
                 </h4>
@@ -1044,9 +2369,72 @@ if (loggedIn) { ... }</code></pre>
             </p>
           </section>
 
-          <!-- Slide 15: Example - Clock -->
+          <!-- Slide 15: Example - Clock Explanation -->
           <section>
             <h3>Example: Clock with useEffect</h3>
+            <div
+              style="text-align: left; font-size: 0.75em; margin-top: 1.5rem"
+            >
+              <div class="card" style="padding: 1.5rem; margin-bottom: 1.5rem">
+                <h4 style="color: var(--accent); margin: 0 0 1rem">
+                  🎯 What this example demonstrates
+                </h4>
+                <ul
+                  style="
+                    margin: 0;
+                    padding-left: 1.5rem;
+                    line-height: 1.8;
+                    font-size: 1.05em;
+                  "
+                >
+                  <li style="margin-bottom: 0.8rem">
+                    <strong style="color: var(--accent)"
+                      >useEffect with setInterval:</strong
+                    >
+                    Updates the time every second
+                  </li>
+                  <li style="margin-bottom: 0.8rem">
+                    <strong style="color: var(--accent)"
+                      >Empty dependency array []:</strong
+                    >
+                    Effect runs once after initial render, then the interval
+                    keeps running
+                  </li>
+                  <li style="margin-bottom: 0.8rem">
+                    <strong style="color: var(--accent)"
+                      >Cleanup function:</strong
+                    >
+                    Returns a function that clears the interval when component
+                    unmounts
+                  </li>
+                  <li>
+                    <strong style="color: var(--accent)"
+                      >Prevents memory leaks:</strong
+                    >
+                    Without cleanup, the interval would keep running even after
+                    component is removed
+                  </li>
+                </ul>
+              </div>
+              <div
+                style="
+                  text-align: center;
+                  padding: 0.8rem;
+                  background: var(--accent-soft);
+                  border-radius: 8px;
+                "
+              >
+                <strong style="color: var(--accent)">Next:</strong>
+                <span style="color: var(--text-soft)"
+                  >Let's see the code implementation →</span
+                >
+              </div>
+            </div>
+          </section>
+
+          <!-- Slide 15a: Example - Clock Code -->
+          <section>
+            <h3>Example: Clock with useEffect - Code</h3>
             <div class="two-col" style="margin-top: 1rem">
               <div>
                 <div
@@ -1091,8 +2479,8 @@ export default function Clock() {
           <!-- Slide 16: Custom Hooks -->
           <section>
             <h3>Custom Hooks <span class="small-text">(30 min)</span></h3>
-            <div style="text-align: left; font-size: 0.85em; margin-top: 1rem">
-              <div class="card" style="margin-bottom: 1rem">
+            <div style="text-align: left; font-size: 0.75em; margin-top: 1rem">
+              <div class="card" style="margin-bottom: 1rem; padding: 1rem">
                 <h4 style="color: var(--accent); margin: 0 0 0.5rem">
                   What is a custom hook?
                 </h4>
@@ -1108,7 +2496,7 @@ export default function Clock() {
                 </ul>
               </div>
 
-              <div class="card" style="margin-bottom: 1rem">
+              <div class="card" style="margin-bottom: 1rem; padding: 1rem">
                 <h4 style="color: var(--accent); margin: 0 0 0.5rem">
                   Why use custom hooks
                 </h4>
@@ -1119,7 +2507,7 @@ export default function Clock() {
                 </ul>
               </div>
 
-              <div class="card">
+              <div class="card" style="padding: 1rem">
                 <h4 style="color: var(--accent); margin: 0 0 0.5rem">
                   Example
                 </h4>
@@ -1164,8 +2552,8 @@ export function useFetch(url) {
               useRef for Mutable References & DOM Access
               <span class="small-text">(20 min)</span>
             </h3>
-            <div style="text-align: left; font-size: 0.85em; margin-top: 1rem">
-              <div class="card" style="margin-bottom: 1rem">
+            <div style="text-align: left; font-size: 0.75em; margin-top: 1rem">
+              <div class="card" style="margin-bottom: 1rem; padding: 1rem">
                 <h4 style="color: var(--accent); margin: 0 0 0.5rem">
                   What is useRef?
                 </h4>
@@ -1178,7 +2566,7 @@ export function useFetch(url) {
                 </ul>
               </div>
 
-              <div class="card" style="margin-bottom: 1rem">
+              <div class="card" style="margin-bottom: 1rem; padding: 1rem">
                 <h4 style="color: var(--accent); margin: 0 0 0.5rem">
                   Use cases
                 </h4>
@@ -1194,7 +2582,7 @@ export function useFetch(url) {
                 </ul>
               </div>
 
-              <div class="card">
+              <div class="card" style="padding: 1rem">
                 <h4 style="color: var(--accent); margin: 0 0 0.5rem">
                   Important rules
                 </h4>
