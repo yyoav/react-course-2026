@@ -319,13 +319,19 @@ const MyComponent = React.memo(Component);
                 <section>
                     <h2 class="slide-title">React.memo Example</h2>
                     <pre><code class="tsx">
-const Greeting = memo(({ name }: { name: string }) =&gt; {
+interface GreetingProps {
+  name: string;
+}
+
+const Greeting = memo(({ name }: GreetingProps) =&gt; {
   return &lt;h1&gt;Hello {name}&lt;/h1&gt;;
 });
                     </code></pre>
                     <p class="text">Re-renders only if <code>name</code> changes.</p>
                     <aside class="notes">
-                        Show the console.log — students can verify in DevTools that it only logs when name actually changes. The arrow function syntax with memo() is the modern approach.
+                        memo receives a function component and an optional custom comparison function.
+                        It returns a new component that behaves the same but skips re-rendering when props have not changed.
+                        Think of it as a wrapper — same component inside, with a "skip if same props" guard added on top.
                     </aside>
                 </section>
 
@@ -347,34 +353,35 @@ const Greeting = memo(({ name }: { name: string }) =&gt; {
                 <section>
                     <h2 class="slide-title">Shallow Comparison Examples</h2>
                     <div class="split-code">
-                        <div>
-                            <div class="label">✅ Child does NOT re-render</div>
-                            <pre><code class="tsx">
-const style = { color: "red" };
-
-function Parent() {
- const [count, setCount] = useState(0);
-
- // same reference every render
- return &lt;Box style={style} /&gt;;
-}                    </code></pre>
-                        </div>
-                        <div>
+                        <div class="fragment fade-in-then-semi-out">
                             <div class="label">❌ Child ALWAYS re-renders</div>
                             <pre><code class="tsx">
 function Parent() {
  const [count, setCount] = useState(0);
 
- // new object created every render
- return &lt;Box style={{ color: "red" }} /&gt;;
+ // new array created every render
+ const items = ["a", "b", "c"];
+ return &lt;Box items={items} /&gt;;
 }
 
                             </code></pre>
                         </div>
+                        <div class="fragment fade-in">
+                            <div class="label">✅ Child does NOT re-render</div>
+                            <pre><code class="tsx">
+const items = ["a", "b", "c"];
+
+function Parent() {
+ const [count, setCount] = useState(0);
+
+ // same reference every render
+ return &lt;Box items={items} /&gt;;
+}                    </code></pre>
+                        </div>
                     </div>
-                    <p class="small-text">Objects &amp; arrays are compared by <strong>reference</strong>, not by content.<br>Every render creates a new reference → memo thinks props changed.</p>
+                    <p class="small-text">Arrays are compared by <strong>reference</strong>, not by content.<br>Every render creates a new reference → memo thinks props changed.</p>
                     <aside class="notes">
-                        Side-by-side comparison. Left: object defined outside the component keeps the same reference. Right: inline object creates a new reference every render, defeating memo. This is the most common mistake with React.memo.
+                        Side-by-side comparison. Left: inline array creates a new reference every render, defeating memo. Right: array defined outside the component keeps the same reference. This is the most common mistake with React.memo.
                     </aside>
                 </section>
 
