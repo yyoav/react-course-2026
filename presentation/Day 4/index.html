@@ -420,6 +420,9 @@ const value = useMemo(() => compute(), [deps]);
                     </code></pre>
                     <aside class="notes">
                         useMemo caches the return value of a function. It only recomputes when dependencies change. Think of it as "remember this result until deps change."
+
+                        Gets: a function to run + a dependency array.
+                        Returns: the cached result of that function — not the function itself.
                     </aside>
                 </section>
 
@@ -440,14 +443,17 @@ function ProductList({ products, query }: Props) {
                 </section>
 
                 <section>
-                    <h2 class="slide-title">useMemo Example</h2>
+                    <h2 class="slide-title">Solution: With useMemo</h2>
                     <pre><code class="tsx">
-const filtered = useMemo(() =>
-  products.filter(p =>
-    p.name.toLowerCase().includes(query.toLowerCase())
-  ),
-  [products, query]
-);
+function ProductList({ products, query }: Props) {
+  const filtered = useMemo(() =>
+    products.filter(p =>
+      p.name.toLowerCase().includes(query.toLowerCase())
+    ),
+    [products, query]
+  );
+  return &lt;ul&gt;{filtered.map(p =&gt; &lt;li key={p.id}&gt;{p.name}&lt;/li&gt;)}&lt;/ul&gt;;
+}
                     </code></pre>
                     <p class="small-text">Recalculates only when <code>products</code> or <code>query</code> changes.</p>
                     <aside class="notes">
@@ -472,7 +478,7 @@ const filtered = useMemo(() =>
                     <ul>
                         <li>Expensive calculations used in rendering</li>
                         <li>Dependencies are stable</li>
-                        <li>Skip for simple calculations or premature optimization</li>
+                        <li>Avoid for simple calculations — measure first</li>
                     </ul>
                     <aside class="notes">
                         Simple math or string operations don't need useMemo. The overhead of memoization would be greater than the computation itself. Profile first.
@@ -492,15 +498,58 @@ const filtered = useMemo(() =>
 
                 <section>
                     <h2 class="slide-title">Why useCallback Exists</h2>
-                    <ul>
+                    <div class="split-code" style="margin-left: -8%; margin-right: -8%; font-size: 0.78em;">
+                        <div class="fragment fade-in">
+                            <pre><code class="tsx">
+const ProductTable = memo(({products,  onDelete,}: {
+  products: Product[];
+  onDelete: (id: number) => void;
+}) => {
+  return (
+    &lt;ul&gt;
+      {products.map(p =&gt; (
+        &lt;li key={p.id}&gt;
+          {p.name}
+          &lt;button onClick={() =&gt; onDelete(p.id)}&gt;
+            Remove
+          &lt;/button&gt;
+        &lt;/li&gt;
+      ))}
+    &lt;/ul&gt;
+  );
+});
+                            </code></pre>
+                        </div>
+                        <div class="fragment fade-in">
+                            <pre><code class="tsx">
+function Dashboard({ products }) {
+  const [query, setQuery] = useState("");
+
+  const handleDelete = (id: number) =>
+    console.log("delete", id);
+
+  return (
+    &lt;&gt;
+      &lt;input value={query}
+        onChange={e =&gt; setQuery(e.target.value)}
+      /&gt;
+      &lt;ProductTable
+        products={products}
+        onDelete={handleDelete}
+      /&gt;
+    &lt;/&gt;
+  );
+}
+                            </code></pre>
+                        </div>
+                    </div>
+                    <p class="small-text fragment" style="margin-top:0.6rem;">What is the problem in this code?</p>
+                    <ul class="fragment">
                         <li>Functions are recreated on every render</li>
-                        <li>New function references make props appear changed</li>
+                        <li><code>ProductTable</code> re-renders on every query change</li>
                     </ul>
-                    <pre><code class="tsx">
-const handleClick = () => setCount(count + 1);
-                    </code></pre>
                     <aside class="notes">
-                        Every render creates a brand new function. If you pass this to a memoized child, memo sees a different reference and re-renders anyway. useCallback solves this.
+                        Show the code first and ask students what the issue is. Then reveal: handleDelete is a new function reference every render, so ProductTable always re-renders even though memo wraps it. useCallback solves this.
                     </aside>
                 </section>
 
@@ -518,15 +567,27 @@ const fn = useCallback(() => {
                 </section>
 
                 <section>
-                    <h2 class="slide-title">useCallback Example</h2>
+                    <h2 class="slide-title">The Fix: useCallback</h2>
                     <pre><code class="tsx">
-const handleClick = useCallback(() => {
-  setCount(prev => prev + 1);
-}, []);
+function Dashboard({ products }: { products: Product[] }) {
+  const [query, setQuery] = useState("");
+
+  // ✅ stable reference — same function every render
+  const handleDelete = useCallback((id: number) => {
+    console.log("delete", id);
+  }, []);
+
+  return (
+    &lt;&gt;
+      &lt;input value={query} onChange={e =&gt; setQuery(e.target.value)} /&gt;
+      &lt;ProductTable products={products} onDelete={handleDelete} /&gt;
+    &lt;/&gt;
+  );
+}
                     </code></pre>
-                    <p class="small-text">Stable function reference; great for memoized children.</p>
+                    <p class="small-text"><code>handleDelete</code> keeps the same reference — <code>ProductTable</code> no longer re-renders on every keystroke.</p>
                     <aside class="notes">
-                        Empty deps array means this function never changes. Using the updater form (prev => prev + 1) avoids needing count in the dependency array.
+                        Wrapping handleDelete in useCallback with an empty deps array means the function reference never changes. ProductTable's memo now works correctly — it only re-renders when products actually change.
                     </aside>
                 </section>
 
