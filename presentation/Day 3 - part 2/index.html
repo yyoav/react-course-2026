@@ -564,7 +564,49 @@ export const useTheme = () => {
             </div>
           </section>
 
-          <!-- Slide 14: Why Zustand over Redux? -->
+          <!-- Slide 14: Provider Hell Problem -->
+          <section>
+            <h3>The Problem: Provider Hell 🔥</h3>
+            <p class="small-text">As apps grow, Context becomes messy...</p>
+
+            <div class="two-col" style="margin-top: 1.5rem">
+              <div>
+                <div class="label">Your App Component</div>
+                <pre><code class="tsx" style="font-size: 0.55em;">&lt;AuthProvider&gt;
+  &lt;ThemeProvider&gt;
+    &lt;NotificationProvider&gt;
+      &lt;SettingsProvider&gt;
+        &lt;CartProvider&gt;
+          &lt;WebSocketProvider&gt;
+            &lt;App /&gt;
+          &lt;/WebSocketProvider&gt;
+        &lt;/CartProvider&gt;
+      &lt;/SettingsProvider&gt;
+    &lt;/NotificationProvider&gt;
+  &lt;/ThemeProvider&gt;
+&lt;/AuthProvider&gt;</code></pre>
+              </div>
+
+              <div>
+                <h4 style="font-size: 0.9em">😫 Problems:</h4>
+                <ul style="font-size: 0.8em; line-height: 1.7">
+                  <li>Deeply nested JSX</li>
+                  <li>Hard to read & maintain</li>
+                  <li>Order matters (bugs!)</li>
+                  <li>Each needs boilerplate</li>
+                  <li>Performance issues</li>
+                </ul>
+
+                <div class="card" style="margin-top: 1rem">
+                  <p style="font-size: 0.7em">
+                    💡 With 10 global states → 10 providers!
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Slide 15: Why Zustand over Redux? -->
           <section>
             <h3>Why Zustand instead of Redux?</h3>
             <div class="card" style="margin-top: 1rem">
@@ -609,7 +651,50 @@ export const useTheme = () => {
             </div>
           </section>
 
-          <!-- Slide 15: Single Source of Truth - Bank Account Example -->
+          <!-- Slide 16: Mental Model -->
+          <section>
+            <h3>Mental Model: Store = State + Actions</h3>
+            <p class="small-text">
+              A Zustand store is just a JavaScript object
+            </p>
+
+            <div style="margin-top: 2rem">
+              <pre><code class="tsx" style="font-size: 0.75em;">const store = {
+  // State (data)
+  count: 0,
+  user: null,
+  isLoading: false,
+
+  // Actions (functions that change state)
+  increment: () => { /* ... */ },
+  setUser: (user) => { /* ... */ },
+  toggleLoading: () => { /* ... */ }
+}</code></pre>
+            </div>
+
+            <div class="card" style="margin-top: 1.5rem">
+              <p style="font-size: 0.85em">
+                ✨ That's it! No reducers, no actions, no dispatch
+              </p>
+              <p
+                style="
+                  font-size: 0.75em;
+                  margin-top: 0.5rem;
+                  color: var(--text-soft);
+                "
+              >
+                Just plain JavaScript objects and functions
+              </p>
+            </div>
+
+            <div class="roadmap" style="margin-top: 1.5rem">
+              <span>Simple</span>
+              <span>Predictable</span>
+              <span>Easy to Debug</span>
+            </div>
+          </section>
+
+          <!-- Slide 17: Single Source of Truth - Bank Account Example -->
           <section>
             <h3>Single Source of Truth</h3>
             <p class="small-text">Example: Bank Account Management</p>
@@ -863,6 +948,196 @@ export const useTheme = () => {
                 No props, no providers, no drilling!
               </text>
             </svg>
+          </section>
+
+          <!-- Slide 18: Zustand API - Just 2 Things -->
+          <section>
+            <h3>Zustand API: Just 2 Things to Learn</h3>
+
+            <div style="margin-top: 2rem">
+              <div class="card" style="margin-bottom: 1.5rem">
+                <div class="label">1️⃣ create() - Create a store</div>
+                <pre><code class="tsx" style="font-size: 0.65em;">import { create } from 'zustand';
+
+const useStore = create((set) => ({
+  count: 0,
+  increment: () => set((state) => ({ count: state.count + 1 }))
+}));</code></pre>
+              </div>
+
+              <div class="card">
+                <div class="label">2️⃣ useStore() - Use the store</div>
+                <pre><code class="tsx" style="font-size: 0.65em;">function Counter() {
+  const count = useStore((state) => state.count);
+  const increment = useStore((state) => state.increment);
+
+  return &lt;button onClick={increment}&gt;{count}&lt;/button&gt;;
+}</code></pre>
+              </div>
+            </div>
+
+            <div class="card" style="margin-top: 1.5rem">
+              <p style="font-size: 0.75em">
+                🎯 Compare to Redux: actions, reducers, dispatch, middleware,
+                combineReducers, applyMiddleware...
+              </p>
+            </div>
+          </section>
+
+          <!-- Slide 19: Exercise 2 - Todo List with Zustand -->
+          <section>
+            <h3>🧪 Exercise 2 — Todo List (Zustand)</h3>
+            <p class="small-text">→ live coding / hands-on</p>
+
+            <div class="two-col" style="margin-top: 1.5rem">
+              <div class="card">
+                <h4>🎯 Goal</h4>
+                <p style="font-size: 0.85em">
+                  Build a simple todo list with Zustand
+                </p>
+                <ul style="font-size: 0.8em">
+                  <li>Add todos</li>
+                  <li>Toggle complete</li>
+                  <li>Delete todos</li>
+                  <li>Show count</li>
+                </ul>
+              </div>
+
+              <div class="card">
+                <h4>📋 Requirements</h4>
+                <p style="font-size: 0.85em">Create a Zustand store with:</p>
+                <ul style="font-size: 0.8em">
+                  <li>todos: [ ]</li>
+                  <li>addTodo(text)</li>
+                  <li>toggleTodo(id)</li>
+                  <li>deleteTodo(id)</li>
+                </ul>
+                <p style="font-size: 0.8em; margin-top: 0.5rem">
+                  Use in multiple components
+                </p>
+              </div>
+            </div>
+
+            <div class="card" style="margin-top: 1rem">
+              <p style="font-size: 0.7em">⏱️ Time: 30 minutes</p>
+            </div>
+          </section>
+
+          <!-- Slide 20: Solution - Todo Store -->
+          <section>
+            <h3>Solution: Todo Store</h3>
+            <pre><code class="tsx" style="font-size: 0.52em;">import { create } from 'zustand';
+
+const useTodoStore = create((set) => ({
+  todos: [],
+
+  addTodo: (text) =>
+    set((state) => ({
+      todos: [
+        ...state.todos,
+        { id: Date.now(), text, completed: false }
+      ]
+    })),
+
+  toggleTodo: (id) =>
+    set((state) => ({
+      todos: state.todos.map((todo) =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo
+      )
+    })),
+
+  deleteTodo: (id) =>
+    set((state) => ({
+      todos: state.todos.filter((todo) => todo.id !== id)
+    }))
+}));
+
+export default useTodoStore;</code></pre>
+          </section>
+
+          <!-- Slide 21: Solution - Using the Store -->
+          <section>
+            <h3>Solution: Using the Store</h3>
+            <div class="two-col" style="margin-top: 1rem">
+              <div>
+                <div class="label">Add Todo Component</div>
+                <pre><code class="tsx" style="font-size: 0.55em;">function AddTodo() {
+  const [text, setText] = useState('');
+  const addTodo = useTodoStore((s) => s.addTodo);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (text.trim()) {
+      addTodo(text);
+      setText('');
+    }
+  };
+
+  return (
+    &lt;form onSubmit={handleSubmit}&gt;
+      &lt;input
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+      /&gt;
+      &lt;button&gt;Add&lt;/button&gt;
+    &lt;/form&gt;
+  );
+}</code></pre>
+              </div>
+
+              <div>
+                <div class="label">Todo List Component</div>
+                <pre><code class="tsx" style="font-size: 0.55em;">function TodoList() {
+  const todos = useTodoStore((s) => s.todos);
+  const toggleTodo = useTodoStore((s) => s.toggleTodo);
+  const deleteTodo = useTodoStore((s) => s.deleteTodo);
+
+  return (
+    &lt;ul&gt;
+      {todos.map((todo) => (
+        &lt;li key={todo.id}&gt;
+          &lt;input
+            type="checkbox"
+            checked={todo.completed}
+            onChange={() => toggleTodo(todo.id)}
+          /&gt;
+          &lt;span&gt;{todo.text}&lt;/span&gt;
+          &lt;button onClick={() => deleteTodo(todo.id)}&gt;
+            ❌
+          &lt;/button&gt;
+        &lt;/li&gt;
+      ))}
+    &lt;/ul&gt;
+  );
+}</code></pre>
+              </div>
+            </div>
+          </section>
+
+          <!-- Slide 22: Key Takeaways -->
+          <section>
+            <h3>🧠 Key Takeaways</h3>
+            <div class="card" style="margin-top: 1.5rem">
+              <h4 style="font-size: 0.95em">Zustand Benefits:</h4>
+              <ul style="font-size: 0.85em; line-height: 1.8">
+                <li>✅ No providers needed</li>
+                <li>✅ Simple API - just create & use</li>
+                <li>✅ Components subscribe only to what they need</li>
+                <li>✅ Less boilerplate than Context</li>
+                <li>✅ Works outside React components</li>
+              </ul>
+            </div>
+
+            <div class="card" style="margin-top: 1.5rem">
+              <p style="font-size: 0.8em">
+                <span class="highlight">When to use Zustand:</span>
+              </p>
+              <ul style="font-size: 0.75em; line-height: 1.6">
+                <li>Complex state shared across many components</li>
+                <li>Need state outside React (utils, services)</li>
+                <li>Want better performance than Context</li>
+              </ul>
+            </div>
           </section>
         </section>
       </div>
