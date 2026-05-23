@@ -314,29 +314,33 @@
           <!-- Slide 4: What is Prop Drilling -->
           <section>
             <h3>What is "prop drilling"?</h3>
-            <div class="two-col">
-              <div>
-                <pre><code class="tsx">&lt;App&gt;
-  &lt;Layout user={user}&gt;
-    &lt;Sidebar user={user}&gt;
-      &lt;Avatar user={user} /&gt;
-    &lt;/Sidebar&gt;
-  &lt;/Layout&gt;
-&lt;/App&gt;</code></pre>
-                <p class="small-text">
-                  👉 Passing props through components that don't need them.
-                </p>
-              </div>
-              <div>
-                <h4>Why it's bad?</h4>
-                <ul>
-                  <li>Hard to maintain</li>
-                  <li>Breaks easily</li>
-                  <li>Makes components tightly coupled</li>
-                  <li>Painful refactoring</li>
-                </ul>
-              </div>
-            </div>
+            <pre><code class="tsx" style="font-size: 0.55em;">// Layer 0 - State lives here
+function App() {
+  const [user, setUser] = useState({
+    name: "John Doe",
+    email: "john@example.com"
+  });
+  return &lt;Dashboard user={user} /&gt;;
+}
+
+// Layer 1 - Doesn't use user, just passes it down ❌
+function Dashboard({ user }) {
+  return &lt;Sidebar user={user} /&gt;;
+}
+
+// Layer 2 - Doesn't use user, just passes it down ❌
+function Sidebar({ user }) {
+  return &lt;UserProfile user={user} /&gt;;
+}
+
+// Layer 3 - Finally uses it! ✅
+function UserProfile({ user }) {
+  return &lt;div&gt;{user.name} - {user.email}&lt;/div&gt;;
+}</code></pre>
+            <p class="small-text" style="margin-top: 0.5rem">
+              👉 3 layers of drilling just to pass
+              <span class="highlight">user</span> from App to UserProfile
+            </p>
           </section>
 
           <!-- Slide 5: Solution Categories -->
@@ -369,26 +373,31 @@
 
           <!-- Slide 7: Context API Components -->
           <section>
-            <h3>Basic Example</h3>
-            <div class="two-col">
-              <div>
-                <div class="label">createContext</div>
-                <pre><code class="tsx">const ThemeContext = createContext("light");</code></pre>
+            <h3>Context API - 3 Steps</h3>
+            <pre><code class="tsx" style="font-size: 0.6em;">// 1️⃣ Create Context
+const ThemeContext = createContext("light");
 
-                <div class="label" style="margin-top: 1rem">Provider</div>
-                <pre><code class="tsx">&lt;ThemeContext.Provider value="dark"&gt;
-  &lt;App /&gt;
-&lt;/ThemeContext.Provider&gt;</code></pre>
-              </div>
-              <div>
-                <div class="label">Consuming Context</div>
-                <pre><code class="tsx">const theme = useContext(ThemeContext);</code></pre>
-                <div class="roadmap" style="margin-top: 1.5rem">
-                  <span>createContext</span>
-                  <span>Provider</span>
-                  <span>useContext</span>
-                </div>
-              </div>
+// 2️⃣ Provide value at the top level
+function App() {
+  const [theme, setTheme] = useState("dark");
+
+  return (
+    &lt;ThemeContext.Provider value={theme}&gt;
+      &lt;Header /&gt;
+      &lt;Content /&gt;
+    &lt;/ThemeContext.Provider&gt;
+  );
+}
+
+// 3️⃣ Consume anywhere in the tree
+function Header() {
+  const theme = useContext(ThemeContext);
+  return &lt;header className={theme}&gt;Current: {theme}&lt;/header&gt;;
+}</code></pre>
+            <div class="roadmap" style="margin-top: 1rem">
+              <span>createContext</span>
+              <span>Provider</span>
+              <span>useContext</span>
             </div>
           </section>
 
@@ -449,7 +458,7 @@
           <!-- Slide 10: Solution -->
           <section>
             <h3>Solution</h3>
-            <pre><code class="tsx">import { createContext, useContext, useState } from "react";
+            <pre><code class="tsx" style="font-size: 0.58em;">import { createContext, useContext, useState } from "react";
 
 const ThemeContext = createContext(null);
 
@@ -464,7 +473,19 @@ export const ThemeProvider = ({ children }) => {
       {children}
     &lt;/ThemeContext.Provider&gt;
   );
-};</code></pre>
+};
+
+// Custom hook for easy access
+export const useTheme = () => {
+  const context = useContext(ThemeContext);
+  if (!context) {
+    throw new Error("useTheme must be used within ThemeProvider");
+  }
+  return context;
+};
+
+// Wrap your app
+// &lt;ThemeProvider&gt;&lt;App /&gt;&lt;/ThemeProvider&gt;</code></pre>
           </section>
 
           <!-- Slide 11: Usage -->
@@ -489,6 +510,359 @@ export const ThemeProvider = ({ children }) => {
                 <li>Re-renders happen when value changes</li>
               </ul>
             </div>
+          </section>
+        </section>
+
+        <!-- PART 2: ZUSTAND -->
+        <section>
+          <!-- Slide 12: Zustand Introduction -->
+          <section>
+            <h1>Zustand</h1>
+            <h3>Simple State Management</h3>
+            <span class="badge">External Library</span>
+            <div
+              class="logo-row"
+              style="justify-content: center; margin-top: 1.5rem"
+            >
+              <span style="font-size: 3em">🐻</span>
+            </div>
+            <p class="small-text" style="margin-top: 1rem">
+              German word for "state"
+            </p>
+          </section>
+
+          <!-- Slide 13: What is Zustand & Why Use It -->
+          <section>
+            <h3>What is Zustand?</h3>
+            <div class="two-col" style="margin-top: 1.5rem">
+              <div>
+                <h4>📦 What it provides:</h4>
+                <ul style="font-size: 0.85em">
+                  <li>Single source of truth</li>
+                  <li>No providers needed</li>
+                  <li>Simple API</li>
+                  <li>TypeScript ready</li>
+                  <li>Minimal boilerplate</li>
+                </ul>
+              </div>
+              <div>
+                <h4>✨ Why use it?</h4>
+                <ul style="font-size: 0.85em">
+                  <li>Less code than Context</li>
+                  <li>Better performance</li>
+                  <li>No wrapper hell</li>
+                  <li>Easy to test</li>
+                  <li>Works outside React</li>
+                </ul>
+              </div>
+            </div>
+            <div class="card" style="margin-top: 1.5rem">
+              <p style="font-size: 0.75em">
+                💡 <span class="highlight">Perfect for:</span> Shopping carts,
+                user data, global UI state
+              </p>
+            </div>
+          </section>
+
+          <!-- Slide 14: Why Zustand over Redux? -->
+          <section>
+            <h3>Why Zustand instead of Redux?</h3>
+            <div class="card" style="margin-top: 1rem">
+              <p style="font-size: 0.85em">
+                <span class="highlight">Redux</span> is the most popular state
+                management library
+              </p>
+              <p style="font-size: 0.75em; color: var(--text-soft)">
+                (used by millions of apps worldwide)
+              </p>
+            </div>
+
+            <div class="two-col" style="margin-top: 2rem">
+              <div class="card">
+                <h4 style="font-size: 0.9em">❌ Redux Challenges</h4>
+                <ul style="font-size: 0.75em; line-height: 1.6">
+                  <li>Steep learning curve</li>
+                  <li>Lots of boilerplate</li>
+                  <li>Actions, reducers, types...</li>
+                  <li>Need middleware for async</li>
+                  <li>Complex setup</li>
+                </ul>
+              </div>
+
+              <div class="card">
+                <h4 style="font-size: 0.9em">✅ Zustand Advantages</h4>
+                <ul style="font-size: 0.75em; line-height: 1.6">
+                  <li>Learn in 10 minutes</li>
+                  <li>Minimal boilerplate</li>
+                  <li>Just one hook + store</li>
+                  <li>Async built-in</li>
+                  <li>Setup in 5 lines</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="card" style="margin-top: 1.5rem">
+              <p style="font-size: 0.75em">
+                🎯 <span class="highlight">For this course:</span> Zustand gives
+                you 80% of Redux power with 20% of the complexity
+              </p>
+            </div>
+          </section>
+
+          <!-- Slide 15: Single Source of Truth - Bank Account Example -->
+          <section>
+            <h3>Single Source of Truth</h3>
+            <p class="small-text">Example: Bank Account Management</p>
+
+            <svg
+              class="diagram-svg"
+              viewBox="0 0 800 500"
+              style="margin-top: 1rem"
+            >
+              <!-- Central Store -->
+              <rect
+                x="300"
+                y="30"
+                width="200"
+                height="120"
+                fill="rgba(97, 218, 251, 0.2)"
+                stroke="#61dafb"
+                stroke-width="2"
+                rx="10"
+              />
+              <text
+                x="400"
+                y="60"
+                text-anchor="middle"
+                fill="#61dafb"
+                font-size="16"
+                font-weight="bold"
+              >
+                🏦 Bank Store
+              </text>
+              <text
+                x="400"
+                y="85"
+                text-anchor="middle"
+                fill="#c8d2de"
+                font-size="14"
+              >
+                balance: $1,000
+              </text>
+              <text
+                x="400"
+                y="105"
+                text-anchor="middle"
+                fill="#c8d2de"
+                font-size="14"
+              >
+                deposit()
+              </text>
+              <text
+                x="400"
+                y="125"
+                text-anchor="middle"
+                fill="#c8d2de"
+                font-size="14"
+              >
+                withdraw()
+              </text>
+
+              <!-- Components accessing the store -->
+              <!-- ATM Component -->
+              <rect
+                x="50"
+                y="250"
+                width="150"
+                height="80"
+                fill="rgba(255, 255, 255, 0.05)"
+                stroke="rgba(255, 255, 255, 0.3)"
+                stroke-width="1"
+                rx="8"
+              />
+              <text
+                x="125"
+                y="275"
+                text-anchor="middle"
+                fill="#8fb5d8"
+                font-size="14"
+              >
+                🏧 ATM
+              </text>
+              <text
+                x="125"
+                y="295"
+                text-anchor="middle"
+                fill="#c8d2de"
+                font-size="12"
+              >
+                withdraw($50)
+              </text>
+              <text
+                x="125"
+                y="315"
+                text-anchor="middle"
+                fill="#61dafb"
+                font-size="11"
+              >
+                ← reads balance
+              </text>
+
+              <!-- Mobile App Component -->
+              <rect
+                x="325"
+                y="250"
+                width="150"
+                height="80"
+                fill="rgba(255, 255, 255, 0.05)"
+                stroke="rgba(255, 255, 255, 0.3)"
+                stroke-width="1"
+                rx="8"
+              />
+              <text
+                x="400"
+                y="275"
+                text-anchor="middle"
+                fill="#8fb5d8"
+                font-size="14"
+              >
+                📱 Mobile App
+              </text>
+              <text
+                x="400"
+                y="295"
+                text-anchor="middle"
+                fill="#c8d2de"
+                font-size="12"
+              >
+                check balance
+              </text>
+              <text
+                x="400"
+                y="315"
+                text-anchor="middle"
+                fill="#61dafb"
+                font-size="11"
+              >
+                ← reads balance
+              </text>
+
+              <!-- Online Banking Component -->
+              <rect
+                x="600"
+                y="250"
+                width="150"
+                height="80"
+                fill="rgba(255, 255, 255, 0.05)"
+                stroke="rgba(255, 255, 255, 0.3)"
+                stroke-width="1"
+                rx="8"
+              />
+              <text
+                x="675"
+                y="275"
+                text-anchor="middle"
+                fill="#8fb5d8"
+                font-size="14"
+              >
+                💻 Web Portal
+              </text>
+              <text
+                x="675"
+                y="295"
+                text-anchor="middle"
+                fill="#c8d2de"
+                font-size="12"
+              >
+                deposit($200)
+              </text>
+              <text
+                x="675"
+                y="315"
+                text-anchor="middle"
+                fill="#61dafb"
+                font-size="11"
+              >
+                ← reads balance
+              </text>
+
+              <!-- Arrows from store to components -->
+              <line
+                x1="350"
+                y1="150"
+                x2="125"
+                y2="250"
+                stroke="#61dafb"
+                stroke-width="2"
+                stroke-dasharray="5,5"
+                marker-end="url(#arrowhead)"
+              />
+              <line
+                x1="400"
+                y1="150"
+                x2="400"
+                y2="250"
+                stroke="#61dafb"
+                stroke-width="2"
+                stroke-dasharray="5,5"
+                marker-end="url(#arrowhead)"
+              />
+              <line
+                x1="450"
+                y1="150"
+                x2="675"
+                y2="250"
+                stroke="#61dafb"
+                stroke-width="2"
+                stroke-dasharray="5,5"
+                marker-end="url(#arrowhead)"
+              />
+
+              <!-- Arrow definition -->
+              <defs>
+                <marker
+                  id="arrowhead"
+                  markerWidth="10"
+                  markerHeight="10"
+                  refX="9"
+                  refY="3"
+                  orient="auto"
+                >
+                  <polygon points="0 0, 10 3, 0 6" fill="#61dafb" />
+                </marker>
+              </defs>
+
+              <!-- Bottom explanation -->
+              <text
+                x="400"
+                y="380"
+                text-anchor="middle"
+                fill="#61dafb"
+                font-size="16"
+                font-weight="bold"
+              >
+                ✅ All components read from ONE store
+              </text>
+              <text
+                x="400"
+                y="410"
+                text-anchor="middle"
+                fill="#c8d2de"
+                font-size="14"
+              >
+                When ATM withdraws → Mobile App & Web Portal instantly see
+                updated balance
+              </text>
+              <text
+                x="400"
+                y="440"
+                text-anchor="middle"
+                fill="#8fb5d8"
+                font-size="13"
+              >
+                No props, no providers, no drilling!
+              </text>
+            </svg>
           </section>
         </section>
       </div>
