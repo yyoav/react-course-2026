@@ -678,7 +678,7 @@ export default ProductCard;</code></pre>
                                                 </div>
 
                                                 <!-- Three key facts as cards with fragments -->
-                                                <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:0.8rem;">
+                                                <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.8rem;">
                                                         <div class="card" style="font-size:0.8em;">
                                                                 <strong class="highlight">📦 Data Down</strong>
                                                                 <p style="margin:0.4rem 0 0; color:var(--text-soft);">Props flow one-way — from parent to child only.</p>
@@ -686,10 +686,6 @@ export default ProductCard;</code></pre>
                                                         <div class="card" style="font-size:0.8em;">
                                                                 <strong class="highlight">🔒 Read-Only</strong>
                                                                 <p style="margin:0.4rem 0 0; color:var(--text-soft);">A child never mutates its own props.</p>
-                                                        </div>
-                                                        <div class="card" style="font-size:0.8em;">
-                                                                <strong class="highlight">♻️ Reusable</strong>
-                                                                <p style="margin:0.4rem 0 0; color:var(--text-soft);">Different prop values = different component output.</p>
                                                         </div>
                                                 </div>
                                         </div>
@@ -784,8 +780,8 @@ export default MyButton;
                                                                 <p style="margin:0.15rem 0 0; font-size:0.62em; color:var(--text-soft);">Use camelCase prop names</p>
                                                         </div>
                                                         <pre style="margin:0 auto; flex:1; font-size:0.52em; display:flex; align-items:center; justify-content:center;"><code class="ts">
-&lt;button onClick={fn}&gt;     // ✅
 &lt;button onchange={fn}&gt;    // ❌
+&lt;button onClick={fn}&gt;     // ✅
                                                         </code></pre>
                                                 </div>
 
@@ -796,19 +792,8 @@ export default MyButton;
                                                                 <p style="margin:0.15rem 0 0; font-size:0.62em; color:var(--text-soft);">Don't call it — pass the reference</p>
                                                         </div>
                                                         <pre style="margin:0 auto; flex:1; font-size:0.52em; display:flex; align-items:center; justify-content:center;"><code class="ts">
-&lt;button onClick={handleClick}&gt;    // ✅
 &lt;button onClick={handleClick()}&gt;  // ❌
-                                                        </code></pre>
-                                                </div>
-
-                                                <!-- Rule 3 -->
-                                                <div class="fragment" style="display:flex; align-items:center; gap:1rem; background:var(--surface); border:1px solid var(--surface-border); border-radius:10px; padding:0.4rem 0.9rem;">
-                                                        <div style="flex:0 0 225px;">
-                                                                <strong class="highlight" style="font-size:0.82em;">Inline arrow</strong>
-                                                                <p style="margin:0.15rem 0 0; font-size:0.62em; color:var(--text-soft);">Use when you need to pass args</p>
-                                                        </div>
-                                                        <pre style="margin:0 auto; flex:1; font-size:0.52em; display:flex; align-items:center; justify-content:center;"><code class="ts">
-&lt;button onClick={() =&gt; handleClick('hi')}&gt;  // ✅
+&lt;button onClick={handleClick}&gt;    // ✅
                                                         </code></pre>
                                                 </div>
                                         </div>
@@ -817,11 +802,49 @@ export default MyButton;
                                         </aside>
                                 </section>
 
+                                <!-- SLIDE – Mini Exercise: Props & Event Handlers -->
+                                <section>
+                                        <div style="display:flex; flex-direction:column; gap:0.9rem;">
+                                                <h2 class="slide-title">🛠️ Mini Exercise</h2>
+                                                <p style="margin:0; font-size:0.82em; color:var(--text-soft);">Props + Event Handlers</p>
+
+                                                <div class="card" style="text-align:left; font-size:0.78em;">
+                                                        <strong class="highlight">Task:</strong>
+                                                        <ol style="margin:0.4rem 0 0; padding-left:1.2rem; line-height:1.8;">
+                                                                <li>Create a <code>&lt;ClickLogger /&gt;</code> component</li>
+                                                                <li>It receives a <code>message</code> prop (string)</li>
+                                                                <li>Render a button that, when clicked, logs the <code>message</code> to the console</li>
+                                                                <li>Use <code>&lt;ClickLogger /&gt;</code> in <code>App</code> with different messages</li>
+                                                        </ol>
+                                                </div>
+
+                                                <div class="fragment">
+                                                        <pre style="margin:0; font-size:0.52em;"><code class="ts">
+// ClickLogger.tsx
+function ClickLogger({ message }: { message: string }) {
+  const handleClick = () => {
+    console.log(message);
+  };
+
+  return &lt;button onClick={handleClick}&gt;Log&lt;/button&gt;;
+}
+
+// App.tsx
+&lt;ClickLogger message="Hello!" /&gt;
+&lt;ClickLogger message="Goodbye!" /&gt;
+                                                        </code></pre>
+                                                </div>
+                                        </div>
+                                        <aside class="notes">
+                                                Give students 5 minutes. This combines props (passing data down) with event handlers (responding to clicks). Walk around and help. Show the solution after.
+                                        </aside>
+                                </section>
+
                                 <!-- SLIDE 15 – State & useState -->
                                 <section>
                                         <div style="display:flex; flex-direction:column; gap:0.9rem;">
 
-                                                <h2 class="slide-title">State &amp; useState</h2>
+                                                <h2 class="slide-title">State &amp; useState Hook</h2>
 
                                                 <!-- Step 1: What is state? -->
                                                 <div class="card">
@@ -975,15 +998,7 @@ setCount(prev =&gt; prev + 1);
                                                                 </code></pre>
                                                                 <p class="small-text">Use the functional form whenever the next value depends on the previous one.</p>
                                                         </div>
-                                                        <div class="card" style="font-size:0.82em;">
-                                                                <strong class="highlight">Why it matters</strong>
-                                                                <ul style="margin:0.5rem 0 0; color:var(--text-soft);">
-                                                                        <li>React batches state updates</li>
-                                                                        <li>Direct form may read a stale closure value</li>
-                                                                        <li>Functional form receives the <em>actual</em> latest state</li>
-                                                                        <li>Always safe for counters &amp; accumulators</li>
-                                                                </ul>
-                                                        </div>
+
                                                 </div>
                                         </div>
                                         <aside class="notes">
@@ -1034,12 +1049,6 @@ if (isLoggedIn) { /* use x */ }</code></pre>
                                                 <h2 class="slide-title">Rules of Hooks <span style="font-size:0.6em; color:var(--text-soft);">(2/2)</span></h2>
                                                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; align-items:start;">
                                                         <div style="display:flex; flex-direction:column; gap:0.4rem;">
-                                                                <div class="card" style="border:1.5px solid rgba(239,68,68,0.5); padding:0.4rem 0.6rem;">
-                                                                        <strong style="color:#f87171; font-size:0.65em;">❌ Wrong</strong>
-                                                                        <pre style="margin:0.2rem 0 0; background:none; box-shadow:none; font-size:0.58em;"><code class="ts">function calcTotal(items) {
-  const [sum, setSum] = useState(0);
-}</code></pre>
-                                                                </div>
                                                                 <div class="card" style="border:1.5px solid rgba(34,197,94,0.5); padding:0.4rem 0.6rem;">
                                                                         <strong style="color:#4ade80; font-size:0.65em;">✅ Correct</strong>
                                                                         <pre style="margin:0.2rem 0 0; background:none; box-shadow:none; font-size:0.58em;"><code class="ts">function Panel() {
@@ -1118,10 +1127,9 @@ setItems(prev =&gt; [...prev, 'd']);
 // ✅ remove
 setItems(prev =&gt; prev.filter(i =&gt; i !== 'b'));
 
-// ✅ update one item
-setItems(prev =&gt;
-  prev.map(i =&gt; i === 'a' ? 'z' : i)
-);
+// ❌ wrong — mutates in place!
+items.push('d');
+setItems(items);
                                                                 </code></pre>
                                                         </div>
                                                         <div style="display:flex; flex-direction:column; gap:0.7rem;">
