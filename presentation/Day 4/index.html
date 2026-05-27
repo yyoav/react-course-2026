@@ -731,7 +731,7 @@ function Dashboard({ products }: { products: Product[] }) {
                 <section>
                     <div style="display:flex; flex-direction:column; gap:0.8rem;">
                         <h2 style="margin:0; font-size:1.9em; font-weight:800;">Before the Compiler</h2>
-                        <pre><code class="tsx" data-line-numbers="2-4">
+                        <pre><code class="tsx">
 // Parent.tsx
 function Parent({ value }: { value: number }) {
   const expensive = useMemo(() =&gt; {
@@ -749,11 +749,11 @@ function Parent({ value }: { value: number }) {
                 </section>
 
                 <section>
-                    <h2 class="slide-title">Example: With React Compiler</h2>
+                    <h2 class="slide-title">With React Compiler</h2>
                     <pre><code class="tsx">
 function Parent({ value }) {
   const expensive = heavyCalculation(value);
-  return <Child data={expensive} />;
+  return &lt;Child data={expensive} /&gt;;
 }
                     </code></pre>
                     <ul>
@@ -798,7 +798,7 @@ export default {
                                                 </div>
                                         </div>
                                         <div style="margin-top: 1.5rem; padding: 0.8rem; background: rgba(97, 218, 251, 0.08); border-radius: 6px; font-size: 0.75em; text-align: left;">
-                                                <p style="margin: 0; color: #aaddff;">💡 <strong>Pro Tip:</strong> Once configured, the compiler automatically memoizes components and hooks—reducing the need for <code>useMemo</code> and <code>useCallback</code>.</p>
+                                                <p style="margin: 0; color: #aaddff;">Once configured, the compiler automatically memoizes components and hooks—reducing the need for <code>useMemo</code> and <code>useCallback</code>.</p>
                                         </div>
                                         <aside class="notes">
                                                 Two steps: upgrade React and install the babel plugin. Add it to your Vite config and you're done. The compiler handles the rest behind the scenes.
