@@ -189,8 +189,13 @@
             <div
               style="
                 display: grid;
-                grid-template-columns: repeat(5, 1fr);
-                gap: 0.5rem;
+                grid-template-columns: repeat(5, minmax(0, 1fr));
+                width: 92vw;
+                max-width: 92vw;
+                position: relative;
+                left: 50%;
+                transform: translateX(-50%);
+                gap: 1rem;
                 margin-top: 0.7rem;
               "
             >
@@ -386,40 +391,9 @@
             </div>
           </section>
 
-          <!-- Slide 3: Why .map() is used in React -->
+          <!-- Slide 3: Example - Product Gallery Wrong Way -->
           <section>
-            <h3>
-              Why .map() is used in React
-              <span class="small-text">(20 min)</span>
-            </h3>
-            <div style="text-align: left; font-size: 0.85em; margin-top: 1rem">
-              <div class="card" style="margin-bottom: 1rem">
-                <ul style="margin: 0; padding-left: 1.5rem">
-                  <li>
-                    In React, you rarely manually create repetitive HTML.
-                    Instead, we use JavaScript arrays and <code>.map()</code> to
-                    generate lists dynamically.
-                  </li>
-                  <li>
-                    <code>.map()</code> iterates through an array and returns a
-                    JSX element for each item.
-                  </li>
-                  <li>
-                    <strong>Example analogy:</strong> Think of a bakery conveyor
-                    belt – each item (JSX) is created from a recipe (array
-                    item).
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <p class="small-text" style="margin-top: 1rem">
-              💡 Let's see the wrong way vs the correct way
-            </p>
-          </section>
-
-          <!-- Slide 3b: Example - Product Gallery Wrong Way -->
-          <section>
-            <h3>Example: Product Gallery - ❌ Wrong Way</h3>
+            <h4>Example: Product Gallery</h4>
             <div class="two-col" style="margin-top: 1rem">
               <div>
                 <div
@@ -489,6 +463,37 @@
 }</code></pre>
               </div>
             </div>
+          </section>
+
+          <!-- Slide 3b: Why .map() is used in React -->
+          <section>
+            <h3>
+              Why .map() is used in React
+              <span class="small-text">(20 min)</span>
+            </h3>
+            <div style="text-align: left; font-size: 0.85em; margin-top: 1rem">
+              <div class="card" style="margin-bottom: 1rem">
+                <ul style="margin: 0; padding-left: 1.5rem">
+                  <li>
+                    In React, you rarely manually create repetitive HTML.
+                    Instead, we use JavaScript arrays and <code>.map()</code> to
+                    generate lists dynamically.
+                  </li>
+                  <li>
+                    <code>.map()</code> iterates through an array and returns a
+                    JSX element for each item.
+                  </li>
+                  <li>
+                    <strong>Example analogy:</strong> Think of a bakery conveyor
+                    belt – each item (JSX) is created from a recipe (array
+                    item).
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <p class="small-text" style="margin-top: 1rem">
+              💡 Let's see the wrong way vs the correct way
+            </p>
           </section>
 
           <!-- Slide 3c: Example - Product Gallery Right Way -->
@@ -561,10 +566,7 @@ function ProductGallery() {
 
           <!-- Slide 3d: Why Keys Matter -->
           <section>
-            <h3>
-              Why Keys Matter
-              <span class="small-text">(10 min)</span>
-            </h3>
+            <h3>Why Keys Matter ?</h3>
             <div style="text-align: left; font-size: 0.85em; margin-top: 1rem">
               <div class="card" style="margin-bottom: 1rem">
                 <ul style="margin: 0; padding-left: 1.5rem">
@@ -1953,11 +1955,11 @@ function UserProfile() {
             >
               <div class="card" style="margin-bottom: 1.5rem; padding: 1.5rem">
                 <ul style="margin: 0; padding-left: 1.5rem; line-height: 1.8">
-                  <li style="margin-bottom: 1rem">
+                  <li style="margin-bottom: 1rem; font-size: 1.5em">
                     React maintains a <strong>Virtual DOM</strong>, a
                     lightweight copy of the real DOM stored in memory.
                   </li>
-                  <li>
+                  <li style="font-size: 1.5em">
                     Think of it as a <strong>blueprint of the UI</strong> React
                     can compare quickly without touching the actual browser DOM.
                   </li>
@@ -2009,10 +2011,7 @@ function UserProfile() {
 
           <!-- Slide 11a: How React Updates UI Efficiently -->
           <section>
-            <h3>
-              How React Updates the UI Efficiently
-              <span class="small-text">(10 min)</span>
-            </h3>
+            <h3>How React Updates the UI Efficiently</h3>
             <div
               style="text-align: left; font-size: 0.43em; margin-top: 1.5rem"
             >
