@@ -1,0 +1,1085 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Day 5 - Next.js Framework</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/black.min.css"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/highlight/monokai.min.css"
+    />
+
+    <style>
+      :root {
+        --accent: #61dafb;
+        --nextjs: #000000;
+        --nextjs-light: #ffffff;
+        --accent-soft: rgba(97, 218, 251, 0.14);
+        --text-soft: #c8d2de;
+        --surface: rgba(255, 255, 255, 0.05);
+        --surface-border: rgba(255, 255, 255, 0.14);
+      }
+      .reveal {
+        background: radial-gradient(
+          circle at 10% 15%,
+          #1f2f47 0%,
+          #10131a 45%,
+          #080a0f 100%
+        );
+      }
+      .reveal h1,
+      .reveal h2,
+      .reveal h3 {
+        text-transform: none;
+        letter-spacing: 0.01em;
+      }
+      .reveal h1 {
+        text-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+      }
+      .reveal ul {
+        font-size: 0.86em;
+      }
+      .reveal code {
+        font-size: 0.9em;
+      }
+      .reveal pre {
+        border-radius: 12px;
+        border: 1px solid var(--surface-border);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
+      }
+      .reveal table {
+        font-size: 0.75em;
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid var(--surface-border);
+      }
+      .reveal table th,
+      .reveal table td {
+        padding: 0.5rem 0.7rem;
+        border-color: rgba(255, 255, 255, 0.12);
+      }
+      .small-text {
+        font-size: 0.7em;
+        color: var(--text-soft);
+      }
+      .highlight {
+        color: var(--accent);
+      }
+      .nextjs-color {
+        color: var(--nextjs-light);
+        font-weight: bold;
+      }
+      .two-col {
+        display: flex;
+        gap: 1.5rem;
+        align-items: flex-start;
+      }
+      .two-col > div {
+        flex: 1;
+      }
+      .card {
+        padding: 0.9rem 1rem;
+        border: 1px solid var(--surface-border);
+        border-radius: 12px;
+        background: var(--surface);
+        backdrop-filter: blur(4px);
+      }
+      .step-card {
+        font-size: 0.82em;
+        line-height: 1.4;
+      }
+      .step-card ol {
+        margin: 0;
+        padding-left: 1.2rem;
+      }
+      .code-card pre {
+        margin: 0;
+        font-size: 0.7em;
+      }
+      .hero {
+        display: grid;
+        grid-template-columns: 1.25fr 1fr;
+        gap: 1.6rem;
+        align-items: center;
+        text-align: left;
+      }
+      .hero p {
+        color: var(--text-soft);
+      }
+      .hero-visual {
+        padding: 1rem;
+        border: 1px solid var(--surface-border);
+        border-radius: 16px;
+        background: linear-gradient(
+          160deg,
+          rgba(97, 218, 251, 0.14),
+          rgba(30, 41, 59, 0.35)
+        );
+        text-align: center;
+      }
+      .logo-row {
+        margin-top: 0.8rem;
+        display: flex;
+        gap: 0.8rem;
+        align-items: center;
+        justify-content: center;
+      }
+      .badge {
+        display: inline-block;
+        padding: 0.2rem 0.55rem;
+        border-radius: 999px;
+        background: var(--accent-soft);
+        color: var(--accent);
+        font-size: 0.5em;
+        border: 1px solid rgba(97, 218, 251, 0.45);
+        margin-top: 0.5rem;
+      }
+      .roadmap {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 0.8rem;
+        justify-content: center;
+      }
+      .roadmap span {
+        font-size: 0.45em;
+        border: 1px solid rgba(97, 218, 251, 0.4);
+        background: rgba(97, 218, 251, 0.1);
+        color: #d5f6ff;
+        border-radius: 999px;
+        padding: 0.23rem 0.55rem;
+      }
+      .check-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        font-size: 0.78em;
+        line-height: 1.65;
+      }
+      .check-list li::before {
+        content: "✓ ";
+        color: var(--accent);
+      }
+      .adv-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.7rem;
+        margin-top: 0.7rem;
+        text-align: left;
+        font-size: 0.58em;
+      }
+      .adv-item {
+        border: 1px solid var(--surface-border);
+        border-radius: 10px;
+        background: rgba(15, 23, 42, 0.45);
+        padding: 0.55rem;
+      }
+      .label {
+        font-size: 0.5em;
+        color: #8fb5d8;
+        margin-bottom: 0.2rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+      @media (max-width: 900px) {
+        .hero,
+        .two-col {
+          grid-template-columns: 1fr;
+          display: block;
+        }
+        .adv-grid {
+          grid-template-columns: 1fr;
+        }
+        .hero-visual,
+        .two-col > div + div {
+          margin-top: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <!-- Slide 1: Title -->
+          <section>
+            <h1>Next.js</h1>
+            <h3>The React Framework for Production</h3>
+            <span class="badge">Full-Stack Framework</span>
+            <div class="logo-row" style="margin-top: 1.5rem">
+              <svg width="60" height="60" viewBox="0 0 180 180" fill="none">
+                <mask id="mask0" style="mask-type:alpha">
+                  <circle cx="90" cy="90" r="90" fill="black"/>
+                </mask>
+                <g mask="url(#mask0)">
+                  <circle cx="90" cy="90" r="90" fill="white"/>
+                  <path d="M149.508 157.52L69.142 54H54V125.97H66.1136V69.3836L139.999 164.845C143.333 162.614 146.509 160.165 149.508 157.52Z" fill="url(#paint0_linear)"/>
+                  <rect x="115" y="54" width="12" height="72" fill="url(#paint1_linear)"/>
+                </g>
+                <defs>
+                  <linearGradient id="paint0_linear" x1="109" y1="116.5" x2="144.5" y2="160.5" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="white"/>
+                    <stop offset="1" stop-color="white" stop-opacity="0"/>
+                  </linearGradient>
+                  <linearGradient id="paint1_linear" x1="121" y1="54" x2="120.799" y2="106.875" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="white"/>
+                    <stop offset="1" stop-color="white" stop-opacity="0"/>
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
+            <p class="small-text" style="margin-top: 1rem">
+              By Vercel - Powers Netflix, TikTok, Twitch, Hulu
+            </p>
+          </section>
+
+          <!-- Slide 2: Schedule -->
+          <section>
+            <h3>Today's Schedule</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Topic</th>
+                  <th>Duration</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>What is Next.js & Why Use It</td>
+                  <td>20 min</td>
+                </tr>
+                <tr>
+                  <td>Setup & Project Structure</td>
+                  <td>30 min</td>
+                </tr>
+                <tr>
+                  <td>File-Based Routing (App Router)</td>
+                  <td>40 min</td>
+                </tr>
+                <tr>
+                  <td>🧪 Exercise 1 (Pages & Navigation)</td>
+                  <td>30 min</td>
+                </tr>
+                <tr>
+                  <td>Break</td>
+                  <td>15 min</td>
+                </tr>
+                <tr>
+                  <td>Data Fetching & Server Components</td>
+                  <td>50 min</td>
+                </tr>
+                <tr>
+                  <td>🧪 Exercise 2 (API Integration)</td>
+                  <td>40 min</td>
+                </tr>
+                <tr>
+                  <td>Deployment & Best Practices</td>
+                  <td>30 min</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+
+          <!-- Slide 3: What is Next.js -->
+          <section>
+            <h3>What is Next.js?</h3>
+            <p class="small-text">
+              A React framework with built-in features for production
+            </p>
+
+            <div class="card" style="margin-top: 2rem">
+              <h4>🎯 Core Philosophy</h4>
+              <p style="font-size: 0.85em; margin-top: 0.5rem">
+                React gives you the tools → Next.js gives you the structure
+              </p>
+            </div>
+
+            <div class="two-col" style="margin-top: 2rem">
+              <div>
+                <h4>React Alone:</h4>
+                <ul style="font-size: 0.8em">
+                  <li>UI library only</li>
+                  <li>You configure routing</li>
+                  <li>You handle SEO</li>
+                  <li>You setup build tools</li>
+                  <li>Client-side only</li>
+                </ul>
+              </div>
+
+              <div>
+                <h4>Next.js Adds:</h4>
+                <ul style="font-size: 0.8em">
+                  <li>Full framework</li>
+                  <li>Built-in routing</li>
+                  <li>SEO-friendly by default</li>
+                  <li>Zero config needed</li>
+                  <li>Server + Client rendering</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <!-- Slide 4: Why Next.js -->
+          <section>
+            <h3>Why Use Next.js?</h3>
+            
+            <div class="adv-grid">
+              <div class="adv-item">
+                <h4 style="font-size: 1.1em">⚡ Performance</h4>
+                <p style="font-size: 0.95em">
+                  Server-side rendering, automatic code splitting, image optimization
+                </p>
+              </div>
+
+              <div class="adv-item">
+                <h4 style="font-size: 1.1em">🔍 SEO</h4>
+                <p style="font-size: 0.95em">
+                  Pre-rendered pages, metadata API, sitemap generation
+                </p>
+              </div>
+
+              <div class="adv-item">
+                <h4 style="font-size: 1.1em">🛣️ Routing</h4>
+                <p style="font-size: 0.95em">
+                  File-based routing, layouts, loading states, error handling
+                </p>
+              </div>
+
+              <div class="adv-item">
+                <h4 style="font-size: 1.1em">🔧 Full-Stack</h4>
+                <p style="font-size: 0.95em">
+                  API routes, server actions, database integration
+                </p>
+              </div>
+
+              <div class="adv-item">
+                <h4 style="font-size: 1.1em">📦 TypeScript</h4>
+                <p style="font-size: 0.95em">
+                  First-class TypeScript support, automatic types
+                </p>
+              </div>
+
+              <div class="adv-item">
+                <h4 style="font-size: 1.1em">🚀 Deployment</h4>
+                <p style="font-size: 0.95em">
+                  One-click deploy to Vercel, works anywhere
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <!-- Slide 5: App Router vs Pages Router -->
+          <section>
+            <h3>App Router vs Pages Router</h3>
+            <p class="small-text">Next.js has two routing systems</p>
+
+            <div class="two-col" style="margin-top: 1.5rem">
+              <div class="card">
+                <h4>📁 Pages Router</h4>
+                <p style="font-size: 0.75em; color: var(--text-soft)">
+                  (Legacy - Still supported)
+                </p>
+                <ul style="font-size: 0.8em; margin-top: 0.5rem">
+                  <li>pages/ directory</li>
+                  <li>Client components by default</li>
+                  <li>getServerSideProps</li>
+                  <li>getStaticProps</li>
+                </ul>
+              </div>
+
+              <div class="card" style="border: 2px solid var(--accent)">
+                <h4>
+                  🆕 App Router
+                  <span style="font-size: 0.6em; color: var(--accent)"
+                    >← We'll use this</span
+                  >
+                </h4>
+                <p style="font-size: 0.75em; color: var(--text-soft)">
+                  (Recommended since Next.js 13+)
+                </p>
+                <ul style="font-size: 0.8em; margin-top: 0.5rem">
+                  <li>app/ directory</li>
+                  <li>Server components by default</li>
+                  <li>Layouts & templates</li>
+                  <li>Streaming & suspense</li>
+                  <li>Better performance</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="card" style="margin-top: 1rem">
+              <p style="font-size: 0.75em">
+                💡 New projects should use <span class="highlight">App Router</span>
+              </p>
+            </div>
+          </section>
+
+          <!-- Slide 6: Getting Started -->
+          <section>
+            <h3>Getting Started</h3>
+            <div class="card" style="margin-top: 1.5rem">
+              <div class="label">Create a Next.js App</div>
+              <pre><code class="bash" style="font-size: 0.7em;">npx create-next-app@latest my-app
+
+# Interactive prompts:
+# ✅ TypeScript? Yes
+# ✅ ESLint? Yes
+# ✅ Tailwind CSS? Yes (optional)
+# ✅ App Router? Yes
+# ❌ src/ directory? No (for simplicity)
+
+cd my-app
+npm run dev
+# Opens at http://localhost:3000</code></pre>
+            </div>
+
+            <div class="roadmap" style="margin-top: 1.5rem">
+              <span>Next.js 14+</span>
+              <span>React 18+</span>
+              <span>TypeScript</span>
+            </div>
+          </section>
+
+          <!-- Slide 7: Project Structure -->
+          <section>
+            <h3>Project Structure (App Router)</h3>
+            <div class="two-col" style="margin-top: 1.5rem">
+              <div>
+                <pre><code class="plaintext" style="font-size: 0.65em;">my-app/
+├── app/
+│   ├── layout.tsx       ← Root layout
+│   ├── page.tsx         ← Home page (/)
+│   ├── about/
+│   │   └── page.tsx     ← /about
+│   └── blog/
+│       ├── page.tsx     ← /blog
+│       └── [slug]/
+│           └── page.tsx ← /blog/:slug
+├── public/
+│   └── images/          ← Static files
+├── components/
+│   └── Button.tsx       ← Reusable components
+├── package.json
+└── next.config.js</code></pre>
+              </div>
+
+              <div>
+                <h4 style="font-size: 0.9em">Key Files:</h4>
+                <ul style="font-size: 0.75em; line-height: 1.7">
+                  <li><strong>layout.tsx</strong> - Shared UI wrapper</li>
+                  <li><strong>page.tsx</strong> - Route page</li>
+                  <li><strong>loading.tsx</strong> - Loading state</li>
+                  <li><strong>error.tsx</strong> - Error boundary</li>
+                  <li><strong>not-found.tsx</strong> - 404 page</li>
+                </ul>
+
+                <div class="card" style="margin-top: 1rem">
+                  <p style="font-size: 0.7em">
+                    🎯 Folder = Route<br />
+                    page.tsx = Publicly accessible
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Slide 8: File-Based Routing -->
+          <section>
+            <h3>File-Based Routing</h3>
+            <p class="small-text">No need to configure routes manually!</p>
+
+            <table style="margin-top: 1.5rem; font-size: 0.65em">
+              <thead>
+                <tr>
+                  <th>File Path</th>
+                  <th>URL</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>app/page.tsx</td>
+                  <td>/</td>
+                  <td>Home page</td>
+                </tr>
+                <tr>
+                  <td>app/about/page.tsx</td>
+                  <td>/about</td>
+                  <td>About page</td>
+                </tr>
+                <tr>
+                  <td>app/blog/page.tsx</td>
+                  <td>/blog</td>
+                  <td>Blog index</td>
+                </tr>
+                <tr>
+                  <td>app/blog/[slug]/page.tsx</td>
+                  <td>/blog/hello</td>
+                  <td>Dynamic route</td>
+                </tr>
+                <tr>
+                  <td>app/dashboard/settings/page.tsx</td>
+                  <td>/dashboard/settings</td>
+                  <td>Nested route</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="card" style="margin-top: 1rem">
+              <p style="font-size: 0.75em">
+                💡 Create a folder + add page.tsx → Instant route!
+              </p>
+            </div>
+          </section>
+
+          <!-- Slide 9: Creating Pages -->
+          <section>
+            <h3>Creating Pages</h3>
+            <div class="two-col" style="margin-top: 1.5rem">
+              <div>
+                <div class="label">app/page.tsx (Home)</div>
+                <pre><code class="tsx" style="font-size: 0.6em;">export default function Home() {
+  return (
+    &lt;main&gt;
+      &lt;h1&gt;Welcome to Next.js&lt;/h1&gt;
+      &lt;p&gt;This is the home page&lt;/p&gt;
+    &lt;/main&gt;
+  );
+}</code></pre>
+              </div>
+
+              <div>
+                <div class="label">app/about/page.tsx</div>
+                <pre><code class="tsx" style="font-size: 0.6em;">export default function About() {
+  return (
+    &lt;main&gt;
+      &lt;h1&gt;About Us&lt;/h1&gt;
+      &lt;p&gt;Learn more about us&lt;/p&gt;
+    &lt;/main&gt;
+  );
+}</code></pre>
+              </div>
+            </div>
+
+            <div class="card" style="margin-top: 1rem">
+              <p style="font-size: 0.75em">
+                ✨ These are <span class="highlight">Server Components</span> by
+                default (fast!)
+              </p>
+            </div>
+          </section>
+
+          <!-- Slide 10: Navigation -->
+          <section>
+            <h3>Navigation with Link</h3>
+            <div class="card" style="margin-top: 1.5rem">
+              <div class="label">Don't use &lt;a&gt; tags!</div>
+              <pre><code class="tsx" style="font-size: 0.65em;">import Link from 'next/link';
+
+export default function Navigation() {
+  return (
+    &lt;nav&gt;
+      &lt;Link href="/"&gt;Home&lt;/Link&gt;
+      &lt;Link href="/about"&gt;About&lt;/Link&gt;
+      &lt;Link href="/blog"&gt;Blog&lt;/Link&gt;
+    &lt;/nav&gt;
+  );
+}</code></pre>
+            </div>
+
+            <div class="card" style="margin-top: 1rem">
+              <h4 style="font-size: 0.9em">Why Link over &lt;a&gt;?</h4>
+              <ul style="font-size: 0.75em">
+                <li>✅ Client-side navigation (no page reload)</li>
+                <li>✅ Automatic prefetching</li>
+                <li>✅ Faster transitions</li>
+                <li>✅ Preserves scroll position</li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- Slide 11: Layouts -->
+          <section>
+            <h3>Layouts - Shared UI</h3>
+            <p class="small-text">
+              Wrap pages with shared components (nav, footer)
+            </p>
+
+            <pre style="margin-top: 1.5rem"><code class="tsx" style="font-size: 0.58em;">// app/layout.tsx - Root layout for ALL pages
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    &lt;html lang="en"&gt;
+      &lt;body&gt;
+        &lt;header&gt;
+          &lt;nav&gt;{/* Navigation */}&lt;/nav&gt;
+        &lt;/header&gt;
+        
+        &lt;main&gt;{children}&lt;/main&gt;
+        
+        &lt;footer&gt;© 2026 My App&lt;/footer&gt;
+      &lt;/body&gt;
+    &lt;/html&gt;
+  );
+}</code></pre>
+
+            <div class="card" style="margin-top: 1rem">
+              <p style="font-size: 0.75em">
+                💡 Layout wraps all pages automatically - no need to import!
+              </p>
+            </div>
+          </section>
+
+          <!-- Slide 12: Dynamic Routes -->
+          <section>
+            <h3>Dynamic Routes</h3>
+            <p class="small-text">Handle routes with parameters</p>
+
+            <div class="two-col" style="margin-top: 1.5rem">
+              <div>
+                <div class="label">File: app/blog/[slug]/page.tsx</div>
+                <pre><code class="tsx" style="font-size: 0.58em;">export default function BlogPost({
+  params,
+}: {
+  params: { slug: string };
+}) {
+  return (
+    &lt;article&gt;
+      &lt;h1&gt;Post: {params.slug}&lt;/h1&gt;
+    &lt;/article&gt;
+  );
+}
+
+// URLs:
+// /blog/hello → slug = "hello"
+// /blog/nextjs-tips → slug = "nextjs-tips"</code></pre>
+              </div>
+
+              <div>
+                <div class="label">Multiple params</div>
+                <pre><code class="tsx" style="font-size: 0.58em;">// app/shop/[category]/[id]/page.tsx
+export default function Product({
+  params,
+}: {
+  params: { category: string; id: string };
+}) {
+  return (
+    &lt;div&gt;
+      &lt;p&gt;Category: {params.category}&lt;/p&gt;
+      &lt;p&gt;Product ID: {params.id}&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}
+
+// /shop/electronics/123
+// category = "electronics", id = "123"</code></pre>
+              </div>
+            </div>
+          </section>
+
+          <!-- Slide 13: Exercise 1 -->
+          <section>
+            <h3>🧪 Exercise 1 — Pages & Navigation</h3>
+            <p class="small-text">Build a multi-page website</p>
+
+            <div class="two-col" style="margin-top: 1.5rem">
+              <div class="card">
+                <h4>🎯 Goal</h4>
+                <p style="font-size: 0.85em">Create a simple portfolio site:</p>
+                <ul style="font-size: 0.8em">
+                  <li>Home page</li>
+                  <li>About page</li>
+                  <li>Projects page</li>
+                  <li>Project detail (dynamic)</li>
+                </ul>
+              </div>
+
+              <div class="card">
+                <h4>📋 Requirements</h4>
+                <ul style="font-size: 0.8em">
+                  <li>Create 3 pages</li>
+                  <li>Add navigation menu</li>
+                  <li>Create layout with header/footer</li>
+                  <li>Dynamic route: /projects/[id]</li>
+                  <li>Use Link for navigation</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="card" style="margin-top: 1rem">
+              <p style="font-size: 0.7em">⏱️ Time: 30 minutes</p>
+            </div>
+          </section>
+
+          <!-- Slide 14: Server Components -->
+          <section>
+            <h3>Server Components</h3>
+            <p class="small-text">The default in Next.js App Router</p>
+
+            <div class="two-col" style="margin-top: 1.5rem">
+              <div class="card">
+                <h4 style="font-size: 0.9em">🖥️ Server Components</h4>
+                <p style="font-size: 0.75em; color: var(--text-soft)">
+                  (default)
+                </p>
+                <ul style="font-size: 0.75em; line-height: 1.7">
+                  <li>Render on server</li>
+                  <li>Can access backend directly</li>
+                  <li>No JavaScript to browser</li>
+                  <li>Better performance</li>
+                  <li>SEO-friendly</li>
+                </ul>
+              </div>
+
+              <div class="card">
+                <h4 style="font-size: 0.9em">💻 Client Components</h4>
+                <p style="font-size: 0.75em; color: var(--text-soft)">
+                  ('use client')
+                </p>
+                <ul style="font-size: 0.75em; line-height: 1.7">
+                  <li>Render in browser</li>
+                  <li>Can use hooks (useState)</li>
+                  <li>Can use event handlers</li>
+                  <li>Interactive</li>
+                  <li>Adds JavaScript bundle</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="card" style="margin-top: 1rem">
+              <p style="font-size: 0.75em">
+                💡 Use Server Components by default, Client only when needed!
+              </p>
+            </div>
+          </section>
+
+          <!-- Slide 15: Client Components -->
+          <section>
+            <h3>When to Use Client Components</h3>
+            <div class="card" style="margin-top: 1.5rem">
+              <div class="label">Add 'use client' directive</div>
+              <pre><code class="tsx" style="font-size: 0.65em;">'use client';
+
+import { useState } from 'react';
+
+export default function Counter() {
+  const [count, setCount] = useState(0);
+
+  return (
+    &lt;div&gt;
+      &lt;p&gt;Count: {count}&lt;/p&gt;
+      &lt;button onClick={() => setCount(count + 1)}&gt;
+        Increment
+      &lt;/button&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+            </div>
+
+            <div class="card" style="margin-top: 1rem">
+              <h4 style="font-size: 0.9em">Use Client when you need:</h4>
+              <ul style="font-size: 0.75em">
+                <li>useState, useEffect, or other hooks</li>
+                <li>Event handlers (onClick, onChange)</li>
+                <li>Browser APIs (localStorage, window)</li>
+                <li>Third-party libraries that use hooks</li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- Slide 16: Data Fetching -->
+          <section>
+            <h3>Data Fetching in Server Components</h3>
+            <p class="small-text">Super simple - just async/await!</p>
+
+            <pre style="margin-top: 1.5rem"><code class="tsx" style="font-size: 0.6em;">// app/posts/page.tsx - Server Component
+async function getPosts() {
+  const res = await fetch('https://api.example.com/posts');
+  return res.json();
+}
+
+export default async function PostsPage() {
+  const posts = await getPosts();
+
+  return (
+    &lt;div&gt;
+      &lt;h1&gt;Blog Posts&lt;/h1&gt;
+      {posts.map((post) => (
+        &lt;article key={post.id}&gt;
+          &lt;h2&gt;{post.title}&lt;/h2&gt;
+          &lt;p&gt;{post.excerpt}&lt;/p&gt;
+        &lt;/article&gt;
+      ))}
+    &lt;/div&gt;
+  );
+}</code></pre>
+
+            <div class="card" style="margin-top: 1rem">
+              <p style="font-size: 0.75em">
+                ✨ No useEffect, no loading state management - it's automatic!
+              </p>
+            </div>
+          </section>
+
+          <!-- Slide 17: Loading States -->
+          <section>
+            <h3>Loading States</h3>
+            <p class="small-text">Show loading UI while data fetches</p>
+
+            <div class="two-col" style="margin-top: 1.5rem">
+              <div>
+                <div class="label">app/posts/loading.tsx</div>
+                <pre><code class="tsx" style="font-size: 0.65em;">export default function Loading() {
+  return (
+    &lt;div&gt;
+      &lt;p&gt;Loading posts...&lt;/p&gt;
+      &lt;div className="spinner"&gt;&lt;/div&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+              </div>
+
+              <div>
+                <div class="label">app/posts/error.tsx</div>
+                <pre><code class="tsx" style="font-size: 0.65em;">'use client';
+
+export default function Error({
+  error,
+  reset,
+}: {
+  error: Error;
+  reset: () => void;
+}) {
+  return (
+    &lt;div&gt;
+      &lt;h2&gt;Something went wrong!&lt;/h2&gt;
+      &lt;button onClick={reset}&gt;Try again&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+              </div>
+            </div>
+
+            <div class="card" style="margin-top: 1rem">
+              <p style="font-size: 0.75em">
+                💡 Next.js automatically shows loading.tsx while page loads!
+              </p>
+            </div>
+          </section>
+
+          <!-- Slide 18: Exercise 2 -->
+          <section>
+            <h3>🧪 Exercise 2 — API Integration</h3>
+            <p class="small-text">Fetch and display data</p>
+
+            <div class="two-col" style="margin-top: 1.5rem">
+              <div class="card">
+                <h4>🎯 Goal</h4>
+                <p style="font-size: 0.85em">
+                  Build a users list from an API:
+                </p>
+                <ul style="font-size: 0.8em">
+                  <li>Fetch users from API</li>
+                  <li>Display in a list</li>
+                  <li>Show loading state</li>
+                  <li>Handle errors</li>
+                </ul>
+              </div>
+
+              <div class="card">
+                <h4>📋 API to Use</h4>
+                <pre><code class="plaintext" style="font-size: 0.7em;">https://jsonplaceholder.typicode.com/users</code></pre>
+                <p style="font-size: 0.8em; margin-top: 0.5rem">Create:</p>
+                <ul style="font-size: 0.8em">
+                  <li>app/users/page.tsx</li>
+                  <li>app/users/loading.tsx</li>
+                  <li>app/users/error.tsx</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="card" style="margin-top: 1rem">
+              <p style="font-size: 0.7em">⏱️ Time: 40 minutes</p>
+            </div>
+          </section>
+
+          <!-- Slide 19: Metadata & SEO -->
+          <section>
+            <h3>Metadata & SEO</h3>
+            <p class="small-text">Built-in SEO optimization</p>
+
+            <pre style="margin-top: 1.5rem"><code class="tsx" style="font-size: 0.6em;">// app/about/page.tsx
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'About Us',
+  description: 'Learn more about our company',
+  keywords: ['company', 'about', 'team'],
+  openGraph: {
+    title: 'About Us',
+    description: 'Learn more about our company',
+    images: ['/og-image.jpg'],
+  },
+};
+
+export default function About() {
+  return &lt;h1&gt;About Us&lt;/h1&gt;;
+}</code></pre>
+
+            <div class="card" style="margin-top: 1rem">
+              <p style="font-size: 0.75em">
+                ✨ Next.js automatically generates &lt;meta&gt; tags for SEO!
+              </p>
+            </div>
+          </section>
+
+          <!-- Slide 20: Deployment -->
+          <section>
+            <h3>Deployment to Vercel</h3>
+            <p class="small-text">One-click deployment</p>
+
+            <div class="card" style="margin-top: 1.5rem">
+              <h4>Steps:</h4>
+              <ol style="font-size: 0.85em; line-height: 1.8">
+                <li>Push code to GitHub</li>
+                <li>Go to <span class="highlight">vercel.com</span></li>
+                <li>Click "Import Project"</li>
+                <li>Select your repository</li>
+                <li>Click "Deploy"</li>
+              </ol>
+            </div>
+
+            <div class="card" style="margin-top: 1.5rem">
+              <h4>✨ Features:</h4>
+              <ul style="font-size: 0.8em">
+                <li>Automatic HTTPS</li>
+                <li>Global CDN</li>
+                <li>Preview deployments for PRs</li>
+                <li>Automatic builds on git push</li>
+                <li>Free for personal projects</li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- Slide 21: Best Practices -->
+          <section>
+            <h3>Next.js Best Practices</h3>
+            
+            <div class="two-col" style="margin-top: 1.5rem">
+              <div class="card">
+                <h4 style="font-size: 0.9em">✅ DO</h4>
+                <ul style="font-size: 0.75em; line-height: 1.7">
+                  <li>Use Server Components by default</li>
+                  <li>Add metadata to all pages</li>
+                  <li>Use next/image for images</li>
+                  <li>Use next/link for navigation</li>
+                  <li>Keep client components small</li>
+                  <li>Use TypeScript</li>
+                </ul>
+              </div>
+
+              <div class="card">
+                <h4 style="font-size: 0.9em">❌ DON'T</h4>
+                <ul style="font-size: 0.75em; line-height: 1.7">
+                  <li>Use &lt;a&gt; tags for internal links</li>
+                  <li>Fetch data in Client Components</li>
+                  <li>Make everything 'use client'</li>
+                  <li>Ignore loading states</li>
+                  <li>Forget error handling</li>
+                  <li>Skip metadata</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <!-- Slide 22: Key Takeaways -->
+          <section>
+            <h3>🧠 Key Takeaways</h3>
+            
+            <div class="card" style="margin-top: 1.5rem">
+              <ul class="check-list">
+                <li>Next.js is a React framework with built-in routing, SSR, and more</li>
+                <li>App Router uses file-based routing (folder = route)</li>
+                <li>Server Components are the default (fast & SEO-friendly)</li>
+                <li>Use 'use client' only when you need interactivity</li>
+                <li>Data fetching is simple with async/await</li>
+                <li>Built-in loading and error handling</li>
+                <li>Deploy to Vercel with one click</li>
+              </ul>
+            </div>
+
+            <div class="card" style="margin-top: 1.5rem">
+              <h4 style="font-size: 0.9em">📚 Next Steps:</h4>
+              <ul style="font-size: 0.8em">
+                <li>Explore API Routes (backend endpoints)</li>
+                <li>Learn Server Actions (mutations)</li>
+                <li>Try Middleware (auth, redirects)</li>
+                <li>Build a full-stack app!</li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- Slide 23: Resources -->
+          <section>
+            <h3>Resources</h3>
+            
+            <div class="card" style="margin-top: 2rem">
+              <h4>📖 Official Docs:</h4>
+              <ul style="font-size: 0.85em; line-height: 1.8">
+                <li>
+                  <a href="https://nextjs.org/docs" target="_blank"
+                    >nextjs.org/docs</a
+                  >
+                  - Official documentation
+                </li>
+                <li>
+                  <a href="https://nextjs.org/learn" target="_blank"
+                    >nextjs.org/learn</a
+                  >
+                  - Interactive tutorial
+                </li>
+                <li>
+                  <a href="https://vercel.com/templates" target="_blank"
+                    >vercel.com/templates</a
+                  >
+                  - Starter templates
+                </li>
+              </ul>
+            </div>
+
+            <div class="roadmap" style="margin-top: 2rem">
+              <span>Happy Coding!</span>
+              <span>Build Amazing Apps</span>
+              <span>Ship Fast</span>
+            </div>
+          </section>
+        </section>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/highlight/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/notes/notes.min.js"></script>
+
+    <script>
+      Reveal.initialize({
+        hash: true,
+        slideNumber: true,
+        plugins: [RevealHighlight, RevealNotes],
+      });
+    </script>
+  </body>
+</html>
