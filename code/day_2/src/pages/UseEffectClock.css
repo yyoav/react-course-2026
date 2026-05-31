@@ -1,0 +1,165 @@
+.clock-example {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.breadcrumb {
+  margin-bottom: 1.5rem;
+}
+
+.breadcrumb a {
+  color: #61dafb;
+  text-decoration: none;
+  font-size: 0.95em;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  transition: opacity 0.2s;
+}
+
+.breadcrumb a:hover {
+  opacity: 0.8;
+}
+
+.clock-example h1 {
+  color: #61dafb;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 2em;
+}
+
+.info-box {
+  background: rgba(97, 218, 251, 0.15);
+  border: 2px solid rgba(97, 218, 251, 0.4);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.info-box h3 {
+  color: #61dafb;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.info-box p {
+  margin: 0.5rem 0;
+  line-height: 1.6;
+}
+
+.info-box code {
+  background: rgba(0, 0, 0, 0.1);
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+  font-family: monospace;
+  font-size: 0.9em;
+}
+
+.demo-container {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 3rem 2rem;
+  margin-bottom: 2rem;
+}
+
+.clock-display {
+  text-align: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 16px;
+  padding: 3rem 2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.clock-display .time {
+  font-size: 4em;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+  font-family: 'Courier New', monospace;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.clock-display .date {
+  font-size: 1.2em;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 1rem 0 0;
+  font-weight: 500;
+}
+
+.code-explanation {
+  background: rgba(40, 44, 52, 0.95);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.code-explanation h3 {
+  color: #61dafb;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.code-block {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 6px;
+  padding: 1rem;
+  overflow-x: auto;
+}
+
+.code-block pre {
+  margin: 0;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9em;
+  line-height: 1.6;
+}
+
+.code-block code {
+  color: #abb2bf;
+}
+
+.explanation {
+  background: rgba(97, 218, 251, 0.1);
+  border-left: 4px solid #61dafb;
+  padding: 1.5rem;
+  border-radius: 8px;
+}
+
+.explanation h3 {
+  color: #61dafb;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.explanation ul {
+  margin: 0;
+  padding-left: 1.5rem;
+  line-height: 1.8;
+}
+
+.explanation li {
+  margin-bottom: 0.75rem;
+}
+
+.explanation code {
+  background: rgba(0, 0, 0, 0.1);
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+  font-family: monospace;
+  font-size: 0.9em;
+}
+
+@media (max-width: 768px) {
+  .clock-example {
+    padding: 1rem;
+  }
+
+  .clock-display .time {
+    font-size: 2.5em;
+  }
+
+  .clock-display .date {
+    font-size: 1em;
+  }
+}

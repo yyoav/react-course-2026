@@ -1,12 +1,12 @@
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import reactLogo from "./assets/react.svg";
+import viteLogo from "./assets/vite.svg";
+import heroImg from "./assets/hero.png";
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
   return (
     <>
@@ -121,10 +121,13 @@ function App() {
         <h3>📚 Course Examples</h3>
         <nav>
           <Link to="/keys">Keys Example</Link>
+          <Link to="/conditional">Conditional Rendering</Link>
+          <Link to="/useeffect1">useEffect 1</Link>
+          <Link to="/useeffect2">useEffect 2</Link>
         </nav>
       </section>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
