@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
@@ -115,6 +116,13 @@ function App() {
 
       <div className="ticks"></div>
       <section id="spacer"></section>
+
+      <section id="examples-menu">
+        <h3>📚 Course Examples</h3>
+        <nav>
+          <Link to="/keys">Keys Example</Link>
+        </nav>
+      </section>
     </>
   )
 }
