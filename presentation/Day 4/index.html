@@ -161,7 +161,7 @@
         .split-code {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 0.9rem;
+            gap: 0.1rem;
             text-align: left;
             margin-top: 0.75rem;
         }
@@ -193,6 +193,22 @@
                 margin-top: 1rem;
             }
         }
+        .demo-slide {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+        }
+        .demo-slide .demo-icon { font-size: 3.5em; line-height: 1; }
+        .demo-slide h2 {
+            font-size: 2.2em;
+            margin: 0;
+            color: var(--accent);
+            text-shadow: 0 0 32px rgba(97,218,251,0.5);
+        }
+        .demo-slide p { color: var(--text-soft); font-size: 0.95em; margin: 0; }
+        .reveal .controls { color: var(--accent) !important; }
     </style>
 </head>
 <body>
@@ -218,46 +234,60 @@
                             </svg>
                         </div>
                     </div>
+                    <aside class="notes">
+                        Welcome to Day 4. Today we focus on performance optimization — understanding when and how to prevent unnecessary work in React.
+                    </aside>
                 </section>
 
                 <section>
-                    <h3>Slide 1 – Why Performance Optimization Matters</h3>
+                    <h2 class="slide-title">Why Performance Optimization Matters</h2>
                     <ul>
                         <li>Large component trees and frequent re-renders</li>
                         <li>Expensive calculations or passing functions as props</li>
                         <li>Slow UI interactions</li>
                         <li>React is fast, but unnecessary re-renders hurt</li>
                     </ul>
+                    <aside class="notes">
+                        Set the stage: React is already fast, but as apps grow, unnecessary renders accumulate. We optimize the bottlenecks, not everything.
+                    </aside>
                 </section>
 
                 <section>
-                    <h3>Slide 2 – How React Renders (Quick Refresher)</h3>
+                    <h2 class="slide-title">How React Renders</h2>
+                    <h6 class="slide-title">(Quick Refresher)</h6>
+
                     <ul>
                         <li>A component re-renders when its state changes</li>
                         <li>When its props change</li>
                         <li>When its parent re-renders</li>
                         <li>By default: parent render triggers child renders</li>
                     </ul>
+                    <aside class="notes">
+                        Quick refresher on the render cycle. Emphasize that parent re-renders cascade down to all children by default — this is the root cause of most perf issues.
+                    </aside>
                 </section>
 
                 <section>
-                    <h3>Slide 3 – What Is an Unnecessary Re-render?</h3>
+                    <h2 class="slide-title">What Is an Unnecessary Re-render?</h2>
                     <pre><code class="tsx">
 function Parent() {
   const [count, setCount] = useState(0);
   return (
-    <>
-      <button onClick={() => setCount(count + 1)}>+</button>
-      <Heavy Component />
-    </>
+    &lt;&gt;
+      &lt;button onClick={() =&gt; setCount(count + 1)}&gt;+&lt;/button&gt;
+      &lt;HeavyComponent /&gt;
+    &lt;/&gt;
   );
 }
                     </code></pre>
                     <p class="small-text">HeavyComponent re-renders even though it does not use count. Optimization helps.</p>
+                    <aside class="notes">
+                        Walk through the example: clicking the button changes count, Parent re-renders, and HeavyComponent re-renders for no reason. This is the problem we solve.
+                    </aside>
                 </section>
 
                 <section>
-                    <h3>Slide 4 – Optimization Tools Overview</h3>
+                    <h2 class="slide-title">Optimization Tools Overview</h2>
                     <table>
                         <thead><tr><th>Tool</th><th>Purpose</th></tr></thead>
                         <tbody>
@@ -266,52 +296,121 @@ function Parent() {
                             <tr><td>useCallback</td><td>Cache function references</td></tr>
                         </tbody>
                     </table>
+                    <aside class="notes">
+                        Overview of our three main tools. We'll cover each one in depth. They solve different problems but work together.
+                    </aside>
                 </section>
 
                 <section>
-                    <h3>Slide 5 – What Is React.memo?</h3>
+                    <h2 class="slide-title">What Is React.memo?</h2>
                     <ul>
                         <li>Higher-order component</li>
                         <li>Memoizes a component</li>
-                        <li>Skips re-render if props did not change</li>
                     </ul>
                     <pre><code class="tsx">
 const MyComponent = React.memo(Component);
                     </code></pre>
+                    <p class="highlight" style="font-weight:700; margin-top:0.6rem;">&#10003; Skips re-render if props did not change</p>
+                    <aside class="notes">
+                        React.memo is a higher-order component that wraps your component. It compares previous and next props — if they're the same, it skips re-rendering.
+                    </aside>
                 </section>
 
                 <section>
-                    <h3>Slide 6 – React.memo Example</h3>
+                    <h2 class="slide-title">React.memo Example</h2>
                     <pre><code class="tsx">
-const Greeting = React.memo(function Greeting({ name }: { name: string }) {
-  console.log("Greeting rendered");
-  return <h1>Hello {name}</h1>;
+interface GreetingProps {
+  name: string;
+}
+
+const Greeting = memo(({ name }: GreetingProps) =&gt; {
+  return &lt;h1&gt;Hello {name}&lt;/h1&gt;;
 });
                     </code></pre>
-                    <p class="small-text">Re-renders only if name changes.</p>
+                    <p class="text">Re-renders only if <code>name</code> changes.</p>
+                    <aside class="notes">
+                        memo receives a function component and an optional custom comparison function.
+                        It returns a new component that behaves the same but skips re-rendering when props have not changed.
+                        Think of it as a wrapper — same component inside, with a "skip if same props" guard added on top.
+                    </aside>
                 </section>
 
                 <section>
-                    <h3>Slide 7 – Without vs With React.memo</h3>
-                    <ul>
-                        <li>Without: parent renders → child renders always</li>
-                        <li>With: parent renders → child renders only if props changed</li>
-                        <li>React.memo uses shallow prop comparison</li>
-                    </ul>
+                    <h2 class="slide-title">Without vs With React.memo</h2>
+                    <table>
+                        <thead><tr><th>Without</th><th>With</th></tr></thead>
+                        <tbody>
+                            <tr><td>Parent renders → child <strong>always</strong> renders</td><td>Parent renders → child renders <strong>only if props changed</strong></td></tr>
+                        </tbody>
+                    </table>
+                    <br/>
+                    <p class="small-text" style="margin-top:0.8rem;">Uses <strong>shallow comparison</strong> (===) — primitives by value, objects/arrays by reference.</p>
+                    <aside class="notes">
+                        Key concept: shallow comparison means === on each prop. Primitives are safe. Objects and arrays need stable references — this is where useMemo comes in later.
+                    </aside>
                 </section>
 
                 <section>
-                    <h3>Slide 8 – When React.memo Helps</h3>
+                    <h2 class="slide-title">Shallow Comparison Examples</h2>
+                    <div class="split-code">
+                        <div class="fragment fade-in-then-semi-out">
+                            <div class="label">❌ Child ALWAYS re-renders</div>
+                            <pre><code class="tsx">
+function Parent() {
+ const [count, setCount] = useState(0);
+
+ // new array created every render
+ const items = ["a", "b", "c"];
+ return &lt;Box items={items} /&gt;;
+}
+
+                            </code></pre>
+                        </div>
+                        <div class="fragment fade-in">
+                            <div class="label">✅ Child does NOT re-render</div>
+                            <pre><code class="tsx">
+const items = ["a", "b", "c"];
+
+function Parent() {
+ const [count, setCount] = useState(0);
+
+ // same reference every render
+ return &lt;Box items={items} /&gt;;
+}                    </code></pre>
+                        </div>
+                    </div>
+                    <p class="small-text">Arrays are compared by <strong>reference</strong>, not by content.<br>Every render creates a new reference → memo thinks props changed.</p>
+                    <aside class="notes">
+                        Side-by-side comparison. Left: inline array creates a new reference every render, defeating memo. Right: array defined outside the component keeps the same reference. This is the most common mistake with React.memo.
+                    </aside>
+                </section>
+
+                <section>
+                    <h2 class="slide-title">When React.memo Helps</h2>
                     <ul>
                         <li>Heavy components or long lists</li>
                         <li>UI components with stable props</li>
                         <li>Not useful when props change often or component is cheap</li>
                         <li>Rule: measure first, optimize second</li>
                     </ul>
+                    <aside class="notes">
+                        Don't wrap everything in memo. It has a cost (storing previous props, running comparison). Only use when the component is expensive or renders frequently with the same props.
+                    </aside>
+                </section>
+
+                <section data-background="linear-gradient(135deg, #0d2137 0%, #0a3040 60%, #0d1f33 100%)">
+                    <div class="demo-slide">
+                        <span class="demo-icon">🛠️</span>
+                        <h2>Demo Time</h2>
+                        <p>React.memo in action</p>
+                    </div>
+                    <aside class="notes">
+                        Live demo: wrap a heavy component in React.memo, show the console.log only fires when props actually change.
+                    </aside>
                 </section>
 
                 <section>
-                    <h3>Slide 9 – What Is useMemo?</h3>
+                    <h2 class="slide-title">What Is useMemo?</h2>
                     <ul>
                         <li>Memoizes a value</li>
                         <li>Avoids recalculating expensive logic on every render</li>
@@ -319,94 +418,225 @@ const Greeting = React.memo(function Greeting({ name }: { name: string }) {
                     <pre><code class="tsx">
 const value = useMemo(() => compute(), [deps]);
                     </code></pre>
+                    <aside class="notes">
+                        useMemo caches the return value of a function. It only recomputes when dependencies change. Think of it as "remember this result until deps change."
+
+                        Gets: a function to run + a dependency array.
+                        Returns: the cached result of that function — not the function itself.
+                    </aside>
                 </section>
 
                 <section>
-                    <h3>Slide 10 – Problem: Expensive Calculation</h3>
+                    <h2 class="slide-title">Problem: Expensive Calculation</h2>
                     <pre><code class="tsx">
-function Component({ items }: { items: number[] }) {
-  const total = items.reduce((sum, n) => sum + n, 0);
-  return <p>Total: {total}</p>;
+function ProductList({ products, query }: Props) {
+  const filtered = products.filter(p =>
+    p.name.toLowerCase().includes(query.toLowerCase())
+  );
+  return &lt;ul&gt;{filtered.map(p =&gt; &lt;li key={p.id}&gt;{p.name}&lt;/li&gt;)}&lt;/ul&gt;;
 }
                     </code></pre>
-                    <p class="small-text">Recalculated on every render even if items did not change.</p>
+                    <p class="small-text">Filter runs on every render — even when <code>query</code> hasn't changed.</p>
+                    <aside class="notes">
+                        Without useMemo, the filter runs on every render even if products and query haven't changed. For large lists this is wasteful.
+                    </aside>
                 </section>
 
                 <section>
-                    <h3>Slide 11 – useMemo Example</h3>
+                    <h2 class="slide-title">Solution: With useMemo</h2>
                     <pre><code class="tsx">
-const total = useMemo(() => {
-  return items.reduce((sum, n) => sum + n, 0);
-}, [items]);
+function ProductList({ products, query }: Props) {
+  const filtered = useMemo(() =>
+    products.filter(p =>
+      p.name.toLowerCase().includes(query.toLowerCase())
+    ),
+    [products, query]
+  );
+  return &lt;ul&gt;{filtered.map(p =&gt; &lt;li key={p.id}&gt;{p.name}&lt;/li&gt;)}&lt;/ul&gt;;
+}
                     </code></pre>
-                    <p class="small-text">Recalculates only when items changes.</p>
+                    <p class="small-text">Recalculates only when <code>products</code> or <code>query</code> changes.</p>
+                    <aside class="notes">
+                        Now the filter only runs when products or query actually change. If the parent re-renders for other reasons, this computation is skipped.
+                    </aside>
                 </section>
 
                 <section>
-                    <h3>Slide 12 – What useMemo Actually Does</h3>
+                    <h2 class="slide-title">What useMemo Actually Does</h2>
                     <ul>
                         <li>Caches the result, not the function</li>
                         <li>Dependency array controls recomputation</li>
                         <li>Wrong dependencies cause bugs</li>
                     </ul>
+                    <aside class="notes">
+                        Important distinction: useMemo caches the result, not the function itself. If you forget a dependency, you get stale data. ESLint exhaustive-deps rule helps catch this.
+                    </aside>
                 </section>
 
                 <section>
-                    <h3>Slide 13 – When to Use useMemo</h3>
+                    <h2 class="slide-title">When to Use useMemo</h2>
                     <ul>
                         <li>Expensive calculations used in rendering</li>
                         <li>Dependencies are stable</li>
-                        <li>Skip for simple calculations or premature optimization</li>
+                        <li>Avoid for simple calculations — measure first</li>
                     </ul>
+                    <aside class="notes">
+                        Simple math or string operations don't need useMemo. The overhead of memoization would be greater than the computation itself. Profile first.
+                    </aside>
+                </section>
+
+                <section data-background="linear-gradient(135deg, #0d2137 0%, #0a3040 60%, #0d1f33 100%)">
+                    <div class="demo-slide">
+                        <span class="demo-icon">🛠️</span>
+                        <h2>Demo Time</h2>
+                        <p>useMemo — caching expensive calculations</p>
+                    </div>
+                    <aside class="notes">
+                        Live demo: show useMemo with the filtered product list. Comment out useMemo, show the calculation running on every keystroke. Re-add it and show it only runs when deps change.
+                    </aside>
                 </section>
 
                 <section>
-                    <h3>Slide 14 – Why useCallback Exists</h3>
-                    <ul>
+                    <h2 class="slide-title">Why useCallback Exists</h2>
+                    <div class="split-code" style="margin-left: -8%; margin-right: -8%; font-size: 0.78em;">
+                        <div class="fragment fade-in">
+                            <pre><code class="tsx">
+const ProductTable = memo(({products,  onDelete,}: {
+  products: Product[];
+  onDelete: (id: number) => void;
+}) => {
+  return (
+    &lt;ul&gt;
+      {products.map(p =&gt; (
+        &lt;li key={p.id}&gt;
+          {p.name}
+          &lt;button onClick={() =&gt; onDelete(p.id)}&gt;
+            Remove
+          &lt;/button&gt;
+        &lt;/li&gt;
+      ))}
+    &lt;/ul&gt;
+  );
+});
+                            </code></pre>
+                        </div>
+                        <div class="fragment fade-in">
+                            <pre><code class="tsx">
+function Dashboard({ products }) {
+  const [query, setQuery] = useState("");
+
+  const handleDelete = (id: number) =>
+    console.log("delete", id);
+
+  return (
+    &lt;&gt;
+      &lt;input value={query}
+        onChange={e =&gt; setQuery(e.target.value)}
+      /&gt;
+      &lt;ProductTable
+        products={products}
+        onDelete={handleDelete}
+      /&gt;
+    &lt;/&gt;
+  );
+}
+                            </code></pre>
+                        </div>
+                    </div>
+                    <p class="small-text fragment" style="margin-top:0.6rem;">What is the problem in this code?</p>
+                    <ul class="fragment">
                         <li>Functions are recreated on every render</li>
-                        <li>New function references make props appear changed</li>
+                        <li><code>ProductTable</code> re-renders on every query change</li>
                     </ul>
-                    <pre><code class="tsx">
-const handleClick = () => setCount(count + 1);
-                    </code></pre>
+                    <aside class="notes">
+                        Show the code first and ask students what the issue is. Then reveal: handleDelete is a new function reference every render, so ProductTable always re-renders even though memo wraps it. useCallback solves this.
+                    </aside>
                 </section>
 
                 <section>
-                    <h3>Slide 15 – useCallback Explained</h3>
+                    <h2 class="slide-title">useCallback Explained</h2>
                     <pre><code class="tsx">
 const fn = useCallback(() => {
   /* logic */
 }, [deps]);
                     </code></pre>
                     <p class="small-text">Memoizes a function to keep the same reference between renders.</p>
+                    <aside class="notes">
+                        useCallback returns the same function reference between renders as long as deps haven't changed. It's the function equivalent of useMemo.
+                    </aside>
                 </section>
 
                 <section>
-                    <h3>Slide 16 – useCallback Example</h3>
+                    <h2 class="slide-title">The Fix: useCallback</h2>
                     <pre><code class="tsx">
-const handleClick = useCallback(() => {
-  setCount(prev => prev + 1);
-}, []);
+function Dashboard({ products }: { products: Product[] }) {
+  const [query, setQuery] = useState("");
+
+  // ✅ stable reference — same function every render
+  const handleDelete = useCallback((id: number) => {
+    console.log("delete", id);
+  }, []);
+
+  return (
+    &lt;&gt;
+      &lt;input value={query} onChange={e =&gt; setQuery(e.target.value)} /&gt;
+      &lt;ProductTable products={products} onDelete={handleDelete} /&gt;
+    &lt;/&gt;
+  );
+}
                     </code></pre>
-                    <p class="small-text">Stable function reference; great for memoized children.</p>
+                    <p class="small-text"><code>handleDelete</code> keeps the same reference — <code>ProductTable</code> no longer re-renders on every keystroke.</p>
+                    <aside class="notes">
+                        Wrapping handleDelete in useCallback with an empty deps array means the function reference never changes. ProductTable's memo now works correctly — it only re-renders when products actually change.
+                    </aside>
                 </section>
 
-                <section>
-                    <h3>Slide 17 – React.memo + useCallback Together</h3>
-                    <pre><code class="tsx">
-const Button = React.memo(({ onClick }) => {
-  return <button onClick={onClick}>Click</button>;
-});
-
-const onClick = useCallback(() => {
-  setCount(c => c + 1);
-}, []);
-                    </code></pre>
-                    <p class="small-text">Common pattern: memoized child + stable handler.</p>
+                <section data-background="linear-gradient(135deg, #0d2137 0%, #0a3040 60%, #0d1f33 100%)">
+                    <div class="demo-slide">
+                        <span class="demo-icon">🛠️</span>
+                        <h2>Demo Time</h2>
+                        <p>React.memo + useCallback — Dashboard &amp; ProductTable</p>
+                    </div>
+                    <aside class="notes">
+                        Live demo: Dashboard with search input + memoized ProductTable. Show that typing only re-renders Dashboard, not ProductTable. Remove useCallback and show memo breaks.
+                    </aside>
                 </section>
 
+                <!--
+                LIVE CODE — React.memo + useCallback Together
+
+                // Heavy child — expensive to render (long list of rows)
+                const ProductTable = React.memo(({ products, onDelete }: Props) => {
+                  console.log("ProductTable rendered");
+                  return (
+                    <ul>
+                      {products.map(p => (
+                        <li key={p.id}>{p.name} <button onClick={() => onDelete(p.id)}>Remove</button></li>
+                      ))}
+                    </ul>
+                  );
+                });
+
+                // Parent — owns state unrelated to the table (e.g. a search input)
+                function Dashboard({ products }: { products: Product[] }) {
+                  const [query, setQuery] = useState("");
+
+                  // stable reference — ProductTable won't re-render when query changes
+                  const handleDelete = useCallback((id: number) => {
+                    console.log("delete", id);
+                  }, []);
+
+                  return (
+                    <>
+                      <input value={query} onChange={e => setQuery(e.target.value)} />
+                      <ProductTable products={products} onDelete={handleDelete} />
+                    </>
+                  );
+                }
+                -->
+
                 <section>
-                    <h3>Slide 18 – useMemo vs useCallback</h3>
+                    <h2 class="slide-title">useMemo vs useCallback</h2>
                     <table>
                         <thead><tr><th>useMemo</th><th>useCallback</th></tr></thead>
                         <tbody>
@@ -416,39 +646,52 @@ const onClick = useCallback(() => {
                         </tbody>
                     </table>
                     <p class="small-text">useCallback(fn) is roughly useMemo(() =&gt; fn).</p>
+                    <aside class="notes">
+                        Key mental model: useMemo caches a value, useCallback caches a function. useCallback(fn, deps) is syntactic sugar for useMemo(() => fn, deps).
+                    </aside>
                 </section>
 
                 <section>
-                    <h3>Slide 19 – Common Mistakes</h3>
+                    <h2 class="slide-title">Common Mistakes</h2>
                     <ul>
                         <li>Overusing memo hooks</li>
                         <li>Missing dependencies</li>
                         <li>Optimizing too early</li>
                         <li>Memoizing everything "just in case"</li>
                     </ul>
+                    <aside class="notes">
+                        Common pitfalls: wrapping everything in memo/useMemo adds complexity without benefit. Missing deps leads to stale closures. Always profile before optimizing.
+                    </aside>
                 </section>
 
                 <section>
-                    <h3>Slide 20 – Performance Rules of Thumb</h3>
+                    <h2 class="slide-title">Performance Rules of Thumb</h2>
                     <ul>
-                        <li>React is fast by default</li>
-                        <li>Optimize only real problems</li>
-                        <li>Use DevTools Profiler</li>
+                        <li>React is fast by default — re-renders are cheap for most components</li>
+                        <li>Memoization is <strong>not free</strong>: comparison + memory cost on every render</li>
+                        <li>For cheap components, overhead <em>exceeds</em> the saving</li>
+                        <li>Adds complexity and stale-closure risk</li>
+                        <li>Optimize only <strong>real, measured</strong> problems — use DevTools Profiler</li>
                     </ul>
+                    <aside class="notes">
+                        Key mental model: React re-renders by default because it's simple and correct. Memoization is an opt-in optimization, not a default. Show students the React DevTools Profiler tab — record a session, identify which components re-render and how long they take, then decide what to optimize.
+                    </aside>
                 </section>
 
                 <section>
-                    <h3>Slide 21 – Real-World Example (Summary)</h3>
+                    <h2 class="slide-title">Real-World Example (Summary)</h2>
                     <ul>
                         <li>List component → React.memo</li>
                         <li>Expensive filtering → useMemo</li>
                         <li>Event handlers → useCallback</li>
                     </ul>
+                    <aside class="notes">
+                        Recap the three tools and when to reach for each. In practice, you often combine all three in a single feature.
+                    </aside>
                 </section>
 
                 <section>
                     <div style="display:flex; flex-direction:column; gap:0.8rem;">
-                        <span style="font-size:0.72em; text-transform:uppercase; letter-spacing:0.12em; color:var(--accent);">Module 5 — Performance</span>
                         <h2 style="margin:0; font-size:1.9em; font-weight:800;">React Compiler</h2>
                         <div class="two-col">
                             <div style="display:flex; flex-direction:column; gap:0.6rem;">
@@ -480,13 +723,15 @@ const onClick = useCallback(() => {
                             </div>
                         </div>
                     </div>
+                    <aside class="notes">
+                        React Compiler is the future of performance in React. It analyzes your code at build time and inserts memoization automatically. No runtime cost, no manual work.
+                    </aside>
                 </section>
 
                 <section>
                     <div style="display:flex; flex-direction:column; gap:0.8rem;">
-                        <span style="font-size:0.72em; text-transform:uppercase; letter-spacing:0.12em; color:var(--accent);">Module 5 — Performance</span>
                         <h2 style="margin:0; font-size:1.9em; font-weight:800;">Before the Compiler</h2>
-                        <pre><code class="tsx" data-line-numbers="2-4">
+                        <pre><code class="tsx">
 // Parent.tsx
 function Parent({ value }: { value: number }) {
   const expensive = useMemo(() =&gt; {
@@ -498,14 +743,17 @@ function Parent({ value }: { value: number }) {
                         </code></pre>
                         <p class="small-text">Manual <code>useMemo</code> adds cognitive overhead and boilerplate to every component.</p>
                     </div>
+                    <aside class="notes">
+                        This is what we've been writing all day — manual useMemo everywhere. It works but adds noise. The compiler eliminates this boilerplate.
+                    </aside>
                 </section>
 
                 <section>
-                    <h3>Slide 24 – Example: With React Compiler</h3>
+                    <h2 class="slide-title">With React Compiler</h2>
                     <pre><code class="tsx">
 function Parent({ value }) {
   const expensive = heavyCalculation(value);
-  return <Child data={expensive} />;
+  return &lt;Child data={expensive} /&gt;;
 }
                     </code></pre>
                     <ul>
@@ -513,10 +761,13 @@ function Parent({ value }) {
                         <li>Same performance with cleaner code</li>
                         <li>Compiler tracks dependencies and memoizes</li>
                     </ul>
+                    <aside class="notes">
+                        Same behavior, cleaner code. The compiler figures out what depends on what and memoizes automatically. You write simple code, the compiler optimizes it.
+                    </aside>
                 </section>
 
                                 <section>
-                                        <h3>Slide 25 – How to Add the React Compiler</h3>
+                                        <h2 class="slide-title">How to Add the React Compiler</h2>
                                         <div class="two-col" style="align-items: center;">
                                                 <div style="font-size: 0.9em; text-align: left;">
                                                         <div style="margin-bottom: 1.5rem;">
@@ -547,8 +798,11 @@ export default {
                                                 </div>
                                         </div>
                                         <div style="margin-top: 1.5rem; padding: 0.8rem; background: rgba(97, 218, 251, 0.08); border-radius: 6px; font-size: 0.75em; text-align: left;">
-                                                <p style="margin: 0; color: #aaddff;">💡 <strong>Pro Tip:</strong> Once configured, the compiler automatically memoizes components and hooks—reducing the need for <code>useMemo</code> and <code>useCallback</code>.</p>
+                                                <p style="margin: 0; color: #aaddff;">Once configured, the compiler automatically memoizes components and hooks—reducing the need for <code>useMemo</code> and <code>useCallback</code>.</p>
                                         </div>
+                                        <aside class="notes">
+                                                Two steps: upgrade React and install the babel plugin. Add it to your Vite config and you're done. The compiler handles the rest behind the scenes.
+                                        </aside>
                                 </section>
 
                 <section>
