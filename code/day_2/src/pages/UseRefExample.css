@@ -1,0 +1,252 @@
+.useref-example {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.breadcrumb {
+  margin-bottom: 1.5rem;
+}
+
+.breadcrumb a {
+  color: #61dafb;
+  text-decoration: none;
+  font-size: 0.95em;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  transition: opacity 0.2s;
+}
+
+.breadcrumb a:hover {
+  opacity: 0.8;
+}
+
+.useref-example h1 {
+  color: #61dafb;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 2em;
+}
+
+.info-box {
+  background: rgba(97, 218, 251, 0.15);
+  border: 2px solid rgba(97, 218, 251, 0.4);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.info-box h3 {
+  color: #61dafb;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.info-box p {
+  margin: 0.5rem 0;
+  line-height: 1.6;
+}
+
+.info-box code {
+  background: rgba(0, 0, 0, 0.1);
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+  font-family: monospace;
+  font-size: 0.9em;
+}
+
+.stats-box {
+  background: rgba(97, 218, 251, 0.1);
+  border: 2px solid rgba(97, 218, 251, 0.3);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.stat-label {
+  color: #61dafb;
+  font-size: 0.9em;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-value {
+  font-size: 2.5em;
+  font-weight: 700;
+  color: #fbbf24;
+  font-family: "Courier New", monospace;
+}
+
+.demo-container {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 3rem 2rem;
+  margin-bottom: 2rem;
+  min-height: 200px;
+}
+
+.focus-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.focus-input {
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  border: 3px solid #4b5563;
+  background: rgba(255, 255, 255, 0.9);
+  font-size: 1.2em;
+  width: 100%;
+  max-width: 500px;
+  color: #333;
+  transition: all 0.3s;
+  text-align: center;
+}
+
+.focus-input:focus {
+  outline: none;
+  border-color: #61dafb;
+  box-shadow: 0 0 0 4px rgba(97, 218, 251, 0.3);
+  background: #fff;
+  transform: scale(1.02);
+}
+
+.focus-input.flash-focus {
+  animation: flashBorder 0.5s ease-in-out;
+}
+
+@keyframes flashBorder {
+  0%,
+  100% {
+    border-color: #61dafb;
+    box-shadow: 0 0 0 4px rgba(97, 218, 251, 0.3);
+  }
+  50% {
+    border-color: #fbbf24;
+    box-shadow:
+      0 0 0 8px rgba(251, 191, 36, 0.5),
+      0 0 20px rgba(251, 191, 36, 0.3);
+    transform: scale(1.05);
+  }
+}
+
+.focus-input::placeholder {
+  color: #666;
+  font-size: 0.9em;
+}
+
+.focus-button {
+  padding: 1rem 2rem;
+  background: #0070f3;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.2em;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 12px rgba(0, 112, 243, 0.4);
+  min-width: 250px;
+}
+
+.focus-button:hover {
+  background: #0051cc;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 112, 243, 0.5);
+}
+
+.focus-button:active {
+  transform: translateY(-1px);
+}
+
+.render-button {
+  padding: 1rem 2rem;
+  background: #6b7280;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.2em;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 12px rgba(107, 114, 128, 0.4);
+  min-width: 250px;
+}
+
+.render-button:hover {
+  background: #4b5563;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(107, 114, 128, 0.5);
+}
+
+.render-button:active {
+  transform: translateY(-1px);
+}
+
+.explanation-box {
+  background: rgba(251, 191, 36, 0.1);
+  border: 2px solid rgba(251, 191, 36, 0.3);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-top: 2rem;
+}
+
+.explanation-box p {
+  margin: 0.75rem 0;
+  line-height: 1.6;
+}
+
+.explanation-box .hint {
+  color: #fbbf24;
+  font-style: italic;
+  font-size: 0.95em;
+  margin-top: 1rem;
+}
+
+@media (max-width: 768px) {
+  .useref-example {
+    padding: 1rem;
+  }
+
+  .stats-box {
+    gap: 1rem;
+  }
+
+  .stat-value {
+    font-size: 2em;
+  }
+
+  .focus-container {
+    gap: 1rem;
+  }
+
+  .focus-input {
+    width: 100%;
+    max-width: none;
+    font-size: 1em;
+  }
+
+  .focus-button,
+  .render-button {
+    width: 100%;
+    min-width: auto;
+    font-size: 1em;
+  }
+}

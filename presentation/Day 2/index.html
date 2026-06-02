@@ -2255,6 +2255,7 @@ function UserProfile() {
               >
                 <div
                   style="
+                    font-size: 0.5em;
                     color: #ef4444;
                     font-weight: bold;
                     margin-bottom: 0.5rem;
@@ -2262,7 +2263,7 @@ function UserProfile() {
                 >
                   ❌ Wrong
                 </div>
-                <pre style="margin: 0; font-size: 0.7em"><code>if (loggedIn)
+                <pre style="margin: 0; font-size: 0.5em"><code>if (loggedIn)
   const [state, setState] = useState();</code></pre>
               </div>
               <div
@@ -2275,6 +2276,7 @@ function UserProfile() {
               >
                 <div
                   style="
+                    font-size: 0.5em;
                     color: #22c55e;
                     font-weight: bold;
                     margin-bottom: 0.5rem;
@@ -2283,17 +2285,85 @@ function UserProfile() {
                   ✅ Right
                 </div>
                 <pre
-                  style="margin: 0; font-size: 0.7em"
+                  style="margin: 0; font-size: 0.5em"
                 ><code>const [state, setState] = useState();
 if (loggedIn) { ... }</code></pre>
               </div>
             </div>
           </section>
 
+          <!-- Slide 13b: useEffect - The Swiss Army Knife -->
+          <section>
+            <h3>useEffect: React's Swiss Army Knife</h3>
+            <div style="margin-top: 0.5rem">
+              <div
+                style="
+                  display: flex;
+                  justify-content: center;
+                  margin-bottom: 0.5rem;
+                "
+              >
+                <img
+                  src="https://sunset.com/wp-content/uploads/leatherman-super-tool-pst-unfolded-sun-0521-2.jpg?w=900&h=500&crop=1"
+                  alt="Leatherman Multi-Tool"
+                  style="
+                    width: 400px;
+                    height: auto;
+                    border-radius: 12px;
+                    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+                  "
+                />
+              </div>
+              <div class="card" style="padding: 2rem; font-size: 0.85em">
+                <h5
+                  style="
+                    color: var(--accent);
+                    margin: 0 0 1rem;
+                    text-align: center;
+                  "
+                >
+                  Just like a Leatherman multi-tool...
+                </h5>
+                <ul
+                  style="
+                    font-size: 0.5em;
+                    margin: 0;
+                    padding-left: 2rem;
+                    line-height: 1.3;
+                  "
+                >
+                  <li>
+                    <strong>Versatile:</strong> Handle many different tasks in
+                    one place
+                  </li>
+                  <li>
+                    <strong>Powerful:</strong> Perform complex operations when
+                    needed
+                  </li>
+                  <li>
+                    <strong>Essential:</strong> A core tool in your React
+                    toolkit
+                  </li>
+                  <li>
+                    <strong>Side Effects:</strong> Interact with the outside
+                    world (APIs, timers, DOM, storage)
+                  </li>
+                </ul>
+              </div>
+              <p
+                class="small-text"
+                style="margin-top: 1.5rem; text-align: center"
+              >
+                💡 useEffect is your go-to hook for anything that happens
+                <strong>outside</strong> your component's rendering
+              </p>
+            </div>
+          </section>
+
           <!-- Slide 14: useEffect -->
           <section>
             <h3>useEffect for Side Effects</h3>
-            <div style="text-align: left; font-size: 0.38em; margin-top: 1rem">
+            <div style="text-align: left; font-size: 0.55em; margin-top: 1rem">
               <div class="card" style="margin-bottom: 1rem; padding: 1rem">
                 <h4 style="color: var(--accent); margin: 0 0 0.5rem">
                   What is a side effect?
@@ -2524,9 +2594,7 @@ export function useFetch(url) {
 
           <!-- Slide 18: useRef -->
           <section>
-            <h3>
-              useRef for Mutable References & DOM Access
-            </h3>
+            <h3>useRef for Mutable References & DOM Access</h3>
             <div style="text-align: left; font-size: 0.65em; margin-top: 1rem">
               <div class="card" style="margin-bottom: 1rem; padding: 1rem">
                 <h4 style="color: var(--accent); margin: 0 0 0.5rem">

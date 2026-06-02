@@ -8,6 +8,7 @@ import ConditionalExample from "./pages/ConditionalExample.tsx";
 import UseEffectClock from "./pages/UseEffectClock.tsx";
 import UseEffectFetch from "./pages/UseEffectFetch.tsx";
 import UseEffectBug from "./pages/UseEffectBug.tsx";
+import UseRefExample from "./pages/UseRefExample.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -19,6 +20,7 @@ createRoot(document.getElementById("root")!).render(
         <Route path="/useeffect1" element={<UseEffectClock />} />
         <Route path="/useeffect2" element={<UseEffectFetch />} />
         <Route path="/bug1" element={<UseEffectBug />} />
+        <Route path="/useref" element={<UseRefExample />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>,
