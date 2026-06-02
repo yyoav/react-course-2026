@@ -122,8 +122,9 @@ function App() {
         <nav>
           <Link to="/keys">Keys Example</Link>
           <Link to="/conditional">Conditional Rendering</Link>
-          <Link to="/useeffect1">useEffect 1</Link>
-          <Link to="/useeffect2">useEffect 2</Link>
+          <Link to="/useeffect1">useEffect - Date</Link>
+          <Link to="/useeffect2">useEffect - Fetch</Link>
+          <Link to="/bug1">useEffect - Bug</Link>
         </nav>
       </section>
     </>
