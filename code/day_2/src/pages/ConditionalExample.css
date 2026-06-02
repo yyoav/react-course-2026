@@ -1,0 +1,271 @@
+.conditional-example {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.breadcrumb {
+  margin-bottom: 1.5rem;
+}
+
+.breadcrumb a {
+  color: #61dafb;
+  text-decoration: none;
+  font-size: 0.95em;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  transition: opacity 0.2s;
+}
+
+.breadcrumb a:hover {
+  opacity: 0.8;
+}
+
+.conditional-example h1 {
+  color: #61dafb;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 2em;
+}
+
+.info-box {
+  background: rgba(97, 218, 251, 0.15);
+  border: 2px solid rgba(97, 218, 251, 0.4);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.info-box h3 {
+  color: #61dafb;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.info-box p {
+  margin: 0.5rem 0;
+  line-height: 1.6;
+}
+
+.info-box code {
+  background: rgba(0, 0, 0, 0.1);
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+  font-family: monospace;
+  font-size: 0.9em;
+}
+
+.demo-container {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.user-selector {
+  margin-bottom: 2rem;
+}
+
+.user-selector h3 {
+  color: #61dafb;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.2em;
+}
+
+.user-buttons {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.user-buttons button {
+  background: #6b7280;
+  color: #fff;
+  border: 2px solid #4b5563;
+  padding: 0.75rem 1.25rem;
+  border-radius: 6px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.user-buttons button:hover {
+  background: #4b5563;
+  border-color: #374151;
+}
+
+.user-buttons button.active {
+  background: #61dafb;
+  color: #1a1a1a;
+  border-color: #61dafb;
+  font-weight: 600;
+}
+
+.user-profile-display {
+  display: flex;
+  justify-content: center;
+}
+
+.user-profile {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
+  padding: 2rem 3rem;
+  min-width: 350px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.user-profile h2 {
+  color: #333;
+  margin: 0 0 1.5rem 0;
+  font-size: 2em;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.badge {
+  background: gold;
+  color: #333;
+  padding: 0.3rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.6em;
+  font-weight: bold;
+  box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.user-status {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #ddd;
+}
+
+.user-status p {
+  color: #555;
+  margin: 0;
+  font-size: 1em;
+}
+
+.premium-yes {
+  color: #22c55e;
+  font-weight: bold;
+}
+
+.premium-no {
+  color: #888;
+}
+
+.code-explanation {
+  background: rgba(40, 44, 52, 0.95);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.code-explanation h3 {
+  color: #61dafb;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.code-block {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 6px;
+  padding: 1rem;
+  overflow-x: auto;
+}
+
+.code-block pre {
+  margin: 0;
+  font-family: "Courier New", monospace;
+  font-size: 0.9em;
+  line-height: 1.6;
+}
+
+.code-block code {
+  color: #abb2bf;
+}
+
+.explanation {
+  background: rgba(97, 218, 251, 0.1);
+  border-left: 4px solid #61dafb;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+}
+
+.explanation h3 {
+  color: #61dafb;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.explanation ul {
+  margin: 0;
+  padding-left: 1.5rem;
+  line-height: 1.8;
+}
+
+.explanation li {
+  margin-bottom: 0.75rem;
+}
+
+.explanation code {
+  background: rgba(0, 0, 0, 0.1);
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+  font-family: monospace;
+  font-size: 0.9em;
+}
+
+.comparison-box {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+.comparison-box h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.comparison-box p {
+  margin: 0.5rem 0 1rem;
+  line-height: 1.6;
+  color: #ccc;
+}
+
+@media (max-width: 768px) {
+  .conditional-example {
+    padding: 1rem;
+  }
+
+  .user-profile {
+    min-width: auto;
+    padding: 1.5rem;
+  }
+
+  .user-profile h2 {
+    font-size: 1.5em;
+  }
+
+  .user-buttons {
+    justify-content: center;
+  }
+}

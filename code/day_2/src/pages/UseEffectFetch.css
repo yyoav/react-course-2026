@@ -1,0 +1,271 @@
+.fetch-example {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.breadcrumb {
+  margin-bottom: 1.5rem;
+}
+
+.breadcrumb a {
+  color: #61dafb;
+  text-decoration: none;
+  font-size: 0.95em;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  transition: opacity 0.2s;
+}
+
+.breadcrumb a:hover {
+  opacity: 0.8;
+}
+
+.fetch-example h1 {
+  color: #61dafb;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 2em;
+}
+
+.info-box {
+  background: rgba(97, 218, 251, 0.15);
+  border: 2px solid rgba(97, 218, 251, 0.4);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.info-box h3 {
+  color: #61dafb;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.info-box p {
+  margin: 0.5rem 0;
+  line-height: 1.6;
+}
+
+.info-box code {
+  background: rgba(0, 0, 0, 0.1);
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+  font-family: monospace;
+  font-size: 0.9em;
+}
+
+.demo-container {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.fetch-button {
+  background: #61dafb;
+  color: #1a1a1a;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  font-size: 1.1em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 12px rgba(97, 218, 251, 0.3);
+}
+
+.fetch-button:hover {
+  background: #4fc3f7;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(97, 218, 251, 0.4);
+}
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 3rem;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid rgba(97, 218, 251, 0.2);
+  border-top-color: #61dafb;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading p {
+  color: #61dafb;
+  font-size: 1.1em;
+  margin: 0;
+}
+
+.error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 3rem;
+  padding: 1.5rem;
+  background: rgba(239, 68, 68, 0.1);
+  border: 2px solid rgba(239, 68, 68, 0.4);
+  border-radius: 8px;
+}
+
+.error p {
+  color: #ef4444;
+  font-size: 1.1em;
+  margin: 0;
+}
+
+.character-card {
+  background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+  border-radius: 16px;
+  padding: 2rem;
+  margin-top: 2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  max-width: 500px;
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.character-card h2 {
+  color: #fbbf24;
+  font-size: 2em;
+  margin: 0 0 1.5rem 0;
+  text-align: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.character-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  backdrop-filter: blur(4px);
+}
+
+.detail-row .label {
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 600;
+}
+
+.detail-row .value {
+  color: #fff;
+  font-weight: 400;
+}
+
+.code-explanation {
+  background: rgba(40, 44, 52, 0.95);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.code-explanation h3 {
+  color: #61dafb;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.code-block {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 6px;
+  padding: 1rem;
+  overflow-x: auto;
+}
+
+.code-block pre {
+  margin: 0;
+  font-family: "Courier New", monospace;
+  font-size: 0.9em;
+  line-height: 1.6;
+}
+
+.code-block code {
+  color: #abb2bf;
+}
+
+.explanation {
+  background: rgba(97, 218, 251, 0.1);
+  border-left: 4px solid #61dafb;
+  padding: 1.5rem;
+  border-radius: 8px;
+}
+
+.explanation h3 {
+  color: #61dafb;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.explanation ul {
+  margin: 0;
+  padding-left: 1.5rem;
+  line-height: 1.8;
+}
+
+.explanation li {
+  margin-bottom: 0.75rem;
+}
+
+.explanation code {
+  background: rgba(0, 0, 0, 0.1);
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+  font-family: monospace;
+  font-size: 0.9em;
+}
+
+@media (max-width: 768px) {
+  .fetch-example {
+    padding: 1rem;
+  }
+
+  .character-card {
+    padding: 1.5rem;
+  }
+
+  .character-card h2 {
+    font-size: 1.5em;
+  }
+
+  .detail-row {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+}
