@@ -9,6 +9,7 @@ import UseEffectClock from "./pages/UseEffectClock.tsx";
 import UseEffectFetch from "./pages/UseEffectFetch.tsx";
 import UseEffectBug from "./pages/UseEffectBug.tsx";
 import UseRefExample from "./pages/UseRefExample.tsx";
+import ReconciliationDemo from "./pages/ReconciliationDemo.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -21,6 +22,7 @@ createRoot(document.getElementById("root")!).render(
         <Route path="/useeffect2" element={<UseEffectFetch />} />
         <Route path="/bug1" element={<UseEffectBug />} />
         <Route path="/useref" element={<UseRefExample />} />
+        <Route path="/reconciliation" element={<ReconciliationDemo />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>,

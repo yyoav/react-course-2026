@@ -126,6 +126,7 @@ function App() {
           <Link to="/useeffect2">useEffect - Fetch</Link>
           <Link to="/bug1">useEffect - Bug</Link>
           <Link to="/useref">useRef</Link>
+          <Link to="/reconciliation">Reconciliation Demo</Link>
         </nav>
       </section>
     </>

@@ -2084,8 +2084,14 @@ function UserProfile() {
             <aside class="notes">
               <strong>Importance of Keys in Reconciliation:</strong>
               <ul>
-                <li><strong>Keys</strong> allow React to match elements between renders, making diffing fast and accurate.</li>
-                <li>Without keys, React may re-render the whole list even if only one item changed.</li>
+                <li>
+                  <strong>Keys</strong> allow React to match elements between
+                  renders, making diffing fast and accurate.
+                </li>
+                <li>
+                  Without keys, React may re-render the whole list even if only
+                  one item changed.
+                </li>
               </ul>
             </aside>
           </section>
@@ -2112,50 +2118,68 @@ function UserProfile() {
             </div>
           </section>
 
-          <!-- Slide 12: Example Concept -->
+          <!-- Slide 12: Exercise Demo -->
           <section>
-            <h3>Reconciliation in Action</h3>
+            <h3>Exercise — Demo 🛠️</h3>
             <div
               class="card"
-              style="margin-top: 2rem; padding: 2rem; text-align: center"
-            >
-              <h4 style="color: var(--accent); margin: 0 0 1.5rem">
-                Example Concept
-              </h4>
-              <p style="font-size: 1.1em; margin: 0; line-height: 1.6">
-                If a list of
-                <strong style="color: var(--accent)">10 items</strong> changes
-                only the
-                <strong style="color: var(--accent)">3rd item</strong>,<br />
-                React updates
-                <strong style="color: var(--accent)">only that element</strong>,
-                not all 10.
-              </p>
-            </div>
-            <div
               style="
                 margin-top: 2rem;
-                display: flex;
-                justify-content: center;
-                gap: 0.5rem;
-                align-items: center;
-                font-size: 2em;
+                padding: 2.5rem;
+                text-align: center;
+                background: var(--accent-soft);
               "
             >
-              <span style="opacity: 0.3">📄</span>
-              <span style="opacity: 0.3">📄</span>
-              <span style="color: var(--accent); opacity: 1">📄</span>
-              <span style="opacity: 0.3">📄</span>
-              <span style="opacity: 0.3">📄</span>
-              <span style="opacity: 0.3">📄</span>
-              <span style="opacity: 0.3">📄</span>
-              <span style="opacity: 0.3">📄</span>
-              <span style="opacity: 0.3">📄</span>
-              <span style="opacity: 0.3">📄</span>
+              <p
+                style="
+                  font-size: 1.2em;
+                  margin: 0 0 1rem;
+                  color: var(--accent);
+                  font-weight: bold;
+                "
+              >
+                Open the live demo in the course app
+              </p>
+              <p
+                style="
+                  font-size: 0.9em;
+                  margin: 0;
+                  color: var(--text-soft);
+                  line-height: 1.6;
+                "
+              >
+                Route: <code style="color: var(--accent)">/reconciliation</code>
+              </p>
             </div>
+            <aside class="notes">
+              <strong>🔍 What to observe with React DevTools:</strong>
+              <ol>
+                <li>Open DevTools → <strong>Elements</strong> tab</li>
+                <li>
+                  Expand the DOM: find <code>.recon-card</code> →
+                  <code>.recon-row--active</code> →
+                  <code>.recon-row__value--highlight</code>
+                </li>
+                <li>
+                  Click <strong>+ Increment</strong> — only the
+                  <strong>text node</strong> inside
+                  <code>.recon-row__value--highlight</code> flashes (Chrome
+                  highlights mutations in purple/yellow)
+                </li>
+                <li>
+                  Point to the three static rows above —
+                  <strong>none of them flash</strong>, even though React re-ran
+                  the entire component
+                </li>
+                <li>
+                  Key message: React rebuilt the whole Virtual DOM tree on every
+                  click, but only committed <strong>one text node</strong>
+                  to the real DOM — the parts that didn't change were skipped.
+                  That's the diffing algorithm in action.
+                </li>
+              </ol>
+            </aside>
           </section>
-
-          <!-- Slide 13: Why Hooks Exist -->
           <section>
             <h3>Why Hooks Exist ?</h3>
             <div style="text-align: left; font-size: 0.45em; margin-top: 2rem">
