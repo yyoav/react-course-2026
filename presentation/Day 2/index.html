@@ -428,32 +428,29 @@
             <h3>Why .map() is used in React</h3>
             <div style="text-align: left; font-size: 0.85em; margin-top: 1rem">
               <div class="card" style="margin-bottom: 1rem">
-                <ul style="margin: 0; padding-left: 1.5rem">
-                  <li>
+                <ul style="margin: 0; padding-left: 1.5rem; line-height: 1.8">
+                  <li style="margin-bottom: 1rem">
                     In React, you rarely manually create repetitive HTML.
                     Instead, we use JavaScript arrays and <code>.map()</code> to
                     generate lists dynamically.
                   </li>
-                  <li>
+                  <li style="margin-bottom: 1rem">
                     <code>.map()</code> iterates through an array and returns a
                     JSX element for each item.
-                  </li>
-                  <li>
-                    <strong>Example analogy:</strong> Think of a bakery conveyor
-                    belt – each item (JSX) is created from a recipe (array
-                    item).
                   </li>
                 </ul>
               </div>
             </div>
-            <p class="small-text" style="margin-top: 1rem">
-              💡 Let's see the wrong way vs the correct way
-            </p>
+
+            <aside class="notes">
+              <strong>Example analogy:</strong> Think of a bakery conveyor belt
+              – each item (JSX) is created from a recipe (array item).
+            </aside>
           </section>
 
           <!-- Slide 3c: Example - Product Gallery Right Way -->
           <section>
-            <h3>Example: Product Gallery - ✅ Right Way</h3>
+            <h4>Example: Product Gallery - ✅ Right Way</h4>
             <div class="two-col" style="margin-top: 1rem">
               <div>
                 <div
@@ -476,44 +473,11 @@ function ProductGallery() {
         &lt;div key={product.id} className="product"&gt;
           &lt;span className="icon"&gt;{product.icon}&lt;/span&gt;
           &lt;h3&gt;{product.name}&lt;/h3&gt;
-          &lt;p&gt;${product.price}&lt;/p&gt;
+          &lt;p&gt;{product.price}&lt;/p&gt;
         &lt;/div&gt;
       ))}
     &lt;/div&gt;
   );
-}</code></pre>
-              </div>
-              <div>
-                <div
-                  class="small-text"
-                  style="margin-bottom: 0.5rem; color: var(--accent)"
-                >
-                  CSS
-                </div>
-                <pre><code class="language-css">.gallery {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
-
-  .product {
-    padding: 1rem;
-    background: #f5f5f5;
-    border-radius: 8px;
-    text-align: center;
-
-    .icon {
-      font-size: 2rem;
-    }
-
-    h3 {
-      margin: 0.5rem 0;
-    }
-
-    p {
-      color: #0070f3;
-      font-weight: bold;
-    }
-  }
 }</code></pre>
               </div>
             </div>
