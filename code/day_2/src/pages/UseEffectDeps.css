@@ -65,7 +65,10 @@
   color: #c8d2de;
   font-size: 0.85rem;
   cursor: pointer;
-  transition: background 0.15s, border-color 0.15s, color 0.15s;
+  transition:
+    background 0.15s,
+    border-color 0.15s,
+    color 0.15s;
 }
 
 .deps-btn:hover {
@@ -83,30 +86,35 @@
 
 /* Card */
 .deps-card {
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
+  background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+  border-radius: 16px;
   overflow: hidden;
+  padding: 2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
 .deps-card h2 {
-  margin: 0;
-  padding: 1rem 1.25rem;
-  font-size: 1.2rem;
-  color: #61dafb;
-  background: rgba(97, 218, 251, 0.08);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  margin: 0 0 1.5rem;
+  font-size: 1.8rem;
+  color: #fbbf24;
+  text-align: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .deps-rows {
   display: flex;
   flex-direction: column;
+  gap: 0.5rem;
 }
 
 .deps-row {
   display: flex;
   justify-content: space-between;
-  padding: 0.65rem 1.25rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  backdrop-filter: blur(4px);
+  border-bottom: none;
 }
 
 .deps-row:last-child {
@@ -114,10 +122,11 @@
 }
 
 .deps-row__label {
-  font-size: 0.78rem;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: normal;
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .deps-row__value {
