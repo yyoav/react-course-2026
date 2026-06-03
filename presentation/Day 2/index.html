@@ -1856,7 +1856,7 @@ export default function TaskList() {
 
           <!-- Slide 9: Exercise - Premium Badge -->
           <section>
-            <h3>Exercise - Demo</h3>
+            <h3>Exercise — Demo 🛠️</h3>
             <div
               class="card"
               style="margin-top: 2rem; padding: 2rem; text-align: center"
@@ -2224,46 +2224,28 @@ function UserProfile() {
           <!-- Slide 13a: Rules of Hooks -->
           <section>
             <h3>Rules of Hooks</h3>
-            <div style="text-align: left; font-size: 0.43em; margin-top: 1rem">
-              <div class="card" style="margin-bottom: 1rem; padding: 1.5rem">
-                <h4 style="color: var(--accent); margin: 0 0 1rem">
-                  The Rules
-                </h4>
-                <ol style="margin: 0; padding-left: 1.5rem; line-height: 1.8">
-                  <li style="margin-bottom: 0.8rem">
-                    <strong>Call Hooks at the top level:</strong> Don't put
-                    Hooks inside loops, conditions, or nested functions. This
-                    ensures that Hooks are called in the same order every
-                    render.
-                  </li>
-                  <li style="margin-bottom: 0.8rem">
-                    <strong>Call Hooks only in React functions:</strong> Only
-                    inside functional components or custom hooks.
-                  </li>
-                  <li>
-                    <strong>Hooks order must stay the same:</strong> Changing
-                    order will break React's internal tracking of state and
-                    effects.
-                  </li>
-                </ol>
-              </div>
-
-              <div class="card" style="padding: 1.5rem">
-                <h4 style="color: var(--accent); margin: 0 0 0.8rem">
-                  Common mistakes
-                </h4>
-                <ul style="margin: 0; padding-left: 1.5rem">
-                  <li>Calling <code>useState</code> inside if statements.</li>
-                  <li>Using Hooks inside non-component functions.</li>
-                </ul>
-              </div>
+            <div style="text-align: left; font-size: 0.8em; margin-top: 1.5rem">
+              <ul style="margin: 0; padding-left: 1.5rem; line-height: 2">
+                <li>
+                  🔝 Call Hooks <strong>at the top level</strong> — not inside
+                  loops or conditions
+                </li>
+                <li>
+                  ⚛️ Call Hooks <strong>only in React functions</strong> —
+                  components or custom hooks
+                </li>
+                <li>
+                  🔢 <strong>Order must stay the same</strong> on every render
+                </li>
+              </ul>
             </div>
             <div
               style="
-                margin-top: 1rem;
+                margin-top: 1.5rem;
                 display: grid;
                 grid-template-columns: 1fr 1fr;
                 gap: 1rem;
+                font-size: 0.75em;
               "
             >
               <div
@@ -2276,7 +2258,6 @@ function UserProfile() {
               >
                 <div
                   style="
-                    font-size: 0.5em;
                     color: #ef4444;
                     font-weight: bold;
                     margin-bottom: 0.5rem;
@@ -2284,8 +2265,8 @@ function UserProfile() {
                 >
                   ❌ Wrong
                 </div>
-                <pre style="margin: 0; font-size: 0.5em"><code>if (loggedIn)
-  const [state, setState] = useState();</code></pre>
+                <pre style="margin: 0"><code>if (loggedIn)
+  const [s, setS] = useState();</code></pre>
               </div>
               <div
                 style="
@@ -2297,7 +2278,6 @@ function UserProfile() {
               >
                 <div
                   style="
-                    font-size: 0.5em;
                     color: #22c55e;
                     font-weight: bold;
                     margin-bottom: 0.5rem;
@@ -2305,12 +2285,25 @@ function UserProfile() {
                 >
                   ✅ Right
                 </div>
-                <pre
-                  style="margin: 0; font-size: 0.5em"
-                ><code>const [state, setState] = useState();
+                <pre style="margin: 0"><code>const [s, setS] = useState();
 if (loggedIn) { ... }</code></pre>
               </div>
             </div>
+            <aside class="notes">
+              <strong>Why order matters:</strong> React tracks hook state by
+              call order (1st useState → slot 0, 2nd → slot 1…). If a hook is
+              inside an <code>if</code>, it may be skipped on some renders,
+              shifting all subsequent slots and corrupting state. <br /><br />
+              <strong>Common mistakes to highlight:</strong>
+              <ul>
+                <li>
+                  Calling <code>useState</code> inside an
+                  <code>if</code> statement
+                </li>
+                <li>Using hooks inside regular (non-component) functions</li>
+                <li>Calling a hook inside a <code>.map()</code> callback</li>
+              </ul>
+            </aside>
           </section>
 
           <!-- Slide 13b: useEffect - The Swiss Army Knife -->
@@ -2321,7 +2314,7 @@ if (loggedIn) { ... }</code></pre>
                 style="
                   display: flex;
                   justify-content: center;
-                  margin-bottom: 0.5rem;
+                  margin-bottom: 1rem;
                 "
               >
                 <img
@@ -2335,168 +2328,299 @@ if (loggedIn) { ... }</code></pre>
                   "
                 />
               </div>
-              <div class="card" style="padding: 2rem; font-size: 0.85em">
-                <h5
-                  style="
-                    color: var(--accent);
-                    margin: 0 0 1rem;
-                    text-align: center;
-                  "
-                >
-                  Just like a Leatherman multi-tool...
-                </h5>
-                <ul
-                  style="
-                    font-size: 0.5em;
-                    margin: 0;
-                    padding-left: 2rem;
-                    line-height: 1.3;
-                  "
-                >
-                  <li>
-                    <strong>Versatile:</strong> Handle many different tasks in
-                    one place
-                  </li>
-                  <li>
-                    <strong>Powerful:</strong> Perform complex operations when
-                    needed
-                  </li>
-                  <li>
-                    <strong>Essential:</strong> A core tool in your React
-                    toolkit
-                  </li>
-                  <li>
-                    <strong>Side Effects:</strong> Interact with the outside
-                    world (APIs, timers, DOM, storage)
-                  </li>
-                </ul>
-              </div>
               <p
                 class="small-text"
-                style="margin-top: 1.5rem; text-align: center"
+                style="margin-top: 1rem; text-align: center; font-size: 1em"
               >
                 💡 useEffect is your go-to hook for anything that happens
                 <strong>outside</strong> your component's rendering
               </p>
             </div>
+            <aside class="notes">
+              <strong>Just like a Leatherman multi-tool...</strong>
+              <ul>
+                <li>
+                  <strong>Versatile:</strong> Handle many different tasks in one
+                  place
+                </li>
+                <li>
+                  <strong>Powerful:</strong> Perform complex operations when
+                  needed
+                </li>
+                <li>
+                  <strong>Essential:</strong> A core tool in your React toolkit
+                </li>
+                <li>
+                  <strong>Side Effects:</strong> Interact with the outside world
+                  — APIs, timers, DOM, storage
+                </li>
+              </ul>
+            </aside>
           </section>
 
           <!-- Slide 14: useEffect -->
           <section>
             <h3>useEffect for Side Effects</h3>
-            <div style="text-align: left; font-size: 0.55em; margin-top: 1rem">
-              <div class="card" style="margin-bottom: 1rem; padding: 1rem">
-                <h4 style="color: var(--accent); margin: 0 0 0.5rem">
-                  What is a side effect?
-                </h4>
-                <p style="margin: 0 0 0.5rem">
-                  Any operation that interacts outside the component or affects
-                  something outside its scope.
-                </p>
-                <p style="margin: 0">
-                  <strong>Examples:</strong> Fetching data, timers,
-                  subscriptions, manual DOM manipulation.
-                </p>
-              </div>
 
-              <div class="card" style="margin-bottom: 1rem; padding: 1rem">
-                <h4 style="color: var(--accent); margin: 0 0 0.5rem">
-                  When does useEffect run?
-                </h4>
-                <ul style="margin: 0; padding-left: 1.5rem">
-                  <li>After the component renders.</li>
-                  <li>
-                    With dependencies, it runs only when those dependencies
-                    change.
-                  </li>
-                  <li>
-                    Empty dependency array <code>[]</code> → runs once after
-                    first render (similar to componentDidMount in class
-                    components).
-                  </li>
-                </ul>
-              </div>
-
-              <div class="card" style="padding: 1rem">
-                <h4 style="color: var(--accent); margin: 0 0 0.5rem">
-                  Cleanup function
-                </h4>
-                <ul style="margin: 0; padding-left: 1.5rem">
-                  <li>
-                    Return a function from <code>useEffect</code> to clean up
-                    resources like intervals, subscriptions, or event listeners.
-                  </li>
-                  <li>Prevents memory leaks.</li>
-                </ul>
-              </div>
-            </div>
-            <p class="small-text" style="margin-top: 1rem">
-              💡 Show example with timer: effect sets interval → cleanup clears
-              interval
-            </p>
-          </section>
-
-          <!-- Slide 15: Example - Clock Explanation -->
-          <section>
-            <h3>Example: Clock with useEffect</h3>
+            <!-- Annotated signature -->
             <div
-              style="text-align: left; font-size: 0.38em; margin-top: 1.5rem"
+              style="
+                margin-top: 2rem;
+                font-size: 0.7em;
+                font-family: monospace;
+                text-align: left;
+              "
             >
-              <div class="card" style="padding: 1.5rem; margin-bottom: 1.5rem">
-                <h4 style="color: var(--accent); margin: 0 0 1rem">
-                  🎯 What this example demonstrates
-                </h4>
-                <ul
-                  style="
-                    margin: 0;
-                    padding-left: 1.5rem;
-                    line-height: 1.8;
-                    font-size: 1.05em;
-                  "
-                >
-                  <li style="margin-bottom: 0.8rem">
-                    <strong style="color: var(--accent)"
-                      >useEffect with setInterval:</strong
-                    >
-                    Updates the time every second
-                  </li>
-                  <li style="margin-bottom: 0.8rem">
-                    <strong style="color: var(--accent)"
-                      >Empty dependency array []:</strong
-                    >
-                    Effect runs once after initial render, then the interval
-                    keeps running
-                  </li>
-                  <li style="margin-bottom: 0.8rem">
-                    <strong style="color: var(--accent)"
-                      >Cleanup function:</strong
-                    >
-                    Returns a function that clears the interval when component
-                    unmounts
-                  </li>
-                  <li>
-                    <strong style="color: var(--accent)"
-                      >Prevents memory leaks:</strong
-                    >
-                    Without cleanup, the interval would keep running even after
-                    component is removed
-                  </li>
-                </ul>
-              </div>
               <div
                 style="
-                  text-align: center;
-                  padding: 0.8rem;
-                  background: var(--accent-soft);
-                  border-radius: 8px;
+                  display: flex;
+                  align-items: flex-start;
+                  gap: 0.5rem;
+                  flex-wrap: nowrap;
                 "
               >
-                <strong style="color: var(--accent)">Next:</strong>
-                <span style="color: var(--text-soft)"
-                  >Let's see the code implementation →</span
+                <span style="color: #c8d2de; white-space: nowrap"
+                  >useEffect(</span
+                >
+
+                <!-- Box 1: effect function -->
+                <div
+                  style="
+                    border: 2px solid #61dafb;
+                    border-radius: 8px;
+                    padding: 0.4rem 0.8rem;
+                    background: rgba(97, 218, 251, 0.08);
+                    white-space: nowrap;
+                  "
+                >
+                  <div
+                    style="
+                      font-size: 0.7em;
+                      color: #61dafb;
+                      margin-bottom: 0.3rem;
+                      font-family: sans-serif;
+                      font-weight: bold;
+                    "
+                  >
+                    ① effect
+                  </div>
+                  <span style="color: #fff">() =&gt; &#123;</span><br />
+                  <span style="color: #c8d2de">&nbsp;&nbsp;// side effect</span
+                  ><br />
+
+                  <!-- Box 3: cleanup -->
+                  <div
+                    style="
+                      display: inline-block;
+                      margin-top: 0.3rem;
+                      border: 2px solid #f97316;
+                      border-radius: 6px;
+                      padding: 0.3rem 0.6rem;
+                      background: rgba(249, 115, 22, 0.08);
+                    "
+                  >
+                    <div
+                      style="
+                        font-size: 0.7em;
+                        color: #f97316;
+                        margin-bottom: 0.2rem;
+                        font-family: sans-serif;
+                        font-weight: bold;
+                      "
+                    >
+                      ③ cleanup
+                    </div>
+                    <span style="color: #fff"
+                      >return () =&gt; &#123; /* cleanup */ &#125;</span
+                    >
+                  </div>
+                  <br />
+                  <span style="color: #fff">&#125;</span>
+                </div>
+
+                <span style="color: #c8d2de; white-space: nowrap">,&nbsp;</span>
+
+                <!-- Box 2: dependencies -->
+                <div
+                  style="
+                    border: 2px solid #22c55e;
+                    border-radius: 8px;
+                    padding: 0.4rem 0.8rem;
+                    background: rgba(34, 197, 94, 0.08);
+                    white-space: nowrap;
+                    align-self: center;
+                  "
+                >
+                  <div
+                    style="
+                      font-size: 0.7em;
+                      color: #22c55e;
+                      margin-bottom: 0.3rem;
+                      font-family: sans-serif;
+                      font-weight: bold;
+                    "
+                  >
+                    ② deps
+                  </div>
+                  <span style="color: #fff">[dep1, dep2]</span>
+                </div>
+
+                <span style="color: #c8d2de; white-space: nowrap">)</span>
+              </div>
+
+              <!-- Legend -->
+              <div
+                style="
+                  display: flex;
+                  gap: 1.5rem;
+                  margin-top: 1.5rem;
+                  font-family: sans-serif;
+                  font-size: 0.85em;
+                "
+              >
+                <span
+                  ><span style="color: #61dafb">①</span> Runs after render</span
+                >
+                <span
+                  ><span style="color: #22c55e">②</span> <code>[]</code> = once
+                  &nbsp;|&nbsp; <code>[val]</code> = on change &nbsp;|&nbsp;
+                  omit = every render</span
+                >
+                <span
+                  ><span style="color: #f97316">③</span> Runs on unmount /
+                  before next effect</span
                 >
               </div>
             </div>
+
+            <aside class="notes">
+              <strong>What is a side effect?</strong>
+              Any operation that interacts outside the component or affects
+              something outside its scope. Examples: fetching data, timers,
+              subscriptions, manual DOM manipulation.
+              <br /><br />
+              <strong>When does useEffect run?</strong>
+              <ul>
+                <li>After every render (no dep array)</li>
+                <li>
+                  Only when listed dependencies change (<code>[dep1, dep2]</code
+                  >)
+                </li>
+                <li>
+                  Once after first render only (<code>[]</code>) — equivalent to
+                  <code>componentDidMount</code>
+                </li>
+              </ul>
+              <strong>Cleanup function:</strong>
+              Return a function from useEffect to clean up resources like
+              intervals, subscriptions, or event listeners — prevents memory
+              leaks.
+              <br /><br />
+              <strong>Demo idea:</strong> effect sets <code>setInterval</code> →
+              cleanup calls <code>clearInterval</code>.
+            </aside>
+          </section>
+
+          <!-- Slide 15: useEffect highlights -->
+          <section>
+            <h3>useEffect — Key Points</h3>
+            <div
+              style="text-align: left; font-size: 0.82em; margin-top: 1.5rem"
+            >
+              <ul style="padding-left: 1.5rem; line-height: 2.2">
+                <li>
+                  ⏱️ Runs <strong>after</strong> the component renders — never
+                  during
+                </li>
+                <li>
+                  🔁 <code>[]</code> → once &nbsp;|&nbsp; <code>[val]</code> →
+                  when <em>val</em> changes &nbsp;|&nbsp; no array → every
+                  render
+                </li>
+                <li>
+                  🧹 Return a function to <strong>clean up</strong> (clear
+                  timers, unsubscribe…)
+                </li>
+                <li>
+                  🚫 No cleanup = <strong>memory leak</strong> if the component
+                  unmounts
+                </li>
+              </ul>
+            </div>
+            <aside class="notes">
+              Walk through each point with the clock example in mind:
+              <ul>
+                <li>
+                  <strong>setInterval</strong> starts the clock → dep array
+                  <code>[]</code> means it runs once
+                </li>
+                <li>
+                  <strong>Cleanup</strong> calls <code>clearInterval</code> when
+                  the component is removed from the tree
+                </li>
+                <li>
+                  Without cleanup the interval keeps ticking even after unmount
+                  — classic memory leak
+                </li>
+              </ul>
+            </aside>
+          </section>
+
+          <!-- Slide 15a: Exercise Demo -->
+          <section>
+            <h3>Exercise — Demo 🛠️</h3>
+            <div
+              class="card"
+              style="
+                margin-top: 2rem;
+                padding: 2.5rem;
+                text-align: center;
+                background: var(--accent-soft);
+              "
+            >
+              <p
+                style="
+                  font-size: 1.2em;
+                  margin: 0 0 1rem;
+                  color: var(--accent);
+                  font-weight: bold;
+                "
+              >
+                Open the live demo in the course app
+              </p>
+              <p
+                style="
+                  font-size: 0.9em;
+                  margin: 0;
+                  color: var(--text-soft);
+                  line-height: 1.6;
+                "
+              >
+                Pages:
+                <code style="color: var(--accent)">UseEffectClock</code>
+                &nbsp;/&nbsp;
+                <code style="color: var(--accent)">UseEffectFetch</code>
+                &nbsp;/&nbsp;
+                <code style="color: var(--accent)">UseEffectBug</code>
+              </p>
+            </div>
+            <aside class="notes">
+              Show three pages from the day_2 course app:
+              <ul>
+                <li>
+                  <strong>UseEffectClock</strong> — setInterval + cleanup, watch
+                  the interval fire in console
+                </li>
+                <li>
+                  <strong>UseEffectFetch</strong> — fetch inside useEffect with
+                  loading state
+                </li>
+                <li>
+                  <strong>UseEffectBug</strong> — missing dep array → infinite
+                  loop; add <code>[]</code> to fix it
+                </li>
+              </ul>
+            </aside>
           </section>
 
           <!-- Slide 15a: Example - Clock Code -->

@@ -1,0 +1,126 @@
+.deps-page {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: sans-serif;
+}
+
+.breadcrumb {
+  margin-bottom: 1.5rem;
+}
+
+.breadcrumb a {
+  color: #61dafb;
+  text-decoration: none;
+  font-size: 0.95em;
+}
+
+.breadcrumb a:hover {
+  opacity: 0.8;
+}
+
+.deps-page h1 {
+  color: #61dafb;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.6em;
+}
+
+/* Hint bar */
+.deps-hint {
+  background: rgba(97, 218, 251, 0.08);
+  border: 1px solid rgba(97, 218, 251, 0.25);
+  border-radius: 8px;
+  padding: 0.75rem 1.1rem;
+  font-size: 0.85rem;
+  color: #c8d2de;
+  margin-bottom: 1.5rem;
+}
+
+.deps-hint code {
+  font-size: 1em;
+  color: #fff;
+}
+
+.deps-hint__var {
+  color: #61dafb;
+  font-weight: bold;
+}
+
+/* Buttons */
+.deps-buttons {
+  display: flex;
+  gap: 0.6rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.deps-btn {
+  flex: 1;
+  padding: 0.6rem 1rem;
+  min-width: 90px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  color: #c8d2de;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.deps-btn:hover {
+  background: rgba(97, 218, 251, 0.1);
+  border-color: #61dafb;
+  color: #fff;
+}
+
+.deps-btn--active {
+  background: rgba(97, 218, 251, 0.15);
+  border-color: #61dafb;
+  color: #61dafb;
+  font-weight: 700;
+}
+
+/* Card */
+.deps-card {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.deps-card h2 {
+  margin: 0;
+  padding: 1rem 1.25rem;
+  font-size: 1.2rem;
+  color: #61dafb;
+  background: rgba(97, 218, 251, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.deps-rows {
+  display: flex;
+  flex-direction: column;
+}
+
+.deps-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.65rem 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.deps-row:last-child {
+  border-bottom: none;
+}
+
+.deps-row__label {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.deps-row__value {
+  font-size: 0.95rem;
+  color: #fff;
+}
