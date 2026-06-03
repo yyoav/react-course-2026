@@ -45,7 +45,7 @@ function ConditionalExample() {
           <div className="user-buttons">
             {users.map((user, index) => (
               <button
-                key={index}
+                key={`${index}-${user.name}`}
                 onClick={() => setSelectedUser(user)}
                 className={selectedUser.name === user.name ? "active" : ""}
               >

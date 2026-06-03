@@ -9,10 +9,10 @@ function UseRefExample() {
     inputRef.current?.focus();
 
     // Add visual flash effect
-    inputRef.current?.classList.add("flash-focus");
-    setTimeout(() => {
-      inputRef.current?.classList.remove("flash-focus");
-    }, 500);
+    // inputRef.current?.classList.add("flash-focus");
+    // setTimeout(() => {
+    //   inputRef.current?.classList.remove("flash-focus");
+    // }, 500);
   };
 
   return (
