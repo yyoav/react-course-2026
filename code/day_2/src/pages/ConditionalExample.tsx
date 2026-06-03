@@ -12,7 +12,7 @@ const sampleUsers: User[] = [
   { name: "Sarah", isPremium: false },
   { name: "David", isPremium: false },
   { name: "Rachel", isPremium: false },
-  { name: "Michael", isPremium: false },
+  { name: "Yoav", isPremium: true },
 ];
 
 function ConditionalExample() {

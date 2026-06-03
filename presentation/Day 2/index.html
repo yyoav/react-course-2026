@@ -1800,6 +1800,11 @@ export default function TaskList() {
                 </div>
               </div>
             </div>
+            <aside class="notes">
+              A classical situation to use <strong>&&</strong> is when we want
+              to display a modal — show the modal component or nothing (the
+              backdrop or null).
+            </aside>
           </section>
 
           <!-- Slide 7d2: Ternary vs Logical AND - Examples -->
@@ -1834,7 +1839,10 @@ export default function TaskList() {
       {isLoggedIn ? (
         &lt;h1&gt;Welcome back!&lt;/h1&gt;
       ) : (
-        &lt;h1&gt;Please log in&lt;/h1&gt;
+        &lt;div className="login-prompt"&gt;
+          &lt;img src="/lock-icon.svg" alt="Login" /&gt;
+          &lt;p&gt;Please log in to continue&lt;/p&gt;
+        &lt;/div&gt;
       )}
       {isLoggedIn && (
         &lt;p&gt;You have new notifications!&lt;/p&gt;
@@ -1848,7 +1856,7 @@ export default function TaskList() {
 
           <!-- Slide 9: Exercise - Premium Badge -->
           <section>
-            <h3>Exercise</h3>
+            <h3>Exercise - Demo</h3>
             <div
               class="card"
               style="margin-top: 2rem; padding: 2rem; text-align: center"
@@ -2073,11 +2081,18 @@ function UserProfile() {
                 </div>
               </div>
             </div>
+            <aside class="notes">
+              <strong>Importance of Keys in Reconciliation:</strong>
+              <ul>
+                <li><strong>Keys</strong> allow React to match elements between renders, making diffing fast and accurate.</li>
+                <li>Without keys, React may re-render the whole list even if only one item changed.</li>
+              </ul>
+            </aside>
           </section>
 
           <!-- Slide 11b: Keys in Reconciliation -->
           <section>
-            <h3>Importance of Keys in Reconciliation</h3>
+            <h3>Importance of Keys in Reconciliation-- DELETED</h3>
             <div
               style="text-align: left; font-size: 0.85em; margin-top: 1.5rem"
             >
