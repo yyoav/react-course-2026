@@ -1305,78 +1305,152 @@ function ProductGallery() {
           <!-- Slide 3f: Best Practices for Keys -->
           <section>
             <h3>Best Practices for Keys</h3>
-            <div style="text-align: left; font-size: 0.6em; margin-top: 1rem">
-              <div class="card" style="margin-bottom: 1rem">
-                <h4 style="color: var(--accent); margin: 0 0 0.5rem">
-                  ✅ Do's
-                </h4>
-                <ul style="margin: 0; padding-left: 1.5rem">
-                  <li>
-                    <strong>Use unique IDs from your data</strong> (from API or
-                    database)
-                    <pre
-                      style="margin: 0.5rem 0 0; font-size: 0.85em"
-                    ><code>key={item.id}</code></pre>
-                  </li>
-                  <li>
-                    <strong>Ensure keys are stable</strong> across renders
-                    (don't change unless the item is truly new)
-                  </li>
-                  <li>
-                    <strong>Use index as key ONLY for static lists</strong> that
-                    never change order or get filtered
-                  </li>
-                </ul>
-              </div>
-
-              <div class="card">
-                <h4 style="color: var(--accent); margin: 0 0 0.5rem">
-                  ❌ Don'ts
-                </h4>
-                <ul style="margin: 0; padding-left: 1.5rem">
-                  <li>
-                    <strong>Avoid random numbers</strong> (defeats React's
-                    diffing)
-                    <pre
-                      style="margin: 0.5rem 0 0; font-size: 0.85em"
-                    ><code>key={Math.random()} // ❌ Wrong!</code></pre>
-                  </li>
-                  <li>
-                    <strong>Don't use array index</strong> for lists where items
-                    can be added, removed, or reordered
-                  </li>
-                  <li>
-                    <strong>Don't skip keys</strong> in lists - React will show
-                    a warning in the console
-                    <pre
-                      style="margin: 0.5rem 0 0; font-size: 0.85em"
-                    ><code>// ❌ This will trigger a warning:
-{items.map(item => &lt;li&gt;{item}&lt;/li&gt;)}
-
-// ✅ Always provide a key:
-{items.map(item => &lt;li key={item.id}&gt;{item}&lt;/li&gt;)}</code></pre>
-                    <p
+            <div
+              style="text-align: left; font-size: 0.78em; margin-top: 1.2rem"
+            >
+              <table
+                style="
+                  width: 100%;
+                  border-collapse: separate;
+                  border-spacing: 0;
+                  border-radius: 12px;
+                  overflow: hidden;
+                  border: 1px solid var(--surface-border);
+                "
+              >
+                <thead>
+                  <tr>
+                    <th
                       style="
-                        margin: 0.5rem 0 0;
-                        font-size: 0.9em;
-                        color: var(--text-soft);
+                        width: 40%;
+                        padding: 0.6rem 1rem;
+                        background: rgba(97, 218, 251, 0.1);
+                        color: var(--accent);
+                        text-align: left;
                       "
                     >
-                      Console warning:
-                      <em
-                        >"Warning: Each child in a list should have a unique
-                        'key' prop."</em
-                      >
-                    </p>
-                  </li>
-                </ul>
-              </div>
+                      Key source
+                    </th>
+                    <th
+                      style="
+                        width: 30%;
+                        padding: 0.6rem 1rem;
+                        background: rgba(97, 218, 251, 0.1);
+                        color: var(--accent);
+                        text-align: center;
+                      "
+                    >
+                      Rating
+                    </th>
+                    <th
+                      style="
+                        padding: 0.6rem 1rem;
+                        background: rgba(97, 218, 251, 0.1);
+                        color: var(--accent);
+                        text-align: left;
+                      "
+                    >
+                      When
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td style="padding: 0.55rem 1rem">
+                      <code>key={item.id}</code> — database / API ID
+                    </td>
+                    <td
+                      style="
+                        padding: 0.55rem 1rem;
+                        text-align: center;
+                        color: #22c55e;
+                        font-weight: 700;
+                      "
+                    >
+                      ⭐⭐⭐ Best
+                    </td>
+                    <td style="padding: 0.55rem 1rem; color: var(--text-soft)">
+                      Always, when data has a unique ID
+                    </td>
+                  </tr>
+                  <tr style="background: var(--surface)">
+                    <td style="padding: 0.55rem 1rem">
+                      <code>key={item.slug}</code> — stable unique string
+                    </td>
+                    <td
+                      style="
+                        padding: 0.55rem 1rem;
+                        text-align: center;
+                        color: #22c55e;
+                        font-weight: 700;
+                      "
+                    >
+                      ⭐⭐⭐ Best
+                    </td>
+                    <td style="padding: 0.55rem 1rem; color: var(--text-soft)">
+                      When no numeric ID but slug is stable
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 0.55rem 1rem">
+                      <code>key={index}</code> — array index
+                    </td>
+                    <td
+                      style="
+                        padding: 0.55rem 1rem;
+                        text-align: center;
+                        color: #f97316;
+                        font-weight: 700;
+                      "
+                    >
+                      ⭐ Acceptable
+                    </td>
+                    <td style="padding: 0.55rem 1rem; color: var(--text-soft)">
+                      Static lists only — no add / remove / reorder
+                    </td>
+                  </tr>
+                  <tr style="background: var(--surface)">
+                    <td style="padding: 0.55rem 1rem">
+                      <code>key={Math.random()}</code> — random
+                    </td>
+                    <td
+                      style="
+                        padding: 0.55rem 1rem;
+                        text-align: center;
+                        color: #ef4444;
+                        font-weight: 700;
+                      "
+                    >
+                      ❌ Never
+                    </td>
+                    <td style="padding: 0.55rem 1rem; color: var(--text-soft)">
+                      Destroys reconciliation on every render
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 0.55rem 1rem">No key at all</td>
+                    <td
+                      style="
+                        padding: 0.55rem 1rem;
+                        text-align: center;
+                        color: #ef4444;
+                        font-weight: 700;
+                      "
+                    >
+                      ❌ Never
+                    </td>
+                    <td style="padding: 0.55rem 1rem; color: var(--text-soft)">
+                      React warns + unpredictable behaviour
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </section>
 
           <!-- Slide 4: Code Example - FruitList -->
           <section>
-            <h3>Example: Rendering a Fruit List</h3>
+            <h3>Example: Rendering a Fruit List - DELETED -</h3>
             <div class="two-col" style="margin-top: 1rem">
               <div>
                 <div
@@ -1421,15 +1495,14 @@ function FruitList() {
 
           <!-- Slide 5: Exercise - TaskList -->
           <section>
-            <h3>Exercise</h3>
+            <h3>Exercise (15 mins)</h3>
             <div
               class="card"
               style="margin-top: 2rem; padding: 2rem; text-align: center"
             >
               <h4 style="color: var(--accent); margin: 0 0 1rem">Task</h4>
               <p style="font-size: 1.1em; margin: 0">
-                Render a list of tasks <code>{ id, title, done }</code> and
-                display "✅" if <code>done</code> is true.
+                Render a list of items <code>{ id, title, done }</code>
               </p>
             </div>
           </section>
@@ -1456,7 +1529,7 @@ export default function TaskList() {
     &lt;ul className="task-list"&gt;
       {tasks.map((task) =&gt; (
         &lt;li key={task.id}&gt;
-          {task.title} {task.done && "✅"}
+          {task.title} {task.done}
         &lt;/li&gt;
       ))}
     &lt;/ul&gt;
@@ -1739,7 +1812,7 @@ export default function TaskList() {
 // ✅ Good: One option → use &&
 {isPremium && &lt;PremiumFeatures /&gt;}
 
-// ❌ Awkward: Don't use ternary when you only want one option
+// 🟠 Not best practice: avoid ternary when you only want one option
 {isPremium ? &lt;PremiumFeatures /&gt; : null}</code></pre>
             </div>
           </section>
@@ -1768,24 +1841,6 @@ export default function TaskList() {
       )}
     &lt;/div&gt;
   );
-}</code></pre>
-              </div>
-              <div>
-                <div
-                  class="small-text"
-                  style="margin-bottom: 0.5rem; color: var(--accent)"
-                >
-                  CSS
-                </div>
-                <pre><code class="language-css">.greeting {
-  h1 {
-    color: #0070f3;
-  }
-
-  p {
-    color: #555;
-    font-style: italic;
-  }
 }</code></pre>
               </div>
             </div>
