@@ -488,23 +488,24 @@ function ProductGallery() {
             <h3>Why Keys Matter ?</h3>
             <div style="text-align: left; font-size: 0.85em; margin-top: 1rem">
               <div class="card" style="margin-bottom: 1rem">
-                <ul style="margin: 0; padding-left: 1.5rem">
-                  <li>
-                    Keys help React identify which items changed, were added, or
-                    removed.
+                <ul style="margin: 0; padding-left: 1.5rem; line-height: 1.8">
+                  <li style="margin-bottom: 1rem">
+                    Keys help React identify which items changed.
                   </li>
-                  <li>
+                  <li style="margin-bottom: 1rem">
                     Without keys, React might re-render the entire list
-                    unnecessarily, causing performance issues or even bugs.
+                    unnecessarily.
                   </li>
-                  <li>
+                  <li style="margin-bottom: 1rem">
                     Keys must be unique among siblings and ideally stable across
                     renders.
                   </li>
-                  <li>
-                    <strong>Example:</strong> Using index as a key is okay for
-                    static lists but not for dynamic lists where items may move
-                    or be deleted.
+                  <li style="margin-bottom: 1rem">
+                    <strong>Example:</strong> Using
+                    <span style="color: #22c55e">index</span> as a key is okay
+                    for <span style="color: #22c55e">static lists</span> but not
+                    for <span style="color: #f97316">dynamic lists</span> where
+                    items may move or be deleted.
                   </li>
                 </ul>
               </div>
@@ -529,9 +530,14 @@ function ProductGallery() {
                     font-size: 1.1em;
                   "
                 >
-                  When you use the array index as a key, React identifies each
-                  element by its <strong>position in the array</strong>, not by
-                  what it actually contains.
+                  When you use the
+                  <span style="color: #f97316"
+                    ><strong>array index as a key</strong></span
+                  >, React identifies each element by its
+                  <strong
+                    ><span style="color: #f97316">position</span> in the
+                    array</strong
+                  >, not by what it actually contains.
                 </p>
                 <div
                   style="
@@ -633,23 +639,13 @@ function ProductGallery() {
                     >
                   </div>
                 </div>
-                <p
-                  style="
-                    margin: 0;
-                    line-height: 1.8;
-                    font-size: 1.05em;
-                    background: rgba(239, 68, 68, 0.15);
-                    padding: 0.6rem;
-                    border-radius: 6px;
-                    border-left: 4px solid #ef4444;
-                  "
-                >
-                  <strong style="color: #ef4444">React thinks:</strong> "The
-                  item at index [1] changed from 'Buy Milk' to 'Buy Bread', so
-                  I'll re-render it but keep its old state (like input values)!"
-                </p>
               </div>
             </div>
+            <aside class="notes">
+              <strong>React thinks:</strong> "The item at index [1] changed from
+              'Buy Milk' to 'Buy Bread', so I'll re-render it but keep its old
+              state (like input values)!"
+            </aside>
           </section>
 
           <!-- Slide 3d2c: The Solution - Unique IDs -->
@@ -758,7 +754,7 @@ function ProductGallery() {
           <!-- Slide 3e: Keys Problem Illustration -->
           <section>
             <h3 style="font-size: 1.2em; margin-bottom: 0.3rem">
-              The Bug: Index Keys in Action
+              The Bug: Index Keys in Action - DELETED ---
             </h3>
             <div style="margin-top: 0.3rem">
               <div
