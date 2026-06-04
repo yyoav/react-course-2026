@@ -1,0 +1,241 @@
+.useref-counter-page {
+  min-height: 100vh;
+  padding: 2rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+}
+
+.breadcrumb {
+  margin-bottom: 2rem;
+}
+
+.breadcrumb a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: opacity 0.2s;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+}
+
+.breadcrumb a:hover {
+  opacity: 0.8;
+}
+
+.useref-counter-page h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  text-align: center;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.subtitle {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+.counter-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.info-card {
+  background: rgba(255, 255, 255, 0.95);
+  color: #333;
+  padding: 1.5rem;
+  border-radius: 12px;
+  text-align: center;
+  margin-bottom: 2rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.info-card.renders {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  color: #fff;
+}
+
+.info-card .label {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.info-card .value {
+  font-size: 4rem;
+  font-weight: 800;
+  margin: 0.5rem 0;
+}
+
+.info-card .description {
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+.counters-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.counter-card {
+  background: rgba(255, 255, 255, 0.95);
+  color: #333;
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s;
+}
+
+.counter-card:hover {
+  transform: translateY(-5px);
+}
+
+.counter-card h3 {
+  margin: 0 0 1rem;
+  font-size: 1.3rem;
+  color: #667eea;
+}
+
+.counter-value {
+  font-size: 4rem;
+  font-weight: 800;
+  margin: 1.5rem 0;
+  color: #333;
+}
+
+.counter-btn {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-bottom: 1rem;
+}
+
+.state-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+}
+
+.state-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.ref-btn {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  color: #fff;
+}
+
+.ref-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(245, 87, 108, 0.4);
+}
+
+.counter-info {
+  font-size: 0.85rem;
+  color: #666;
+  font-style: italic;
+}
+
+.action-buttons {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.action-btn {
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.95);
+  color: #667eea;
+  transition: all 0.3s;
+}
+
+.action-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.explanation-card {
+  background: rgba(255, 255, 255, 0.95);
+  color: #333;
+  padding: 2rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.explanation-card h3 {
+  margin: 0 0 1rem;
+  color: #667eea;
+}
+
+.explanation-card ul {
+  margin: 0;
+  padding-left: 1.5rem;
+  line-height: 2;
+}
+
+.explanation-card li {
+  margin-bottom: 0.75rem;
+}
+
+.explanation-card strong {
+  color: #667eea;
+}
+
+.code-example {
+  background: rgba(0, 0, 0, 0.85);
+  color: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.code-example h4 {
+  margin: 0 0 1rem;
+  color: #f093fb;
+}
+
+.code-example pre {
+  margin: 0;
+  background: transparent;
+  color: #a8e6cf;
+  font-family: "Courier New", monospace;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  overflow-x: auto;
+}
+
+@media (max-width: 768px) {
+  .useref-counter-page {
+    padding: 1rem;
+  }
+
+  .useref-counter-page h1 {
+    font-size: 1.8rem;
+  }
+
+  .counters-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .counter-value,
+  .info-card .value {
+    font-size: 3rem;
+  }
+}
