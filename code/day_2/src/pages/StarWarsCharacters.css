@@ -1,0 +1,149 @@
+.starwars-page {
+  min-height: 100vh;
+  padding: 2rem;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  color: #fff;
+}
+
+.breadcrumb {
+  margin-bottom: 2rem;
+}
+
+.breadcrumb a {
+  color: #61dafb;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.2s;
+}
+
+.breadcrumb a:hover {
+  color: #4fc3f7;
+}
+
+.starwars-page h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  text-align: center;
+  color: #ffd700;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.subtitle {
+  text-align: center;
+  color: #61dafb;
+  margin-bottom: 2rem;
+  font-size: 0.9rem;
+}
+
+.search-box {
+  max-width: 600px;
+  margin: 0 auto 2rem;
+}
+
+.search-input {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1rem;
+  border: 2px solid #61dafb;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  transition: all 0.3s;
+}
+
+.search-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #ffd700;
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 15px rgba(97, 218, 251, 0.3);
+}
+
+.loading {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #61dafb;
+  padding: 3rem;
+}
+
+.characters-table {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  border-collapse: collapse;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.characters-table thead {
+  background: rgba(97, 218, 251, 0.2);
+}
+
+.characters-table th {
+  padding: 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: #ffd700;
+  border-bottom: 2px solid #61dafb;
+}
+
+.characters-table th:first-child {
+  width: 80px;
+  text-align: center;
+}
+
+.characters-table td {
+  padding: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.characters-table td:first-child {
+  text-align: center;
+  color: #61dafb;
+  font-weight: 600;
+}
+
+.characters-table tbody tr {
+  transition: background 0.2s;
+}
+
+.characters-table tbody tr:hover {
+  background: rgba(97, 218, 251, 0.1);
+}
+
+.characters-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.no-results {
+  text-align: center !important;
+  color: rgba(255, 255, 255, 0.5);
+  font-style: italic;
+  padding: 2rem !important;
+}
+
+@media (max-width: 768px) {
+  .starwars-page {
+    padding: 1rem;
+  }
+
+  .starwars-page h1 {
+    font-size: 1.8rem;
+  }
+
+  .characters-table th,
+  .characters-table td {
+    padding: 0.75rem;
+    font-size: 0.9rem;
+  }
+
+  .characters-table th:first-child,
+  .characters-table td:first-child {
+    width: 50px;
+  }
+}

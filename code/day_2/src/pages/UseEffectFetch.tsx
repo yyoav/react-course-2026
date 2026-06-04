@@ -7,7 +7,6 @@ interface StarWarsCharacter {
   height: string;
   mass: string;
   hair_color: string;
-  skin_color: string;
   eye_color: string;
   birth_year: string;
   gender: string;
@@ -15,35 +14,19 @@ interface StarWarsCharacter {
 
 function UseEffectFetch() {
   const [character, setCharacter] = useState<StarWarsCharacter | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
   const [characterId, setCharacterId] = useState(1);
 
   useEffect(() => {
-    setLoading(true);
-    setError(null);
-    fetch(`https://swapi.py4e.com/api/people/${characterId}/`)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Failed to fetch character");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setCharacter(data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-        setError(error.message);
-        setLoading(false);
-      });
-  }, [characterId]);
+    async function fetchCharacter() {
+      const response = await fetch(
+        `https://swapi.py4e.com/api/people/${characterId}/`,
+      );
+      const data = await response.json();
+      setCharacter(data);
+    }
 
-  const handleFetchCharacter = () => {
-    const randomId = Math.floor(Math.random() * 83) + 1;
-    setCharacterId(randomId);
-  };
+    fetchCharacter();
+  }, [characterId]);
 
   return (
     <div className="fetch-example">
@@ -53,37 +36,15 @@ function UseEffectFetch() {
 
       <h1>useEffect: Fetch Example</h1>
 
-      <div className="info-box">
-        <h3>🎯 Example: Fetch Star Wars Character</h3>
-        <p>
-          This example demonstrates <strong>useEffect</strong> with data
-          fetching from the Star Wars API (SWAPI).
-        </p>
-        <p>
-          <strong>Key Concepts:</strong> Async data fetching, loading states,
-          and dependency arrays.
-        </p>
-      </div>
-
       <div className="demo-container">
-        <button onClick={handleFetchCharacter} className="fetch-button">
+        <button
+          onClick={() => setCharacterId(Math.floor(Math.random() * 83) + 1)}
+          className="fetch-button"
+        >
           🎲 Fetch Random Character
         </button>
 
-        {loading && (
-          <div className="loading">
-            <div className="spinner"></div>
-            <p>Loading...</p>
-          </div>
-        )}
-
-        {error && (
-          <div className="error">
-            <p>Error: {error}</p>
-          </div>
-        )}
-
-        {!loading && !error && character && (
+        {character && (
           <div className="character-card">
             <h2>{character.name}</h2>
             <div className="character-details">

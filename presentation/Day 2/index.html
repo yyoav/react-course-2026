@@ -158,8 +158,8 @@
                     line-height: 1.05;
                   "
                 >
-                  State, Events, Lists,<br />and
-                  <span style="color: var(--accent)">Effects</span>
+                  Lists, Hooks<br />and
+                  <span style="color: var(--accent)">Custom Hooks</span>
                 </h1>
                 <p
                   style="
@@ -420,39 +420,6 @@
   );
 }</code></pre>
               </div>
-              <div>
-                <div
-                  class="small-text"
-                  style="margin-bottom: 0.5rem; color: var(--accent)"
-                >
-                  CSS
-                </div>
-                <pre><code class="language-css">.gallery {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
-
-  .product {
-    padding: 1rem;
-    background: #f5f5f5;
-    border-radius: 8px;
-    text-align: center;
-
-    .icon {
-      font-size: 2rem;
-    }
-
-    h3 {
-      margin: 0.5rem 0;
-    }
-
-    p {
-      color: #0070f3;
-      font-weight: bold;
-    }
-  }
-}</code></pre>
-              </div>
             </div>
           </section>
 
@@ -461,32 +428,29 @@
             <h3>Why .map() is used in React</h3>
             <div style="text-align: left; font-size: 0.85em; margin-top: 1rem">
               <div class="card" style="margin-bottom: 1rem">
-                <ul style="margin: 0; padding-left: 1.5rem">
-                  <li>
+                <ul style="margin: 0; padding-left: 1.5rem; line-height: 1.8">
+                  <li style="margin-bottom: 1rem">
                     In React, you rarely manually create repetitive HTML.
                     Instead, we use JavaScript arrays and <code>.map()</code> to
                     generate lists dynamically.
                   </li>
-                  <li>
+                  <li style="margin-bottom: 1rem">
                     <code>.map()</code> iterates through an array and returns a
                     JSX element for each item.
-                  </li>
-                  <li>
-                    <strong>Example analogy:</strong> Think of a bakery conveyor
-                    belt – each item (JSX) is created from a recipe (array
-                    item).
                   </li>
                 </ul>
               </div>
             </div>
-            <p class="small-text" style="margin-top: 1rem">
-              💡 Let's see the wrong way vs the correct way
-            </p>
+
+            <aside class="notes">
+              <strong>Example analogy:</strong> Think of a bakery conveyor belt
+              – each item (JSX) is created from a recipe (array item).
+            </aside>
           </section>
 
           <!-- Slide 3c: Example - Product Gallery Right Way -->
           <section>
-            <h3>Example: Product Gallery - ✅ Right Way</h3>
+            <h4>Example: Product Gallery - ✅ Right Way</h4>
             <div class="two-col" style="margin-top: 1rem">
               <div>
                 <div
@@ -509,44 +473,11 @@ function ProductGallery() {
         &lt;div key={product.id} className="product"&gt;
           &lt;span className="icon"&gt;{product.icon}&lt;/span&gt;
           &lt;h3&gt;{product.name}&lt;/h3&gt;
-          &lt;p&gt;${product.price}&lt;/p&gt;
+          &lt;p&gt;{product.price}&lt;/p&gt;
         &lt;/div&gt;
       ))}
     &lt;/div&gt;
   );
-}</code></pre>
-              </div>
-              <div>
-                <div
-                  class="small-text"
-                  style="margin-bottom: 0.5rem; color: var(--accent)"
-                >
-                  CSS
-                </div>
-                <pre><code class="language-css">.gallery {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
-
-  .product {
-    padding: 1rem;
-    background: #f5f5f5;
-    border-radius: 8px;
-    text-align: center;
-
-    .icon {
-      font-size: 2rem;
-    }
-
-    h3 {
-      margin: 0.5rem 0;
-    }
-
-    p {
-      color: #0070f3;
-      font-weight: bold;
-    }
-  }
 }</code></pre>
               </div>
             </div>
@@ -557,23 +488,24 @@ function ProductGallery() {
             <h3>Why Keys Matter ?</h3>
             <div style="text-align: left; font-size: 0.85em; margin-top: 1rem">
               <div class="card" style="margin-bottom: 1rem">
-                <ul style="margin: 0; padding-left: 1.5rem">
-                  <li>
-                    Keys help React identify which items changed, were added, or
-                    removed.
+                <ul style="margin: 0; padding-left: 1.5rem; line-height: 1.8">
+                  <li style="margin-bottom: 1rem">
+                    Keys help React identify which items changed.
                   </li>
-                  <li>
+                  <li style="margin-bottom: 1rem">
                     Without keys, React might re-render the entire list
-                    unnecessarily, causing performance issues or even bugs.
+                    unnecessarily.
                   </li>
-                  <li>
+                  <li style="margin-bottom: 1rem">
                     Keys must be unique among siblings and ideally stable across
                     renders.
                   </li>
-                  <li>
-                    <strong>Example:</strong> Using index as a key is okay for
-                    static lists but not for dynamic lists where items may move
-                    or be deleted.
+                  <li style="margin-bottom: 1rem">
+                    <strong>Example:</strong> Using
+                    <span style="color: #22c55e">index</span> as a key is okay
+                    for <span style="color: #22c55e">static lists</span> but not
+                    for <span style="color: #f97316">dynamic lists</span> where
+                    items may move or be deleted.
                   </li>
                 </ul>
               </div>
@@ -598,9 +530,14 @@ function ProductGallery() {
                     font-size: 1.1em;
                   "
                 >
-                  When you use the array index as a key, React identifies each
-                  element by its <strong>position in the array</strong>, not by
-                  what it actually contains.
+                  When you use the
+                  <span style="color: #f97316"
+                    ><strong>array index as a key</strong></span
+                  >, React identifies each element by its
+                  <strong
+                    ><span style="color: #f97316">position</span> in the
+                    array</strong
+                  >, not by what it actually contains.
                 </p>
                 <div
                   style="
@@ -702,23 +639,13 @@ function ProductGallery() {
                     >
                   </div>
                 </div>
-                <p
-                  style="
-                    margin: 0;
-                    line-height: 1.8;
-                    font-size: 1.05em;
-                    background: rgba(239, 68, 68, 0.15);
-                    padding: 0.6rem;
-                    border-radius: 6px;
-                    border-left: 4px solid #ef4444;
-                  "
-                >
-                  <strong style="color: #ef4444">React thinks:</strong> "The
-                  item at index [1] changed from 'Buy Milk' to 'Buy Bread', so
-                  I'll re-render it but keep its old state (like input values)!"
-                </p>
               </div>
             </div>
+            <aside class="notes">
+              <strong>React thinks:</strong> "The item at index [1] changed from
+              'Buy Milk' to 'Buy Bread', so I'll re-render it but keep its old
+              state (like input values)!"
+            </aside>
           </section>
 
           <!-- Slide 3d2c: The Solution - Unique IDs -->
@@ -827,7 +754,7 @@ function ProductGallery() {
           <!-- Slide 3e: Keys Problem Illustration -->
           <section>
             <h3 style="font-size: 1.2em; margin-bottom: 0.3rem">
-              The Bug: Index Keys in Action
+              The Bug: Index Keys in Action - DELETED ---
             </h3>
             <div style="margin-top: 0.3rem">
               <div
@@ -1378,78 +1305,152 @@ function ProductGallery() {
           <!-- Slide 3f: Best Practices for Keys -->
           <section>
             <h3>Best Practices for Keys</h3>
-            <div style="text-align: left; font-size: 0.6em; margin-top: 1rem">
-              <div class="card" style="margin-bottom: 1rem">
-                <h4 style="color: var(--accent); margin: 0 0 0.5rem">
-                  ✅ Do's
-                </h4>
-                <ul style="margin: 0; padding-left: 1.5rem">
-                  <li>
-                    <strong>Use unique IDs from your data</strong> (from API or
-                    database)
-                    <pre
-                      style="margin: 0.5rem 0 0; font-size: 0.85em"
-                    ><code>key={item.id}</code></pre>
-                  </li>
-                  <li>
-                    <strong>Ensure keys are stable</strong> across renders
-                    (don't change unless the item is truly new)
-                  </li>
-                  <li>
-                    <strong>Use index as key ONLY for static lists</strong> that
-                    never change order or get filtered
-                  </li>
-                </ul>
-              </div>
-
-              <div class="card">
-                <h4 style="color: var(--accent); margin: 0 0 0.5rem">
-                  ❌ Don'ts
-                </h4>
-                <ul style="margin: 0; padding-left: 1.5rem">
-                  <li>
-                    <strong>Avoid random numbers</strong> (defeats React's
-                    diffing)
-                    <pre
-                      style="margin: 0.5rem 0 0; font-size: 0.85em"
-                    ><code>key={Math.random()} // ❌ Wrong!</code></pre>
-                  </li>
-                  <li>
-                    <strong>Don't use array index</strong> for lists where items
-                    can be added, removed, or reordered
-                  </li>
-                  <li>
-                    <strong>Don't skip keys</strong> in lists - React will show
-                    a warning in the console
-                    <pre
-                      style="margin: 0.5rem 0 0; font-size: 0.85em"
-                    ><code>// ❌ This will trigger a warning:
-{items.map(item => &lt;li&gt;{item}&lt;/li&gt;)}
-
-// ✅ Always provide a key:
-{items.map(item => &lt;li key={item.id}&gt;{item}&lt;/li&gt;)}</code></pre>
-                    <p
+            <div
+              style="text-align: left; font-size: 0.78em; margin-top: 1.2rem"
+            >
+              <table
+                style="
+                  width: 100%;
+                  border-collapse: separate;
+                  border-spacing: 0;
+                  border-radius: 12px;
+                  overflow: hidden;
+                  border: 1px solid var(--surface-border);
+                "
+              >
+                <thead>
+                  <tr>
+                    <th
                       style="
-                        margin: 0.5rem 0 0;
-                        font-size: 0.9em;
-                        color: var(--text-soft);
+                        width: 40%;
+                        padding: 0.6rem 1rem;
+                        background: rgba(97, 218, 251, 0.1);
+                        color: var(--accent);
+                        text-align: left;
                       "
                     >
-                      Console warning:
-                      <em
-                        >"Warning: Each child in a list should have a unique
-                        'key' prop."</em
-                      >
-                    </p>
-                  </li>
-                </ul>
-              </div>
+                      Key source
+                    </th>
+                    <th
+                      style="
+                        width: 30%;
+                        padding: 0.6rem 1rem;
+                        background: rgba(97, 218, 251, 0.1);
+                        color: var(--accent);
+                        text-align: center;
+                      "
+                    >
+                      Rating
+                    </th>
+                    <th
+                      style="
+                        padding: 0.6rem 1rem;
+                        background: rgba(97, 218, 251, 0.1);
+                        color: var(--accent);
+                        text-align: left;
+                      "
+                    >
+                      When
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td style="padding: 0.55rem 1rem">
+                      <code>key={item.id}</code> — database / API ID
+                    </td>
+                    <td
+                      style="
+                        padding: 0.55rem 1rem;
+                        text-align: center;
+                        color: #22c55e;
+                        font-weight: 700;
+                      "
+                    >
+                      ⭐⭐⭐ Best
+                    </td>
+                    <td style="padding: 0.55rem 1rem; color: var(--text-soft)">
+                      Always, when data has a unique ID
+                    </td>
+                  </tr>
+                  <tr style="background: var(--surface)">
+                    <td style="padding: 0.55rem 1rem">
+                      <code>key={item.slug}</code> — stable unique string
+                    </td>
+                    <td
+                      style="
+                        padding: 0.55rem 1rem;
+                        text-align: center;
+                        color: #22c55e;
+                        font-weight: 700;
+                      "
+                    >
+                      ⭐⭐⭐ Best
+                    </td>
+                    <td style="padding: 0.55rem 1rem; color: var(--text-soft)">
+                      When no numeric ID but slug is stable
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 0.55rem 1rem">
+                      <code>key={index}</code> — array index
+                    </td>
+                    <td
+                      style="
+                        padding: 0.55rem 1rem;
+                        text-align: center;
+                        color: #f97316;
+                        font-weight: 700;
+                      "
+                    >
+                      ⭐ Acceptable
+                    </td>
+                    <td style="padding: 0.55rem 1rem; color: var(--text-soft)">
+                      Static lists only — no add / remove / reorder
+                    </td>
+                  </tr>
+                  <tr style="background: var(--surface)">
+                    <td style="padding: 0.55rem 1rem">
+                      <code>key={Math.random()}</code> — random
+                    </td>
+                    <td
+                      style="
+                        padding: 0.55rem 1rem;
+                        text-align: center;
+                        color: #ef4444;
+                        font-weight: 700;
+                      "
+                    >
+                      ❌ Never
+                    </td>
+                    <td style="padding: 0.55rem 1rem; color: var(--text-soft)">
+                      Destroys reconciliation on every render
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 0.55rem 1rem">No key at all</td>
+                    <td
+                      style="
+                        padding: 0.55rem 1rem;
+                        text-align: center;
+                        color: #ef4444;
+                        font-weight: 700;
+                      "
+                    >
+                      ❌ Never
+                    </td>
+                    <td style="padding: 0.55rem 1rem; color: var(--text-soft)">
+                      React warns + unpredictable behaviour
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </section>
 
           <!-- Slide 4: Code Example - FruitList -->
           <section>
-            <h3>Example: Rendering a Fruit List</h3>
+            <h3>Example: Rendering a Fruit List - DELETED -</h3>
             <div class="two-col" style="margin-top: 1rem">
               <div>
                 <div
@@ -1494,15 +1495,14 @@ function FruitList() {
 
           <!-- Slide 5: Exercise - TaskList -->
           <section>
-            <h3>Exercise</h3>
+            <h3>Exercise (15 mins)</h3>
             <div
               class="card"
               style="margin-top: 2rem; padding: 2rem; text-align: center"
             >
               <h4 style="color: var(--accent); margin: 0 0 1rem">Task</h4>
               <p style="font-size: 1.1em; margin: 0">
-                Render a list of tasks <code>{ id, title, done }</code> and
-                display "✅" if <code>done</code> is true.
+                Render a list of items <code>{ id, title, done }</code>
               </p>
             </div>
           </section>
@@ -1529,7 +1529,7 @@ export default function TaskList() {
     &lt;ul className="task-list"&gt;
       {tasks.map((task) =&gt; (
         &lt;li key={task.id}&gt;
-          {task.title} {task.done && "✅"}
+          {task.title} {task.done}
         &lt;/li&gt;
       ))}
     &lt;/ul&gt;
@@ -1800,6 +1800,11 @@ export default function TaskList() {
                 </div>
               </div>
             </div>
+            <aside class="notes">
+              A classical situation to use <strong>&&</strong> is when we want
+              to display a modal — show the modal component or nothing (the
+              backdrop or null).
+            </aside>
           </section>
 
           <!-- Slide 7d2: Ternary vs Logical AND - Examples -->
@@ -1812,7 +1817,7 @@ export default function TaskList() {
 // ✅ Good: One option → use &&
 {isPremium && &lt;PremiumFeatures /&gt;}
 
-// ❌ Awkward: Don't use ternary when you only want one option
+// 🟠 Not best practice: avoid ternary when you only want one option
 {isPremium ? &lt;PremiumFeatures /&gt; : null}</code></pre>
             </div>
           </section>
@@ -1834,7 +1839,10 @@ export default function TaskList() {
       {isLoggedIn ? (
         &lt;h1&gt;Welcome back!&lt;/h1&gt;
       ) : (
-        &lt;h1&gt;Please log in&lt;/h1&gt;
+        &lt;div className="login-prompt"&gt;
+          &lt;img src="/lock-icon.svg" alt="Login" /&gt;
+          &lt;p&gt;Please log in to continue&lt;/p&gt;
+        &lt;/div&gt;
       )}
       {isLoggedIn && (
         &lt;p&gt;You have new notifications!&lt;/p&gt;
@@ -1843,30 +1851,12 @@ export default function TaskList() {
   );
 }</code></pre>
               </div>
-              <div>
-                <div
-                  class="small-text"
-                  style="margin-bottom: 0.5rem; color: var(--accent)"
-                >
-                  CSS
-                </div>
-                <pre><code class="language-css">.greeting {
-  h1 {
-    color: #0070f3;
-  }
-
-  p {
-    color: #555;
-    font-style: italic;
-  }
-}</code></pre>
-              </div>
             </div>
           </section>
 
           <!-- Slide 9: Exercise - Premium Badge -->
           <section>
-            <h3>Exercise</h3>
+            <h3>Exercise — Demo 🛠️</h3>
             <div
               class="card"
               style="margin-top: 2rem; padding: 2rem; text-align: center"
@@ -2091,11 +2081,24 @@ function UserProfile() {
                 </div>
               </div>
             </div>
+            <aside class="notes">
+              <strong>Importance of Keys in Reconciliation:</strong>
+              <ul>
+                <li>
+                  <strong>Keys</strong> allow React to match elements between
+                  renders, making diffing fast and accurate.
+                </li>
+                <li>
+                  Without keys, React may re-render the whole list even if only
+                  one item changed.
+                </li>
+              </ul>
+            </aside>
           </section>
 
           <!-- Slide 11b: Keys in Reconciliation -->
           <section>
-            <h3>Importance of Keys in Reconciliation</h3>
+            <h3>Importance of Keys in Reconciliation-- DELETED</h3>
             <div
               style="text-align: left; font-size: 0.85em; margin-top: 1.5rem"
             >
@@ -2115,50 +2118,68 @@ function UserProfile() {
             </div>
           </section>
 
-          <!-- Slide 12: Example Concept -->
+          <!-- Slide 12: Exercise Demo -->
           <section>
-            <h3>Reconciliation in Action</h3>
+            <h3>Exercise — Demo 🛠️</h3>
             <div
               class="card"
-              style="margin-top: 2rem; padding: 2rem; text-align: center"
-            >
-              <h4 style="color: var(--accent); margin: 0 0 1.5rem">
-                Example Concept
-              </h4>
-              <p style="font-size: 1.1em; margin: 0; line-height: 1.6">
-                If a list of
-                <strong style="color: var(--accent)">10 items</strong> changes
-                only the
-                <strong style="color: var(--accent)">3rd item</strong>,<br />
-                React updates
-                <strong style="color: var(--accent)">only that element</strong>,
-                not all 10.
-              </p>
-            </div>
-            <div
               style="
                 margin-top: 2rem;
-                display: flex;
-                justify-content: center;
-                gap: 0.5rem;
-                align-items: center;
-                font-size: 2em;
+                padding: 2.5rem;
+                text-align: center;
+                background: var(--accent-soft);
               "
             >
-              <span style="opacity: 0.3">📄</span>
-              <span style="opacity: 0.3">📄</span>
-              <span style="color: var(--accent); opacity: 1">📄</span>
-              <span style="opacity: 0.3">📄</span>
-              <span style="opacity: 0.3">📄</span>
-              <span style="opacity: 0.3">📄</span>
-              <span style="opacity: 0.3">📄</span>
-              <span style="opacity: 0.3">📄</span>
-              <span style="opacity: 0.3">📄</span>
-              <span style="opacity: 0.3">📄</span>
+              <p
+                style="
+                  font-size: 1.2em;
+                  margin: 0 0 1rem;
+                  color: var(--accent);
+                  font-weight: bold;
+                "
+              >
+                Open the live demo in the course app
+              </p>
+              <p
+                style="
+                  font-size: 0.9em;
+                  margin: 0;
+                  color: var(--text-soft);
+                  line-height: 1.6;
+                "
+              >
+                Route: <code style="color: var(--accent)">/reconciliation</code>
+              </p>
             </div>
+            <aside class="notes">
+              <strong>🔍 What to observe with React DevTools:</strong>
+              <ol>
+                <li>Open DevTools → <strong>Elements</strong> tab</li>
+                <li>
+                  Expand the DOM: find <code>.recon-card</code> →
+                  <code>.recon-row--active</code> →
+                  <code>.recon-row__value--highlight</code>
+                </li>
+                <li>
+                  Click <strong>+ Increment</strong> — only the
+                  <strong>text node</strong> inside
+                  <code>.recon-row__value--highlight</code> flashes (Chrome
+                  highlights mutations in purple/yellow)
+                </li>
+                <li>
+                  Point to the three static rows above —
+                  <strong>none of them flash</strong>, even though React re-ran
+                  the entire component
+                </li>
+                <li>
+                  Key message: React rebuilt the whole Virtual DOM tree on every
+                  click, but only committed <strong>one text node</strong>
+                  to the real DOM — the parts that didn't change were skipped.
+                  That's the diffing algorithm in action.
+                </li>
+              </ol>
+            </aside>
           </section>
-
-          <!-- Slide 13: Why Hooks Exist -->
           <section>
             <h3>Why Hooks Exist ?</h3>
             <div style="text-align: left; font-size: 0.45em; margin-top: 2rem">
@@ -2203,46 +2224,28 @@ function UserProfile() {
           <!-- Slide 13a: Rules of Hooks -->
           <section>
             <h3>Rules of Hooks</h3>
-            <div style="text-align: left; font-size: 0.43em; margin-top: 1rem">
-              <div class="card" style="margin-bottom: 1rem; padding: 1.5rem">
-                <h4 style="color: var(--accent); margin: 0 0 1rem">
-                  The Rules
-                </h4>
-                <ol style="margin: 0; padding-left: 1.5rem; line-height: 1.8">
-                  <li style="margin-bottom: 0.8rem">
-                    <strong>Call Hooks at the top level:</strong> Don't put
-                    Hooks inside loops, conditions, or nested functions. This
-                    ensures that Hooks are called in the same order every
-                    render.
-                  </li>
-                  <li style="margin-bottom: 0.8rem">
-                    <strong>Call Hooks only in React functions:</strong> Only
-                    inside functional components or custom hooks.
-                  </li>
-                  <li>
-                    <strong>Hooks order must stay the same:</strong> Changing
-                    order will break React's internal tracking of state and
-                    effects.
-                  </li>
-                </ol>
-              </div>
-
-              <div class="card" style="padding: 1.5rem">
-                <h4 style="color: var(--accent); margin: 0 0 0.8rem">
-                  Common mistakes
-                </h4>
-                <ul style="margin: 0; padding-left: 1.5rem">
-                  <li>Calling <code>useState</code> inside if statements.</li>
-                  <li>Using Hooks inside non-component functions.</li>
-                </ul>
-              </div>
+            <div style="text-align: left; font-size: 0.8em; margin-top: 1.5rem">
+              <ul style="margin: 0; padding-left: 1.5rem; line-height: 2">
+                <li>
+                  🔝 Call Hooks <strong>at the top level</strong> — not inside
+                  loops or conditions
+                </li>
+                <li>
+                  ⚛️ Call Hooks <strong>only in React functions</strong> —
+                  components or custom hooks
+                </li>
+                <li>
+                  🔢 <strong>Order must stay the same</strong> on every render
+                </li>
+              </ul>
             </div>
             <div
               style="
-                margin-top: 1rem;
+                margin-top: 1.5rem;
                 display: grid;
                 grid-template-columns: 1fr 1fr;
                 gap: 1rem;
+                font-size: 0.75em;
               "
             >
               <div
@@ -2255,7 +2258,6 @@ function UserProfile() {
               >
                 <div
                   style="
-                    font-size: 0.5em;
                     color: #ef4444;
                     font-weight: bold;
                     margin-bottom: 0.5rem;
@@ -2263,8 +2265,8 @@ function UserProfile() {
                 >
                   ❌ Wrong
                 </div>
-                <pre style="margin: 0; font-size: 0.5em"><code>if (loggedIn)
-  const [state, setState] = useState();</code></pre>
+                <pre style="margin: 0"><code>if (loggedIn)
+  const [s, setS] = useState();</code></pre>
               </div>
               <div
                 style="
@@ -2276,7 +2278,6 @@ function UserProfile() {
               >
                 <div
                   style="
-                    font-size: 0.5em;
                     color: #22c55e;
                     font-weight: bold;
                     margin-bottom: 0.5rem;
@@ -2284,12 +2285,25 @@ function UserProfile() {
                 >
                   ✅ Right
                 </div>
-                <pre
-                  style="margin: 0; font-size: 0.5em"
-                ><code>const [state, setState] = useState();
+                <pre style="margin: 0"><code>const [s, setS] = useState();
 if (loggedIn) { ... }</code></pre>
               </div>
             </div>
+            <aside class="notes">
+              <strong>Why order matters:</strong> React tracks hook state by
+              call order (1st useState → slot 0, 2nd → slot 1…). If a hook is
+              inside an <code>if</code>, it may be skipped on some renders,
+              shifting all subsequent slots and corrupting state. <br /><br />
+              <strong>Common mistakes to highlight:</strong>
+              <ul>
+                <li>
+                  Calling <code>useState</code> inside an
+                  <code>if</code> statement
+                </li>
+                <li>Using hooks inside regular (non-component) functions</li>
+                <li>Calling a hook inside a <code>.map()</code> callback</li>
+              </ul>
+            </aside>
           </section>
 
           <!-- Slide 13b: useEffect - The Swiss Army Knife -->
@@ -2300,7 +2314,7 @@ if (loggedIn) { ... }</code></pre>
                 style="
                   display: flex;
                   justify-content: center;
-                  margin-bottom: 0.5rem;
+                  margin-bottom: 1rem;
                 "
               >
                 <img
@@ -2314,168 +2328,299 @@ if (loggedIn) { ... }</code></pre>
                   "
                 />
               </div>
-              <div class="card" style="padding: 2rem; font-size: 0.85em">
-                <h5
-                  style="
-                    color: var(--accent);
-                    margin: 0 0 1rem;
-                    text-align: center;
-                  "
-                >
-                  Just like a Leatherman multi-tool...
-                </h5>
-                <ul
-                  style="
-                    font-size: 0.5em;
-                    margin: 0;
-                    padding-left: 2rem;
-                    line-height: 1.3;
-                  "
-                >
-                  <li>
-                    <strong>Versatile:</strong> Handle many different tasks in
-                    one place
-                  </li>
-                  <li>
-                    <strong>Powerful:</strong> Perform complex operations when
-                    needed
-                  </li>
-                  <li>
-                    <strong>Essential:</strong> A core tool in your React
-                    toolkit
-                  </li>
-                  <li>
-                    <strong>Side Effects:</strong> Interact with the outside
-                    world (APIs, timers, DOM, storage)
-                  </li>
-                </ul>
-              </div>
               <p
                 class="small-text"
-                style="margin-top: 1.5rem; text-align: center"
+                style="margin-top: 1rem; text-align: center; font-size: 1em"
               >
                 💡 useEffect is your go-to hook for anything that happens
                 <strong>outside</strong> your component's rendering
               </p>
             </div>
+            <aside class="notes">
+              <strong>Just like a Leatherman multi-tool...</strong>
+              <ul>
+                <li>
+                  <strong>Versatile:</strong> Handle many different tasks in one
+                  place
+                </li>
+                <li>
+                  <strong>Powerful:</strong> Perform complex operations when
+                  needed
+                </li>
+                <li>
+                  <strong>Essential:</strong> A core tool in your React toolkit
+                </li>
+                <li>
+                  <strong>Side Effects:</strong> Interact with the outside world
+                  — APIs, timers, DOM, storage
+                </li>
+              </ul>
+            </aside>
           </section>
 
           <!-- Slide 14: useEffect -->
           <section>
             <h3>useEffect for Side Effects</h3>
-            <div style="text-align: left; font-size: 0.55em; margin-top: 1rem">
-              <div class="card" style="margin-bottom: 1rem; padding: 1rem">
-                <h4 style="color: var(--accent); margin: 0 0 0.5rem">
-                  What is a side effect?
-                </h4>
-                <p style="margin: 0 0 0.5rem">
-                  Any operation that interacts outside the component or affects
-                  something outside its scope.
-                </p>
-                <p style="margin: 0">
-                  <strong>Examples:</strong> Fetching data, timers,
-                  subscriptions, manual DOM manipulation.
-                </p>
-              </div>
 
-              <div class="card" style="margin-bottom: 1rem; padding: 1rem">
-                <h4 style="color: var(--accent); margin: 0 0 0.5rem">
-                  When does useEffect run?
-                </h4>
-                <ul style="margin: 0; padding-left: 1.5rem">
-                  <li>After the component renders.</li>
-                  <li>
-                    With dependencies, it runs only when those dependencies
-                    change.
-                  </li>
-                  <li>
-                    Empty dependency array <code>[]</code> → runs once after
-                    first render (similar to componentDidMount in class
-                    components).
-                  </li>
-                </ul>
-              </div>
-
-              <div class="card" style="padding: 1rem">
-                <h4 style="color: var(--accent); margin: 0 0 0.5rem">
-                  Cleanup function
-                </h4>
-                <ul style="margin: 0; padding-left: 1.5rem">
-                  <li>
-                    Return a function from <code>useEffect</code> to clean up
-                    resources like intervals, subscriptions, or event listeners.
-                  </li>
-                  <li>Prevents memory leaks.</li>
-                </ul>
-              </div>
-            </div>
-            <p class="small-text" style="margin-top: 1rem">
-              💡 Show example with timer: effect sets interval → cleanup clears
-              interval
-            </p>
-          </section>
-
-          <!-- Slide 15: Example - Clock Explanation -->
-          <section>
-            <h3>Example: Clock with useEffect</h3>
+            <!-- Annotated signature -->
             <div
-              style="text-align: left; font-size: 0.38em; margin-top: 1.5rem"
+              style="
+                margin-top: 2rem;
+                font-size: 0.7em;
+                font-family: monospace;
+                text-align: left;
+              "
             >
-              <div class="card" style="padding: 1.5rem; margin-bottom: 1.5rem">
-                <h4 style="color: var(--accent); margin: 0 0 1rem">
-                  🎯 What this example demonstrates
-                </h4>
-                <ul
-                  style="
-                    margin: 0;
-                    padding-left: 1.5rem;
-                    line-height: 1.8;
-                    font-size: 1.05em;
-                  "
-                >
-                  <li style="margin-bottom: 0.8rem">
-                    <strong style="color: var(--accent)"
-                      >useEffect with setInterval:</strong
-                    >
-                    Updates the time every second
-                  </li>
-                  <li style="margin-bottom: 0.8rem">
-                    <strong style="color: var(--accent)"
-                      >Empty dependency array []:</strong
-                    >
-                    Effect runs once after initial render, then the interval
-                    keeps running
-                  </li>
-                  <li style="margin-bottom: 0.8rem">
-                    <strong style="color: var(--accent)"
-                      >Cleanup function:</strong
-                    >
-                    Returns a function that clears the interval when component
-                    unmounts
-                  </li>
-                  <li>
-                    <strong style="color: var(--accent)"
-                      >Prevents memory leaks:</strong
-                    >
-                    Without cleanup, the interval would keep running even after
-                    component is removed
-                  </li>
-                </ul>
-              </div>
               <div
                 style="
-                  text-align: center;
-                  padding: 0.8rem;
-                  background: var(--accent-soft);
-                  border-radius: 8px;
+                  display: flex;
+                  align-items: flex-start;
+                  gap: 0.5rem;
+                  flex-wrap: nowrap;
                 "
               >
-                <strong style="color: var(--accent)">Next:</strong>
-                <span style="color: var(--text-soft)"
-                  >Let's see the code implementation →</span
+                <span style="color: #c8d2de; white-space: nowrap"
+                  >useEffect(</span
+                >
+
+                <!-- Box 1: effect function -->
+                <div
+                  style="
+                    border: 2px solid #61dafb;
+                    border-radius: 8px;
+                    padding: 0.4rem 0.8rem;
+                    background: rgba(97, 218, 251, 0.08);
+                    white-space: nowrap;
+                  "
+                >
+                  <div
+                    style="
+                      font-size: 0.7em;
+                      color: #61dafb;
+                      margin-bottom: 0.3rem;
+                      font-family: sans-serif;
+                      font-weight: bold;
+                    "
+                  >
+                    ① effect
+                  </div>
+                  <span style="color: #fff">() =&gt; &#123;</span><br />
+                  <span style="color: #c8d2de">&nbsp;&nbsp;// side effect</span
+                  ><br />
+
+                  <!-- Box 3: cleanup -->
+                  <div
+                    style="
+                      display: inline-block;
+                      margin-top: 0.3rem;
+                      border: 2px solid #f97316;
+                      border-radius: 6px;
+                      padding: 0.3rem 0.6rem;
+                      background: rgba(249, 115, 22, 0.08);
+                    "
+                  >
+                    <div
+                      style="
+                        font-size: 0.7em;
+                        color: #f97316;
+                        margin-bottom: 0.2rem;
+                        font-family: sans-serif;
+                        font-weight: bold;
+                      "
+                    >
+                      ③ cleanup
+                    </div>
+                    <span style="color: #fff"
+                      >return () =&gt; &#123; /* cleanup */ &#125;</span
+                    >
+                  </div>
+                  <br />
+                  <span style="color: #fff">&#125;</span>
+                </div>
+
+                <span style="color: #c8d2de; white-space: nowrap">,&nbsp;</span>
+
+                <!-- Box 2: dependencies -->
+                <div
+                  style="
+                    border: 2px solid #22c55e;
+                    border-radius: 8px;
+                    padding: 0.4rem 0.8rem;
+                    background: rgba(34, 197, 94, 0.08);
+                    white-space: nowrap;
+                    align-self: center;
+                  "
+                >
+                  <div
+                    style="
+                      font-size: 0.7em;
+                      color: #22c55e;
+                      margin-bottom: 0.3rem;
+                      font-family: sans-serif;
+                      font-weight: bold;
+                    "
+                  >
+                    ② deps
+                  </div>
+                  <span style="color: #fff">[dep1, dep2]</span>
+                </div>
+
+                <span style="color: #c8d2de; white-space: nowrap">)</span>
+              </div>
+
+              <!-- Legend -->
+              <div
+                style="
+                  display: flex;
+                  gap: 1.5rem;
+                  margin-top: 1.5rem;
+                  font-family: sans-serif;
+                  font-size: 0.85em;
+                "
+              >
+                <span
+                  ><span style="color: #61dafb">①</span> Runs after render</span
+                >
+                <span
+                  ><span style="color: #22c55e">②</span> <code>[]</code> = once
+                  &nbsp;|&nbsp; <code>[val]</code> = on change &nbsp;|&nbsp;
+                  omit = every render</span
+                >
+                <span
+                  ><span style="color: #f97316">③</span> Runs on unmount /
+                  before next effect</span
                 >
               </div>
             </div>
+
+            <aside class="notes">
+              <strong>What is a side effect?</strong>
+              Any operation that interacts outside the component or affects
+              something outside its scope. Examples: fetching data, timers,
+              subscriptions, manual DOM manipulation.
+              <br /><br />
+              <strong>When does useEffect run?</strong>
+              <ul>
+                <li>After every render (no dep array)</li>
+                <li>
+                  Only when listed dependencies change (<code>[dep1, dep2]</code
+                  >)
+                </li>
+                <li>
+                  Once after first render only (<code>[]</code>) — equivalent to
+                  <code>componentDidMount</code>
+                </li>
+              </ul>
+              <strong>Cleanup function:</strong>
+              Return a function from useEffect to clean up resources like
+              intervals, subscriptions, or event listeners — prevents memory
+              leaks.
+              <br /><br />
+              <strong>Demo idea:</strong> effect sets <code>setInterval</code> →
+              cleanup calls <code>clearInterval</code>.
+            </aside>
+          </section>
+
+          <!-- Slide 15: useEffect highlights -->
+          <section>
+            <h3>useEffect — Key Points</h3>
+            <div
+              style="text-align: left; font-size: 0.82em; margin-top: 1.5rem"
+            >
+              <ul style="padding-left: 1.5rem; line-height: 2.2">
+                <li>
+                  ⏱️ Runs <strong>after</strong> the component renders — never
+                  during
+                </li>
+                <li>
+                  🔁 <code>[]</code> → once &nbsp;|&nbsp; <code>[val]</code> →
+                  when <em>val</em> changes &nbsp;|&nbsp; no array → every
+                  render
+                </li>
+                <li>
+                  🧹 Return a function to <strong>clean up</strong> (clear
+                  timers, unsubscribe…)
+                </li>
+                <li>
+                  🚫 No cleanup = <strong>memory leak</strong> if the component
+                  unmounts
+                </li>
+              </ul>
+            </div>
+            <aside class="notes">
+              Walk through each point with the clock example in mind:
+              <ul>
+                <li>
+                  <strong>setInterval</strong> starts the clock → dep array
+                  <code>[]</code> means it runs once
+                </li>
+                <li>
+                  <strong>Cleanup</strong> calls <code>clearInterval</code> when
+                  the component is removed from the tree
+                </li>
+                <li>
+                  Without cleanup the interval keeps ticking even after unmount
+                  — classic memory leak
+                </li>
+              </ul>
+            </aside>
+          </section>
+
+          <!-- Slide 15a: Exercise Demo -->
+          <section>
+            <h3>Exercise — Demo 🛠️</h3>
+            <div
+              class="card"
+              style="
+                margin-top: 2rem;
+                padding: 2.5rem;
+                text-align: center;
+                background: var(--accent-soft);
+              "
+            >
+              <p
+                style="
+                  font-size: 1.2em;
+                  margin: 0 0 1rem;
+                  color: var(--accent);
+                  font-weight: bold;
+                "
+              >
+                Open the live demo in the course app
+              </p>
+              <p
+                style="
+                  font-size: 0.9em;
+                  margin: 0;
+                  color: var(--text-soft);
+                  line-height: 1.6;
+                "
+              >
+                Pages:
+                <code style="color: var(--accent)">UseEffectClock</code>
+                &nbsp;/&nbsp;
+                <code style="color: var(--accent)">UseEffectFetch</code>
+                &nbsp;/&nbsp;
+                <code style="color: var(--accent)">UseEffectBug</code>
+              </p>
+            </div>
+            <aside class="notes">
+              Show three pages from the day_2 course app:
+              <ul>
+                <li>
+                  <strong>UseEffectClock</strong> — setInterval + cleanup, watch
+                  the interval fire in console
+                </li>
+                <li>
+                  <strong>UseEffectFetch</strong> — fetch inside useEffect with
+                  loading state
+                </li>
+                <li>
+                  <strong>UseEffectBug</strong> — missing dep array → infinite
+                  loop; add <code>[]</code> to fix it
+                </li>
+              </ul>
+            </aside>
           </section>
 
           <!-- Slide 15a: Example - Clock Code -->
@@ -2522,49 +2667,144 @@ export default function Clock() {
             </div>
           </section>
 
-          <!-- Slide 16: Custom Hooks -->
+          <!-- Slide 16a: What is a Custom Hook? -->
           <section>
-            <h3>Custom Hooks <span class="small-text">(30 min)</span></h3>
-            <div style="text-align: left; font-size: 0.75em; margin-top: 1rem">
-              <div class="card" style="margin-bottom: 1rem; padding: 1rem">
-                <h4 style="color: var(--accent); margin: 0 0 0.5rem">
-                  What is a custom hook?
-                </h4>
-                <ul style="margin: 0; padding-left: 1.5rem">
-                  <li>
+            <h3>What is a Custom Hook?</h3>
+            <div style="text-align: left; font-size: 0.45em; margin-top: 2rem">
+              <div class="card" style="margin-bottom: 1.5rem; padding: 2rem">
+                <ul style="margin: 0; padding-left: 1.5rem; line-height: 2.2">
+                  <li style="margin-bottom: 1.2rem; font-size: 1.5em">
                     A JavaScript function that starts with <code>use</code> and
                     reuses component logic.
                   </li>
-                  <li>
+                  <li style="font-size: 1.5em">
                     Can use other hooks inside it (<code>useState</code>,
                     <code>useEffect</code>, etc.).
                   </li>
                 </ul>
               </div>
+            </div>
+          </section>
 
-              <div class="card" style="margin-bottom: 1rem; padding: 1rem">
-                <h4 style="color: var(--accent); margin: 0 0 0.5rem">
-                  Why use custom hooks
-                </h4>
-                <ul style="margin: 0; padding-left: 1.5rem">
-                  <li>Avoid repeating code.</li>
-                  <li>Separate logic from UI.</li>
-                  <li>Makes code cleaner and easier to test.</li>
+          <!-- Slide 16b: Why Use Custom Hooks? -->
+          <section>
+            <h3>Why Use Custom Hooks?</h3>
+            <div style="text-align: left; font-size: 0.45em; margin-top: 2rem">
+              <div class="card" style="margin-bottom: 1.5rem; padding: 2rem">
+                <ul style="margin: 0; padding-left: 1.5rem; line-height: 2.2">
+                  <li style="margin-bottom: 1.2rem; font-size: 1.5em">
+                    Avoid repeating code.
+                  </li>
+                  <li style="margin-bottom: 1.2rem; font-size: 1.5em">
+                    Separate logic from UI.
+                  </li>
+                  <li style="font-size: 1.5em">
+                    Makes code cleaner and easier to test.
+                  </li>
                 </ul>
               </div>
+            </div>
+          </section>
 
-              <div class="card" style="padding: 1rem">
-                <h4 style="color: var(--accent); margin: 0 0 0.5rem">
-                  Example
-                </h4>
-                <p style="margin: 0">
+          <!-- Slide 16c: What Can Custom Hooks Return? -->
+          <section>
+            <h3>What Can Custom Hooks Return?</h3>
+            <div style="text-align: left; font-size: 0.45em; margin-top: 2rem">
+              <div class="card" style="margin-bottom: 1.5rem; padding: 2rem">
+                <ul style="margin: 0; padding-left: 1.5rem; line-height: 2.2">
+                  <li style="margin-bottom: 1.2rem; font-size: 1.5em">
+                    Can return <strong>any kind of data</strong>: objects,
+                    arrays, primitives, functions
+                  </li>
+                  <li style="margin-bottom: 1.2rem; font-size: 1.5em">
+                    Can return <strong>nothing</strong> (just perform side
+                    effects)
+                  </li>
+                  <li style="color: #ef4444; font-size: 1.5em">
+                    ❌ <strong>Cannot return JSX</strong> - hooks are logic, not
+                    UI
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <!-- Slide 16d: Custom Hooks as Services -->
+          <section>
+            <h3>Custom Hooks as Services</h3>
+            <div style="text-align: left; font-size: 0.45em; margin-top: 2rem">
+              <div class="card" style="margin-bottom: 1.5rem; padding: 2rem">
+                <ul style="margin: 0; padding-left: 1.5rem; line-height: 2.2">
+                  <li style="margin-bottom: 1.2rem; font-size: 1.5em">
+                    Think of custom hooks as <strong>services</strong>
+                  </li>
+                  <li style="margin-bottom: 1.2rem; font-size: 1.5em">
+                    They provide reusable functionality to components
+                  </li>
+                  <li style="font-size: 1.5em">
+                    Similar to services in other frameworks (Angular, etc.)
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <!-- Slide 16e: Custom Hooks and Component Lifecycle -->
+          <section>
+            <h3>Custom Hooks & Component Lifecycle</h3>
+            <div style="text-align: left; font-size: 0.45em; margin-top: 2rem">
+              <div class="card" style="margin-bottom: 1.5rem; padding: 2rem">
+                <ul style="margin: 0; padding-left: 1.5rem; line-height: 2.2">
+                  <li style="margin-bottom: 1.2rem; font-size: 1.5em">
+                    Custom hooks are
+                    <strong>part of the component's lifecycle</strong>
+                  </li>
+                  <li style="margin-bottom: 1.2rem; font-size: 1.5em">
+                    They execute when the component renders
+                  </li>
+                  <li style="font-size: 1.5em">
+                    This is just a
+                    <strong>technical/visual separation</strong> of concerns
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <!-- Slide 16f: Custom Hooks and Separation of Concerns -->
+          <section>
+            <h3>Custom Hooks & Design Patterns</h3>
+            <div style="text-align: left; font-size: 0.45em; margin-top: 2rem">
+              <div class="card" style="margin-bottom: 1.5rem; padding: 2rem">
+                <ul style="margin: 0; padding-left: 1.5rem; line-height: 2.2">
+                  <li style="margin-bottom: 1.2rem; font-size: 1.5em">
+                    Similar to <strong>MVC pattern</strong>: separate business
+                    logic from presentation
+                  </li>
+                  <li style="margin-bottom: 1.2rem; font-size: 1.5em">
+                    <strong>Custom Hook</strong> = Model/Controller (logic)
+                  </li>
+                  <li style="font-size: 1.5em">
+                    <strong>Component</strong> = View (UI/JSX)
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <!-- Slide 16g: Custom Hooks Example -->
+          <section>
+            <h3>Custom Hooks - Example</h3>
+            <div style="text-align: left; font-size: 0.45em; margin-top: 2rem">
+              <div class="card" style="padding: 2rem">
+                <p style="margin: 0; line-height: 1.8; font-size: 1.5em">
                   <code>useFetch</code> encapsulates data fetching logic, so any
                   component can just call
                   <code>const { data, loading } = useFetch(url)</code>.
                 </p>
               </div>
             </div>
-            <p class="small-text" style="margin-top: 1rem">
+            <p class="small-text" style="margin-top: 1.5rem">
               💡 Show example: component without custom hook (repeated fetch
               code) vs component with custom hook
             </p>
@@ -2592,52 +2832,59 @@ export function useFetch(url) {
             </div>
           </section>
 
-          <!-- Slide 18: useRef -->
+          <!-- Slide 18a: What is useRef? -->
           <section>
-            <h3>useRef for Mutable References & DOM Access</h3>
-            <div style="text-align: left; font-size: 0.65em; margin-top: 1rem">
-              <div class="card" style="margin-bottom: 1rem; padding: 1rem">
-                <h4 style="color: var(--accent); margin: 0 0 0.5rem">
-                  What is useRef?
-                </h4>
-                <ul style="margin: 0; padding-left: 1.5rem">
-                  <li>
+            <h3>What is useRef?</h3>
+            <div style="text-align: left; font-size: 0.45em; margin-top: 2rem">
+              <div class="card" style="margin-bottom: 1.5rem; padding: 2rem">
+                <ul style="margin: 0; padding-left: 1.5rem; line-height: 2.2">
+                  <li style="margin-bottom: 1.2rem; font-size: 1.5em">
                     A hook that holds a mutable object whose
                     <code>.current</code> property persists across renders.
                   </li>
-                  <li>Can store DOM elements or mutable values.</li>
+                  <li style="font-size: 1.5em">
+                    Can store DOM elements or mutable values.
+                  </li>
                 </ul>
               </div>
+            </div>
+          </section>
 
-              <div class="card" style="margin-bottom: 1rem; padding: 1rem">
-                <h4 style="color: var(--accent); margin: 0 0 0.5rem">
-                  Use cases
-                </h4>
-                <ul style="margin: 0; padding-left: 1.5rem">
-                  <li>
+          <!-- Slide 18b: useRef Use Cases -->
+          <section>
+            <h3>useRef - Use Cases</h3>
+            <div style="text-align: left; font-size: 0.45em; margin-top: 2rem">
+              <div class="card" style="margin-bottom: 1.5rem; padding: 2rem">
+                <ul style="margin: 0; padding-left: 1.5rem; line-height: 2.2">
+                  <li style="margin-bottom: 1.2rem; font-size: 1.5em">
                     <strong>DOM access:</strong> Focus input, scroll to element,
                     measure element size.
                   </li>
-                  <li>
+                  <li style="font-size: 1.5em">
                     <strong>Mutable storage:</strong> Store previous state or
                     timer ID without triggering re-renders.
                   </li>
                 </ul>
               </div>
+            </div>
+          </section>
 
-              <div class="card" style="padding: 1rem">
-                <h4 style="color: var(--accent); margin: 0 0 0.5rem">
-                  Important rules
-                </h4>
-                <ul style="margin: 0; padding-left: 1.5rem">
-                  <li>
+          <!-- Slide 18c: useRef Important Rules -->
+          <section>
+            <h3>useRef - Important Rules</h3>
+            <div style="text-align: left; font-size: 0.45em; margin-top: 2rem">
+              <div class="card" style="padding: 2rem">
+                <ul style="margin: 0; padding-left: 1.5rem; line-height: 2.2">
+                  <li style="margin-bottom: 1.2rem; font-size: 1.5em">
                     Updating <code>.current</code> does not trigger a render.
                   </li>
-                  <li>Useful for performance-sensitive operations.</li>
+                  <li style="font-size: 1.5em">
+                    Useful for performance-sensitive operations.
+                  </li>
                 </ul>
               </div>
             </div>
-            <p class="small-text" style="margin-top: 1rem">
+            <p class="small-text" style="margin-top: 1.5rem">
               💡 Show visual: component renders, useRef stores a DOM element →
               manipulate it without re-rendering
             </p>
@@ -2706,6 +2953,84 @@ function FocusInput() {
             </div>
           </section>
 
+          <!-- Slide 19b: Example - useRef for Constant Reference -->
+          <section>
+            <h3>Example: useRef - Constant Reference</h3>
+            <div class="two-col" style="margin-top: 1rem">
+              <div>
+                <div
+                  class="small-text"
+                  style="margin-bottom: 0.5rem; color: var(--accent)"
+                >
+                  JavaScript/JSX
+                </div>
+                <pre><code class="language-jsx">import { useState, useRef } from "react";
+
+function ClickCounter() {
+  const [stateCount, setStateCount] = useState(0);
+  const [displayRef, setDisplayRef] = useState(0);
+  const refCount = useRef(0);
+
+  const handleStateClick = () => {
+    setStateCount(stateCount + 1); // ✅ Triggers re-render
+  };
+
+  const handleRefClick = () => {
+    refCount.current++; // ❌ No re-render
+    console.log("Ref count:", refCount.current);
+  };
+
+  const showRefValue = () => {
+    setDisplayRef(refCount.current); // Force update
+  };
+
+  return (
+    &lt;div&gt;
+      &lt;p&gt;State Count: {stateCount}&lt;/p&gt;
+      &lt;p&gt;Ref Count (Display): {displayRef}&lt;/p&gt;
+      &lt;button onClick={handleStateClick}&gt;
+        State +1 (Re-renders)
+      &lt;/button&gt;
+      &lt;button onClick={handleRefClick}&gt;
+        Ref +1 (No Re-render)
+      &lt;/button&gt;
+      &lt;button onClick={showRefValue}&gt;
+        Show Ref Value
+      &lt;/button&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+              </div>
+              <div>
+                <div
+                  class="small-text"
+                  style="margin-bottom: 0.5rem; color: var(--accent)"
+                >
+                  Key Points
+                </div>
+                <div class="card" style="padding: 1rem; text-align: left; font-size: 0.85em">
+                  <ul style="margin: 0; padding-left: 1.5rem; line-height: 1.8">
+                    <li style="margin-bottom: 0.8rem">
+                      <code>useState</code> triggers re-render when updated
+                    </li>
+                    <li style="margin-bottom: 0.8rem">
+                      <code>useRef</code> persists value but doesn't trigger re-render
+                    </li>
+                    <li style="margin-bottom: 0.8rem">
+                      Perfect for tracking values like click counts, timers, previous values
+                    </li>
+                    <li>
+                      Check console to see ref value updates
+                    </li>
+                  </ul>
+                </div>
+                <p class="small-text" style="margin-top: 1rem">
+                  💡 Route: /useref-counter
+                </p>
+              </div>
+            </div>
+          </section>
+
           <!-- Slide 20: Exercise - Fetch and Render -->
           <section>
             <h3>
@@ -2718,17 +3043,17 @@ function FocusInput() {
             >
               <h4 style="color: var(--accent); margin: 0 0 1rem">Task</h4>
               <ul style="font-size: 1.1em; margin: 0; padding-left: 1.5rem">
-                <li>Fetch posts from JSONPlaceholder.</li>
-                <li>Display the title in a list.</li>
+                <li>Fetch data from the Star Wars API.</li>
+                <li>Display the characters in a list.</li>
                 <li>Use a custom hook <code>useFetch</code>.</li>
               </ul>
             </div>
             <p class="small-text" style="margin-top: 1rem">
-              💡 Consider splitting into two exercises
+              💡 Bonus: add input field to perform a character search
             </p>
           </section>
 
-          <!-- Slide 21: Solution - PostList -->
+          <!-- Slide 21: Solution - Star Wars Characters -->
           <section>
             <h3>Solution: Fetch and Render a List</h3>
             <div class="two-col" style="margin-top: 1rem">
@@ -2737,25 +3062,44 @@ function FocusInput() {
                   class="small-text"
                   style="margin-bottom: 0.5rem; color: var(--accent)"
                 >
-                  JavaScript/JSX
+                  JavaScript/JSX - Star Wars Characters
                 </div>
-                <pre><code class="language-jsx">import { useFetch } from "./useFetch";
+                <pre><code class="language-jsx">function StarWarsCharacters() {
+  const [search, setSearch] = useState("");
+  const [characters, setCharacters] = useState([]);
 
-export default function PostList() {
-  const { data: posts, loading } = useFetch(
-    "https://jsonplaceholder.typicode.com/posts"
-  );
-
-  if (loading) {
-    return &lt;p&gt;Loading...&lt;/p&gt;;
-  }
+  useEffect(() => {
+    async function fetchCharacters() {
+      const response = await fetch(
+        `https://swapi.py4e.com/api/people/?search=${search}`
+      );
+      const data = await response.json();
+      setCharacters(data.results.slice(0, 10));
+    }
+    fetchCharacters();
+  }, [search]);
 
   return (
-    &lt;ul className="post-list"&gt;
-      {posts.map((post) =&gt; (
-        &lt;li key={post.id}&gt;{post.title}&lt;/li&gt;
-      ))}
-    &lt;/ul&gt;
+    &lt;div&gt;
+      &lt;input
+        type="text"
+        placeholder="Search..."
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+      /&gt;
+      &lt;table&gt;
+        &lt;thead&gt;
+          &lt;tr&gt;&lt;th&gt;Name&lt;/th&gt;&lt;/tr&gt;
+        &lt;/thead&gt;
+        &lt;tbody&gt;
+          {characters.map((c, i) => (
+            &lt;tr key={i}&gt;
+              &lt;td&gt;{c.name}&lt;/td&gt;
+            &lt;/tr&gt;
+          ))}
+        &lt;/tbody&gt;
+      &lt;/table&gt;
+    &lt;/div&gt;
   );
 }</code></pre>
               </div>
@@ -2764,16 +3108,15 @@ export default function PostList() {
                   class="small-text"
                   style="margin-bottom: 0.5rem; color: var(--accent)"
                 >
-                  CSS
+                  Route: /starwars
                 </div>
-                <pre><code class="language-css">.post-list li {
-  padding: 0.5rem;
-  border-bottom: 1px solid #ddd;
-
-  &:hover {
-    background: #f9f9f9;
-  }
-}</code></pre>
+                <p style="font-size: 0.8em; margin-top: 1rem">Features:</p>
+                <ul style="font-size: 0.75em; text-align: left">
+                  <li>Fetches 10 Star Wars characters by default</li>
+                  <li>Search field filters characters in real-time</li>
+                  <li>Simple table with character names</li>
+                  <li>Uses useEffect with search dependency</li>
+                </ul>
               </div>
             </div>
           </section>

@@ -12,7 +12,7 @@ const sampleUsers: User[] = [
   { name: "Sarah", isPremium: false },
   { name: "David", isPremium: false },
   { name: "Rachel", isPremium: false },
-  { name: "Michael", isPremium: false },
+  { name: "Yoav", isPremium: true },
 ];
 
 function ConditionalExample() {
@@ -45,7 +45,7 @@ function ConditionalExample() {
           <div className="user-buttons">
             {users.map((user, index) => (
               <button
-                key={index}
+                key={`${index}-${user.name}`}
                 onClick={() => setSelectedUser(user)}
                 className={selectedUser.name === user.name ? "active" : ""}
               >

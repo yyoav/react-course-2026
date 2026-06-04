@@ -124,8 +124,12 @@ function App() {
           <Link to="/conditional">Conditional Rendering</Link>
           <Link to="/useeffect1">useEffect - Date</Link>
           <Link to="/useeffect2">useEffect - Fetch</Link>
+          <Link to="/useeffect3">useEffect - Deps</Link>
           <Link to="/bug1">useEffect - Bug</Link>
-          <Link to="/useref">useRef</Link>
+          <Link to="/useref">useRef - DOM Access</Link>
+          <Link to="/useref-counter">useRef - Constant Reference</Link>
+          <Link to="/reconciliation">Reconciliation Demo</Link>
+          <Link to="/starwars">⭐ Star Wars Characters (Exercise)</Link>
         </nav>
       </section>
     </>
