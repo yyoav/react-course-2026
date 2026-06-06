@@ -182,3 +182,44 @@
     border-right-color: var(--border);
   }
 }
+
+
+#examples-menu {
+  padding: 24px 32px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+
+  h3 {
+    margin: 0 0 16px 0;
+    font-size: 18px;
+    color: var(--text-h);
+  }
+
+  nav {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  a {
+    color: var(--accent);
+    text-decoration: none;
+    padding: 8px 16px;
+    border: 1px solid var(--accent-border);
+    border-radius: 6px;
+    background: var(--accent-bg);
+    transition: all 0.3s;
+    font-size: 15px;
+
+    &:hover {
+      background: var(--accent);
+      color: var(--bg);
+      border-color: var(--accent);
+    }
+  }
+
+  @media (max-width: 1024px) {
+    padding: 20px;
+  }
+}
