@@ -702,7 +702,7 @@ export const useTheme = () => {
             </div>
           </section>
 
-          <!-- Slide 17: Why Zustand over Redux? -->
+          <!-- Slide 17: Why Zustand over Redux? - Introduction -->
           <section>
             <h3>Why Zustand instead of Redux?</h3>
             <div class="card" style="margin-top: 1rem">
@@ -714,40 +714,147 @@ export const useTheme = () => {
                 (used by millions of apps worldwide)
               </p>
             </div>
+            <div class="card" style="margin-top: 1.5rem">
+              <p style="font-size: 0.8em">👉 So why learn Zustand instead?</p>
+            </div>
+          </section>
 
-            <div class="two-col" style="margin-top: 2rem">
-              <div class="card">
-                <h4 style="font-size: 0.9em">❌ Redux Challenges</h4>
-                <ul style="font-size: 0.75em; line-height: 1.6">
-                  <li>Steep learning curve</li>
-                  <li>Lots of boilerplate</li>
-                  <li>Actions, reducers, types...</li>
-                  <li>Need middleware for async</li>
-                  <li>Complex setup</li>
-                </ul>
-              </div>
-
-              <div class="card">
-                <h4 style="font-size: 0.9em">✅ Zustand Advantages</h4>
-                <ul style="font-size: 0.75em; line-height: 1.6">
-                  <li>Learn in 10 minutes</li>
-                  <li>Minimal boilerplate</li>
-                  <li>Just one hook + store</li>
-                  <li>Async built-in</li>
-                  <li>Setup in 5 lines</li>
+          <!-- Slide 18: Redux Challenges - Part 1 -->
+          <section>
+            <h3>Redux Challenges</h3>
+            <div style="text-align: left; font-size: 0.9em; margin-top: 2rem">
+              <div class="card" style="padding: 2rem">
+                <ul
+                  style="
+                    margin: 0;
+                    padding-left: 1.5rem;
+                    line-height: 1.8;
+                    font-size: 1.1em;
+                  "
+                >
+                  <li style="margin-bottom: 1rem">
+                    <strong style="color: var(--accent)"
+                      >Steep learning curve:</strong
+                    >
+                    Many concepts to master before being productive
+                  </li>
+                  <li style="margin-bottom: 1rem">
+                    <strong style="color: var(--accent)"
+                      >Lots of boilerplate:</strong
+                    >
+                    Multiple files and patterns for simple state updates
+                  </li>
+                  <li>
+                    <strong style="color: var(--accent)"
+                      >Complex structure:</strong
+                    >
+                    Actions, reducers, action types, constants...
+                  </li>
                 </ul>
               </div>
             </div>
+          </section>
 
+          <!-- Slide 19: Redux Challenges - Part 2 -->
+          <section>
+            <h3>Redux Challenges (cont.)</h3>
+            <div style="text-align: left; font-size: 0.9em; margin-top: 2rem">
+              <div class="card" style="padding: 2rem">
+                <ul
+                  style="
+                    margin: 0;
+                    padding-left: 1.5rem;
+                    line-height: 1.8;
+                    font-size: 1.1em;
+                  "
+                >
+                  <li style="margin-bottom: 1rem">
+                    <strong style="color: var(--accent)"
+                      >Middleware required:</strong
+                    >
+                    Need extra setup (Redux Thunk/Saga) for async operations
+                  </li>
+                  <li>
+                    <strong style="color: var(--accent)">Complex setup:</strong>
+                    Store configuration, provider wrapping, dev tools
+                    integration
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <!-- Slide 20: Zustand Advantages - Part 1 -->
+          <section>
+            <h3>Zustand Advantages</h3>
+            <div style="text-align: left; font-size: 0.9em; margin-top: 2rem">
+              <div class="card" style="padding: 2rem">
+                <ul
+                  style="
+                    margin: 0;
+                    padding-left: 1.5rem;
+                    line-height: 1.8;
+                    font-size: 1.1em;
+                  "
+                >
+                  <li style="margin-bottom: 1rem">
+                    <strong style="color: var(--accent)"
+                      >Learn in 10 minutes:</strong
+                    >
+                    Simple API with minimal concepts to understand
+                  </li>
+                  <li style="margin-bottom: 1rem">
+                    <strong style="color: var(--accent)"
+                      >Minimal boilerplate:</strong
+                    >
+                    Just define your store and use it - no extra files needed
+                  </li>
+                  <li>
+                    <strong style="color: var(--accent)">Just one hook:</strong>
+                    Create store with `create()`, use it with the returned hook
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <!-- Slide 21: Zustand Advantages - Part 2 -->
+          <section>
+            <h3>Zustand Advantages (cont.)</h3>
+            <div style="text-align: left; font-size: 0.9em; margin-top: 2rem">
+              <div class="card" style="padding: 2rem">
+                <ul
+                  style="
+                    margin: 0;
+                    padding-left: 1.5rem;
+                    line-height: 1.8;
+                    font-size: 1.1em;
+                  "
+                >
+                  <li style="margin-bottom: 1rem">
+                    <strong style="color: var(--accent)"
+                      >Async built-in:</strong
+                    >
+                    Handle async operations directly - no middleware needed
+                  </li>
+                  <li>
+                    <strong style="color: var(--accent)"
+                      >Setup in 5 lines:</strong
+                    >
+                    Define state and actions in one simple object
+                  </li>
+                </ul>
+              </div>
+            </div>
             <div class="card" style="margin-top: 1.5rem">
-              <p style="font-size: 0.75em">
+              <p style="font-size: 0.85em">
                 🎯 <span class="highlight">For this course:</span> Zustand gives
                 you 80% of Redux power with 20% of the complexity
               </p>
             </div>
           </section>
 
-          <!-- Slide 18: Mental Model -->
+          <!-- Slide 22: Mental Model -->
           <section>
             <h3>Mental Model: Store = State + Actions</h3>
             <p class="small-text">
@@ -782,15 +889,9 @@ export const useTheme = () => {
                 Just plain JavaScript objects and functions
               </p>
             </div>
-
-            <div class="roadmap" style="margin-top: 1.5rem">
-              <span>Simple</span>
-              <span>Predictable</span>
-              <span>Easy to Debug</span>
-            </div>
           </section>
 
-          <!-- Slide 19: Single Source of Truth - Bank Account Example -->
+          <!-- Slide 23: Single Source of Truth - Bank Account Example -->
           <section>
             <h3>Single Source of Truth</h3>
             <p class="small-text">Example: Bank Account Management</p>
@@ -1046,7 +1147,7 @@ export const useTheme = () => {
             </svg>
           </section>
 
-          <!-- Slide 20: Zustand API - Just 2 Things -->
+          <!-- Slide 24: Zustand API - Just 2 Things -->
           <section>
             <h3>Zustand API: Just 2 Things to Learn</h3>
 
@@ -1080,7 +1181,7 @@ const useStore = create((set) => ({
             </div>
           </section>
 
-          <!-- Slide 21: Exercise 2 - Todo List with Zustand -->
+          <!-- Slide 25: Exercise 2 - Todo List with Zustand -->
           <section>
             <h3>🧪 Exercise 2 — Todo List (Zustand)</h3>
             <p class="small-text">→ live coding / hands-on</p>
@@ -1119,7 +1220,7 @@ const useStore = create((set) => ({
             </div>
           </section>
 
-          <!-- Slide 22: Solution - Todo Store -->
+          <!-- Slide 26: Solution - Todo Store -->
           <section>
             <h3>Solution: Todo Store</h3>
             <pre><code class="tsx" style="font-size: 0.52em;">import { create } from 'zustand';
@@ -1151,7 +1252,7 @@ const useTodoStore = create((set) => ({
 export default useTodoStore;</code></pre>
           </section>
 
-          <!-- Slide 23: Solution - Using the Store -->
+          <!-- Slide 27: Solution - Using the Store -->
           <section>
             <h3>Solution: Using the Store</h3>
             <div class="two-col" style="margin-top: 1rem">
@@ -1210,7 +1311,7 @@ export default useTodoStore;</code></pre>
             </div>
           </section>
 
-          <!-- Slide 24: Key Takeaways -->
+          <!-- Slide 28: Key Takeaways -->
           <section>
             <h3>🧠 Key Takeaways</h3>
             <div class="card" style="margin-top: 1.5rem">
