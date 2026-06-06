@@ -303,12 +303,6 @@
           <!-- Slide 3: Topics Overview -->
           <section>
             <h3>The Problem: Prop Drilling</h3>
-            <div class="roadmap">
-              <span>Global State Management in React</span>
-              <span>Context API</span>
-              <span>Zustand</span>
-              <span>When to use what</span>
-            </div>
           </section>
 
           <!-- Slide 4: What is Prop Drilling -->
@@ -343,35 +337,137 @@ function UserProfile({ user }) {
             </p>
           </section>
 
-          <!-- Slide 5: Solution Categories -->
+          <!-- Slide 5: Why Prop Drilling is a Problem - Part 1 -->
           <section>
-            <h3>Solution Categories</h3>
-            <ul>
-              <li><span class="highlight">Context API</span> (built-in)</li>
-              <li>
-                <span class="highlight">External state libraries</span>
-                (Zustand, Redux, etc.)
-              </li>
-            </ul>
+            <h3>Why Prop Drilling is a Problem</h3>
+            <div style="text-align: left; font-size: 0.9em; margin-top: 2rem">
+              <div class="card" style="padding: 2rem">
+                <ul
+                  style="
+                    margin: 0;
+                    padding-left: 1.5rem;
+                    line-height: 1.8;
+                    font-size: 1.1em;
+                  "
+                >
+                  <li style="margin-bottom: 1rem">
+                    <strong style="color: var(--accent)"
+                      >Maintenance burden:</strong
+                    >
+                    Every intermediate component must know about props it
+                    doesn't use
+                  </li>
+                  <li style="margin-bottom: 1rem">
+                    <strong style="color: var(--accent)"
+                      >Tight coupling:</strong
+                    >
+                    Components become unnecessarily dependent on their parent's
+                    data structure
+                  </li>
+                  <li>
+                    <strong style="color: var(--accent)"
+                      >Refactoring nightmare:</strong
+                    >
+                    Adding or removing a prop requires changes across multiple
+                    files
+                  </li>
+                </ul>
+              </div>
+            </div>
           </section>
 
-          <!-- Slide 6: What is Context -->
+          <!-- Slide 6: Why Prop Drilling is a Problem - Part 2 -->
+          <section>
+            <h3>Why Prop Drilling is a Problem (cont.)</h3>
+            <div style="text-align: left; font-size: 0.9em; margin-top: 2rem">
+              <div class="card" style="padding: 2rem">
+                <ul
+                  style="
+                    margin: 0;
+                    padding-left: 1.5rem;
+                    line-height: 1.8;
+                    font-size: 1.1em;
+                  "
+                >
+                  <li style="margin-bottom: 1rem">
+                    <strong style="color: var(--accent)"
+                      >Reduced reusability:</strong
+                    >
+                    Components polluted with pass-through props are harder to
+                    reuse
+                  </li>
+                  <li>
+                    <strong style="color: var(--accent)">Code noise:</strong>
+                    Props list grows, obscuring which data is actually used
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <!-- Slide 7: Solution Categories -->
+          <section>
+            <h3>Solution Categories</h3>
+            <div style="text-align: left; font-size: 0.9em; margin-top: 2rem">
+              <div class="card" style="padding: 2rem">
+                <ul
+                  style="
+                    margin: 0;
+                    padding-left: 1.5rem;
+                    line-height: 1.8;
+                    font-size: 1.1em;
+                  "
+                >
+                  <li style="margin-bottom: 1rem">
+                    <strong style="color: var(--accent)">Context API</strong>
+                    (built-in)
+                  </li>
+                  <li>
+                    <strong style="color: var(--accent)"
+                      >External state libraries</strong
+                    >
+                    (Zustand, Redux, etc.)
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <!-- Slide 8: What is Context -->
           <section>
             <h3>What is Context?</h3>
             <p class="small-text">
               👉 A way to share data globally without props
             </p>
-            <div style="margin-top: 1.5rem">
+            <div style="text-align: left; font-size: 0.9em; margin-top: 2rem">
               <h4>Best for:</h4>
-              <ul>
-                <li>Theme (dark/light)</li>
-                <li>Auth user</li>
-                <li>Language / locale</li>
-              </ul>
+              <div class="card" style="padding: 2rem">
+                <ul
+                  style="
+                    margin: 0;
+                    padding-left: 1.5rem;
+                    line-height: 1.8;
+                    font-size: 1.1em;
+                  "
+                >
+                  <li style="margin-bottom: 1rem">
+                    <strong style="color: var(--accent)">Theme</strong>
+                    (dark/light)
+                  </li>
+                  <li style="margin-bottom: 1rem">
+                    <strong style="color: var(--accent)">Auth user</strong>
+                  </li>
+                  <li>
+                    <strong style="color: var(--accent)"
+                      >Language / locale</strong
+                    >
+                  </li>
+                </ul>
+              </div>
             </div>
           </section>
 
-          <!-- Slide 7: Context API Components -->
+          <!-- Slide 9: Context API Components -->
           <section>
             <h3>Context API - 3 Steps</h3>
             <pre><code class="tsx" style="font-size: 0.6em;">// 1️⃣ Create Context
@@ -401,7 +497,7 @@ function Header() {
             </div>
           </section>
 
-          <!-- Slide 8: Important Concept -->
+          <!-- Slide 10: Important Concept -->
           <section>
             <h3>Important Concept</h3>
             <div class="card" style="margin-top: 1rem">
@@ -423,7 +519,7 @@ function Header() {
             </div>
           </section>
 
-          <!-- Slide 9: Exercise 1 -->
+          <!-- Slide 11: Exercise 1 -->
           <section>
             <h3>🧪 Exercise 1 — Theme Toggle (Context)</h3>
             <p class="small-text">→ live coding</p>
@@ -455,7 +551,7 @@ function Header() {
             </div>
           </section>
 
-          <!-- Slide 10: Solution -->
+          <!-- Slide 12: Solution -->
           <section>
             <h3>Solution</h3>
             <pre><code class="tsx" style="font-size: 0.58em;">import { createContext, useContext, useState } from "react";
@@ -488,7 +584,7 @@ export const useTheme = () => {
 // &lt;ThemeProvider&gt;&lt;App /&gt;&lt;/ThemeProvider&gt;</code></pre>
           </section>
 
-          <!-- Slide 11: Usage -->
+          <!-- Slide 13: Usage -->
           <section>
             <h3>Usage</h3>
             <pre><code class="tsx">const Button = () => {
@@ -515,7 +611,7 @@ export const useTheme = () => {
 
         <!-- PART 2: ZUSTAND -->
         <section>
-          <!-- Slide 12: Zustand Introduction -->
+          <!-- Slide 14: Zustand Introduction -->
           <section>
             <h1>Zustand</h1>
             <h3>Simple State Management</h3>
@@ -531,7 +627,7 @@ export const useTheme = () => {
             </p>
           </section>
 
-          <!-- Slide 13: What is Zustand & Why Use It -->
+          <!-- Slide 15: What is Zustand & Why Use It -->
           <section>
             <h3>What is Zustand?</h3>
             <div class="two-col" style="margin-top: 1.5rem">
@@ -564,7 +660,7 @@ export const useTheme = () => {
             </div>
           </section>
 
-          <!-- Slide 14: Provider Hell Problem -->
+          <!-- Slide 16: Provider Hell Problem -->
           <section>
             <h3>The Problem: Provider Hell 🔥</h3>
             <p class="small-text">As apps grow, Context becomes messy...</p>
@@ -606,7 +702,7 @@ export const useTheme = () => {
             </div>
           </section>
 
-          <!-- Slide 15: Why Zustand over Redux? -->
+          <!-- Slide 17: Why Zustand over Redux? -->
           <section>
             <h3>Why Zustand instead of Redux?</h3>
             <div class="card" style="margin-top: 1rem">
@@ -651,7 +747,7 @@ export const useTheme = () => {
             </div>
           </section>
 
-          <!-- Slide 16: Mental Model -->
+          <!-- Slide 18: Mental Model -->
           <section>
             <h3>Mental Model: Store = State + Actions</h3>
             <p class="small-text">
@@ -694,7 +790,7 @@ export const useTheme = () => {
             </div>
           </section>
 
-          <!-- Slide 17: Single Source of Truth - Bank Account Example -->
+          <!-- Slide 19: Single Source of Truth - Bank Account Example -->
           <section>
             <h3>Single Source of Truth</h3>
             <p class="small-text">Example: Bank Account Management</p>
@@ -950,7 +1046,7 @@ export const useTheme = () => {
             </svg>
           </section>
 
-          <!-- Slide 18: Zustand API - Just 2 Things -->
+          <!-- Slide 20: Zustand API - Just 2 Things -->
           <section>
             <h3>Zustand API: Just 2 Things to Learn</h3>
 
@@ -984,7 +1080,7 @@ const useStore = create((set) => ({
             </div>
           </section>
 
-          <!-- Slide 19: Exercise 2 - Todo List with Zustand -->
+          <!-- Slide 21: Exercise 2 - Todo List with Zustand -->
           <section>
             <h3>🧪 Exercise 2 — Todo List (Zustand)</h3>
             <p class="small-text">→ live coding / hands-on</p>
@@ -1023,7 +1119,7 @@ const useStore = create((set) => ({
             </div>
           </section>
 
-          <!-- Slide 20: Solution - Todo Store -->
+          <!-- Slide 22: Solution - Todo Store -->
           <section>
             <h3>Solution: Todo Store</h3>
             <pre><code class="tsx" style="font-size: 0.52em;">import { create } from 'zustand';
@@ -1055,7 +1151,7 @@ const useTodoStore = create((set) => ({
 export default useTodoStore;</code></pre>
           </section>
 
-          <!-- Slide 21: Solution - Using the Store -->
+          <!-- Slide 23: Solution - Using the Store -->
           <section>
             <h3>Solution: Using the Store</h3>
             <div class="two-col" style="margin-top: 1rem">
@@ -1114,7 +1210,7 @@ export default useTodoStore;</code></pre>
             </div>
           </section>
 
-          <!-- Slide 22: Key Takeaways -->
+          <!-- Slide 24: Key Takeaways -->
           <section>
             <h3>🧠 Key Takeaways</h3>
             <div class="card" style="margin-top: 1.5rem">
