@@ -12,7 +12,8 @@ export default function BuildProductCardStarter() {
         <p className="eyebrow">Result area</p>
         <h3>Your product card</h3>
         <div className="exercise-preview-shell">
-          {/* Should render their ProductCard component here. */}
+          AAAA
+          {/* Render the ProductCard component here. */}
         </div>
       </section>
     </div>
