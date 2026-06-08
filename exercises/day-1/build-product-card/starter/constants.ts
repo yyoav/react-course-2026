@@ -12,9 +12,9 @@ export const meta: CourseTargetMeta = {
 }
 
 export const starterTasks = [
-  'Move the hard-coded product data into a props object.',
-  'Render the image, title, description, and price.',
-  'Render the action button under the price.',
+  'ProductTitle.tsx: returns an <h2> with a ridiculous product name like "Invisible Umbrella 3000".',
+  'ProductImage.tsx: returns an <img> tag with any placeholder URL, or just an emoji unicorn.',
+  'ProductPrice.tsx: returns a <p> with an absurd price like "Only $9,999,999.99".',
 ]
 
-export const starterHint = 'Hint: start with a single root element and pass product data through props.'
+export const starterHint = "Create a ProductCard component with 3 sub-components and sell the world's most ridiculous product."

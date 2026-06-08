@@ -10,7 +10,7 @@ export default function Preview() {
 
       <div className="exercise-task-block exercise-task-block-inline">
         <p className="eyebrow">Todo</p>
-        <strong>ProductCard.tsx</strong>
+        <strong>Build ProductCard.tsx with 3 sub-components</strong>
         <div className="task-list">
           {solutionTasks.map((task) => (
             <p key={task}>{task}</p>
