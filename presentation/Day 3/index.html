@@ -441,7 +441,11 @@ function Navbar() {
         <section>
           <h2 class="slide-title">URL Parameters</h2>
           <h3 class="slide-title"> (Dynamic Routes)</h2>
-            <pre><code class="tsx">
+            <div class="small-text">
+              <p>Use dynamic params for product pages, user profiles, blog posts, or any ID-based route. Syntax: <code>/products/:id</code></p>
+              <p>Example: <a href="https://www.yad2.co.il/vehicles/cars" target="_blank" rel="noopener noreferrer">Yad2 cars listing</a></p>
+            </div>
+            <pre class="fragment"><code class="tsx">
 // Route definition
 &lt;Route path="/products/:id" element={&lt;ProductPage /&gt;} /&gt;
 
@@ -453,9 +457,6 @@ function ProductPage() {
     return &lt;h1&gt;Product ID: {id}&lt;/h1&gt;;
 }
                     </code></pre>
-            <div class="small-text">
-              <p>Use dynamic params for product pages, user profiles, blog posts, or any ID-based route.</p>
-            </div>
             <aside class="notes">
               Explain the colon syntax in the route path and make clear that id is a variable segment.
               Show how useParams reads the matched value from the current URL.
@@ -466,17 +467,16 @@ function ProductPage() {
         </section>
 
         <section>
-          <h2 class="slide-title">Query Params vs URL Params</h2>
+          <h2 class="slide-title">Query Params</h2>
           <div class="small-text">
             <ul>
-              <li>URL params are part of the path, like <code>/products/42</code>.</li>
-              <li>Query params come after <code>?</code>, like <code>/products?category=shoes&amp;sort=price</code>.
-              </li>
-              <li>Use URL params for resource identity, and query params for filters, search, sorting, or pagination.
-              </li>
+              <li>Query params are key-value pairs added after <code>?</code> in the URL.</li>
+              <li>They help control page state such as filters, sorting, search text, or pagination.</li>
+              <li>Syntax: <strong><code>/products?category=shoes&amp;sort=price</code></strong>.</li>
             </ul>
+            <p>Example: <a href="https://www.yad2.co.il/vehicles/cars" target="_blank" rel="noopener noreferrer">Filtering cars list</a></p>
           </div>
-          <pre><code class="tsx">
+          <pre class="fragment"><code class="tsx">
 import { useSearchParams } from "react-router-dom";
 
 function ProductsPage() {
@@ -488,22 +488,38 @@ function ProductsPage() {
 }
           </code></pre>
           <aside class="notes">
-            Contrast the two concepts clearly.
-            Explain that slash-products-slash-42 points to one specific product, while query params usually modify how a
-            list or page is displayed.
-            Use examples students already know: filters, search keywords, sort order, and page number.
+            Introduce query params as an extra layer of information attached to a URL.
+            Explain that they do not usually identify a different page, but rather describe how that page should be
+            displayed.
+            Use familiar examples such as filters, search text, sort order, and pagination.
             Mention that React Router provides useSearchParams for reading and updating query string values.
           </aside>
         </section>
 
         <section>
+          <h2 class="slide-title">Query Params vs URL Params</h2>
+          <div class="two-col mini">
+            <div class="card">
+              <div class="label">URL Params</div>
+              <p>Part of the path, like <code>/products/42</code>.</p>
+              <p>Usually identifies a specific resource such as a product, user, or post.</p>
+            </div>
+            <div class="card">
+              <div class="label">Query Params</div>
+              <p>Come after <code>?</code>, like <code>/products?category=shoes&amp;sort=price</code>.</p>
+              <p>Usually changes how a page is filtered, sorted, searched, or paginated.</p>
+            </div>
+          </div>
+          <aside class="notes">
+            Contrast the two concepts clearly.
+            Explain that slash-products-slash-42 points to one specific product, while query params usually modify how a
+            list or page is displayed.
+            Reinforce the rule of thumb: path for identity, query string for options.
+          </aside>
+        </section>
+
+        <section>
           <h2 class="slide-title">Nested Routes Structure</h2>
-          <pre><code class="tsx">
-&lt;Route path="/dashboard" element={&lt;DashboardLayout /&gt;}&gt;
-    &lt;Route path="analytics" element={&lt;Analytics /&gt;} /&gt;
-    &lt;Route path="reports" element={&lt;Reports /&gt;} /&gt;
-&lt;/Route&gt;
-                    </code></pre>
           <div class="small-text">
             <ul>
               <li><code>/dashboard</code> is the parent route.</li>
@@ -511,10 +527,45 @@ function ProductsPage() {
               <li>These become URLs like <code>/dashboard/analytics</code> and <code>/dashboard/reports</code>.</li>
             </ul>
           </div>
+          <div class="image-frame" style="margin-top: 0.9rem;">
+            <svg class="diagram-svg" viewBox="0 0 760 220" role="img" aria-label="Nested routes structure demo">
+              <rect x="20" y="20" width="320" height="180" rx="16" fill="#0f172a" stroke="#61dafb" />
+              <text x="38" y="36" fill="#7dd3fc" font-size="13">Dashboard Section</text>
+              <rect x="42" y="42" width="276" height="34" rx="10" fill="#1e293b" stroke="#8fb5d8" />
+              <text x="180" y="64" fill="#dbeafe" text-anchor="middle" font-size="16">/dashboard</text>
+              <rect x="60" y="95" width="240" height="72" rx="12" fill="#082f49" stroke="#61dafb" />
+              <text x="180" y="132" fill="#d5f6ff" text-anchor="middle" font-size="16">Child routes live here</text>
+
+              <path d="M380 110 L430 110" stroke="#61dafb" stroke-width="3" marker-end="url(#arrowhead-structure)" />
+
+              <rect x="430" y="34" width="150" height="44" rx="12" fill="#1f2937" stroke="#61dafb" />
+              <text x="505" y="61" fill="#dbeafe" text-anchor="middle" font-size="14">/dashboard/analytics</text>
+              <rect x="590" y="34" width="150" height="44" rx="12" fill="#1f2937" stroke="#61dafb" />
+              <text x="665" y="61" fill="#dbeafe" text-anchor="middle" font-size="14">/dashboard/reports</text>
+
+              <rect x="460" y="102" width="120" height="60" rx="12" fill="#082f49" stroke="#61dafb" />
+              <text x="520" y="128" fill="#d5f6ff" text-anchor="middle" font-size="14">Analytics</text>
+              <text x="520" y="148" fill="#7dd3fc" text-anchor="middle" font-size="12">child route</text>
+
+              <rect x="610" y="102" width="120" height="60" rx="12" fill="#082f49" stroke="#61dafb" />
+              <text x="670" y="128" fill="#d5f6ff" text-anchor="middle" font-size="14">Reports</text>
+              <text x="670" y="148" fill="#7dd3fc" text-anchor="middle" font-size="12">child route</text>
+
+              <defs>
+                <marker id="arrowhead-structure" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                  <polygon points="0 0, 10 3.5, 0 7" fill="#61dafb" />
+                </marker>
+              </defs>
+            </svg>
+          </div>
+          <div class="small-text">
+            <p>Example: <a href="https://www.yad2.co.il/vehicles/motorcycles" target="_blank" rel="noopener noreferrer">Yad2 motorcycles section</a></p>
+          </div>
           <aside class="notes">
             Start with the route tree itself before talking about Outlet.
             Explain that child paths are relative to the parent route, so analytics becomes
             slash-dashboard-slash-analytics.
+            Use the diagram to show that both pages belong to one dashboard section.
             Make the connection to dashboards, settings pages, and admin areas where several screens share one parent
             section.
           </aside>
@@ -522,15 +573,14 @@ function ProductsPage() {
 
         <section>
           <h2 class="slide-title">Nested Routes with Outlet</h2>
-          <div class="image-frame" style="margin-bottom: 0.9rem;">
-            <svg class="diagram-svg" viewBox="0 0 760 220" role="img" aria-label="Nested routes outlet demo">
+          <div class="image-frame" style="margin-bottom: 0.7rem; padding: 0.55rem;">
+            <svg class="diagram-svg" viewBox="0 0 760 220" role="img" aria-label="Nested routes outlet demo" style="max-height: 180px;">
               <rect x="20" y="20" width="320" height="180" rx="16" fill="#0f172a" stroke="#61dafb" />
               <text x="38" y="36" fill="#7dd3fc" font-size="13">Dashboard Layout</text>
               <rect x="42" y="42" width="276" height="34" rx="10" fill="#1e293b" stroke="#8fb5d8" />
               <text x="180" y="64" fill="#dbeafe" text-anchor="middle" font-size="16">Dashboard Header</text>
               <rect x="60" y="95" width="240" height="72" rx="12" fill="#082f49" stroke="#61dafb" />
-              <text x="180" y="124" fill="#d5f6ff" text-anchor="middle" font-size="16">&lt;Outlet /&gt;</text>
-              <text x="180" y="148" fill="#7dd3fc" text-anchor="middle" font-size="12">Child route renders inside the layout</text>
+              <text x="180" y="132" fill="#d5f6ff" text-anchor="middle" font-size="16">Child routes live here</text>
 
               <path d="M380 110 L430 110" stroke="#61dafb" stroke-width="3" marker-end="url(#arrowhead)" />
 
@@ -541,11 +591,11 @@ function ProductsPage() {
 
               <rect x="460" y="102" width="120" height="60" rx="12" fill="#082f49" stroke="#61dafb" />
               <text x="520" y="128" fill="#d5f6ff" text-anchor="middle" font-size="14">Analytics</text>
-              <text x="520" y="148" fill="#7dd3fc" text-anchor="middle" font-size="12">inside Outlet</text>
+              <text x="520" y="148" fill="#7dd3fc" text-anchor="middle" font-size="12">child route</text>
 
               <rect x="610" y="102" width="120" height="60" rx="12" fill="#082f49" stroke="#61dafb" />
               <text x="670" y="128" fill="#d5f6ff" text-anchor="middle" font-size="14">Reports</text>
-              <text x="670" y="148" fill="#7dd3fc" text-anchor="middle" font-size="12">inside Outlet</text>
+              <text x="670" y="148" fill="#7dd3fc" text-anchor="middle" font-size="12">child route</text>
 
               <defs>
                 <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
@@ -554,6 +604,28 @@ function ProductsPage() {
               </defs>
             </svg>
           </div>
+          <pre><code class="tsx">
+&lt;Route path="/dashboard" element={&lt;DashboardLayout /&gt;}&gt;
+    &lt;Route path="analytics" element={&lt;Analytics /&gt;} /&gt;
+    &lt;Route path="reports" element={&lt;Reports /&gt;} /&gt;
+&lt;/Route&gt;
+                    </code></pre>
+          <div class="small-text">
+            <ul>
+              <li><code>Dashboard</code> stays visible as shared layout content.</li>
+              <li>Only the inner page changes when moving between nested routes.</li>
+            </ul>
+          </div>
+          <aside class="notes">
+            Now explain the rendering behavior.
+            Point out that the layout component is what makes nested routes useful because the shell stays on screen.
+            Keep this slide focused on the route declaration and the visual idea of a shared layout.
+            Connect this to real apps with shared sidebars, tabs, headers, or admin layouts.
+          </aside>
+        </section>
+
+        <section>
+          <h2 class="slide-title">Outlet and Inner Routes</h2>
           <pre><code class="tsx">
 // DashboardLayout.tsx
 import { Outlet } from "react-router-dom";
@@ -566,19 +638,24 @@ function DashboardLayout() {
         &lt;/div&gt;
   );
 }
+
+function Analytics() {
+  return &lt;h2&gt;Analytics Page&lt;/h2&gt;;
+}
+
+function Reports() {
+  return &lt;h2&gt;Reports Page&lt;/h2&gt;;
+}
                     </code></pre>
           <div class="small-text">
             <ul>
-              <li><code>Dashboard</code> stays visible as shared layout content.</li>
               <li><code>&lt;Outlet /&gt;</code> is the placeholder for the matched child route.</li>
-              <li>Only the inner page changes when moving between nested routes.</li>
             </ul>
           </div>
           <aside class="notes">
-            Now explain the rendering behavior.
-            Point out that the layout component is what makes nested routes useful because the shell stays on screen.
-            Explain that Outlet is where Analytics or Reports will render depending on the current child route.
-            Connect this to real apps with shared sidebars, tabs, headers, or admin layouts.
+            Finish with the code once the visual model is clear.
+            Point out that the parent route owns the layout, while the inner route components render inside the Outlet.
+            This is the implementation version of the two previous slides.
           </aside>
         </section>
       </section>
