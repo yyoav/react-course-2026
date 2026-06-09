@@ -497,8 +497,8 @@ function ProductGallery() {
                     unnecessarily.
                   </li>
                   <li style="margin-bottom: 1rem">
-                    Keys must be unique among siblings and ideally stable across
-                    renders.
+                    Keys must be unique and
+                    <span style="color: #f97316">stable</span> across renders.
                   </li>
                   <li style="margin-bottom: 1rem">
                     <strong>Example:</strong> Using
@@ -751,6 +751,54 @@ function ProductGallery() {
             </div>
           </section>
 
+          <!-- Slide 3e: Keys Example Demo -->
+          <section>
+            <h3>Exercise — Demo 🛠️</h3>
+            <div
+              class="card"
+              style="
+                margin-top: 2rem;
+                padding: 2.5rem;
+                text-align: center;
+                background: var(--accent-soft);
+              "
+            >
+              <p
+                style="
+                  font-size: 1.2em;
+                  margin: 0 0 1rem;
+                  color: var(--accent);
+                  font-weight: bold;
+                "
+              >
+                Open the live demo in the course app
+              </p>
+              <p
+                style="
+                  font-size: 0.9em;
+                  margin: 0;
+                  color: var(--text-soft);
+                  line-height: 1.6;
+                "
+              >
+                Route: <code style="color: var(--accent)">/keys</code>
+              </p>
+            </div>
+            <aside class="notes">
+              <strong>🔍 Demo: Unique IDs vs Index Keys</strong>
+              <ol>
+                <li>Shows a todo list with unique ID keys</li>
+                <li>Each item has an input field with a default value</li>
+                <li>Try deleting the middle item ("Buy Milk")</li>
+                <li>Notice how input values stay with the correct items</li>
+                <li>
+                  React preserves component state correctly because each item
+                  has a unique ID
+                </li>
+              </ol>
+            </aside>
+          </section>
+
           <!-- Slide 3f: Best Practices for Keys -->
           <section>
             <h3>Best Practices for Keys</h3>
@@ -913,7 +961,7 @@ function ProductGallery() {
 
           <!-- Slide 6: Solution - TaskList -->
           <section>
-            <h3>Solution: Task List with Completion Status</h3>
+            <h3>Solution: Task List</h3>
             <div class="two-col" style="margin-top: 1rem">
               <div>
                 <div
@@ -963,20 +1011,19 @@ export default function TaskList() {
           <!-- Slide 7: Conditional Rendering Introduction -->
           <section>
             <h3>Conditional Rendering</h3>
-            <div style="text-align: left; font-size: 0.9em; margin-top: 1.5rem">
-              <div class="card" style="margin-bottom: 1.5rem; padding: 1.5rem">
-                <h4 style="color: var(--accent); margin: 0 0 1rem">
-                  What is conditional rendering?
-                </h4>
-                <p style="margin: 0 0 0.8rem; line-height: 1.6">
-                  Conditional rendering is the ability to show or hide
-                  components or elements based on certain conditions (state,
-                  props, or data).
-                </p>
-                <p style="margin: 0; line-height: 1.6">
-                  It is similar to if/else statements in programming but adapted
-                  for JSX.
-                </p>
+            <div style="text-align: left; font-size: 0.85em; margin-top: 1rem">
+              <div class="card" style="margin-bottom: 1rem">
+                <ul style="margin: 0; padding-left: 1.5rem; line-height: 1.8">
+                  <li style="margin-bottom: 1rem">
+                    Conditional rendering is the ability to show or hide
+                    components or elements based on certain conditions (state,
+                    props, or data).
+                  </li>
+                  <li style="margin-bottom: 1rem">
+                    It is similar to <code>if/else</code> statements in programming but adapted
+                    for JSX.
+                  </li>
+                </ul>
               </div>
             </div>
           </section>
