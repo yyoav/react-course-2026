@@ -426,7 +426,7 @@
           <!-- Slide 3b: Why .map() is used in React -->
           <section>
             <h3>Why .map() is used in React</h3>
-            <div style="text-align: left; font-size: 0.85em; margin-top: 1rem">
+            <div style="text-align: left; font-size: 0.9em; margin-top: 1rem">
               <div
                 class="card"
                 style="margin-bottom: 1rem; background: var(--accent-soft)"
@@ -1024,7 +1024,7 @@ export default function TaskList() {
           <!-- Slide 7: Conditional Rendering Introduction -->
           <section>
             <h3>Conditional Rendering</h3>
-            <div style="text-align: left; font-size: 0.85em; margin-top: 1rem">
+            <div style="text-align: left; font-size: 0.9em; margin-top: 1rem">
               <div
                 class="card"
                 style="margin-bottom: 1rem; background: var(--accent-soft)"
@@ -1428,11 +1428,11 @@ function UserProfile() {
                 "
               >
                 <ul style="margin: 0; padding-left: 1.5rem; line-height: 1.8">
-                  <li style="margin-bottom: 1rem; font-size: 1.5em">
+                  <li style="margin-bottom: 1rem; font-size: 1.6em">
                     React maintains a <strong>Virtual DOM</strong>, a
                     lightweight copy of the real DOM stored in memory.
                   </li>
-                  <li style="font-size: 1.5em">
+                  <li style="font-size: 1.6em">
                     Think of it as a <strong>blueprint of the UI</strong> React
                     can compare quickly without touching the actual browser DOM.
                   </li>
@@ -1500,14 +1500,14 @@ function UserProfile() {
                   When a component state or prop changes:
                 </h4>
                 <ol style="margin: 0; padding-left: 1.5rem; line-height: 1.8">
-                  <li style="margin-bottom: 0.8rem">
+                  <li style="margin-bottom: 0.8rem;font-size:1.2em">
                     React creates a <strong>new Virtual DOM tree</strong>
                   </li>
-                  <li style="margin-bottom: 0.8rem">
+                  <li style="margin-bottom: 0.8rem;font-size:1.2em">
                     Compares it to the previous Virtual DOM (this is called
                     <strong style="color: var(--accent)">diffing</strong>)
                   </li>
-                  <li style="margin-bottom: 0.8rem">
+                  <li style="margin-bottom: 0.8rem;font-size:1.2em">
                     Only updates the
                     <strong>actual DOM elements that changed</strong>, instead
                     of re-rendering everything
@@ -1679,7 +1679,7 @@ function UserProfile() {
                   style="
                     margin: 0 0 1.5rem;
                     line-height: 1.8;
-                    font-size: 1.05em;
+                    font-size: 1.25em;
                   "
                 >
                   Before React 16.8,
@@ -1688,7 +1688,7 @@ function UserProfile() {
                   <strong style="color: var(--accent)">class components</strong
                   >.
                 </p>
-                <p style="margin: 0; line-height: 1.8; font-size: 1.05em">
+                <p style="margin: 0; line-height: 1.8; font-size: 1.25em">
                   Functional components were "stateless" - they could only
                   receive props and return JSX.
                 </p>
@@ -1700,7 +1700,7 @@ function UserProfile() {
                 <h4 style="color: var(--accent); margin: 0 0 1.5rem">
                   The Solution: Hooks
                 </h4>
-                <p style="margin: 0; line-height: 1.8; font-size: 1.05em">
+                <p style="margin: 0; line-height: 1.8; font-size: 1.25em">
                   Hooks let us use
                   <strong>state, effects, and other React features</strong> in
                   functional components, making them simpler and more powerful.
@@ -2173,11 +2173,11 @@ export default function Clock() {
                 "
               >
                 <ul style="margin: 0; padding-left: 1.5rem; line-height: 2.2">
-                  <li style="margin-bottom: 1.2rem; font-size: 1.5em">
+                  <li style="margin-bottom: 1.2rem; font-size: 1.8em">
                     A JavaScript function that starts with <code>use</code> and
                     reuses component logic.
                   </li>
-                  <li style="font-size: 1.5em">
+                  <li style="font-size: 1.8em">
                     Can use other hooks inside it (<code>useState</code>,
                     <code>useEffect</code>, etc.).
                   </li>
@@ -2199,13 +2199,13 @@ export default function Clock() {
                 "
               >
                 <ul style="margin: 0; padding-left: 1.5rem; line-height: 2.2">
-                  <li style="margin-bottom: 1.2rem; font-size: 1.5em">
+                  <li style="margin-bottom: 1.2rem; font-size: 1.8em">
                     Avoid repeating code.
                   </li>
-                  <li style="margin-bottom: 1.2rem; font-size: 1.5em">
+                  <li style="margin-bottom: 1.2rem; font-size: 1.8em">
                     Separate logic from UI.
                   </li>
-                  <li style="font-size: 1.5em">
+                  <li style="font-size: 1.8em">
                     Makes code cleaner and easier to test.
                   </li>
                 </ul>
@@ -2226,15 +2226,15 @@ export default function Clock() {
                 "
               >
                 <ul style="margin: 0; padding-left: 1.5rem; line-height: 2.2">
-                  <li style="margin-bottom: 1.2rem; font-size: 1.5em">
+                  <li style="margin-bottom: 1.2rem; font-size: 1.8em">
                     Can return <strong>any kind of data</strong>: objects,
                     arrays, primitives, functions
                   </li>
-                  <li style="margin-bottom: 1.2rem; font-size: 1.5em">
+                  <li style="margin-bottom: 1.2rem; font-size: 1.8em">
                     Can return <strong>nothing</strong> (just perform side
                     effects)
                   </li>
-                  <li style="color: #ef4444; font-size: 1.5em">
+                  <li style="color: #ef4444; font-size: 1.8em">
                     ❌ <strong>Cannot return JSX</strong> - hooks are logic, not
                     UI
                   </li>
@@ -2256,13 +2256,13 @@ export default function Clock() {
                 "
               >
                 <ul style="margin: 0; padding-left: 1.5rem; line-height: 2.2">
-                  <li style="margin-bottom: 1.2rem; font-size: 1.5em">
+                  <li style="margin-bottom: 1.2rem; font-size: 1.8em">
                     Think of custom hooks as <strong>services</strong>
                   </li>
-                  <li style="margin-bottom: 1.2rem; font-size: 1.5em">
+                  <li style="margin-bottom: 1.2rem; font-size: 1.8em">
                     They provide reusable functionality to components
                   </li>
-                  <li style="font-size: 1.5em">
+                  <li style="font-size: 1.8em">
                     Similar to services in other frameworks (Angular, etc.)
                   </li>
                 </ul>
@@ -2283,14 +2283,14 @@ export default function Clock() {
                 "
               >
                 <ul style="margin: 0; padding-left: 1.5rem; line-height: 2.2">
-                  <li style="margin-bottom: 1.2rem; font-size: 1.5em">
+                  <li style="margin-bottom: 1.2rem; font-size: 1.8em">
                     Custom hooks are
                     <strong>part of the component's lifecycle</strong>
                   </li>
-                  <li style="margin-bottom: 1.2rem; font-size: 1.5em">
+                  <li style="margin-bottom: 1.2rem; font-size: 1.8em">
                     They execute when the component renders
                   </li>
-                  <li style="font-size: 1.5em">
+                  <li style="font-size: 1.8em">
                     This is just a
                     <strong>technical/visual separation</strong> of concerns
                   </li>
@@ -2312,14 +2312,14 @@ export default function Clock() {
                 "
               >
                 <ul style="margin: 0; padding-left: 1.5rem; line-height: 2.2">
-                  <li style="margin-bottom: 1.2rem; font-size: 1.5em">
+                  <li style="margin-bottom: 1.2rem; font-size: 1.8em">
                     Similar to <strong>MVC pattern</strong>: separate business
                     logic from presentation
                   </li>
-                  <li style="margin-bottom: 1.2rem; font-size: 1.5em">
+                  <li style="margin-bottom: 1.2rem; font-size: 1.8em">
                     <strong>Custom Hook</strong> = Model/Controller (logic)
                   </li>
-                  <li style="font-size: 1.5em">
+                  <li style="font-size: 1.8em">
                     <strong>Component</strong> = View (UI/JSX)
                   </li>
                 </ul>
@@ -2335,7 +2335,7 @@ export default function Clock() {
                 class="card"
                 style="padding: 2rem; background: var(--accent-soft)"
               >
-                <p style="margin: 0; line-height: 1.8; font-size: 1.5em">
+                <p style="margin: 0; line-height: 1.8; font-size: 1.8em">
                   <code>useFetch</code> encapsulates data fetching logic, so any
                   component can just call
                   <code>const { data, loading } = useFetch(url)</code>.
@@ -2383,11 +2383,11 @@ export function useFetch(url) {
                 "
               >
                 <ul style="margin: 0; padding-left: 1.5rem; line-height: 2.2">
-                  <li style="margin-bottom: 1.2rem; font-size: 1.5em">
+                  <li style="margin-bottom: 1.2rem; font-size: 1.8em">
                     A hook that holds a mutable object whose
                     <code>.current</code> property persists across renders.
                   </li>
-                  <li style="font-size: 1.5em">
+                  <li style="font-size: 1.8em">
                     Can store DOM elements or mutable values.
                   </li>
                 </ul>
@@ -2408,11 +2408,11 @@ export function useFetch(url) {
                 "
               >
                 <ul style="margin: 0; padding-left: 1.5rem; line-height: 2.2">
-                  <li style="margin-bottom: 1.2rem; font-size: 1.5em">
+                  <li style="margin-bottom: 1.2rem; font-size: 1.8em">
                     <strong>DOM access:</strong> Focus input, scroll to element,
                     measure element size.
                   </li>
-                  <li style="font-size: 1.5em">
+                  <li style="font-size: 1.8em">
                     <strong>Mutable storage:</strong> Store previous state or
                     timer ID without triggering re-renders.
                   </li>
@@ -2430,10 +2430,10 @@ export function useFetch(url) {
                 style="padding: 2rem; background: var(--accent-soft)"
               >
                 <ul style="margin: 0; padding-left: 1.5rem; line-height: 2.2">
-                  <li style="margin-bottom: 1.2rem; font-size: 1.5em">
+                  <li style="margin-bottom: 1.2rem; font-size: 1.8em">
                     Updating <code>.current</code> does not trigger a render.
                   </li>
-                  <li style="font-size: 1.5em">
+                  <li style="font-size: 1.8em">
                     Useful for performance-sensitive operations.
                   </li>
                 </ul>
