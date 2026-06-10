@@ -522,29 +522,30 @@
           <!-- Slide 4: Why Next.js - Part 1 -->
           <section>
             <h3>Why Use Next.js?</h3>
-            <p class="small-text">Key benefits for modern web apps</p>
-
-            <div class="adv-grid">
-              <div class="adv-item">
-                <h4 style="font-size: 1.1em">⚡ Performance</h4>
-                <p style="font-size: 0.95em">
-                  Server-side rendering, automatic code splitting, image
-                  optimization
-                </p>
-              </div>
-
-              <div class="adv-item">
-                <h4 style="font-size: 1.1em">🔍 SEO</h4>
-                <p style="font-size: 0.95em">
-                  Pre-rendered pages, metadata API, sitemap generation
-                </p>
-              </div>
-
-              <div class="adv-item">
-                <h4 style="font-size: 1.1em">🛣️ Routing</h4>
-                <p style="font-size: 0.95em">
-                  File-based routing, layouts, loading states, error handling
-                </p>
+            <div style="text-align: left; font-size: 0.85em; margin-top: 1rem">
+              <div
+                class="card"
+                style="margin-bottom: 1rem; background: var(--accent-soft)"
+              >
+                <ul style="margin: 0; padding-left: 1.5rem; line-height: 1.8">
+                  <li style="margin-bottom: 1em">
+                    <strong style="color: var(--accent)"
+                      >⚡ Performance:</strong
+                    >
+                    Server-side rendering, automatic code splitting, and image
+                    optimization for lightning-fast apps
+                  </li>
+                  <li style="margin-bottom: 1em">
+                    <strong style="color: var(--accent)">🔍 SEO:</strong>
+                    Pre-rendered pages, metadata API, and sitemap generation
+                    make your site search-engine friendly
+                  </li>
+                  <li style="margin-bottom: 1em">
+                    <strong style="color: var(--accent)">🛣️ Routing:</strong>
+                    File-based routing with built-in layouts, loading states,
+                    and error handling
+                  </li>
+                </ul>
               </div>
             </div>
           </section>
@@ -552,35 +553,120 @@
           <!-- Slide 5: Why Next.js - Part 2 -->
           <section>
             <h3>Why Use Next.js? (continued)</h3>
-            <p class="small-text">More powerful features</p>
+            <div style="text-align: left; font-size: 0.85em; margin-top: 1rem">
+              <div
+                class="card"
+                style="margin-bottom: 1rem; background: var(--accent-soft)"
+              >
+                <ul style="margin: 0; padding-left: 1.5rem; line-height: 1.8">
+                  <li style="margin-bottom: 1em">
+                    <strong style="color: var(--accent)">🔧 Full-Stack:</strong>
+                    API routes, server actions, and seamless database
+                    integration
+                  </li>
+                  <li style="margin-bottom: 1em">
+                    <strong style="color: var(--accent)">📦 TypeScript:</strong>
+                    First-class TypeScript support with automatic type
+                    generation
+                  </li>
+                  <li style="margin-bottom: 1em">
+                    <strong style="color: var(--accent)">🚀 Deployment:</strong>
+                    One-click deploy to Vercel, or deploy anywhere you want
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <p class="small-text" style="margin-top: 1rem">
+              💡 A complete framework that handles routing, rendering, data
+              fetching, and deployment
+            </p>
+          </section>
 
-            <div class="adv-grid">
-              <div class="adv-item">
-                <h4 style="font-size: 1.1em">🔧 Full-Stack</h4>
-                <p style="font-size: 0.95em">
-                  API routes, server actions, database integration
-                </p>
+          <!-- Slide 6a: Pages Router Explained -->
+          <section>
+            <h3>📁 Pages Router (Legacy)</h3>
+            <p class="small-text">The traditional Next.js routing system</p>
+
+            <div class="two-col" style="margin-top: 1.5rem; align-items: stretch">
+              <div>
+                <div class="card" style="height: 100%">
+                  <h4 style="font-size: 0.9em; margin-bottom: 1rem">Directory Structure</h4>
+                  <pre><code class="plaintext" style="font-size: 0.6em;">my-app/
+├── pages/
+│   ├── index.tsx        ← / route
+│   ├── about.tsx        ← /about
+│   ├── blog/
+│   │   ├── index.tsx    ← /blog
+│   │   └── [slug].tsx   ← /blog/:slug
+│   └── api/
+│       └── hello.ts     ← API route
+├── public/
+├── styles/
+└── package.json</code></pre>
+                </div>
               </div>
 
-              <div class="adv-item">
-                <h4 style="font-size: 1.1em">📦 TypeScript</h4>
-                <p style="font-size: 0.95em">
-                  First-class TypeScript support, automatic types
-                </p>
-              </div>
-
-              <div class="adv-item">
-                <h4 style="font-size: 1.1em">🚀 Deployment</h4>
-                <p style="font-size: 0.95em">
-                  One-click deploy to Vercel, works anywhere
-                </p>
+              <div>
+                <div class="card" style="height: 100%">
+                  <h4 style="font-size: 0.9em; margin-bottom: 1rem">How it works</h4>
+                  <ul style="font-size: 0.75em; line-height: 1.7">
+                    <li>Files in <code>pages/</code> → routes</li>
+                    <li>Each file exports a React component</li>
+                    <li>Client-side rendering by default</li>
+                    <li>Data fetching with <code>getServerSideProps</code></li>
+                    <li>Static generation with <code>getStaticProps</code></li>
+                    <li><code>_app.tsx</code> for global layout</li>
+                  </ul>
+                </div>
               </div>
             </div>
           </section>
 
-          <!-- Slide 6: App Router vs Pages Router -->
+          <!-- Slide 6b: App Router Explained -->
           <section>
-            <h3>App Router vs Pages Router</h3>
+            <h3>🆕 App Router (Modern)</h3>
+            <p class="small-text">The new recommended routing system since Next.js 13+</p>
+
+            <div class="two-col" style="margin-top: 1.5rem; align-items: stretch">
+              <div>
+                <div class="card" style="height: 100%">
+                  <h4 style="font-size: 0.9em; margin-bottom: 1rem">Directory Structure</h4>
+                  <pre><code class="plaintext" style="font-size: 0.6em;">my-app/
+├── app/
+│   ├── layout.tsx       ← Root layout
+│   ├── page.tsx         ← / route
+│   ├── about/
+│   │   └── page.tsx     ← /about
+│   ├── blog/
+│   │   ├── page.tsx     ← /blog
+│   │   └── [slug]/
+│   │       └── page.tsx ← /blog/:slug
+│   └── api/
+│       └── route.ts     ← API route
+├── public/
+└── package.json</code></pre>
+                </div>
+              </div>
+
+              <div>
+                <div class="card" style="height: 100%">
+                  <h4 style="font-size: 0.9em; margin-bottom: 1rem">How it works</h4>
+                  <ul style="font-size: 0.75em; line-height: 1.7">
+                    <li>Folders = routes, <code>page.tsx</code> = accessible</li>
+                    <li>Server components by default</li>
+                    <li><code>layout.tsx</code> for nested layouts</li>
+                    <li><code>loading.tsx</code> for loading states</li>
+                    <li><code>error.tsx</code> for error handling</li>
+                    <li>Async data fetching directly in components</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Slide 6c: App Router vs Pages Router -->
+          <section>
+            <h3>App Router vs Pages Router - Comparison</h3>
             <p class="small-text">Next.js has two routing systems</p>
 
             <div class="two-col" style="margin-top: 1.5rem">
@@ -625,7 +711,7 @@
             </div>
           </section>
 
-          <!-- Slide 6: Getting Started -->
+          <!-- Slide 7: Getting Started -->
           <section>
             <h3>Getting Started</h3>
             <div class="card" style="margin-top: 1.5rem">
@@ -651,7 +737,7 @@ npm run dev
             </div>
           </section>
 
-          <!-- Slide 7: Project Structure -->
+          <!-- Slide 8: Project Structure -->
           <section>
             <h3>Project Structure (App Router)</h3>
             <div class="two-col" style="margin-top: 1.5rem">
@@ -694,7 +780,7 @@ npm run dev
             </div>
           </section>
 
-          <!-- Slide 8: File-Based Routing -->
+          <!-- Slide 9: File-Based Routing -->
           <section>
             <h3>File-Based Routing</h3>
             <p class="small-text">No need to configure routes manually!</p>
@@ -743,7 +829,7 @@ npm run dev
             </div>
           </section>
 
-          <!-- Slide 9: Creating Pages -->
+          <!-- Slide 10: Creating Pages -->
           <section>
             <h3>Creating Pages</h3>
             <div class="two-col" style="margin-top: 1.5rem">
@@ -780,7 +866,7 @@ npm run dev
             </div>
           </section>
 
-          <!-- Slide 10: Navigation -->
+          <!-- Slide 11: Navigation -->
           <section>
             <h3>Navigation with Link</h3>
             <div class="card" style="margin-top: 1.5rem">
@@ -809,7 +895,7 @@ export default function Navigation() {
             </div>
           </section>
 
-          <!-- Slide 11: Layouts -->
+          <!-- Slide 12: Layouts -->
           <section>
             <h3>Layouts - Shared UI</h3>
             <p class="small-text">
@@ -846,7 +932,7 @@ export default function RootLayout({
             </div>
           </section>
 
-          <!-- Slide 12: Dynamic Routes -->
+          <!-- Slide 13: Dynamic Routes -->
           <section>
             <h3>Dynamic Routes</h3>
             <p class="small-text">Handle routes with parameters</p>
@@ -893,7 +979,7 @@ export default function Product({
             </div>
           </section>
 
-          <!-- Slide 13: Exercise 1 -->
+          <!-- Slide 14: Exercise 1 -->
           <section>
             <h3>🧪 Exercise 1 — Pages & Navigation</h3>
             <p class="small-text">Build a multi-page website</p>
@@ -927,7 +1013,7 @@ export default function Product({
             </div>
           </section>
 
-          <!-- Slide 14: Server Components -->
+          <!-- Slide 15: Server Components -->
           <section>
             <h3>Server Components</h3>
             <p class="small-text">The default in Next.js App Router</p>
@@ -969,7 +1055,7 @@ export default function Product({
             </div>
           </section>
 
-          <!-- Slide 15: Client Components -->
+          <!-- Slide 16: Client Components -->
           <section>
             <h3>When to Use Client Components</h3>
             <div class="card" style="margin-top: 1.5rem">
@@ -1003,7 +1089,7 @@ export default function Counter() {
             </div>
           </section>
 
-          <!-- Slide 16: Data Fetching -->
+          <!-- Slide 17: Data Fetching -->
           <section>
             <h3>Data Fetching in Server Components</h3>
             <p class="small-text">Super simple - just async/await!</p>
@@ -1039,7 +1125,7 @@ export default async function PostsPage() {
             </div>
           </section>
 
-          <!-- Slide 17: Loading States -->
+          <!-- Slide 18: Loading States -->
           <section>
             <h3>Loading States</h3>
             <p class="small-text">Show loading UI while data fetches</p>
@@ -1085,7 +1171,7 @@ export default function Error({
             </div>
           </section>
 
-          <!-- Slide 18: Exercise 2 -->
+          <!-- Slide 19: Exercise 2 -->
           <section>
             <h3>🧪 Exercise 2 — API Integration</h3>
             <p class="small-text">Fetch and display data</p>
@@ -1119,7 +1205,7 @@ export default function Error({
             </div>
           </section>
 
-          <!-- Slide 19: Metadata & SEO -->
+          <!-- Slide 20: Metadata & SEO -->
           <section>
             <h3>Metadata & SEO</h3>
             <p class="small-text">Built-in SEO optimization</p>
@@ -1151,7 +1237,7 @@ export default function About() {
             </div>
           </section>
 
-          <!-- Slide 20: Deployment -->
+          <!-- Slide 21: Deployment -->
           <section>
             <h3>Deployment to Vercel</h3>
             <p class="small-text">One-click deployment</p>
@@ -1179,7 +1265,7 @@ export default function About() {
             </div>
           </section>
 
-          <!-- Slide 21: Best Practices -->
+          <!-- Slide 22: Best Practices -->
           <section>
             <h3>Next.js Best Practices</h3>
 
@@ -1210,7 +1296,7 @@ export default function About() {
             </div>
           </section>
 
-          <!-- Slide 22: Key Takeaways -->
+          <!-- Slide 23: Key Takeaways -->
           <section>
             <h3>🧠 Key Takeaways</h3>
 
@@ -1240,7 +1326,7 @@ export default function About() {
             </div>
           </section>
 
-          <!-- Slide 23: Resources -->
+          <!-- Slide 24: Resources -->
           <section>
             <h3>Resources</h3>
 
