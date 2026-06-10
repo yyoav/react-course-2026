@@ -715,8 +715,6 @@
           <!-- Slide 4: Single Source of Truth - GOOD Example -->
           <section>
             <h3>Solution: Single source of truth ✅</h3>
-            <p class="small-text">Same Example: Bank Account Done Right</p>
-
             <svg
               class="diagram-svg"
               viewBox="0 0 800 500"
@@ -1055,25 +1053,25 @@ function UserProfile({ user }) {
                   style="
                     margin: 0;
                     padding-left: 1.5rem;
-                    line-height: 1.8;
-                    font-size: 1.1em;
+                    line-height: 1.85;
+                    font-size: 1em;
                   "
                 >
-                  <li style="margin-bottom: 1rem">
+                  <li style="margin-bottom: 0.9rem">
                     <strong style="color: var(--accent)"
                       >Maintenance burden:</strong
                     >
                     Every intermediate component must know about props it
                     doesn't use
                   </li>
-                  <li style="margin-bottom: 1rem">
+                  <li style="margin-bottom: 0.9rem">
                     <strong style="color: var(--accent)"
                       >Tight coupling:</strong
                     >
                     Components become unnecessarily dependent on their parent's
                     data structure
                   </li>
-                  <li>
+                  <li style="margin-bottom: 0.9rem">
                     <strong style="color: var(--accent)"
                       >Refactoring nightmare:</strong
                     >
@@ -2048,16 +2046,16 @@ const useStore = create((set) => ({
                 <span class="highlight">When to use Zustand:</span>
               </p>
               <ul style="font-size: 0.65em; line-height: 1.6">
-                <li>✅Complex state shared across many components</li>
-                <li>✅Need state outside React (utils, services)</li>
-                <li>✅Want better performance than Context</li>
+                <li>✅ Complex state shared across many components</li>
+                <li>✅ Need state outside React (utils, services)</li>
+                <li>✅ Want better performance than Context</li>
               </ul>
             </div>
           </section>
 
           <!-- Slide 13b: Exercise Demo -->
           <section>
-            <h3>Exercise — Demo 🛠️</h3>
+            <h3>Demo 🛠️</h3>
             <div
               class="card"
               style="
