@@ -587,10 +587,15 @@
             <h3>📁 Pages Router (Legacy)</h3>
             <p class="small-text">The traditional Next.js routing system</p>
 
-            <div class="two-col" style="margin-top: 1.5rem; align-items: stretch">
+            <div
+              class="two-col"
+              style="margin-top: 1.5rem; align-items: stretch"
+            >
               <div>
                 <div class="card" style="height: 100%">
-                  <h4 style="font-size: 0.9em; margin-bottom: 1rem">Directory Structure</h4>
+                  <h4 style="font-size: 0.9em; margin-bottom: 1rem">
+                    Directory Structure
+                  </h4>
                   <pre><code class="plaintext" style="font-size: 0.6em;">my-app/
 ├── pages/
 │   ├── index.tsx        ← / route
@@ -608,7 +613,9 @@
 
               <div>
                 <div class="card" style="height: 100%">
-                  <h4 style="font-size: 0.9em; margin-bottom: 1rem">How it works</h4>
+                  <h4 style="font-size: 0.9em; margin-bottom: 1rem">
+                    How it works
+                  </h4>
                   <ul style="font-size: 0.75em; line-height: 1.7">
                     <li>Files in <code>pages/</code> → routes</li>
                     <li>Each file exports a React component</li>
@@ -625,12 +632,19 @@
           <!-- Slide 6b: App Router Explained -->
           <section>
             <h3>🆕 App Router (Modern)</h3>
-            <p class="small-text">The new recommended routing system since Next.js 13+</p>
+            <p class="small-text">
+              The new recommended routing system since Next.js 13+
+            </p>
 
-            <div class="two-col" style="margin-top: 1.5rem; align-items: stretch">
+            <div
+              class="two-col"
+              style="margin-top: 1.5rem; align-items: stretch"
+            >
               <div>
                 <div class="card" style="height: 100%">
-                  <h4 style="font-size: 0.9em; margin-bottom: 1rem">Directory Structure</h4>
+                  <h4 style="font-size: 0.9em; margin-bottom: 1rem">
+                    Directory Structure
+                  </h4>
                   <pre><code class="plaintext" style="font-size: 0.6em;">my-app/
 ├── app/
 │   ├── layout.tsx       ← Root layout
@@ -650,9 +664,13 @@
 
               <div>
                 <div class="card" style="height: 100%">
-                  <h4 style="font-size: 0.9em; margin-bottom: 1rem">How it works</h4>
+                  <h4 style="font-size: 0.9em; margin-bottom: 1rem">
+                    How it works
+                  </h4>
                   <ul style="font-size: 0.75em; line-height: 1.7">
-                    <li>Folders = routes, <code>page.tsx</code> = accessible</li>
+                    <li>
+                      Folders = routes, <code>page.tsx</code> = accessible
+                    </li>
                     <li>Server components by default</li>
                     <li><code>layout.tsx</code> for nested layouts</li>
                     <li><code>loading.tsx</code> for loading states</li>
