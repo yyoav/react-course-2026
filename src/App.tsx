@@ -41,10 +41,17 @@ function App() {
         <section className="viewer-shell">
           <div className="viewer-topbar">
             <a className="viewer-back" href={targetDay ? getDayHref(targetDay) : '/'}>
-              {targetDay ? `Back to ${targetDay.dayLabel}` : 'Back to all days'}
+              <span className="viewer-back-icon" aria-hidden="true">
+                ←
+              </span>
+              <span>{targetDay ? `Back to ${targetDay.dayLabel}` : 'Back to all days'}</span>
             </a>
-            <span className="viewer-pill">{selectedTarget.meta.dayLabel}</span>
-            <span className="viewer-pill">{getVariantLabel(selectedTarget.meta.variant)}</span>
+            <div className="viewer-context-pills" aria-label="Current selection metadata">
+              <span className="viewer-pill viewer-pill-day">{selectedTarget.meta.dayLabel}</span>
+              <span className={`viewer-pill viewer-pill-variant viewer-pill-variant-${selectedTarget.meta.variant}`}>
+                {getVariantLabel(selectedTarget.meta.variant)}
+              </span>
+            </div>
           </div>
 
           <header className="viewer-header">
@@ -119,26 +126,30 @@ function App() {
           <span>Back to home</span>
         </a>
 
-        <section className="hero-panel hero-panel-compact">
-          <p className="eyebrow">{selectedDay.dayLabel}</p>
-          <h1>{selectedDay.dayLabel} materials.</h1>
-          <p className="hero-copy">
-            Open the presentation or jump directly into the demos and exercises for this workshop day.
-          </p>
+        <section className="hero-panel hero-panel-compact day-hero-panel">
+          <div className="day-hero-header">
+            <div className="day-hero-copy">
+              <p className="eyebrow">{selectedDay.dayLabel}</p>
+              <h1>{selectedDay.dayLabel} materials.</h1>
+              <p className="hero-copy">
+                Open the presentation or jump directly into the demos and exercises for this workshop day.
+              </p>
+            </div>
 
-          <div className="hero-actions">
-            {selectedDay.presentationHref ? (
-              <a className="hero-link" href={selectedDay.presentationHref} target="_blank" rel="noreferrer">
-                Open presentation
-              </a>
-            ) : (
-              <span className="hero-link hero-link-muted">Presentation coming soon</span>
-            )}
+            <div className="hero-actions day-hero-actions">
+              {selectedDay.presentationHref ? (
+                <a className="hero-link" href={selectedDay.presentationHref} target="_blank" rel="noreferrer">
+                  Open presentation
+                </a>
+              ) : (
+                <span className="hero-link hero-link-muted">Presentation coming soon</span>
+              )}
+            </div>
           </div>
         </section>
 
         <section className="day-detail-grid">
-          <article className="day-section-panel">
+          <article className="day-section-panel day-section-panel-demos">
             <div className="day-section">
               <div className="day-section-heading">
                 <h3>Demos</h3>
@@ -147,9 +158,9 @@ function App() {
               {demos.length > 0 ? (
                 <div className="target-list">
                   {demos.map((target) => (
-                    <a className="target-card" href={`/?target=${target.meta.id}`} key={target.meta.id}>
+                    <a className="target-card target-card-demo" href={`/?target=${target.meta.id}`} key={target.meta.id}>
                       <div className="target-card-top">
-                        <span className="target-kind">Demo</span>
+                        <span className="target-kind target-kind-demo">Demo</span>
                       </div>
                       <h3>{target.meta.title}</h3>
                       {target.meta.description ? <p>{target.meta.description}</p> : null}
@@ -163,7 +174,7 @@ function App() {
             </div>
           </article>
 
-          <article className="day-section-panel">
+          <article className="day-section-panel day-section-panel-exercises">
             <div className="day-section">
               <div className="day-section-heading">
                 <h3>Exercises</h3>
@@ -172,9 +183,9 @@ function App() {
               {exerciseGroups.length > 0 ? (
                 <div className="target-list">
                   {exerciseGroups.map((exerciseGroup) => (
-                    <article className="target-card exercise-group-card" key={exerciseGroup.key}>
+                    <article className="target-card target-card-exercise exercise-group-card" key={exerciseGroup.key}>
                       <div className="target-card-top">
-                        <span className="target-kind">Exercise</span>
+                        <span className="target-kind target-kind-exercise">Exercise</span>
                       </div>
                       <h3>{exerciseGroup.title}</h3>
                       {exerciseGroup.description ? <p>{exerciseGroup.description}</p> : null}

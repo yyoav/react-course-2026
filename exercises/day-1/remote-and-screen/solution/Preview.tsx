@@ -5,12 +5,12 @@ export default function Preview() {
     <section className="lesson-card exercise-header-card">
       <div className="exercise-header-copy">
         <p className="eyebrow">File to review</p>
-        <code className="exercise-file-path">exercises/day-1/build-product-card/solution/entry.tsx</code>
+        <code className="exercise-file-path">exercises/day-1/remote-and-screen/solution/entry.tsx</code>
       </div>
 
       <div className="exercise-task-block exercise-task-block-inline">
         <p className="eyebrow">Todo</p>
-        <strong>Build ProductCard.tsx with 3 sub-components</strong>
+        <strong>Lift the shared TV state into the parent component</strong>
         <div className="task-list">
           {solutionTasks.map((task) => (
             <p key={task}>{task}</p>
