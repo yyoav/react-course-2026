@@ -26,6 +26,8 @@ The default launcher lives at `/`, for example `http://localhost:5173/` during l
 npm run course -- day-1/demo/vite-basics
 npm run course -- day-1/exercises/build-product-card/starter
 npm run course -- day-1/exercises/build-product-card/solution
+npm run course -- day-1/exercises/remote-and-screen/starter
+npm run course -- day-1/exercises/remote-and-screen/solution
 npm run course -- day-2/exercises/fetch-and-render-a-list/solution
 ```
 
@@ -90,6 +92,8 @@ export default function Example() {
 - `day-1/demo/vite-basics`
 - `day-1/exercises/build-product-card/starter`
 - `day-1/exercises/build-product-card/solution`
+- `day-1/exercises/remote-and-screen/starter`
+- `day-1/exercises/remote-and-screen/solution`
 
 ## Build
 
