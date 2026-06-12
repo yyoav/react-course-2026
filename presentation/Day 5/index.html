@@ -592,7 +592,10 @@
               style="margin-top: 1.5rem; align-items: stretch"
             >
               <div>
-                <div class="card" style="height: 100%">
+                <div
+                  class="card"
+                  style="height: 100%; background: var(--accent-soft)"
+                >
                   <h4 style="font-size: 0.9em; margin-bottom: 1rem">
                     Directory Structure
                   </h4>
@@ -612,7 +615,10 @@
               </div>
 
               <div>
-                <div class="card" style="height: 100%">
+                <div
+                  class="card"
+                  style="height: 100%; background: var(--accent-soft)"
+                >
                   <h4 style="font-size: 0.9em; margin-bottom: 1rem">
                     How it works
                   </h4>
@@ -649,7 +655,10 @@
               style="margin-top: 1.5rem; align-items: stretch"
             >
               <div>
-                <div class="card" style="height: 100%">
+                <div
+                  class="card"
+                  style="height: 100%; background: var(--accent-soft)"
+                >
                   <h4 style="font-size: 0.9em; margin-bottom: 1rem">
                     Directory Structure
                   </h4>
@@ -671,7 +680,10 @@
               </div>
 
               <div>
-                <div class="card" style="height: 100%">
+                <div
+                  class="card"
+                  style="height: 100%; background: var(--accent-soft)"
+                >
                   <h4 style="font-size: 0.9em; margin-bottom: 1rem">
                     How it works
                   </h4>
@@ -692,16 +704,15 @@
 
           <!-- Slide 6c: App Router vs Pages Router -->
           <section>
-            <h3>App Router vs Pages Router - Comparison</h3>
             <p class="small-text">Next.js has two routing systems</p>
 
             <div class="two-col" style="margin-top: 1.5rem">
-              <div class="card">
+              <div class="card" style="background: var(--accent-soft)">
                 <h4>📁 Pages Router</h4>
-                <p style="font-size: 0.75em; color: var(--text-soft)">
+                <p style="font-size: 0.65em; color: var(--text-soft)">
                   (Legacy - Still supported)
                 </p>
-                <ul style="font-size: 0.8em; margin-top: 0.5rem">
+                <ul style="font-size: 0.65em; margin-top: 0.5rem">
                   <li>pages/ directory</li>
                   <li>Client components by default</li>
                   <li>getServerSideProps</li>
@@ -709,7 +720,13 @@
                 </ul>
               </div>
 
-              <div class="card" style="border: 2px solid var(--accent)">
+              <div
+                class="card"
+                style="
+                  border: 2px solid var(--accent);
+                  background: var(--accent-soft);
+                "
+              >
                 <h4>
                   🆕 App Router
                   <span style="font-size: 0.6em; color: var(--accent)"
@@ -719,7 +736,7 @@
                 <p style="font-size: 0.75em; color: var(--text-soft)">
                   (Recommended since Next.js 13+)
                 </p>
-                <ul style="font-size: 0.8em; margin-top: 0.5rem">
+                <ul style="font-size: 0.65em; margin-top: 0.5rem">
                   <li>app/ directory</li>
                   <li>Server components by default</li>
                   <li>Layouts & templates</li>
@@ -729,7 +746,10 @@
               </div>
             </div>
 
-            <div class="card" style="margin-top: 1rem">
+            <div
+              class="card"
+              style="margin-top: 1rem; background: var(--accent-soft)"
+            >
               <p style="font-size: 0.75em">
                 💡 New projects should use
                 <span class="highlight">App Router</span>
@@ -911,8 +931,8 @@ export default function Navigation() {
             </div>
 
             <div class="card" style="margin-top: 1rem">
-              <h4 style="font-size: 0.9em">Why Link over &lt;a&gt;?</h4>
-              <ul style="font-size: 0.75em">
+              <h4 style="font-size: 0.7em">Why Link over &lt;a&gt;?</h4>
+              <ul style="font-size: 0.65em">
                 <li>✅ Client-side navigation (no page reload)</li>
                 <li>✅ Automatic prefetching</li>
                 <li>✅ Faster transitions</li>
