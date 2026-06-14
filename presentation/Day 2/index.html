@@ -426,8 +426,11 @@
           <!-- Slide 3b: Why .map() is used in React -->
           <section>
             <h3>Why .map() is used in React</h3>
-            <div style="text-align: left; font-size: 0.85em; margin-top: 1rem">
-              <div class="card" style="margin-bottom: 1rem">
+            <div style="text-align: left; font-size: 0.9em; margin-top: 1rem">
+              <div
+                class="card"
+                style="margin-bottom: 1rem; background: var(--accent-soft)"
+              >
                 <ul style="margin: 0; padding-left: 1.5rem; line-height: 1.8">
                   <li style="margin-bottom: 1rem">
                     In React, you rarely manually create repetitive HTML.
@@ -487,7 +490,10 @@ function ProductGallery() {
           <section>
             <h3>Why Keys Matter ?</h3>
             <div style="text-align: left; font-size: 0.85em; margin-top: 1rem">
-              <div class="card" style="margin-bottom: 1rem">
+              <div
+                class="card"
+                style="margin-bottom: 1rem; background: var(--accent-soft)"
+              >
                 <ul style="margin: 0; padding-left: 1.5rem; line-height: 1.8">
                   <li style="margin-bottom: 1rem">
                     Keys help React identify which items changed.
@@ -497,8 +503,8 @@ function ProductGallery() {
                     unnecessarily.
                   </li>
                   <li style="margin-bottom: 1rem">
-                    Keys must be unique among siblings and ideally stable across
-                    renders.
+                    Keys must be unique and
+                    <span style="color: #f97316">stable</span> across renders.
                   </li>
                   <li style="margin-bottom: 1rem">
                     <strong>Example:</strong> Using
@@ -519,7 +525,14 @@ function ProductGallery() {
           <section>
             <h3>Understanding Keys: Index vs Unique ID</h3>
             <div style="text-align: left; font-size: 0.5em; margin-top: 1rem">
-              <div class="card" style="margin-bottom: 1rem; padding: 1rem">
+              <div
+                class="card"
+                style="
+                  margin-bottom: 1rem;
+                  padding: 1rem;
+                  background: var(--accent-soft);
+                "
+              >
                 <h4 style="color: var(--accent); margin: 0 0 0.75rem">
                   What happens when you use array index as key?
                 </h4>
@@ -751,6 +764,54 @@ function ProductGallery() {
             </div>
           </section>
 
+          <!-- Slide 3e: Keys Example Demo -->
+          <section>
+            <h3>Demo 🛠️</h3>
+            <div
+              class="card"
+              style="
+                margin-top: 2rem;
+                padding: 2.5rem;
+                text-align: center;
+                background: var(--accent-soft);
+              "
+            >
+              <p
+                style="
+                  font-size: 1.2em;
+                  margin: 0 0 1rem;
+                  color: var(--accent);
+                  font-weight: bold;
+                "
+              >
+                Open the live demo in the course app
+              </p>
+              <p
+                style="
+                  font-size: 0.9em;
+                  margin: 0;
+                  color: var(--text-soft);
+                  line-height: 1.6;
+                "
+              >
+                Route: <code style="color: var(--accent)">/keys</code>
+              </p>
+            </div>
+            <aside class="notes">
+              <strong>🔍 Demo: Unique IDs vs Index Keys</strong>
+              <ol>
+                <li>Shows a todo list with unique ID keys</li>
+                <li>Each item has an input field with a default value</li>
+                <li>Try deleting the middle item ("Buy Milk")</li>
+                <li>Notice how input values stay with the correct items</li>
+                <li>
+                  React preserves component state correctly because each item
+                  has a unique ID
+                </li>
+              </ol>
+            </aside>
+          </section>
+
           <!-- Slide 3f: Best Practices for Keys -->
           <section>
             <h3>Best Practices for Keys</h3>
@@ -899,21 +960,21 @@ function ProductGallery() {
 
           <!-- Slide 5: Exercise - TaskList -->
           <section>
-            <h3>Exercise (15 mins)</h3>
+            <h3>Exercise 15 mins 🛠️</h3>
             <div
               class="card"
-              style="margin-top: 2rem; padding: 2rem; text-align: center"
+              style="margin-top: 2rem; padding: 2rem; text-align: left"
             >
               <h4 style="color: var(--accent); margin: 0 0 1rem">Task</h4>
-              <p style="font-size: 1.1em; margin: 0">
-                Render a list of items <code>{ id, title, done }</code>
-              </p>
+              <ul style="font-size: 1.1em; margin: 0; padding-left: 1.5rem">
+                <li>Render a list of items <code>{ id, title, done }</code></li>
+              </ul>
             </div>
           </section>
 
           <!-- Slide 6: Solution - TaskList -->
           <section>
-            <h3>Solution: Task List with Completion Status</h3>
+            <h3>Solution: Task List</h3>
             <div class="two-col" style="margin-top: 1rem">
               <div>
                 <div
@@ -963,20 +1024,22 @@ export default function TaskList() {
           <!-- Slide 7: Conditional Rendering Introduction -->
           <section>
             <h3>Conditional Rendering</h3>
-            <div style="text-align: left; font-size: 0.9em; margin-top: 1.5rem">
-              <div class="card" style="margin-bottom: 1.5rem; padding: 1.5rem">
-                <h4 style="color: var(--accent); margin: 0 0 1rem">
-                  What is conditional rendering?
-                </h4>
-                <p style="margin: 0 0 0.8rem; line-height: 1.6">
-                  Conditional rendering is the ability to show or hide
-                  components or elements based on certain conditions (state,
-                  props, or data).
-                </p>
-                <p style="margin: 0; line-height: 1.6">
-                  It is similar to if/else statements in programming but adapted
-                  for JSX.
-                </p>
+            <div style="text-align: left; font-size: 0.9em; margin-top: 1rem">
+              <div
+                class="card"
+                style="margin-bottom: 1rem; background: var(--accent-soft)"
+              >
+                <ul style="margin: 0; padding-left: 1.5rem; line-height: 1.8">
+                  <li style="margin-bottom: 1rem">
+                    Conditional rendering is the ability to show or hide
+                    components or elements based on certain conditions (state,
+                    props, or data).
+                  </li>
+                  <li style="margin-bottom: 1rem">
+                    It is similar to <code>if/else</code> statements in
+                    programming but adapted for JSX.
+                  </li>
+                </ul>
               </div>
             </div>
           </section>
@@ -984,8 +1047,11 @@ export default function TaskList() {
           <!-- Slide 7a: Why Conditional Rendering Matters -->
           <section>
             <h3>Why Conditional Rendering Matters</h3>
-            <div style="text-align: left; font-size: 0.9em; margin-top: 2rem">
-              <div class="card" style="padding: 2rem">
+            <div style="text-align: left; font-size: 0.85em; margin-top: 1rem">
+              <div
+                class="card"
+                style="margin-bottom: 1rem; background: var(--accent-soft)"
+              >
                 <ul
                   style="
                     margin: 0;
@@ -1016,8 +1082,11 @@ export default function TaskList() {
           <!-- Slide 7b: Ternary Operator -->
           <section>
             <h3>Ternary Operator (? :)</h3>
-            <div style="margin-top: 1.5rem">
-              <div class="card" style="margin-bottom: 1.5rem; padding: 1.5rem">
+            <div style="text-align: left; font-size: 0.85em; margin-top: 1rem">
+              <div
+                class="card"
+                style="margin-bottom: 1rem; background: var(--accent-soft)"
+              >
                 <h4 style="color: var(--accent); margin: 0 0 1rem">
                   When to use it
                 </h4>
@@ -1064,8 +1133,11 @@ export default function TaskList() {
           <!-- Slide 7c: Logical AND Operator -->
           <section>
             <h3>Logical AND (&&)</h3>
-            <div style="margin-top: 1.5rem">
-              <div class="card" style="margin-bottom: 1.5rem; padding: 1.5rem">
+            <div style="text-align: left; font-size: 0.85em; margin-top: 1rem">
+              <div
+                class="card"
+                style="margin-bottom: 1rem; background: var(--accent-soft)"
+              >
                 <h4 style="color: var(--accent); margin: 0 0 1rem">
                   When to use it
                 </h4>
@@ -1260,15 +1332,35 @@ export default function TaskList() {
 
           <!-- Slide 9: Exercise - Premium Badge -->
           <section>
-            <h3>Exercise — Demo 🛠️</h3>
+            <h3>Demo 🛠️</h3>
             <div
               class="card"
-              style="margin-top: 2rem; padding: 2rem; text-align: center"
+              style="
+                margin-top: 2rem;
+                padding: 2.5rem;
+                text-align: center;
+                background: var(--accent-soft);
+              "
             >
-              <h4 style="color: var(--accent); margin: 0 0 1rem">Task</h4>
-              <p style="font-size: 1.1em; margin: 0">
-                Show a "Premium Badge" only if <code>user.isPremium</code> is
-                true.
+              <p
+                style="
+                  font-size: 1.2em;
+                  margin: 0 0 1rem;
+                  color: var(--accent);
+                  font-weight: bold;
+                "
+              >
+                Open the live demo in the course app
+              </p>
+              <p
+                style="
+                  font-size: 0.9em;
+                  margin: 0;
+                  color: var(--text-soft);
+                  line-height: 1.6;
+                "
+              >
+                Route: <code style="color: var(--accent)">/conditional</code>
               </p>
             </div>
           </section>
@@ -1327,13 +1419,20 @@ function UserProfile() {
             <div
               style="text-align: left; font-size: 0.43em; margin-top: 1.5rem"
             >
-              <div class="card" style="margin-bottom: 1.5rem; padding: 1.5rem">
+              <div
+                class="card"
+                style="
+                  margin-bottom: 1.5rem;
+                  padding: 1.5rem;
+                  background: var(--accent-soft);
+                "
+              >
                 <ul style="margin: 0; padding-left: 1.5rem; line-height: 1.8">
-                  <li style="margin-bottom: 1rem; font-size: 1.5em">
+                  <li style="margin-bottom: 1rem; font-size: 1.6em">
                     React maintains a <strong>Virtual DOM</strong>, a
                     lightweight copy of the real DOM stored in memory.
                   </li>
-                  <li style="font-size: 1.5em">
+                  <li style="font-size: 1.6em">
                     Think of it as a <strong>blueprint of the UI</strong> React
                     can compare quickly without touching the actual browser DOM.
                   </li>
@@ -1389,19 +1488,26 @@ function UserProfile() {
             <div
               style="text-align: left; font-size: 0.43em; margin-top: 1.5rem"
             >
-              <div class="card" style="margin-bottom: 1.5rem; padding: 1.5rem">
+              <div
+                class="card"
+                style="
+                  margin-bottom: 1.5rem;
+                  padding: 1.5rem;
+                  background: var(--accent-soft);
+                "
+              >
                 <h4 style="color: var(--accent); margin: 0 0 1rem">
                   When a component state or prop changes:
                 </h4>
                 <ol style="margin: 0; padding-left: 1.5rem; line-height: 1.8">
-                  <li style="margin-bottom: 0.8rem">
+                  <li style="margin-bottom: 0.8rem;font-size:1.2em">
                     React creates a <strong>new Virtual DOM tree</strong>
                   </li>
-                  <li style="margin-bottom: 0.8rem">
+                  <li style="margin-bottom: 0.8rem;font-size:1.2em">
                     Compares it to the previous Virtual DOM (this is called
                     <strong style="color: var(--accent)">diffing</strong>)
                   </li>
-                  <li style="margin-bottom: 0.8rem">
+                  <li style="margin-bottom: 0.8rem;font-size:1.2em">
                     Only updates the
                     <strong>actual DOM elements that changed</strong>, instead
                     of re-rendering everything
@@ -1502,7 +1608,7 @@ function UserProfile() {
 
           <!-- Slide 12: Exercise Demo -->
           <section>
-            <h3>Exercise — Demo 🛠️</h3>
+            <h3>Demo 🛠️</h3>
             <div
               class="card"
               style="
@@ -1573,7 +1679,7 @@ function UserProfile() {
                   style="
                     margin: 0 0 1.5rem;
                     line-height: 1.8;
-                    font-size: 1.05em;
+                    font-size: 1.25em;
                   "
                 >
                   Before React 16.8,
@@ -1582,7 +1688,7 @@ function UserProfile() {
                   <strong style="color: var(--accent)">class components</strong
                   >.
                 </p>
-                <p style="margin: 0; line-height: 1.8; font-size: 1.05em">
+                <p style="margin: 0; line-height: 1.8; font-size: 1.25em">
                   Functional components were "stateless" - they could only
                   receive props and return JSX.
                 </p>
@@ -1594,7 +1700,7 @@ function UserProfile() {
                 <h4 style="color: var(--accent); margin: 0 0 1.5rem">
                   The Solution: Hooks
                 </h4>
-                <p style="margin: 0; line-height: 1.8; font-size: 1.05em">
+                <p style="margin: 0; line-height: 1.8; font-size: 1.25em">
                   Hooks let us use
                   <strong>state, effects, and other React features</strong> in
                   functional components, making them simpler and more powerful.
@@ -1909,25 +2015,30 @@ if (loggedIn) { ... }</code></pre>
             <div
               style="text-align: left; font-size: 0.82em; margin-top: 1.5rem"
             >
-              <ul style="padding-left: 1.5rem; line-height: 2.2">
-                <li>
-                  ⏱️ Runs <strong>after</strong> the component renders — never
-                  during
-                </li>
-                <li>
-                  🔁 <code>[]</code> → once &nbsp;|&nbsp; <code>[val]</code> →
-                  when <em>val</em> changes &nbsp;|&nbsp; no array → every
-                  render
-                </li>
-                <li>
-                  🧹 Return a function to <strong>clean up</strong> (clear
-                  timers, unsubscribe…)
-                </li>
-                <li>
-                  🚫 No cleanup = <strong>memory leak</strong> if the component
-                  unmounts
-                </li>
-              </ul>
+              <div
+                class="card"
+                style="padding: 1.5rem; background: var(--accent-soft)"
+              >
+                <ul style="margin: 0; padding-left: 1.5rem; line-height: 2.2">
+                  <li>
+                    ⏱️ Runs <strong>after</strong> the component renders — never
+                    during
+                  </li>
+                  <li>
+                    🔁 <code>[]</code> → once &nbsp;|&nbsp; <code>[val]</code> →
+                    when <em>val</em> changes &nbsp;|&nbsp; no array → every
+                    render
+                  </li>
+                  <li>
+                    🧹 Return a function to <strong>clean up</strong> (clear
+                    timers, unsubscribe…)
+                  </li>
+                  <li>
+                    🚫 No cleanup = <strong>memory leak</strong> if the
+                    component unmounts
+                  </li>
+                </ul>
+              </div>
             </div>
             <aside class="notes">
               Walk through each point with the clock example in mind:
@@ -1950,7 +2061,7 @@ if (loggedIn) { ... }</code></pre>
 
           <!-- Slide 15a: Exercise Demo -->
           <section>
-            <h3>Exercise — Demo 🛠️</h3>
+            <h3>Demo 🛠️</h3>
             <div
               class="card"
               style="
@@ -2053,13 +2164,20 @@ export default function Clock() {
           <section>
             <h3>What is a Custom Hook?</h3>
             <div style="text-align: left; font-size: 0.45em; margin-top: 2rem">
-              <div class="card" style="margin-bottom: 1.5rem; padding: 2rem">
+              <div
+                class="card"
+                style="
+                  margin-bottom: 1.5rem;
+                  padding: 2rem;
+                  background: var(--accent-soft);
+                "
+              >
                 <ul style="margin: 0; padding-left: 1.5rem; line-height: 2.2">
-                  <li style="margin-bottom: 1.2rem; font-size: 1.5em">
+                  <li style="margin-bottom: 1.2rem; font-size: 1.8em">
                     A JavaScript function that starts with <code>use</code> and
                     reuses component logic.
                   </li>
-                  <li style="font-size: 1.5em">
+                  <li style="font-size: 1.8em">
                     Can use other hooks inside it (<code>useState</code>,
                     <code>useEffect</code>, etc.).
                   </li>
@@ -2072,15 +2190,22 @@ export default function Clock() {
           <section>
             <h3>Why Use Custom Hooks?</h3>
             <div style="text-align: left; font-size: 0.45em; margin-top: 2rem">
-              <div class="card" style="margin-bottom: 1.5rem; padding: 2rem">
+              <div
+                class="card"
+                style="
+                  margin-bottom: 1.5rem;
+                  padding: 2rem;
+                  background: var(--accent-soft);
+                "
+              >
                 <ul style="margin: 0; padding-left: 1.5rem; line-height: 2.2">
-                  <li style="margin-bottom: 1.2rem; font-size: 1.5em">
+                  <li style="margin-bottom: 1.2rem; font-size: 1.8em">
                     Avoid repeating code.
                   </li>
-                  <li style="margin-bottom: 1.2rem; font-size: 1.5em">
+                  <li style="margin-bottom: 1.2rem; font-size: 1.8em">
                     Separate logic from UI.
                   </li>
-                  <li style="font-size: 1.5em">
+                  <li style="font-size: 1.8em">
                     Makes code cleaner and easier to test.
                   </li>
                 </ul>
@@ -2092,17 +2217,24 @@ export default function Clock() {
           <section>
             <h3>What Can Custom Hooks Return?</h3>
             <div style="text-align: left; font-size: 0.45em; margin-top: 2rem">
-              <div class="card" style="margin-bottom: 1.5rem; padding: 2rem">
+              <div
+                class="card"
+                style="
+                  margin-bottom: 1.5rem;
+                  padding: 2rem;
+                  background: var(--accent-soft);
+                "
+              >
                 <ul style="margin: 0; padding-left: 1.5rem; line-height: 2.2">
-                  <li style="margin-bottom: 1.2rem; font-size: 1.5em">
+                  <li style="margin-bottom: 1.2rem; font-size: 1.8em">
                     Can return <strong>any kind of data</strong>: objects,
                     arrays, primitives, functions
                   </li>
-                  <li style="margin-bottom: 1.2rem; font-size: 1.5em">
+                  <li style="margin-bottom: 1.2rem; font-size: 1.8em">
                     Can return <strong>nothing</strong> (just perform side
                     effects)
                   </li>
-                  <li style="color: #ef4444; font-size: 1.5em">
+                  <li style="color: #ef4444; font-size: 1.8em">
                     ❌ <strong>Cannot return JSX</strong> - hooks are logic, not
                     UI
                   </li>
@@ -2115,15 +2247,22 @@ export default function Clock() {
           <section>
             <h3>Custom Hooks as Services</h3>
             <div style="text-align: left; font-size: 0.45em; margin-top: 2rem">
-              <div class="card" style="margin-bottom: 1.5rem; padding: 2rem">
+              <div
+                class="card"
+                style="
+                  margin-bottom: 1.5rem;
+                  padding: 2rem;
+                  background: var(--accent-soft);
+                "
+              >
                 <ul style="margin: 0; padding-left: 1.5rem; line-height: 2.2">
-                  <li style="margin-bottom: 1.2rem; font-size: 1.5em">
+                  <li style="margin-bottom: 1.2rem; font-size: 1.8em">
                     Think of custom hooks as <strong>services</strong>
                   </li>
-                  <li style="margin-bottom: 1.2rem; font-size: 1.5em">
+                  <li style="margin-bottom: 1.2rem; font-size: 1.8em">
                     They provide reusable functionality to components
                   </li>
-                  <li style="font-size: 1.5em">
+                  <li style="font-size: 1.8em">
                     Similar to services in other frameworks (Angular, etc.)
                   </li>
                 </ul>
@@ -2135,16 +2274,23 @@ export default function Clock() {
           <section>
             <h3>Custom Hooks & Component Lifecycle</h3>
             <div style="text-align: left; font-size: 0.45em; margin-top: 2rem">
-              <div class="card" style="margin-bottom: 1.5rem; padding: 2rem">
+              <div
+                class="card"
+                style="
+                  margin-bottom: 1.5rem;
+                  padding: 2rem;
+                  background: var(--accent-soft);
+                "
+              >
                 <ul style="margin: 0; padding-left: 1.5rem; line-height: 2.2">
-                  <li style="margin-bottom: 1.2rem; font-size: 1.5em">
+                  <li style="margin-bottom: 1.2rem; font-size: 1.8em">
                     Custom hooks are
                     <strong>part of the component's lifecycle</strong>
                   </li>
-                  <li style="margin-bottom: 1.2rem; font-size: 1.5em">
+                  <li style="margin-bottom: 1.2rem; font-size: 1.8em">
                     They execute when the component renders
                   </li>
-                  <li style="font-size: 1.5em">
+                  <li style="font-size: 1.8em">
                     This is just a
                     <strong>technical/visual separation</strong> of concerns
                   </li>
@@ -2157,16 +2303,23 @@ export default function Clock() {
           <section>
             <h3>Custom Hooks & Design Patterns</h3>
             <div style="text-align: left; font-size: 0.45em; margin-top: 2rem">
-              <div class="card" style="margin-bottom: 1.5rem; padding: 2rem">
+              <div
+                class="card"
+                style="
+                  margin-bottom: 1.5rem;
+                  padding: 2rem;
+                  background: var(--accent-soft);
+                "
+              >
                 <ul style="margin: 0; padding-left: 1.5rem; line-height: 2.2">
-                  <li style="margin-bottom: 1.2rem; font-size: 1.5em">
+                  <li style="margin-bottom: 1.2rem; font-size: 1.8em">
                     Similar to <strong>MVC pattern</strong>: separate business
                     logic from presentation
                   </li>
-                  <li style="margin-bottom: 1.2rem; font-size: 1.5em">
+                  <li style="margin-bottom: 1.2rem; font-size: 1.8em">
                     <strong>Custom Hook</strong> = Model/Controller (logic)
                   </li>
-                  <li style="font-size: 1.5em">
+                  <li style="font-size: 1.8em">
                     <strong>Component</strong> = View (UI/JSX)
                   </li>
                 </ul>
@@ -2178,8 +2331,11 @@ export default function Clock() {
           <section>
             <h3>Custom Hooks - Example</h3>
             <div style="text-align: left; font-size: 0.45em; margin-top: 2rem">
-              <div class="card" style="padding: 2rem">
-                <p style="margin: 0; line-height: 1.8; font-size: 1.5em">
+              <div
+                class="card"
+                style="padding: 2rem; background: var(--accent-soft)"
+              >
+                <p style="margin: 0; line-height: 1.8; font-size: 1.8em">
                   <code>useFetch</code> encapsulates data fetching logic, so any
                   component can just call
                   <code>const { data, loading } = useFetch(url)</code>.
@@ -2218,13 +2374,20 @@ export function useFetch(url) {
           <section>
             <h3>What is useRef?</h3>
             <div style="text-align: left; font-size: 0.45em; margin-top: 2rem">
-              <div class="card" style="margin-bottom: 1.5rem; padding: 2rem">
+              <div
+                class="card"
+                style="
+                  margin-bottom: 1.5rem;
+                  padding: 2rem;
+                  background: var(--accent-soft);
+                "
+              >
                 <ul style="margin: 0; padding-left: 1.5rem; line-height: 2.2">
-                  <li style="margin-bottom: 1.2rem; font-size: 1.5em">
+                  <li style="margin-bottom: 1.2rem; font-size: 1.8em">
                     A hook that holds a mutable object whose
                     <code>.current</code> property persists across renders.
                   </li>
-                  <li style="font-size: 1.5em">
+                  <li style="font-size: 1.8em">
                     Can store DOM elements or mutable values.
                   </li>
                 </ul>
@@ -2236,13 +2399,20 @@ export function useFetch(url) {
           <section>
             <h3>useRef - Use Cases</h3>
             <div style="text-align: left; font-size: 0.45em; margin-top: 2rem">
-              <div class="card" style="margin-bottom: 1.5rem; padding: 2rem">
+              <div
+                class="card"
+                style="
+                  margin-bottom: 1.5rem;
+                  padding: 2rem;
+                  background: var(--accent-soft);
+                "
+              >
                 <ul style="margin: 0; padding-left: 1.5rem; line-height: 2.2">
-                  <li style="margin-bottom: 1.2rem; font-size: 1.5em">
+                  <li style="margin-bottom: 1.2rem; font-size: 1.8em">
                     <strong>DOM access:</strong> Focus input, scroll to element,
                     measure element size.
                   </li>
-                  <li style="font-size: 1.5em">
+                  <li style="font-size: 1.8em">
                     <strong>Mutable storage:</strong> Store previous state or
                     timer ID without triggering re-renders.
                   </li>
@@ -2255,12 +2425,15 @@ export function useFetch(url) {
           <section>
             <h3>useRef - Important Rules</h3>
             <div style="text-align: left; font-size: 0.45em; margin-top: 2rem">
-              <div class="card" style="padding: 2rem">
+              <div
+                class="card"
+                style="padding: 2rem; background: var(--accent-soft)"
+              >
                 <ul style="margin: 0; padding-left: 1.5rem; line-height: 2.2">
-                  <li style="margin-bottom: 1.2rem; font-size: 1.5em">
+                  <li style="margin-bottom: 1.2rem; font-size: 1.8em">
                     Updating <code>.current</code> does not trigger a render.
                   </li>
-                  <li style="font-size: 1.5em">
+                  <li style="font-size: 1.8em">
                     Useful for performance-sensitive operations.
                   </li>
                 </ul>
@@ -2392,24 +2565,29 @@ function ClickCounter() {
                 </div>
                 <div
                   class="card"
-                  style="padding: 1rem; text-align: left; font-size: 0.85em"
+                  style="
+                    padding: 0.8rem;
+                    text-align: left;
+                    font-size: 0.7em;
+                    background: var(--accent-soft);
+                  "
                 >
-                  <ul style="margin: 0; padding-left: 1.5rem; line-height: 1.8">
-                    <li style="margin-bottom: 0.8rem">
+                  <ul style="margin: 0; padding-left: 1.2rem; line-height: 1.6">
+                    <li style="margin-bottom: 0.6rem">
                       <code>useState</code> triggers re-render when updated
                     </li>
-                    <li style="margin-bottom: 0.8rem">
+                    <li style="margin-bottom: 0.6rem">
                       <code>useRef</code> persists value but doesn't trigger
                       re-render
                     </li>
-                    <li style="margin-bottom: 0.8rem">
+                    <li style="margin-bottom: 0.6rem">
                       Perfect for tracking values like click counts, timers,
                       previous values
                     </li>
                     <li>Check console to see ref value updates</li>
                   </ul>
                 </div>
-                <p class="small-text" style="margin-top: 1rem">
+                <p class="small-text" style="margin-top: 0.8rem">
                   💡 Route: /useref-counter
                 </p>
               </div>
@@ -2420,7 +2598,7 @@ function ClickCounter() {
           <section>
             <h3>
               Exercise: Fetch and Render a List
-              <span class="small-text">(1h)</span>
+              <span class="small-text">(1h) 🛠️</span>
             </h3>
             <div
               class="card"
@@ -2432,77 +2610,6 @@ function ClickCounter() {
                 <li>Display the characters in a list.</li>
                 <li>Use a custom hook <code>useFetch</code>.</li>
               </ul>
-            </div>
-            <p class="small-text" style="margin-top: 1rem">
-              💡 Bonus: add input field to perform a character search
-            </p>
-          </section>
-
-          <!-- Slide 21: Solution - Star Wars Characters -->
-          <section>
-            <h3>Solution: Fetch and Render a List</h3>
-            <div class="two-col" style="margin-top: 1rem">
-              <div>
-                <div
-                  class="small-text"
-                  style="margin-bottom: 0.5rem; color: var(--accent)"
-                >
-                  JavaScript/JSX - Star Wars Characters
-                </div>
-                <pre><code class="language-jsx">function StarWarsCharacters() {
-  const [search, setSearch] = useState("");
-  const [characters, setCharacters] = useState([]);
-
-  useEffect(() => {
-    async function fetchCharacters() {
-      const response = await fetch(
-        `https://swapi.py4e.com/api/people/?search=${search}`
-      );
-      const data = await response.json();
-      setCharacters(data.results.slice(0, 10));
-    }
-    fetchCharacters();
-  }, [search]);
-
-  return (
-    &lt;div&gt;
-      &lt;input
-        type="text"
-        placeholder="Search..."
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-      /&gt;
-      &lt;table&gt;
-        &lt;thead&gt;
-          &lt;tr&gt;&lt;th&gt;Name&lt;/th&gt;&lt;/tr&gt;
-        &lt;/thead&gt;
-        &lt;tbody&gt;
-          {characters.map((c, i) => (
-            &lt;tr key={i}&gt;
-              &lt;td&gt;{c.name}&lt;/td&gt;
-            &lt;/tr&gt;
-          ))}
-        &lt;/tbody&gt;
-      &lt;/table&gt;
-    &lt;/div&gt;
-  );
-}</code></pre>
-              </div>
-              <div>
-                <div
-                  class="small-text"
-                  style="margin-bottom: 0.5rem; color: var(--accent)"
-                >
-                  Route: /starwars
-                </div>
-                <p style="font-size: 0.8em; margin-top: 1rem">Features:</p>
-                <ul style="font-size: 0.75em; text-align: left">
-                  <li>Fetches 10 Star Wars characters by default</li>
-                  <li>Search field filters characters in real-time</li>
-                  <li>Simple table with character names</li>
-                  <li>Uses useEffect with search dependency</li>
-                </ul>
-              </div>
             </div>
           </section>
         </section>

@@ -1,0 +1,120 @@
+.starwars-container {
+  padding: 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.starwars-container h1 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  color: #ffd700;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.search-box {
+  max-width: 600px;
+  margin: 0 auto 2rem;
+}
+
+.search-input {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1rem;
+  border: 2px solid #61dafb;
+  border-radius: 8px;
+  background: rgba(97, 218, 251, 0.05);
+  transition: all 0.3s;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #ffd700;
+  background: rgba(97, 218, 251, 0.1);
+  box-shadow: 0 0 15px rgba(97, 218, 251, 0.3);
+}
+
+.loading {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #61dafb;
+  padding: 3rem;
+}
+
+.characters-table {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  border-collapse: collapse;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.characters-table thead {
+  background: rgba(97, 218, 251, 0.2);
+}
+
+.characters-table th {
+  padding: 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: #ffd700;
+  border-bottom: 2px solid #61dafb;
+}
+
+.characters-table th:first-child {
+  width: 80px;
+  text-align: center;
+}
+
+.characters-table td {
+  padding: 1rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.characters-table td:first-child {
+  text-align: center;
+  color: #61dafb;
+  font-weight: 600;
+}
+
+.characters-table tbody tr {
+  transition: background 0.2s;
+}
+
+.characters-table tbody tr:hover {
+  background: rgba(97, 218, 251, 0.05);
+}
+
+.characters-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.no-results {
+  text-align: center !important;
+  color: rgba(0, 0, 0, 0.4);
+  font-style: italic;
+  padding: 2rem !important;
+}
+
+@media (max-width: 768px) {
+  .starwars-container {
+    padding: 1rem;
+  }
+
+  .starwars-container h1 {
+    font-size: 1.8rem;
+  }
+
+  .characters-table th,
+  .characters-table td {
+    padding: 0.75rem;
+    font-size: 0.9rem;
+  }
+
+  .characters-table th:first-child,
+  .characters-table td:first-child {
+    width: 50px;
+  }
+}

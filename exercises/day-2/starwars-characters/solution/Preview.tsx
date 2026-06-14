@@ -3,19 +3,21 @@ export default function Preview() {
     <section className="lesson-card exercise-header-card">
       <div className="exercise-header-copy">
         <p className="eyebrow">Solution</p>
-        <h2 className="exercise-title">Zustand Counter: 2×2 Grid</h2>
+        <h2 className="exercise-title">Fetch and Render a List</h2>
       </div>
 
       <div className="exercise-task-block exercise-task-block-inline">
         <p className="eyebrow">Completed</p>
-        <strong>useCounterStore.ts & Counter.tsx</strong>
+        <strong>StarWarsCharacters.tsx</strong>
         <p className="product-meta">
-          ✅ Created 2×2 grid layout (4 quarters)
+          ✅ Fetch data from the Star Wars API
           <br />
-          ✅ Added "Add" button in top-left quarter
+          ✅ Display characters in a table
           <br />
-          ✅ Added "Remove" button in bottom-right quarter
-          <br />✅ Both counter displays show synchronized value
+          ✅ Add search functionality with useEffect dependency
+          <br />
+          ✅ Show loading state while fetching
+          <br />✅ Handle empty results gracefully
         </p>
       </div>
     </section>
