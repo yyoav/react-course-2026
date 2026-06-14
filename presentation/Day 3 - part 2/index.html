@@ -715,8 +715,6 @@
           <!-- Slide 4: Single Source of Truth - GOOD Example -->
           <section>
             <h3>Solution: Single source of truth ✅</h3>
-            <p class="small-text">Same Example: Bank Account Done Right</p>
-
             <svg
               class="diagram-svg"
               viewBox="0 0 800 500"
@@ -963,7 +961,14 @@
           <section>
             <h3>So... how do we achieve this in React?</h3>
 
-            <div class="card" style="margin-top: 1rem; padding: 1rem">
+            <div
+              class="card"
+              style="
+                margin-top: 1rem;
+                padding: 1rem;
+                background: var(--accent-soft);
+              "
+            >
               <h4
                 style="
                   color: var(--accent);
@@ -979,7 +984,14 @@
               </p>
             </div>
 
-            <div class="card" style="margin-top: 0.8rem; padding: 1rem">
+            <div
+              class="card"
+              style="
+                margin-top: 0.8rem;
+                padding: 1rem;
+                background: var(--accent-soft);
+              "
+            >
               <h4
                 style="color: #fbbf24; font-size: 0.9em; margin-bottom: 0.5rem"
               >
@@ -1050,30 +1062,33 @@ function UserProfile({ user }) {
           <section>
             <h3>Why prop drilling is a problem</h3>
             <div style="text-align: left; font-size: 0.9em; margin-top: 2rem">
-              <div class="card" style="padding: 2rem">
+              <div
+                class="card"
+                style="padding: 2rem; background: var(--accent-soft)"
+              >
                 <ul
                   style="
                     margin: 0;
                     padding-left: 1.5rem;
-                    line-height: 1.8;
-                    font-size: 1.1em;
+                    line-height: 1.85;
+                    font-size: 1em;
                   "
                 >
-                  <li style="margin-bottom: 1rem">
+                  <li style="margin-bottom: 0.9rem">
                     <strong style="color: var(--accent)"
                       >Maintenance burden:</strong
                     >
                     Every intermediate component must know about props it
                     doesn't use
                   </li>
-                  <li style="margin-bottom: 1rem">
+                  <li style="margin-bottom: 0.9rem">
                     <strong style="color: var(--accent)"
                       >Tight coupling:</strong
                     >
                     Components become unnecessarily dependent on their parent's
                     data structure
                   </li>
-                  <li>
+                  <li style="margin-bottom: 0.9rem">
                     <strong style="color: var(--accent)"
                       >Refactoring nightmare:</strong
                     >
@@ -1089,7 +1104,10 @@ function UserProfile({ user }) {
           <section>
             <h3>Why prop drilling is a problem (cont.)</h3>
             <div style="text-align: left; font-size: 0.9em; margin-top: 2rem">
-              <div class="card" style="padding: 2rem">
+              <div
+                class="card"
+                style="padding: 2rem; background: var(--accent-soft)"
+              >
                 <ul
                   style="
                     margin: 0;
@@ -1118,7 +1136,10 @@ function UserProfile({ user }) {
           <section>
             <h3>Solution categories</h3>
             <div style="text-align: left; font-size: 0.9em; margin-top: 2rem">
-              <div class="card" style="padding: 2rem">
+              <div
+                class="card"
+                style="padding: 2rem; background: var(--accent-soft)"
+              >
                 <ul
                   style="
                     margin: 0;
@@ -1150,7 +1171,10 @@ function UserProfile({ user }) {
             </p>
             <div style="text-align: left; font-size: 0.9em; margin-top: 2rem">
               <h4>Best for:</h4>
-              <div class="card" style="padding: 2rem">
+              <div
+                class="card"
+                style="padding: 2rem; background: var(--accent-soft)"
+              >
                 <ul
                   style="
                     margin: 0;
@@ -1209,7 +1233,10 @@ function Header() {
           <!-- Slide 13: Important Concept -->
           <section>
             <h3>Important concept</h3>
-            <div class="card" style="margin-top: 1rem">
+            <div
+              class="card"
+              style="margin-top: 1rem; background: var(--accent-soft)"
+            >
               <p style="font-size: 0.9em">⚠️ Context is NOT a state manager</p>
               <p style="font-size: 0.9em">👉 It only shares values</p>
               <p style="font-size: 0.9em">
@@ -1301,7 +1328,10 @@ export const useTheme = () => {
   );
 };</code></pre>
 
-            <div class="card" style="margin-top: 1.5rem">
+            <div
+              class="card"
+              style="margin-top: 1.5rem; background: var(--accent-soft)"
+            >
               <h4>🧠 Teaching Notes</h4>
               <p style="font-size: 0.8em">Emphasize:</p>
               <ul style="font-size: 0.8em">
@@ -1798,7 +1828,10 @@ export const useTheme = () => {
           <!-- Slide 20: Why Zustand over Redux? - Introduction -->
           <section>
             <h3>Why Zustand instead of Redux?</h3>
-            <div class="card" style="margin-top: 1rem">
+            <div
+              class="card"
+              style="margin-top: 1rem; background: var(--accent-soft)"
+            >
               <p style="font-size: 0.85em">
                 <span class="highlight">Redux</span> is the most popular state
                 management library
@@ -1807,7 +1840,10 @@ export const useTheme = () => {
                 (used by millions of apps worldwide)
               </p>
             </div>
-            <div class="card" style="margin-top: 1.5rem">
+            <div
+              class="card"
+              style="margin-top: 1.5rem; background: var(--accent-soft)"
+            >
               <p style="font-size: 0.8em">👉 So why learn Zustand instead?</p>
             </div>
           </section>
@@ -1816,7 +1852,10 @@ export const useTheme = () => {
           <section>
             <h3>Redux challenges</h3>
             <div style="text-align: left; font-size: 0.9em; margin-top: 2rem">
-              <div class="card" style="padding: 2rem">
+              <div
+                class="card"
+                style="padding: 2rem; background: var(--accent-soft)"
+              >
                 <ul
                   style="
                     margin: 0;
@@ -1852,7 +1891,10 @@ export const useTheme = () => {
           <section>
             <h3>Redux challenges (cont.)</h3>
             <div style="text-align: left; font-size: 0.9em; margin-top: 2rem">
-              <div class="card" style="padding: 2rem">
+              <div
+                class="card"
+                style="padding: 2rem; background: var(--accent-soft)"
+              >
                 <ul
                   style="
                     margin: 0;
@@ -1881,7 +1923,10 @@ export const useTheme = () => {
           <section>
             <h3>Zustand advantages</h3>
             <div style="text-align: left; font-size: 0.9em; margin-top: 2rem">
-              <div class="card" style="padding: 2rem">
+              <div
+                class="card"
+                style="padding: 2rem; background: var(--accent-soft)"
+              >
                 <ul
                   style="
                     margin: 0;
@@ -1915,7 +1960,10 @@ export const useTheme = () => {
           <section>
             <h3>Zustand advantages (cont.)</h3>
             <div style="text-align: left; font-size: 0.9em; margin-top: 2rem">
-              <div class="card" style="padding: 2rem">
+              <div
+                class="card"
+                style="padding: 2rem; background: var(--accent-soft)"
+              >
                 <ul
                   style="
                     margin: 0;
@@ -1939,7 +1987,10 @@ export const useTheme = () => {
                 </ul>
               </div>
             </div>
-            <div class="card" style="margin-top: 1.5rem">
+            <div
+              class="card"
+              style="margin-top: 1.5rem; background: var(--accent-soft)"
+            >
               <p style="font-size: 0.85em">
                 🎯 <span class="highlight">For this course:</span> Zustand gives
                 you 80% of Redux power with 20% of the complexity
@@ -2034,7 +2085,14 @@ const useStore = create((set) => ({
               <p style="font-size: 0.65em">
                 <span class="highlight">Zustand benefits:</span>
               </p>
-              <ul style="font-size: 0.65em; line-height: 1.8">
+              <ul
+                style="
+                  font-size: 0.65em;
+                  line-height: 1.8;
+                  list-style: none;
+                  padding-left: 0;
+                "
+              >
                 <li>✅ No providers needed</li>
                 <li>✅ Simple API - just create & use</li>
                 <li>✅ Components subscribe only to what they need</li>
@@ -2047,17 +2105,24 @@ const useStore = create((set) => ({
               <p style="font-size: 0.65em">
                 <span class="highlight">When to use Zustand:</span>
               </p>
-              <ul style="font-size: 0.65em; line-height: 1.6">
-                <li>✅Complex state shared across many components</li>
-                <li>✅Need state outside React (utils, services)</li>
-                <li>✅Want better performance than Context</li>
+              <ul
+                style="
+                  font-size: 0.65em;
+                  line-height: 1.6;
+                  list-style: none;
+                  padding-left: 0;
+                "
+              >
+                <li>✅ Complex state shared across many components</li>
+                <li>✅ Need state outside React (utils, services)</li>
+                <li>✅ Want better performance than Context</li>
               </ul>
             </div>
           </section>
 
           <!-- Slide 13b: Exercise Demo -->
           <section>
-            <h3>Exercise — Demo 🛠️</h3>
+            <h3>Demo 🛠️</h3>
             <div
               class="card"
               style="

@@ -1,4 +1,4 @@
-import { create } from 'zustand'
+import { create } from "zustand";
 
 // 1️⃣ Create the store with state and actions
 const useCounterStore = create((set) => ({
@@ -6,9 +6,7 @@ const useCounterStore = create((set) => ({
   count: 0,
 
   // Actions
-  increment: () => set((state) => ({ count: state.count + 1 })),
+  add: () => set((state) => ({ count: state.count + 1 })),
+}));
 
-  // TODO: Add a decrease action here
-}))
-
-export default useCounterStore
+export default useCounterStore;
