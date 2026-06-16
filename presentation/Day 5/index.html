@@ -514,7 +514,9 @@
                   <li>Built-in routing</li>
                   <li>SEO-friendly by default</li>
                   <li>Zero config needed</li>
-                  <li>Server + Client rendering</li>
+                  <li>
+                    <span class="highlight">Server + Client rendering</span>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -739,7 +741,9 @@
                 </p>
                 <ul style="font-size: 0.65em; margin-top: 0.5rem">
                   <li>app/ directory</li>
-                  <li>Server components by default</li>
+                  <li>
+                    <span class="highlight">Server components by default</span>
+                  </li>
                   <li>Layouts & templates</li>
                   <li>Streaming & suspense</li>
                   <li>Better performance</li>
@@ -781,49 +785,6 @@ npm run dev
               <span>Next.js 16+</span>
               <span>React 19+</span>
               <span>TypeScript</span>
-            </div>
-          </section>
-
-          <!-- Slide 8: Project Structure -->
-          <section>
-            <h3>Project Structure (App Router)</h3>
-            <div class="two-col" style="margin-top: 1.5rem">
-              <div>
-                <pre><code class="plaintext" style="font-size: 0.65em;">my-app/
-├── app/
-│   ├── layout.tsx       ← Root layout
-│   ├── page.tsx         ← Home page (/)
-│   ├── about/
-│   │   └── page.tsx     ← /about
-│   └── blog/
-│       ├── page.tsx     ← /blog
-│       └── [slug]/
-│           └── page.tsx ← /blog/:slug
-├── public/
-│   └── images/          ← Static files
-├── components/
-│   └── Button.tsx       ← Reusable components
-├── package.json
-└── next.config.js</code></pre>
-              </div>
-
-              <div>
-                <h4 style="font-size: 0.9em">Key Files:</h4>
-                <ul style="font-size: 0.75em; line-height: 1.7">
-                  <li><strong>layout.tsx</strong> - Shared UI wrapper</li>
-                  <li><strong>page.tsx</strong> - Route page</li>
-                  <li><strong>loading.tsx</strong> - Loading state</li>
-                  <li><strong>error.tsx</strong> - Error boundary</li>
-                  <li><strong>not-found.tsx</strong> - 404 page</li>
-                </ul>
-
-                <div class="card" style="margin-top: 1rem">
-                  <p style="font-size: 0.7em">
-                    🎯 Folder = Route<br />
-                    page.tsx = Publicly accessible
-                  </p>
-                </div>
-              </div>
             </div>
           </section>
 
@@ -876,110 +837,17 @@ npm run dev
             </div>
           </section>
 
-          <!-- Slide 10: Creating Pages -->
+          <!-- Slide 10: Exercise 1 -->
           <section>
-            <h3>Creating Pages</h3>
-            <div class="two-col" style="margin-top: 1.5rem">
-              <div>
-                <div class="label">app/page.tsx (Home)</div>
-                <pre><code class="tsx" style="font-size: 0.6em;">export default function Home() {
-  return (
-    &lt;main&gt;
-      &lt;h1&gt;Welcome to Next.js&lt;/h1&gt;
-      &lt;p&gt;This is the home page&lt;/p&gt;
-    &lt;/main&gt;
-  );
-}</code></pre>
-              </div>
-
-              <div>
-                <div class="label">app/about/page.tsx</div>
-                <pre><code class="tsx" style="font-size: 0.6em;">export default function About() {
-  return (
-    &lt;main&gt;
-      &lt;h1&gt;About Us&lt;/h1&gt;
-      &lt;p&gt;Learn more about us&lt;/p&gt;
-    &lt;/main&gt;
-  );
-}</code></pre>
-              </div>
-            </div>
+            <h3>🧪 Exercise 1 — Pages & Navigation</h3>
+            <p class="small-text">→ live coding / hands-on</p>
 
             <div class="card" style="margin-top: 1rem">
-              <p style="font-size: 0.75em">
-                ✨ These are <span class="highlight">Server Components</span> by
-                default (fast!)
-              </p>
+              <p style="font-size: 0.7em">⏱️ Time: 30 minutes</p>
             </div>
           </section>
 
-          <!-- Slide 11: Navigation -->
-          <section>
-            <h3>Navigation with Link</h3>
-            <div class="card" style="margin-top: 1.5rem">
-              <div class="label">Don't use &lt;a&gt; tags!</div>
-              <pre><code class="tsx" style="font-size: 0.65em;">import Link from 'next/link';
-
-export default function Navigation() {
-  return (
-    &lt;nav&gt;
-      &lt;Link href="/"&gt;Home&lt;/Link&gt;
-      &lt;Link href="/about"&gt;About&lt;/Link&gt;
-      &lt;Link href="/blog"&gt;Blog&lt;/Link&gt;
-    &lt;/nav&gt;
-  );
-}</code></pre>
-            </div>
-
-            <div class="card" style="margin-top: 1rem">
-              <h4 style="font-size: 0.7em">Why Link over &lt;a&gt;?</h4>
-              <ul style="font-size: 0.65em">
-                <li>✅ Client-side navigation (no page reload)</li>
-                <li>✅ Automatic prefetching</li>
-                <li>✅ Faster transitions</li>
-                <li>✅ Preserves scroll position</li>
-              </ul>
-            </div>
-          </section>
-
-          <!-- Slide 12: Layouts -->
-          <section>
-            <h3>Layouts - Shared UI</h3>
-            <p class="small-text">
-              Wrap pages with shared components (nav, footer)
-            </p>
-
-            <pre
-              style="margin-top: 1.5rem"
-            ><code class="tsx" style="font-size: 0.58em;">// app/layout.tsx - Root layout for ALL pages
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return (
-    &lt;html lang="en"&gt;
-      &lt;body&gt;
-        &lt;header&gt;
-          &lt;nav&gt;{/* Navigation */}&lt;/nav&gt;
-        &lt;/header&gt;
-
-        &lt;main&gt;{children}&lt;/main&gt;
-
-        &lt;footer&gt;© 2026 My App&lt;/footer&gt;
-      &lt;/body&gt;
-    &lt;/html&gt;
-  );
-}</code></pre>
-
-            <div class="card" style="margin-top: 1rem">
-              <p style="font-size: 0.75em">
-                💡 Layout wraps all pages automatically - no need to import!
-              </p>
-            </div>
-          </section>
-
-          <!-- Slide 13: Dynamic Routes -->
+          <!-- Slide 11: Dynamic Routes -->
           <section>
             <h3>Dynamic Routes</h3>
             <p class="small-text">Handle routes with parameters</p>
@@ -1026,37 +894,106 @@ export default function Product({
             </div>
           </section>
 
-          <!-- Slide 14: Exercise 1 -->
+          <!-- Slide 12: Creating Pages -->
           <section>
-            <h3>🧪 Exercise 1 — Pages & Navigation</h3>
-            <p class="small-text">Build a multi-page website</p>
-
+            <h3>Creating Pages</h3>
             <div class="two-col" style="margin-top: 1.5rem">
-              <div class="card">
-                <h4>🎯 Goal</h4>
-                <p style="font-size: 0.85em">Create a simple portfolio site:</p>
-                <ul style="font-size: 0.8em">
-                  <li>Home page</li>
-                  <li>About page</li>
-                  <li>Projects page</li>
-                  <li>Project detail (dynamic)</li>
-                </ul>
+              <div>
+                <div class="label">app/page.tsx (Home)</div>
+                <pre><code class="tsx" style="font-size: 0.6em;">export default function Home() {
+  return (
+    &lt;main&gt;
+      &lt;h1&gt;Welcome to Next.js&lt;/h1&gt;
+      &lt;p&gt;This is the home page&lt;/p&gt;
+    &lt;/main&gt;
+  );
+}</code></pre>
               </div>
 
-              <div class="card">
-                <h4>📋 Requirements</h4>
-                <ul style="font-size: 0.8em">
-                  <li>Create 3 pages</li>
-                  <li>Add navigation menu</li>
-                  <li>Create layout with header/footer</li>
-                  <li>Dynamic route: /projects/[id]</li>
-                  <li>Use Link for navigation</li>
-                </ul>
+              <div>
+                <div class="label">app/about/page.tsx</div>
+                <pre><code class="tsx" style="font-size: 0.6em;">export default function About() {
+  return (
+    &lt;main&gt;
+      &lt;h1&gt;About Us&lt;/h1&gt;
+      &lt;p&gt;Learn more about us&lt;/p&gt;
+    &lt;/main&gt;
+  );
+}</code></pre>
               </div>
             </div>
 
             <div class="card" style="margin-top: 1rem">
-              <p style="font-size: 0.7em">⏱️ Time: 30 minutes</p>
+              <p style="font-size: 0.75em">
+                ✨ These are <span class="highlight">Server Components</span> by
+                default (fast!)
+              </p>
+            </div>
+          </section>
+
+          <!-- Slide 13: Navigation -->
+          <section>
+            <h3>Navigation with Link</h3>
+            <div class="card" style="margin-top: 1.5rem">
+              <div class="label">Don't use &lt;a&gt; tags!</div>
+              <pre><code class="tsx" style="font-size: 0.65em;">import Link from 'next/link';
+
+export default function Navigation() {
+  return (
+    &lt;nav&gt;
+      &lt;Link href="/"&gt;Home&lt;/Link&gt;
+      &lt;Link href="/about"&gt;About&lt;/Link&gt;
+      &lt;Link href="/blog"&gt;Blog&lt;/Link&gt;
+    &lt;/nav&gt;
+  );
+}</code></pre>
+            </div>
+
+            <div class="card" style="margin-top: 1rem">
+              <h4 style="font-size: 0.7em">Why Link over &lt;a&gt;?</h4>
+              <ul style="font-size: 0.65em">
+                <li>✅ Client-side navigation (no page reload)</li>
+                <li>✅ Automatic prefetching</li>
+                <li>✅ Faster transitions</li>
+                <li>✅ Preserves scroll position</li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- Slide 14: Layouts -->
+          <section>
+            <h3>Layouts - Shared UI</h3>
+            <p class="small-text">
+              Wrap pages with shared components (nav, footer)
+            </p>
+
+            <pre
+              style="margin-top: 1.5rem"
+            ><code class="tsx" style="font-size: 0.58em;">// app/layout.tsx - Root layout for ALL pages
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    &lt;html lang="en"&gt;
+      &lt;body&gt;
+        &lt;header&gt;
+          &lt;nav&gt;{/* Navigation */}&lt;/nav&gt;
+        &lt;/header&gt;
+
+        &lt;main&gt;{children}&lt;/main&gt;
+
+        &lt;footer&gt;© 2026 My App&lt;/footer&gt;
+      &lt;/body&gt;
+    &lt;/html&gt;
+  );
+}</code></pre>
+
+            <div class="card" style="margin-top: 1rem">
+              <p style="font-size: 0.75em">
+                💡 Layout wraps all pages automatically - no need to import!
+              </p>
             </div>
           </section>
 
