@@ -847,6 +847,28 @@ npm run dev
             </div>
           </section>
 
+          <!-- Slide 10.5: App vs Pages Coexistence -->
+          <section>
+            <h3>Pages & App Router Coexistence</h3>
+            <p class="small-text">Yes, they can live together!</p>
+            <div class="card" style="margin-top: 1.5rem; background: var(--accent-soft)">
+              <h4 style="font-size: 0.9em">Gradual Migration</h4>
+              <ul style="font-size: 0.8em; line-height: 1.6">
+                <li>You can have both <code>app/</code> and <code>pages/</code> in the same project</li>
+                <li>Routes in <code>app/</code> <span style="color: var(--accent)">take priority if there is a conflict</span></li>
+                <li>Great for migrating old Next.js apps page by page</li>
+                <li>Both share the same build process out of the box</li>
+              </ul>
+            </div>
+            <pre style="margin-top: 1.5rem"><code class="plaintext" style="font-size: 0.65em;">my-app/
+├── app/
+│   └── dashboard/page.tsx  ← App Router (Modern)
+├── pages/
+│   └── old-dashboard.tsx   ← Pages Router (Legacy)
+</code></pre>
+
+          </section>
+
           <!-- Slide 11: Dynamic Routes -->
           <section>
             <h3>Dynamic Routes</h3>
@@ -854,32 +876,28 @@ npm run dev
 
             <div class="two-col" style="margin-top: 1.5rem">
               <div>
-                <div class="label">File: app/blog/[slug]/page.tsx</div>
-                <pre><code class="tsx" style="font-size: 0.58em;">export default function BlogPost({
-  params,
-}: {
-  params: { slug: string };
-}) {
+                <div class="label">Dynamic ID: app/product/[id]/page.tsx</div>
+                <pre><code class="tsx" style="font-size: 0.58em;">interface Params{
+  params: { id: string };
+}
+export default function Product({ params }: Params) {
   return (
-    &lt;article&gt;
-      &lt;h1&gt;Post: {params.slug}&lt;/h1&gt;
-    &lt;/article&gt;
+    &lt;div&gt;
+      &lt;h1&gt;Viewing Product: {params.id}&lt;/h1&gt;
+    &lt;/div&gt;
   );
 }
 
-// URLs:
-// /blog/hello → slug = "hello"
-// /blog/nextjs-tips → slug = "nextjs-tips"</code></pre>
+// URL: /product/123 → id = "123"</code></pre>
               </div>
 
               <div>
                 <div class="label">Multiple params</div>
                 <pre><code class="tsx" style="font-size: 0.58em;">// app/shop/[category]/[id]/page.tsx
-export default function Product({
-  params,
-}: {
+ interface Params{
   params: { category: string; id: string };
-}) {
+}
+export default function ShopItem({ params }: Params) {
   return (
     &lt;div&gt;
       &lt;p&gt;Category: {params.category}&lt;/p&gt;
@@ -888,8 +906,8 @@ export default function Product({
   );
 }
 
-// /shop/electronics/123
-// category = "electronics", id = "123"</code></pre>
+// URL: /shop/phones/123
+// category = "phones", id = "123"</code></pre>
               </div>
             </div>
           </section>
@@ -950,13 +968,63 @@ export default function Navigation() {
             </div>
 
             <div class="card" style="margin-top: 1rem">
-              <h4 style="font-size: 0.7em">Why Link over &lt;a&gt;?</h4>
-              <ul style="font-size: 0.65em">
+              <h4 style="font-size: 0.6em">Why Link over &lt;a&gt;?</h4>
+              <ul style="font-size: 0.5em">
                 <li>✅ Client-side navigation (no page reload)</li>
                 <li>✅ Automatic prefetching</li>
                 <li>✅ Faster transitions</li>
                 <li>✅ Preserves scroll position</li>
               </ul>
+            </div>
+          </section>
+
+          <!-- Slide 13.5: What is a Layout? -->
+          <section>
+            <h3>What is a Layout?</h3>
+            <p class="small-text">A consistent UI wrapper that persists across multiple pages</p>
+
+            <svg
+              class="diagram-svg"
+              viewBox="0 0 800 500"
+              style="margin-top: 0.5rem; max-width: 700px; width: 100%; border-radius: 12px;"
+            >
+              <!-- Background / Browser Window -->
+              <rect x="0" y="0" width="800" height="480" fill="rgba(255, 255, 255, 0.05)" stroke="var(--surface-border)" stroke-width="2" rx="12" />
+
+              <!-- Address bar mock -->
+              <rect x="0" y="0" width="800" height="40" fill="rgba(0, 0, 0, 0.3)" rx="12" stroke="none" />
+              <path d="M0,40 h800" stroke="var(--surface-border)" stroke-width="2" />
+
+              <circle cx="25" cy="20" r="6" fill="#ef4444" />
+              <circle cx="45" cy="20" r="6" fill="#f59e0b" />
+              <circle cx="65" cy="20" r="6" fill="#22c55e" />
+
+              <rect x="90" y="10" width="620" height="20" rx="10" fill="rgba(255,255,255,0.1)" />
+              <text x="400" y="24" text-anchor="middle" fill="#8fb5d8" font-size="12" font-family="monospace">localhost:3000/dashboard</text>
+
+              <!-- Header (Layout) -->
+              <rect x="20" y="60" width="760" height="60" rx="8" fill="rgba(97, 218, 251, 0.15)" stroke="var(--accent)" stroke-width="2" stroke-dasharray="4,4" />
+              <text x="400" y="96" text-anchor="middle" fill="var(--accent)" font-size="20" font-weight="bold">Header (layout.tsx)</text>
+
+              <!-- Sidebar (Layout) -->
+              <rect x="20" y="125" width="200" height="290" rx="8" fill="rgba(97, 218, 251, 0.15)" stroke="var(--accent)" stroke-width="2" stroke-dasharray="4,4" />
+              <text x="120" y="280" text-anchor="middle" fill="var(--accent)" font-size="20" font-weight="bold">Sidebar</text>
+              <text x="120" y="305" text-anchor="middle" fill="rgba(97, 218, 251, 0.8)" font-size="14">(layout.tsx)</text>
+
+              <!-- Main Content (Page) -->
+              <rect x="235" y="125" width="545" height="290" rx="8" fill="rgba(34, 197, 94, 0.15)" stroke="#22c55e" stroke-width="2" />
+              <text x="507" y="260" text-anchor="middle" fill="#22c55e" font-size="26" font-weight="bold">Page Content (children)</text>
+              <text x="507" y="290" text-anchor="middle" fill="rgba(34, 197, 94, 0.8)" font-size="16">This part changes when navigating!</text>
+
+              <!-- Footer (Layout) -->
+              <rect x="20" y="420" width="760" height="40" rx="8" fill="rgba(97, 218, 251, 0.15)" stroke="var(--accent)" stroke-width="2" stroke-dasharray="4,4" />
+              <text x="400" y="446" text-anchor="middle" fill="var(--accent)" font-size="16" font-weight="bold">Footer (layout.tsx)</text>
+            </svg>
+
+            <div class="card">
+              <p style="font-size: 0.50em">
+                💡 <strong>Layouts do not re-render</strong> when navigating. Only the <span style="color: #22c55e; font-weight: bold;">Page Content</span> mounts/unmounts.
+              </p>
             </div>
           </section>
 
@@ -970,20 +1038,14 @@ export default function Navigation() {
             <pre
               style="margin-top: 1.5rem"
             ><code class="tsx" style="font-size: 0.58em;">// app/layout.tsx - Root layout for ALL pages
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     &lt;html lang="en"&gt;
       &lt;body&gt;
         &lt;header&gt;
           &lt;nav&gt;{/* Navigation */}&lt;/nav&gt;
         &lt;/header&gt;
-
         &lt;main&gt;{children}&lt;/main&gt;
-
         &lt;footer&gt;© 2026 My App&lt;/footer&gt;
       &lt;/body&gt;
     &lt;/html&gt;
@@ -994,6 +1056,235 @@ export default function RootLayout({
               <p style="font-size: 0.75em">
                 💡 Layout wraps all pages automatically - no need to import!
               </p>
+            </div>
+          </section>
+
+          <!-- Slide 14.1: Nested Layouts -->
+          <section>
+            <h3>Nested Layouts</h3>
+            <p class="small-text">Layouts can be nested per route</p>
+
+            <div class="two-col" style="margin-top: 1.5rem">
+              <div class="card" style="text-align: left">
+                <h4 style="font-size: 0.9em">File Structure</h4>
+                <pre><code class="plaintext" style="font-size: 0.6em;">app/
+├── layout.tsx         ← Root (Applies to all)
+├── page.tsx           ← Home page
+└── basic-routing/
+    ├── layout.tsx     ← Nested (Applies to basic-routing/*)
+    └── page.tsx       ← Basic Routing page</code></pre>
+              </div>
+
+              <div class="card" style="text-align: left">
+                <h4 style="font-size: 0.9em">Result</h4>
+                <div style="border: 2px solid #555; padding: 10px; font-size: 0.7em;">
+                  Root Layout (Nav, Footer)
+                  <div style="border: 2px dashed var(--accent); padding: 10px; margin-top: 10px;">
+                    Basic Routing Layout (Sidebar)
+                    <div style="background: rgba(255,255,255,0.1); padding: 10px; margin-top: 10px;">
+                      Page Content
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Slide 14.2: Demo 🛠️ -->
+          <section>
+            <h3>Demo 🛠️</h3>
+            <div
+              class="card"
+              style="
+                margin-top: 2rem;
+                padding: 2.5rem;
+                text-align: center;
+                background: var(--accent-soft);
+              "
+            >
+              <p
+                style="
+                  font-size: 1.2em;
+                  margin: 0 0 1rem;
+                  color: var(--accent);
+                  font-weight: bold;
+                "
+              >
+                Open the live demo in the course app
+              </p>
+              <p
+                style="
+                  font-size: 0.9em;
+                  margin: 0;
+                  color: var(--text-soft);
+                  line-height: 1.6;
+                "
+              >
+                Page:
+                <code style="color: var(--accent)">/basic-routing</code>
+              </p>
+            </div>
+          </section>
+
+          <!-- Slide 14.4: CSR vs SSR (Visual) -->
+          <section>
+            <h3>Visualizing CSR vs SSR</h3>
+            <p class="small-text">How the browser gets your UI</p>
+
+            <svg
+              class="diagram-svg"
+              viewBox="0 0 800 450"
+              style="margin-top: 1.5rem; max-width: 750px; width: 100%; border-radius: 12px; background: rgba(0,0,0,0.2);"
+            >
+              <!-- CSR Section -->
+              <text x="400" y="40" text-anchor="middle" fill="#22c55e" font-size="22" font-weight="bold">Client-Side Rendering (CSR)</text>
+
+              <!-- Server CSR -->
+              <rect x="50" y="60" width="160" height="120" rx="8" fill="rgba(80,80,80,0.3)" stroke="#888" stroke-width="2" />
+              <text x="130" y="95" text-anchor="middle" fill="#ddd" font-size="18" font-weight="bold">Server</text>
+              <text x="130" y="125" text-anchor="middle" fill="#aaa" font-size="14">Sends basic HTML shell</text>
+              <text x="130" y="145" text-anchor="middle" fill="#aaa" font-size="14">(&lt;div id="root"&gt;&lt;/div&gt;) + JS</text>
+
+              <!-- Arrow CSR -->
+              <path d="M 220 120 L 320 120" stroke="#888" stroke-width="2" marker-end="url(#arrowhead)"/>
+              <text x="270" y="110" text-anchor="middle" fill="#aaa" font-size="14">Network</text>
+
+              <!-- Browser CSR -->
+              <rect x="330" y="60" width="160" height="120" rx="8" fill="rgba(34,197,94,0.15)" stroke="#22c55e" stroke-width="2" />
+              <text x="410" y="95" text-anchor="middle" fill="#22c55e" font-size="18" font-weight="bold">Browser</text>
+              <text x="410" y="125" text-anchor="middle" fill="#fff" font-size="14">Downloads JS</text>
+              <text x="410" y="145" text-anchor="middle" fill="#fff" font-size="14">&amp; Builds UI</text>
+
+              <!-- User sees CSR -->
+              <path d="M 500 120 L 580 120" stroke="#888" stroke-width="2" marker-end="url(#arrowhead)"/>
+              <rect x="590" y="60" width="160" height="120" rx="8" fill="rgba(255,255,255,0.1)" stroke="#ddd" stroke-width="2" />
+              <text x="670" y="95" text-anchor="middle" fill="#fff" font-size="18" font-weight="bold">User Visually</text>
+              <text x="670" y="125" text-anchor="middle" fill="#f59e0b" font-size="14">Blank screen...</text>
+              <text x="670" y="145" text-anchor="middle" fill="#22c55e" font-size="14">Visible later</text>
+
+              <!-- Divider -->
+              <line x1="50" y1="225" x2="750" y2="225" stroke="#444" stroke-dasharray="8,4" stroke-width="2" />
+
+              <!-- SSR Section -->
+              <text x="400" y="270" text-anchor="middle" fill="var(--accent)" font-size="22" font-weight="bold">Server-Side Rendering (SSR)</text>
+
+              <!-- Server SSR -->
+              <rect x="50" y="290" width="160" height="120" rx="8" fill="rgba(97,218,251,0.15)" stroke="var(--accent)" stroke-width="2" />
+              <text x="130" y="325" text-anchor="middle" fill="var(--accent)" font-size="18" font-weight="bold">Server</text>
+              <text x="130" y="355" text-anchor="middle" fill="#fff" font-size="14">Generates</text>
+              <text x="130" y="375" text-anchor="middle" fill="#fff" font-size="14">Full HTML</text>
+
+              <!-- Arrow SSR -->
+              <path d="M 220 350 L 320 350" stroke="#888" stroke-width="2" marker-end="url(#arrowhead)"/>
+              <text x="270" y="340" text-anchor="middle" fill="#aaa" font-size="14">Network</text>
+
+              <!-- Browser SSR -->
+              <rect x="330" y="290" width="160" height="120" rx="8" fill="rgba(97,218,251,0.05)" stroke="#8fb5d8" stroke-width="2" />
+              <text x="410" y="315" text-anchor="middle" fill="#8fb5d8" font-size="18" font-weight="bold">Browser</text>
+              <text x="410" y="340" text-anchor="middle" fill="#fff" font-size="14">1. Shows HTML fast</text>
+              <text x="410" y="360" text-anchor="middle" fill="#fff" font-size="14">2. Loads React</text>
+              <text x="410" y="380" text-anchor="middle" fill="#fff" font-size="14">3. 💧 "Hydrates" (Adds JS)</text>
+
+              <!-- User sees SSR -->
+              <path d="M 500 350 L 580 350" stroke="#888" stroke-width="2" marker-end="url(#arrowhead)"/>
+              <rect x="590" y="290" width="160" height="120" rx="8" fill="rgba(255,255,255,0.1)" stroke="#ddd" stroke-width="2" />
+              <text x="670" y="315" text-anchor="middle" fill="#fff" font-size="18" font-weight="bold">User Visually</text>
+              <text x="670" y="340" text-anchor="middle" fill="#22c55e" font-size="14">1. Visible instantly ⚡</text>
+              <text x="670" y="360" text-anchor="middle" fill="#aaa" font-size="14">(But not clickable)</text>
+              <text x="670" y="380" text-anchor="middle" fill="#38bdf8" font-size="14">2. Becomes Interactive 👆</text>
+
+              <defs>
+                <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                  <polygon points="0 0, 10 3.5, 0 7" fill="#888" />
+                </marker>
+              </defs>
+            </svg>
+          </section>
+
+          <!-- Slide 14.5: Client vs Server Rendering -->
+          <section>
+            <h3>Client vs Server Rendering</h3>
+            <p class="small-text">Where does your component become &lt;html&gt;?</p>
+
+            <div class="two-col" style="margin-top: 1rem">
+              <div class="card" style="text-align: left; background: rgba(34, 197, 94, 0.1); border-color: #22c55e;">
+                <h4 style="font-size: 0.8em; color: #22c55e;">Client-Side Rendering (CSR)</h4>
+                <ul style="font-size: 0.65em; line-height: 1.5; padding-left: 1.2rem;">
+                  <li>Browser downloads a basic HTML shell (e.g., <code>&lt;div id="root"&gt;&lt;/div&gt;</code>) + JS.</li>
+                  <li>React runs in browser, creating and mounting the UI dynamically.</li>
+                  <li>Slower initial load, big JS bundle.</li>
+                  <li>Used in traditional React (Vite).</li>
+                </ul>
+              </div>
+
+              <div class="card" style="text-align: left; background: rgba(97, 218, 251, 0.1); border-color: var(--accent);">
+                <h4 style="font-size: 0.8em; color: var(--accent);">Server-Side Rendering (SSR)</h4>
+                <ul style="font-size: 0.65em; line-height: 1.5; padding-left: 1.2rem;">
+                  <li>Server generates HTML.</li>
+                  <li>Browser gets full HTML immediately.</li>
+                  <li>React "hydrates" it to make it interactive.</li>
+                  <li>Faster load, better SEO.</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <!-- Slide 14.6: Server Components vs SSR -->
+          <section>
+            <h3>Server Components vs SSR</h3>
+            <p class="small-text">They are NOT the same thing!</p>
+
+            <div style="margin-top: 1rem; text-align: left;">
+              <div class="card" style="margin-bottom: 1rem;">
+                <h4 style="font-size: 0.8em;">Server-Side Rendering (SSR)</h4>
+                <p style="font-size: 0.65em; color: var(--text-soft); line-height: 1.4;">
+                  A technique where a <strong>Client Component</strong> is pre-rendered into HTML on the server. The JS is still sent to the browser, and the component "hydrates" to become interactive.
+                </p>
+              </div>
+
+              <div class="card" style="border-color: var(--accent);">
+                <h4 style="font-size: 0.8em; color: var(--accent);">React Server Components (RSC)</h4>
+                <p style="font-size: 0.65em; color: var(--text-soft); line-height: 1.4;">
+                  A new type of component that executes <strong>ONLY</strong> on the server. Its code (JS) is <strong>never</strong> sent to the browser. It cannot use hooks or state, but it can safely access databases directly.
+                </p>
+              </div>
+            </div>
+
+            <div class="card" style="margin-top: 1rem; padding: 0.5rem;">
+              <p style="font-size: 0.65em; text-align: center;">
+                💡 <strong>RSC</strong> reduces bundle size. <strong>SSR</strong> improves initial load time. Next.js uses both!
+              </p>
+            </div>
+          </section>
+
+          <!-- Slide 14.7: Mental Shift Model -->
+          <section>
+            <h3>Mental Shift Model</h3>
+            <p class="small-text">Thinking in boundaries</p>
+
+            <div class="card" style="margin-top: 1.5rem; text-align: left;">
+              <h4 style="font-size: 0.9em; text-align: center; margin-bottom: 1rem;">The Network Boundary</h4>
+
+              <div style="display: flex; justify-content: space-between; align-items: stretch; font-size: 0.7em;">
+                <div style="flex: 1; padding: 1rem; border-right: 2px dashed #666;">
+                  <strong style="color: var(--accent); font-size: 1.2em;">Server (Back-end)</strong>
+                  <ul style="margin-top: 1rem; padding-left: 1rem; line-height: 1.6;">
+                    <li>Keep secrets safe (API keys)</li>
+                    <li>Direct DB Queries</li>
+                    <li>No JS sent to browser</li>
+                    <li><em>Default in Next.js</em></li>
+                  </ul>
+                </div>
+                <div style="flex: 1; padding: 1rem;">
+                  <strong style="color: #22c55e; font-size: 1.2em;">Client (Front-end)</strong>
+                  <ul style="margin-top: 1rem; padding-left: 1rem; line-height: 1.6;">
+                    <li>Interactive (onClick)</li>
+                    <li>State (useState)</li>
+                    <li>Browser APIs (window, localStorage)</li>
+                    <li><em>Requires 'use client'</em></li>
+                  </ul>
+                </div>
+              </div>
             </div>
           </section>
 
@@ -1109,6 +1400,119 @@ export default async function PostsPage() {
             </div>
           </section>
 
+          <!-- Slide 17.1: Streaming -->
+          <section>
+            <h3>Data Fetching & Streaming</h3>
+            <p class="small-text">Show UI immediately while data continues to load</p>
+
+            <div class="card" style="margin-top: 1rem; text-align: left;">
+              <h4 style="font-size: 0.8em;">React Suspense</h4>
+              <p style="font-size: 0.65em; color: var(--text-soft); line-height: 1.4;">
+                Instead of waiting for all data to load before showing the page, you can <strong>stream</strong> parts of the UI as they become ready.
+              </p>
+            </div>
+
+            <pre style="margin-top: 1rem"><code class="tsx" style="font-size: 0.58em;">import { Suspense } from 'react';
+import { PostFeed, WeatherWidget } from './components';
+
+export default function Home() {
+  return (
+    &lt;main&gt;
+      &lt;h1&gt;Dashboard&lt;/h1&gt;
+
+      {/* Renders immediately, shows fallback while loading */}
+      &lt;Suspense fallback={&lt;p&gt;Loading generic feed...&lt;/p&gt;}&gt;
+        &lt;PostFeed /&gt;
+      &lt;/Suspense&gt;
+
+      &lt;Suspense fallback={&lt;p&gt;Loading weather...&lt;/p&gt;}&gt;
+        &lt;WeatherWidget /&gt;
+      &lt;/Suspense&gt;
+    &lt;/main&gt;
+  );
+}</code></pre>
+          </section>
+
+          <!-- Slide 17.2: Static vs Dynamic Rendering -->
+          <section>
+            <h3>Static Rendering</h3>
+            <p class="small-text">Default behavior in Next.js</p>
+
+            <div class="two-col" style="margin-top: 1.5rem">
+              <div class="card" style="text-align: left;">
+                <h4 style="font-size: 0.8em; color: var(--accent);">Static Rendering (SSG)</h4>
+                <ul style="font-size: 0.65em; line-height: 1.5; padding-left: 1.2rem;">
+                  <li>Pre-rendered at build time.</li>
+                  <li>Incredibly fast (served from CDN).</li>
+                  <li>Best for blog posts, documentation, marketing pages.</li>
+                </ul>
+              </div>
+
+              <div class="card" style="text-align: left;">
+                <h4 style="font-size: 0.8em; color: #fbbf24;">Dynamic Rendering</h4>
+                <ul style="font-size: 0.65em; line-height: 1.5; padding-left: 1.2rem;">
+                  <li>Rendered on-demand for each request.</li>
+                  <li>Triggered automatically if you use <code>cookies()</code>, <code>headers()</code>, or URL <code>searchParams</code>.</li>
+                  <li>Best for user dashboards, real-time data.</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <!-- Slide 17.3: Server Actions -->
+          <section>
+            <h3>Server Actions</h3>
+            <p class="small-text">Run secure server code directly from components</p>
+
+            <div class="card" style="margin-top: 1rem; text-align: left;">
+              <p style="font-size: 0.65em; color: var(--text-soft); line-height: 1.4;">
+                No absolutely need to write API routes (/api/*) just to handle a form submission.
+              </p>
+            </div>
+
+            <pre style="margin-top: 1rem"><code class="tsx" style="font-size: 0.58em;">export default function Form() {
+  // This function runs on the SERVER!
+  async function createPost(formData: FormData) {
+    'use server'; // The magic directive ✨
+
+    const title = formData.get('title');
+    await db.post.create({ title }); // Direct DB mutation!
+  }
+
+  return (
+    &lt;form action={createPost}&gt;
+      &lt;input type="text" name="title" /&gt;
+      &lt;button type="submit"&gt;Submit&lt;/button&gt;
+    &lt;/form&gt;
+  );
+}</code></pre>
+          </section>
+
+          <!-- Slide 17.4: Next.js Proxy -->
+          <section>
+            <h3>Route Handlers (API Proxy)</h3>
+            <p class="small-text">Building APIs or proxying requests</p>
+
+            <div class="card" style="margin-top: 1rem; text-align: left;">
+              <p style="font-size: 0.65em; color: var(--text-soft); line-height: 1.4;">
+                Use <code>route.ts</code> to handle traditional API requests or proxy to an external backend (to hide API keys).
+              </p>
+            </div>
+
+            <pre style="margin-top: 1rem"><code class="tsx" style="font-size: 0.58em;">// app/api/weather/route.ts
+import { NextResponse } from 'next/server';
+
+export async function GET(request: Request) {
+  // Use securely stored environment variable
+  const API_KEY = process.env.SECRET_WEATHER_API_KEY;
+
+  const res = await fetch(`https://api.weather.com/v1/...&key=${API_KEY}`);
+  const data = await res.json();
+
+  return NextResponse.json({ data });
+}</code></pre>
+          </section>
+
           <!-- Slide 18: Loading States -->
           <section>
             <h3>Loading States</h3>
@@ -1218,34 +1622,6 @@ export default function About() {
               <p style="font-size: 0.75em">
                 ✨ Next.js automatically generates &lt;meta&gt; tags for SEO!
               </p>
-            </div>
-          </section>
-
-          <!-- Slide 21: Deployment -->
-          <section>
-            <h3>Deployment to Vercel</h3>
-            <p class="small-text">One-click deployment</p>
-
-            <div class="card" style="margin-top: 1.5rem">
-              <h4>Steps:</h4>
-              <ol style="font-size: 0.85em; line-height: 1.8">
-                <li>Push code to GitHub</li>
-                <li>Go to <span class="highlight">vercel.com</span></li>
-                <li>Click "Import Project"</li>
-                <li>Select your repository</li>
-                <li>Click "Deploy"</li>
-              </ol>
-            </div>
-
-            <div class="card" style="margin-top: 1.5rem">
-              <h4>✨ Features:</h4>
-              <ul style="font-size: 0.8em">
-                <li>Automatic HTTPS</li>
-                <li>Global CDN</li>
-                <li>Preview deployments for PRs</li>
-                <li>Automatic builds on git push</li>
-                <li>Free for personal projects</li>
-              </ul>
             </div>
           </section>
 
