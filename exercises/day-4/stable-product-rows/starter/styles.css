@@ -1,0 +1,26 @@
+.tick-label {
+  font-size: 12px;
+  opacity: 0.6;
+}
+
+.product-list-container {
+  width: 100%;
+  max-width: 400px;
+}
+
+.product-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  border-bottom: 1px solid #333;
+}
+
+.product-row-remove {
+  margin-left: 12px;
+}
+
+.empty-message {
+  text-align: center;
+  opacity: 0.5;
+}

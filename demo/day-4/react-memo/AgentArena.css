@@ -1,0 +1,150 @@
+.arena-shell {
+  display: grid;
+  gap: 20px;
+  color: #dce7f7;
+}
+
+.arena-hero-card,
+.arena-agent-panel {
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at top left, rgba(56, 189, 248, 0.16), transparent 32%),
+    linear-gradient(180deg, rgba(15, 23, 42, 0.98), rgba(8, 15, 30, 0.98));
+  box-shadow: 0 20px 40px rgba(2, 6, 23, 0.28);
+}
+
+.arena-hero-card {
+  padding: 24px;
+}
+
+.arena-agent-panel {
+  padding: 22px;
+}
+
+.arena-card-label {
+  margin: 0 0 8px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #7dd3fc;
+}
+
+.arena-hero-card h2,
+.arena-panel-heading h3 {
+  margin: 0;
+  color: #f8fafc;
+}
+
+.arena-token-counter {
+  margin: 8px 0 0;
+  color: #94a3b8;
+  font-size: 14px;
+}
+
+.arena-token-counter strong {
+  color: #7dd3fc;
+  font-size: 22px;
+}
+
+.arena-hero-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(340px, 0.95fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.arena-hero-copy-block {
+  min-width: 0;
+}
+
+.arena-main-grid {
+  display: block;
+}
+
+.arena-panel-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.arena-panel-heading > span {
+  font-size: 14px;
+  color: #94a3b8;
+}
+
+.arena-agent-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.arena-agent-card {
+  display: grid;
+  gap: 14px;
+  padding: 18px;
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  border-radius: 22px;
+  background: rgba(15, 23, 42, 0.72);
+}
+
+.arena-agent-card-top {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.arena-agent-card h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #f8fafc;
+}
+
+.arena-status-pill {
+  padding: 7px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.arena-status-thinking {
+  background: rgba(59, 130, 246, 0.16);
+  color: #bfdbfe;
+}
+
+.arena-status-generating {
+  background: rgba(16, 185, 129, 0.16);
+  color: #bbf7d0;
+}
+
+.arena-status-idle {
+  background: rgba(148, 163, 184, 0.16);
+  color: #cbd5e1;
+}
+
+@media (max-width: 1200px) {
+  .arena-hero-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .arena-agent-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 820px) {
+  .arena-agent-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .arena-hero-card,
+  .arena-agent-panel {
+    border-radius: 22px;
+    padding: 18px;
+  }
+}
