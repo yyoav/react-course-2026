@@ -1087,59 +1087,22 @@ setItems(items);
                                         </aside>
                                 </section>
 
-                                <!-- SLIDE 20 – Lifting State Up -->
+                                <!-- EXERCISE SLIDE – Podcast Episode Cards -->
                                 <section>
-                                        <div style="display:flex; flex-direction:column; gap:0.8rem;">
-                                                <h2 class="slide-title">Lifting State Up</h2>
-                                                <div class="two-col" style="align-items:flex-start; gap:1.4rem;">
-                                                        <div style="display:flex; flex-direction:column; gap:0.6rem;">
-                                                                <p style="margin:0; font-size:0.84em; color:var(--text-soft);">When two siblings need the same state, <span class="highlight">move it to their common parent</span> and pass it down as props.</p>
-                                                                <svg viewBox="0 0 320 170" width="100%" aria-label="Lifting state up diagram">
-                                                                        <defs>
-                                                                                <marker id="ls-arr" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
-                                                                                        <polygon points="0 0, 8 3, 0 6" fill="#61dafb"/>
-                                                                                </marker>
-                                                                        </defs>
-                                                                        <rect x="95" y="10" width="130" height="44" rx="8" fill="#1e3a4a" stroke="#61dafb" stroke-width="1.6"/>
-                                                                        <text x="160" y="28" fill="#61dafb" text-anchor="middle" font-size="11" font-family="sans-serif" font-weight="bold">Parent</text>
-                                                                        <text x="160" y="44" fill="#c8d2de" text-anchor="middle" font-size="10" font-family="monospace">useState(…)</text>
-                                                                        <line x1="125" y1="54" x2="80"  y2="104" stroke="#61dafb" stroke-width="1.5" stroke-dasharray="4 2" marker-end="url(#ls-arr)"/>
-                                                                        <line x1="195" y1="54" x2="240" y2="104" stroke="#61dafb" stroke-width="1.5" stroke-dasharray="4 2" marker-end="url(#ls-arr)"/>
-                                                                        <rect x="20"  y="106" width="110" height="44" rx="8" fill="#1e3a4a" stroke="rgba(97,218,251,0.5)" stroke-width="1.4"/>
-                                                                        <text x="75"  y="124" fill="#c8d2de" text-anchor="middle" font-size="11" font-family="sans-serif">Child A</text>
-                                                                        <text x="75"  y="140" fill="#c8d2de" text-anchor="middle" font-size="10" font-family="monospace">reads value</text>
-                                                                        <rect x="190" y="106" width="110" height="44" rx="8" fill="#1e3a4a" stroke="rgba(97,218,251,0.5)" stroke-width="1.4"/>
-                                                                        <text x="245" y="124" fill="#c8d2de" text-anchor="middle" font-size="11" font-family="sans-serif">Child B</text>
-                                                                        <text x="245" y="140" fill="#c8d2de" text-anchor="middle" font-size="10" font-family="monospace">calls setter</text>
-                                                                </svg>
-                                                        </div>
-                                                        <div style="display:flex; flex-direction:column; gap:0.4rem;">
-                                                                <span style="font-size:0.68em; text-transform:uppercase; letter-spacing:0.1em; color:var(--accent);">Example</span>
-                                                                <pre style="margin:0;"><code class="ts" data-line-numbers>
-// Parent.tsx
-function Parent() {
-  const [name, setName] = useState('');
-  return (
-    &lt;NameInput value={name} onChange={setName} /&gt;
-    &lt;NameDisplay name={name} /&gt;
-  );
-}
-                                                                </code></pre>
-                                                                <p class="small-text">State lives in <code>Parent</code> — <code>NameInput</code> writes, <code>NameDisplay</code> reads.</p>
-                                                        </div>
+                                        <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1.5rem; text-align:center;">
+                                                <h2>Exercise - Podcast Episode Cards</h2>
+                                                <a href="http://localhost:5173/?target=day-1/exercises/podcast-episode-cards/starter" target="_blank" style="color:var(--accent); font-size:1.1em;">Open Exercise</a>
+                                                <div class="fragment" style="margin-top:1rem;">
+                                                        <p style="font-size:0.85em; color:var(--text-soft);">File to review</p>
+                                                        <a href="http://localhost:5173/?target=day-1/exercises/podcast-episode-cards/solution" target="_blank" style="color:var(--accent); font-size:0.95em;">Open Solution</a>
                                                 </div>
                                         </div>
-                                        <aside class="notes">
-                                                Lifting state up is how siblings share data. Find the closest common ancestor, put useState there, pass value down as props and setter as a callback. This pattern appears everywhere in React apps. Preview: when prop-drilling gets deep, we'll use Context (Day 3).
-                                        </aside>
                                 </section>
 
                                 <!-- CONCLUSION SLIDE -->
                                 <section>
                                         <div style="display:flex; flex-direction:column; align-items:center; gap:1.2rem; text-align:center;">
-                                                <h2 style="margin:0; font-weight:800; color:var(--accent);">Day 1 — Wrap-Up</h2>
-                                                <p style="margin:0; font-size:0.82em; color:var(--text-soft);">What we covered today</p>
-
+                                                <h2 style="margin:0; font-weight:800; color:var(--accent);">What we covered today</h2>
                                                 <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:0.65rem; margin-top:0.4rem; width:100%;">
                                                         <div class="card" style="font-size:0.76em; text-align:center;">
                                                                 <div style="font-size:1.4em; margin-bottom:0.2rem;">⚛️</div>
@@ -1165,11 +1128,6 @@ function Parent() {
                                                                 <div style="font-size:1.4em; margin-bottom:0.2rem;">🗃️</div>
                                                                 <strong class="highlight">State &amp; useState</strong>
                                                                 <p style="margin:0.3rem 0 0; color:var(--text-soft);">Component-owned data, immutable updates, functional setters</p>
-                                                        </div>
-                                                        <div class="card" style="font-size:0.76em; text-align:center;">
-                                                                <div style="font-size:1.4em; margin-bottom:0.2rem;">🔗</div>
-                                                                <strong class="highlight">Lifting State Up</strong>
-                                                                <p style="margin:0.3rem 0 0; color:var(--text-soft);">Sharing state between siblings via a common parent</p>
                                                         </div>
                                                 </div>
 
