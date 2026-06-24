@@ -785,7 +785,7 @@ h3 {
 .exercise-preview-shell {
   display: grid;
   align-items: center;
-  min-height: 100%;
+  /* min-height: 100%; */
 }
 
 .exercise-preview-frame {

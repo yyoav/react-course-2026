@@ -436,6 +436,59 @@ npm run dev</code></pre>
                     </aside>
                 </section>
 
+                                <section>
+                                        <div style="display:flex; flex-direction:column; gap:1rem;">
+                                                <h2 class="slide-title">App Component (Concept)</h2>
+                                                <div class="two-col">
+                                                        <ul style="margin:0;">
+                                                                <li><code>App.tsx</code> is the <span class="highlight">root component</span></li>
+                                                                <li>Child components nest inside parents</li>
+                                                                <li>Builds UIs from small, reusable pieces</li>
+                                                                <li>Every React app has exactly one root</li>
+                                                        </ul>
+                                                        <div class="card" style="font-size:0.82em;">
+                                                                <strong class="highlight">Component Tree</strong>
+                                                                <pre style="background:none; box-shadow:none; margin:0.6rem 0 0; font-size:0.95em; text-align:left; color:var(--text-soft);">App
+├── Header
+├── Greeting
+│   └── Avatar
+└── Footer</pre>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                        <aside class="notes">
+                                                Think of it like a family tree. App is the grandparent. Each component can have children. This tree structure is how React knows what to render and in what order. Draw parallel to HTML DOM tree — same concept, but with your custom components. Ask: "If Greeting re-renders, does Header also re-render?" Answer: by default no, only the subtree.
+                                        </aside>
+                                </section>
+
+                                <section>
+                                        <div style="display:flex; flex-direction:column; gap:0.8rem;">
+                                                <h2 class="slide-title">App Component (Code)</h2>
+                                                <pre><code class="ts">
+// App.tsx
+import Header from './Header';
+import Greeting from './Greeting';
+import Footer from './Footer';
+
+function App() {
+  return (
+    &lt;div&gt;
+      &lt;Header /&gt;
+      &lt;Greeting /&gt;
+      &lt;Footer /&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default App;
+                                                </code></pre>
+                                                <p class="small-text"><a href="https://www.att.com" target="_blank" style="color:var(--accent);">att.com</a> </p>
+                                        </div>
+                                        <aside class="notes">
+                                                Show this in the actual demo project. Open App.tsx and point out: imports at top, function body returns JSX, self-closing tags for components. The wrapping div is needed because JSX must return one root. Mention Fragment shorthand as alternative. Use att.com as a real-world example — point out how the navbar, hero banner, plan cards, and footer could each be their own component file.
+                                        </aside>
+                                </section>
+
                 <section>
                     <h2 class="slide-title">Your First Function Component</h2>
                     <div class="two-col" style="margin-top:0.8rem; align-items:center;">
@@ -544,110 +597,17 @@ return &lt;&gt;&lt;h1&gt;Hi&lt;/h1&gt;&lt;p&gt;Bye&lt;/p&gt;&lt;/&gt;;</code></p
                     </aside>
                 </section>
 
-                                <section>
-                                        <div style="display:flex; flex-direction:column; gap:1rem;">
-                                                <h2 class="slide-title">App Component (Concept)</h2>
-                                                <div class="two-col">
-                                                        <ul style="margin:0;">
-                                                                <li><code>App.tsx</code> is the <span class="highlight">root component</span></li>
-                                                                <li>Child components nest inside parents</li>
-                                                                <li>Builds UIs from small, reusable pieces</li>
-                                                                <li>Every React app has exactly one root</li>
-                                                        </ul>
-                                                        <div class="card" style="font-size:0.82em;">
-                                                                <strong class="highlight">Component Tree</strong>
-                                                                <pre style="background:none; box-shadow:none; margin:0.6rem 0 0; font-size:0.95em; text-align:left; color:var(--text-soft);">App
-├── Header
-├── Greeting
-│   └── Avatar
-└── Footer</pre>
-                                                        </div>
-                                                </div>
-                                        </div>
-                                        <aside class="notes">
-                                                Think of it like a family tree. App is the grandparent. Each component can have children. This tree structure is how React knows what to render and in what order. Draw parallel to HTML DOM tree — same concept, but with your custom components. Ask: "If Greeting re-renders, does Header also re-render?" Answer: by default no, only the subtree.
-                                        </aside>
-                                </section>
-
-                                <section>
-                                        <div style="display:flex; flex-direction:column; gap:0.8rem;">
-                                                <h2 class="slide-title">App Component (Code)</h2>
-                                                <pre><code class="ts">
-// App.tsx
-import Header from './Header';
-import Greeting from './Greeting';
-import Footer from './Footer';
-
-function App() {
-  return (
-    &lt;div&gt;
-      &lt;Header /&gt;
-      &lt;Greeting /&gt;
-      &lt;Footer /&gt;
-    &lt;/div&gt;
-  );
-}
-
-export default App;
-                                                </code></pre>
-                                                <p class="small-text"><code>App</code> is the root — it composes <code>Header</code>, <code>Greeting</code>, and <code>Footer</code> into a single UI tree.</p>
-                                        </div>
-                                        <aside class="notes">
-                                                Show this in the actual demo project. Open App.tsx and point out: imports at top, function body returns JSX, self-closing tags for components. The wrapping div is needed because JSX must return one root. Mention Fragment shorthand as alternative. Ask students to create their own component file and import it into App.
-                                        </aside>
-                                </section>
-
                                 <!-- EXERCISE SLIDE -->
                                 <section>
-                                        <div style="display:flex; flex-direction:column; gap:1.2rem; align-items:center; text-align:center;">
-                                                <h2 style="margin:0;">&#x1F6D2; Your Turn &mdash; Build a Product Card</h2>
-                                                <p style="margin:0; font-size:0.82em; color:var(--text-soft);">Create a <code>ProductCard</code> component with <strong style="color:var(--accent);">3 sub-components</strong> &mdash; sell the world's most ridiculous product</p>
-
-                                                <div style="display:flex; gap:1rem; align-items:stretch; margin-top:0.4rem;">
-                                                        <div class="card" style="font-size:0.8em; text-align:center; flex:1;">
-                                                                <div style="font-size:1.8em;">&#x2728;</div>
-                                                                <p style="margin:0.3rem 0 0; color:var(--accent); font-weight:700;">ProductTitle.tsx</p>
-                                                                <p style="margin:0.2rem 0 0; color:var(--text-soft);">Returns an <code>&lt;h2&gt;</code> with<br>a ridiculous product name<br><em style="font-size:0.85em;">"Invisible Umbrella 3000"</em></p>
-                                                        </div>
-                                                        <div class="card" style="font-size:0.8em; text-align:center; flex:1;">
-                                                                <div style="font-size:1.8em;">&#x1F5BC;&#xFE0F;</div>
-                                                                <p style="margin:0.3rem 0 0; color:var(--accent); font-weight:700;">ProductImage.tsx</p>
-                                                                <p style="margin:0.2rem 0 0; color:var(--text-soft);">Returns an <code>&lt;img&gt;</code> tag<br>(use any placeholder URL)<br><em style="font-size:0.85em;">or just an emoji &#x1F984;</em></p>
-                                                        </div>
-                                                        <div class="card" style="font-size:0.8em; text-align:center; flex:1;">
-                                                                <div style="font-size:1.8em;">&#x1F4B8;</div>
-                                                                <p style="margin:0.3rem 0 0; color:var(--accent); font-weight:700;">ProductPrice.tsx</p>
-                                                                <p style="margin:0.2rem 0 0; color:var(--text-soft);">Returns a <code>&lt;p&gt;</code> with<br>an absurd price<br><em style="font-size:0.85em;">"Only $9,999,999.99"</em></p>
-                                                        </div>
-                                                </div>
-
-                                                <pre style="margin:0; font-size:0.72em; text-align:left;"><code class="tsx">// ProductCard.tsx
-import ProductTitle from './ProductTitle';
-import ProductImage from './ProductImage';
-import ProductPrice from './ProductPrice';
-
-function ProductCard() {
-  return (
-    &lt;div&gt;
-      &lt;ProductTitle /&gt;
-      &lt;ProductImage /&gt;
-      &lt;ProductPrice /&gt;
-    &lt;/div&gt;
-  );
-}
-
-export default ProductCard;</code></pre>
-
-                                                <p style="margin:0; font-size:0.72em; color:var(--text-soft);">&#x23F1;&#xFE0F; 5 minutes &mdash; the weirder the product, the better! &#x1F3C6;</p>
+                                        <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1.5rem; text-align:center;">
+                                                <h2>Exercise - Build a Product Card</h2>
+                                                <a href="http://localhost:5173/?target=day-1/exercises/build-product-card/starter" target="_blank" style="color:var(--accent); font-size:1.1em;">Open Exercise</a>
                                         </div>
-                                        <aside class="notes">
-                                                Fun exercise &mdash; encourage silly products (Solar-Powered Flashlight, Waterproof Sponge, Diet Water). The real goal is muscle-memory: create file, write function, export, import, compose. Walk around and make sure everyone's dev server is running. If someone finishes early, challenge them to import ProductCard into App.tsx or add a 4th sub-component (ProductReviews.tsx with fake 1-star reviews?).
-                                        </aside>
                                 </section>
 
                                 <section>
                                         <div style="display:flex; flex-direction:column; gap:1rem;">
-                                                <h2 class="slide-title">Props Overview</h2>
+                                                <h2 class="slide-title">Props</h2>
 
                                                 <!-- Flow diagram -->
                                                 <div style="display:flex; align-items:center; justify-content:center; margin:0.2rem 0;">
