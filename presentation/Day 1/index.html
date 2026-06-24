@@ -721,7 +721,6 @@ export default MyButton;
                                                                 </code></pre>
                                                         </div>
                                                 </div>
-                                                <p class="small-text">React uses <span class="highlight">camelCase</span> prop names and expects a <span class="highlight">function reference</span>, not a string.</p>
                                         </div>
                                         <aside class="notes">
                                                 Key differences from HTML: 1) camelCase (onClick not onclick), 2) Pass a function reference, don't call it, 3) No quotes around the handler. React uses synthetic events that wrap native browser events for cross-browser consistency. The event object is passed automatically as the first argument.
@@ -740,7 +739,7 @@ export default MyButton;
                                                                 <p style="margin:0.15rem 0 0; font-size:0.62em; color:var(--text-soft);">Use camelCase prop names</p>
                                                         </div>
                                                         <pre style="margin:0 auto; flex:1; font-size:0.52em; display:flex; align-items:center; justify-content:center;"><code class="ts">
-&lt;button onchange={fn}&gt;    // ❌
+&lt;button onclick={fn}&gt;    // ❌
 &lt;button onClick={fn}&gt;     // ✅
                                                         </code></pre>
                                                 </div>
@@ -762,42 +761,12 @@ export default MyButton;
                                         </aside>
                                 </section>
 
-                                <!-- SLIDE – Mini Exercise: Props & Event Handlers -->
+                                <!-- EXERCISE SLIDE -->
                                 <section>
-                                        <div style="display:flex; flex-direction:column; gap:0.9rem;">
-                                                <h2 class="slide-title">🛠️ Mini Exercise</h2>
-                                                <p style="margin:0; font-size:0.82em; color:var(--text-soft);">Props + Event Handlers</p>
-
-                                                <div class="card" style="text-align:left; font-size:0.78em;">
-                                                        <strong class="highlight">Task:</strong>
-                                                        <ol style="margin:0.4rem 0 0; padding-left:1.2rem; line-height:1.8;">
-                                                                <li>Create a <code>&lt;ClickLogger /&gt;</code> component</li>
-                                                                <li>It receives a <code>message</code> prop (string)</li>
-                                                                <li>Render a button that, when clicked, logs the <code>message</code> to the console</li>
-                                                                <li>Use <code>&lt;ClickLogger /&gt;</code> in <code>App</code> with different messages</li>
-                                                        </ol>
-                                                </div>
-
-                                                <div class="fragment">
-                                                        <pre style="margin:0; font-size:0.52em;"><code class="ts">
-// ClickLogger.tsx
-function ClickLogger({ message }: { message: string }) {
-  const handleClick = () => {
-    console.log(message);
-  };
-
-  return &lt;button onClick={handleClick}&gt;Log&lt;/button&gt;;
-}
-
-// App.tsx
-&lt;ClickLogger message="Hello!" /&gt;
-&lt;ClickLogger message="Goodbye!" /&gt;
-                                                        </code></pre>
-                                                </div>
+                                        <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1.5rem; text-align:center;">
+                                                <h2>Exercise - Build a Product Card with Props</h2>
+                                                <a href="http://localhost:5173/?target=day-1/exercises/build-product-card-with-prop/starter" target="_blank" style="color:var(--accent); font-size:1.1em;">Open Exercise</a>
                                         </div>
-                                        <aside class="notes">
-                                                Give students 5 minutes. This combines props (passing data down) with event handlers (responding to clicks). Walk around and help. Show the solution after.
-                                        </aside>
                                 </section>
 
                                 <!-- SLIDE 15 – State & useState -->
@@ -964,6 +933,14 @@ setCount(prev =&gt; prev + 1);
                                         <aside class="notes">
                                                 This trips up many beginners. If you call setCount(count + 1) twice in the same event handler, you get count+1 both times (not count+2) because count is a stale closure. The functional form always receives the actual current value. Rule of thumb: if new state depends on old state, use the functional form.
                                         </aside>
+                                </section>
+
+                                <!-- DEMO SLIDE – Product Counter -->
+                                <section>
+                                        <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1.5rem; text-align:center;">
+                                                <h2>Demo - Product Counter</h2>
+                                                <a href="http://localhost:5173/?target=day-1/demo/product-counter" target="_blank" style="color:var(--accent); font-size:1.1em;">Demo</a>
+                                        </div>
                                 </section>
 
                                 <!-- SLIDE 18a – Rule 1: Top Level Only -->
