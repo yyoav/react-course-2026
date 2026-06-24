@@ -243,13 +243,13 @@
                         </div>
                         <div class="card" style="font-size:0.78em; text-align:center;">
                             <div style="font-size:1.8em; margin-bottom:0.3rem; color:var(--accent);">05</div>
-                            <p style="margin:0 0 0.2rem; color:var(--accent); font-weight:600;">State</p>
-                            <p style="margin:0; color:var(--text-soft);">Make the UI react to change</p>
+                            <p style="margin:0 0 0.2rem; color:var(--accent); font-weight:600;">Events</p>
+                            <p style="margin:0; color:var(--text-soft);">Respond to user interactions</p>
                         </div>
                         <div class="card" style="font-size:0.78em; text-align:center;">
                             <div style="font-size:1.8em; margin-bottom:0.3rem; color:var(--accent);">06</div>
-                            <p style="margin:0 0 0.2rem; color:var(--accent); font-weight:600;">Events</p>
-                            <p style="margin:0; color:var(--text-soft);">Respond to user interactions</p>
+                            <p style="margin:0 0 0.2rem; color:var(--accent); font-weight:600;">State</p>
+                            <p style="margin:0; color:var(--text-soft);">Make the UI react to change</p>
                         </div>
                     </div>
                     <aside class="notes">
@@ -261,94 +261,35 @@
                     <h2 class="slide-title">What is React?</h2>
                     <div style="border-left:4px solid var(--accent); padding:0.5rem 0.9rem; margin:0.5rem 0 1rem; background:var(--accent-soft); border-radius:0 6px 6px 0;">
                         <p style="margin:0; font-size:0.82em; line-height:1.5; color:#e2e8f0;">
-                            A <strong style="color:var(--accent);">JavaScript library</strong> for building user interfaces —
-                            primarily used for <strong style="color:var(--accent);">Single Page Applications</strong>.
+                            A <strong style="color:var(--accent);">JavaScript library</strong> for building user interfaces
                         </p>
                     </div>
                     <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:0.75rem;">
                         <div class="card" style="text-align:center; font-size:0.78em;">
                             <div style="font-size:1.6em; margin-bottom:0.4rem;">🧩</div>
                             <p style="margin:0 0 0.3rem; color:var(--accent); font-weight:700;">Component-based</p>
-                            <p style="margin:0; color:var(--text-soft);">Build UIs from small, reusable pieces.</p>
+                            <p style="margin:0; color:var(--text-soft);">Like LEGO — small reusable pieces</p>
                         </div>
                         <div class="card" style="text-align:center; font-size:0.78em;">
                             <div style="font-size:1.6em; margin-bottom:0.4rem;">📝</div>
                             <p style="margin:0 0 0.3rem; color:var(--accent); font-weight:700;">Declarative</p>
-                            <p style="margin:0; color:var(--text-soft);">Describe <em>what</em> to show — React handles the DOM.</p>
+                            <p style="margin:0; color:var(--text-soft);">Tell React what to show, it handles the rest</p>
                         </div>
                         <div class="card" style="text-align:center; font-size:0.78em;">
                             <div style="font-size:1.6em; margin-bottom:0.4rem;">⚡</div>
-                            <p style="margin:0 0 0.3rem; color:var(--accent); font-weight:700;">Virtual DOM</p>
-                            <p style="margin:0; color:var(--text-soft);">Updates only what changed — stays fast.</p>
-                        </div>
-                    </div>
-                    <aside class="notes">
-                        Key distinction: React is a LIBRARY, not a framework (unlike Angular). It handles just the View layer. "Declarative" means you describe the end state and React figures out the DOM changes. Virtual DOM is a lightweight JS representation — diffing algorithm compares old vs new tree.
-                    </aside>
-                </section>
-
-                <section>
-                    <h2 class="slide-title">Single Page Applications (SPA)</h2>
-                    <div style="display:flex; flex-direction:column; align-items:center; gap:1.6rem; margin-top:1rem;">
-
-                        <!-- Flow steps -->
-                        <div style="display:flex; align-items:center; gap:0.6rem; width:100%;">
-                            <div style="flex:1; text-align:center; background:#1e293b; border:1px solid #334155; border-radius:8px; padding:0.75em 0.5em; font-size:0.72em; color:#cbd5e1;">🖱️ User clicks</div>
-                            <div style="color:var(--accent); font-size:1.4em; animation:spa-pulse 1.4s ease-in-out infinite;">→</div>
-                            <div style="flex:1; text-align:center; background:#1e293b; border:1px solid var(--accent); border-radius:8px; padding:0.75em 0.5em; font-size:0.72em; color:#a5f3fc;">⚛️ React intercepts</div>
-                            <div style="color:var(--accent); font-size:1.4em; animation:spa-pulse 1.4s ease-in-out infinite 0.2s;">→</div>
-                            <div style="flex:1; text-align:center; background:#1e293b; border:1px solid var(--accent); border-radius:8px; padding:0.75em 0.5em; font-size:0.72em; color:#a5f3fc;">📦 Fetch JSON only</div>
-                            <div style="color:var(--accent); font-size:1.4em; animation:spa-pulse 1.4s ease-in-out infinite 0.4s;">→</div>
-                            <div style="flex:1; text-align:center; background:#1e293b; border:1px solid #22c55e; border-radius:8px; padding:0.75em 0.5em; font-size:0.72em; color:#86efac;">✅ Update UI only</div>
-                        </div>
-
-                        <!-- CSR vs SSR -->
-                        <div style="display:flex; gap:1rem; width:100%;">
-                            <div class="card" style="flex:1; font-size:0.72em; border-color:rgba(97,218,251,0.6);">
-                                <p style="margin:0 0 0.25rem; color:var(--accent); font-weight:700;">⚙️ CSR — Client Side Rendering</p>
-                                <p style="margin:0; color:var(--text-soft);">React runs in the browser. JS renders the UI. <strong style="color:#e2e8f0;">This is what the diagram above shows.</strong></p>
-                            </div>
-                            <div class="card" style="flex:1; font-size:0.72em; border-color:rgba(148,163,184,0.3);">
-                                <p style="margin:0 0 0.25rem; color:#94a3b8; font-weight:700;">🖥️ SSR — Server Side Rendering</p>
-                                <p style="margin:0; color:var(--text-soft);">Server renders HTML before sending it. Different flow — covered in <strong style="color:#e2e8f0;">Next.js.</strong></p>
-                            </div>
-                        </div>
-                    </div>
-                    <style>
-                        @keyframes spa-pulse { 0%,100%{opacity:0.35} 50%{opacity:1} }
-                    </style>
-                    <aside class="notes">
-                        Traditional multi-page app: every click = full page reload from server. SPA loads ONE HTML shell, then JS handles all navigation. Mention tradeoffs: initial load can be heavier, SEO requires extra work (hence SSR/Next.js later). CSR is the default for Vite + React. Ask class: "Who has used Gmail or Google Maps?" — those are SPAs.
-                    </aside>
-                </section>
-
-                <section>
-                    <h2 class="slide-title">Why React?</h2>
-                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem; margin-top:0.8rem;">
-                        <div class="card" style="font-size:0.8em;">
-                            <p style="margin:0 0 0.3rem; color:var(--accent); font-size:1.1em;">⚡ Build faster</p>
-                            <p style="margin:0; color:var(--text-soft);">Reusable components — write once, use everywhere.</p>
-                        </div>
-                        <div class="card" style="font-size:0.8em;">
-                            <p style="margin:0 0 0.3rem; color:var(--accent); font-size:1.1em;">🧹 Stay clean</p>
-                            <p style="margin:0; color:var(--text-soft);">Declarative code is easier to read and maintain.</p>
-                        </div>
-                        <div class="card" style="font-size:0.8em;">
-                            <p style="margin:0 0 0.3rem; color:var(--accent); font-size:1.1em;">🔄 Reactive UI</p>
-                            <p style="margin:0; color:var(--text-soft);">State changes update the UI instantly — no manual DOM.</p>
-                        </div>
-                        <div class="card" style="font-size:0.8em;">
-                            <p style="margin:0 0 0.3rem; color:var(--accent); font-size:1.1em;">🌍 Ecosystem</p>
-                            <p style="margin:0; color:var(--text-soft);">Router, DevTools, TypeScript, testing — all ready to use.</p>
+                            <p style="margin:0 0 0.3rem; color:var(--accent); font-weight:700;">Smart Updates</p>
+                            <p style="margin:0; color:var(--text-soft);">Only re-renders what changed</p>
                         </div>
                     </div>
                     <p class="small-text" style="margin-top:0.75rem; text-align:center;">
-                        React is the most widely used UI library — backed by Meta, used at scale worldwide.
+                        The most widely used UI library — backed by Meta, massive ecosystem.
                     </p>
                     <aside class="notes">
-                        Emphasize the job-market angle: React dominates job listings. Ecosystem is massive — React Router, Redux/Zustand, React Query, testing with Vitest/RTL. Compare briefly: Angular = opinionated full framework, Vue = similar but smaller community. React lets you pick your own tools.
+                        Key distinction: React is a LIBRARY, not a framework (unlike Angular). It handles just the View layer. Ecosystem is massive — React Router, Redux/Zustand, React Query, testing with Vitest/RTL. React dominates job listings. Compare briefly: Angular = opinionated full framework, Vue = similar but smaller community.
                     </aside>
                 </section>
+
+
 
                 <section>
                     <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1rem; text-align:center;">
@@ -398,28 +339,12 @@ npm run dev</code></pre>
                     <div style="display:flex; gap:1.5rem; align-items:center; margin-top:0.8rem; overflow:visible;">
                         <img src="https://vitejs.dev/logo.svg" style="width:72px; flex-shrink:0; padding:12px; box-sizing:content-box; overflow:visible; filter:drop-shadow(0 0 16px rgba(255,180,50,0.5));" alt="Vite logo">
                         <div style="border-left:3px solid rgba(97,218,251,0.3); padding-left:1rem;">
-                            <p style="margin:0; font-size:0.78em; color:#e2e8f0;">A <strong style="color:var(--accent);">fast modern build tool</strong> for web apps — replaces the old Create React App.</p>
-                        </div>
-                    </div>
-                    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:0.7rem; margin-top:1rem;">
-                        <div class="card" style="font-size:0.72em; text-align:center;">
-                            <div style="font-size:1.4em; margin-bottom:0.3rem;">⚡</div>
-                            <p style="margin:0 0 0.2rem; color:var(--accent); font-weight:700;">Instant start</p>
-                            <p style="margin:0; color:var(--text-soft);">No waiting for a full bundle before dev server starts</p>
-                        </div>
-                        <div class="card" style="font-size:0.72em; text-align:center;">
-                            <div style="font-size:1.4em; margin-bottom:0.3rem;">🔄</div>
-                            <p style="margin:0 0 0.2rem; color:var(--accent); font-weight:700;">Fast HMR</p>
-                            <p style="margin:0; color:var(--text-soft);">Hot Module Replacement — see changes without full reload</p>
-                        </div>
-                        <div class="card" style="font-size:0.72em; text-align:center;">
-                            <div style="font-size:1.4em; margin-bottom:0.3rem;">📦</div>
-                            <p style="margin:0 0 0.2rem; color:var(--accent); font-weight:700;">Optimised build</p>
-                            <p style="margin:0; color:var(--text-soft);">Production bundle is minified and tree-shaken automatically</p>
+                            <p style="margin:0; font-size:0.82em; color:#e2e8f0;">A <strong style="color:var(--accent);">fast build tool</strong> for React apps. Starts instantly, updates without reload.</p>
+                            <p style="margin:0.4rem 0 0; font-size:0.7em; color:var(--text-soft);">Replaces the old Create React App — much faster.</p>
                         </div>
                     </div>
                     <aside class="notes">
-                        Vite (French for "fast") uses native ES modules in dev — no bundling needed. Only the file you changed gets sent to the browser. In production, it uses Rollup under the hood for optimized output. CRA is deprecated since 2023 — Vite is the recommended replacement. Mention esbuild for dependency pre-bundling (Go-based, extremely fast).
+                        Vite (French for "fast") uses native ES modules in dev — no bundling needed. Only the file you changed gets sent to the browser. CRA is deprecated since 2023 — Vite is the recommended replacement. Students will see HMR in the demo.
                     </aside>
                 </section>
 
@@ -515,9 +440,6 @@ export default Greeting;
                             </code></pre>
                         </div>
                     </div>
-                    <p class="fragment small-text" style="margin-top:0.6rem;">
-                        💡 Components let you break the UI into small, independent, reusable pieces.
-                    </p>
                     <aside class="notes">
                         Stress the naming convention: PascalCase = component (Greeting), camelCase = regular function. React distinguishes components from HTML elements by the capital letter. The `import React` line is no longer needed in React 17+ with the new JSX transform, but shown here for clarity. Ask: "What happens if we name it `greeting` lowercase?" — React treats it as an HTML tag.
                     </aside>
@@ -526,6 +448,7 @@ export default Greeting;
                 <section>
                     <h2 class="slide-title">JSX</h2>
                     <div style="display:flex; flex-direction:column; gap:0.7rem; margin-top:0.8rem;">
+                        <p style="margin:0; font-size:0.82em; color:var(--text-soft);">Looks like HTML, but it's <strong style="color:var(--accent);">JavaScript</strong> — gets compiled to function calls at build time.</p>
                         <div>
                             <p style="font-size:0.78em; color:var(--accent); text-transform:uppercase; letter-spacing:0.1em; margin:0 0 0.3rem;">✍️ You write</p>
                             <pre style="margin:0;"><code class="tsx">
@@ -568,20 +491,7 @@ return &lt;h1&gt;Hi&lt;/h1&gt; &lt;p&gt;Bye&lt;/p&gt;;
 return &lt;&gt;&lt;h1&gt;Hi&lt;/h1&gt;&lt;p&gt;Bye&lt;/p&gt;&lt;/&gt;;</code></pre>
                         </div>
 
-                        <!-- Rule 2: className & htmlFor -->
-                        <div class="fragment" style="display:flex; align-items:center; gap:1rem; background:var(--surface); border:1px solid var(--surface-border); border-radius:10px; padding:0.4rem 0.9rem;">
-                            <div style="flex:0 0 220px;">
-                                <strong class="highlight" style="font-size:0.82em;">className &amp; htmlFor</strong>
-                                <p style="margin:0.15rem 0 0; font-size:0.62em; color:var(--text-soft);">HTML reserved words are renamed</p>
-                            </div>
-                            <pre style="margin:0 auto; flex:1; font-size:0.52em; display:flex; align-items:center; justify-content:center;"><code class="tsx">&lt;div className="card"&gt;   // ✅
-&lt;div class="card"&gt;      // ❌
-
-&lt;label htmlFor="email"&gt; // ✅
-&lt;label for="email"&gt;    // ❌</code></pre>
-                        </div>
-
-                        <!-- Rule 4: Curly braces -->
+                        <!-- Rule 2: Curly braces -->
                         <div class="fragment" style="display:flex; align-items:center; gap:1rem; background:var(--surface); border:1px solid var(--surface-border); border-radius:10px; padding:0.4rem 0.9rem;">
                             <div style="flex:0 0 220px;">
                                 <strong class="highlight" style="font-size:0.82em;">{} for expressions</strong>
@@ -593,7 +503,7 @@ return &lt;&gt;&lt;h1&gt;Hi&lt;/h1&gt;&lt;p&gt;Bye&lt;/p&gt;&lt;/&gt;;</code></p
                         </div>
                     </div>
                     <aside class="notes">
-                        Walk through each rule. 1) Single root — JSX compiles to a function call, and a function can only return one value; Fragment avoids extra DOM nodes. 2) All tags must close — unlike HTML, JSX is strict like XML. 3) className/htmlFor — because `class` and `for` are reserved words in JavaScript. 4) Curly braces are the "escape hatch" into JavaScript — any expression works (variables, math, function calls, ternaries) but NOT statements (if/for).
+                        Walk through each rule. 1) Single root — JSX compiles to a function call, and a function can only return one value; Fragment avoids extra DOM nodes. 2) Curly braces are the "escape hatch" into JavaScript — any expression works (variables, math, function calls, ternaries) but NOT statements (if/for). Mention className/htmlFor briefly if it comes up naturally during exercises.
                     </aside>
                 </section>
 
