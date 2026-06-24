@@ -1,15 +1,15 @@
-interface ProductCardProps {
-  title: string
-  description: string
-  price: string
-}
+import ProductDescription from "./ProductDescription";
+import ProductPrice from "./ProductPrice";
+import ProductTitle from "./ProductTitle";
 
-export default function ProductCard({ title, description, price }: ProductCardProps) {
+
+
+export default function ProductCard() {
   return (
     <article className="product-card">
-      <strong>{title}</strong>
-      <p className="product-meta">{description}</p>
-      <p className="product-price">{price}</p>
+      <ProductTitle />
+      <ProductDescription  />
+      <ProductPrice />
     </article>
   )
 }
