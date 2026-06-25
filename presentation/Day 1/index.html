@@ -243,13 +243,13 @@
                         </div>
                         <div class="card" style="font-size:0.78em; text-align:center;">
                             <div style="font-size:1.8em; margin-bottom:0.3rem; color:var(--accent);">05</div>
-                            <p style="margin:0 0 0.2rem; color:var(--accent); font-weight:600;">State</p>
-                            <p style="margin:0; color:var(--text-soft);">Make the UI react to change</p>
+                            <p style="margin:0 0 0.2rem; color:var(--accent); font-weight:600;">Events</p>
+                            <p style="margin:0; color:var(--text-soft);">Respond to user interactions</p>
                         </div>
                         <div class="card" style="font-size:0.78em; text-align:center;">
                             <div style="font-size:1.8em; margin-bottom:0.3rem; color:var(--accent);">06</div>
-                            <p style="margin:0 0 0.2rem; color:var(--accent); font-weight:600;">Events</p>
-                            <p style="margin:0; color:var(--text-soft);">Respond to user interactions</p>
+                            <p style="margin:0 0 0.2rem; color:var(--accent); font-weight:600;">State</p>
+                            <p style="margin:0; color:var(--text-soft);">Make the UI react to change</p>
                         </div>
                     </div>
                     <aside class="notes">
@@ -261,94 +261,35 @@
                     <h2 class="slide-title">What is React?</h2>
                     <div style="border-left:4px solid var(--accent); padding:0.5rem 0.9rem; margin:0.5rem 0 1rem; background:var(--accent-soft); border-radius:0 6px 6px 0;">
                         <p style="margin:0; font-size:0.82em; line-height:1.5; color:#e2e8f0;">
-                            A <strong style="color:var(--accent);">JavaScript library</strong> for building user interfaces —
-                            primarily used for <strong style="color:var(--accent);">Single Page Applications</strong>.
+                            A <strong style="color:var(--accent);">JavaScript library</strong> for building user interfaces
                         </p>
                     </div>
                     <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:0.75rem;">
                         <div class="card" style="text-align:center; font-size:0.78em;">
                             <div style="font-size:1.6em; margin-bottom:0.4rem;">🧩</div>
                             <p style="margin:0 0 0.3rem; color:var(--accent); font-weight:700;">Component-based</p>
-                            <p style="margin:0; color:var(--text-soft);">Build UIs from small, reusable pieces.</p>
+                            <p style="margin:0; color:var(--text-soft);">Like LEGO — small reusable pieces</p>
                         </div>
                         <div class="card" style="text-align:center; font-size:0.78em;">
                             <div style="font-size:1.6em; margin-bottom:0.4rem;">📝</div>
                             <p style="margin:0 0 0.3rem; color:var(--accent); font-weight:700;">Declarative</p>
-                            <p style="margin:0; color:var(--text-soft);">Describe <em>what</em> to show — React handles the DOM.</p>
+                            <p style="margin:0; color:var(--text-soft);">Tell React what to show, it handles the rest</p>
                         </div>
                         <div class="card" style="text-align:center; font-size:0.78em;">
                             <div style="font-size:1.6em; margin-bottom:0.4rem;">⚡</div>
-                            <p style="margin:0 0 0.3rem; color:var(--accent); font-weight:700;">Virtual DOM</p>
-                            <p style="margin:0; color:var(--text-soft);">Updates only what changed — stays fast.</p>
-                        </div>
-                    </div>
-                    <aside class="notes">
-                        Key distinction: React is a LIBRARY, not a framework (unlike Angular). It handles just the View layer. "Declarative" means you describe the end state and React figures out the DOM changes. Virtual DOM is a lightweight JS representation — diffing algorithm compares old vs new tree.
-                    </aside>
-                </section>
-
-                <section>
-                    <h2 class="slide-title">Single Page Applications (SPA)</h2>
-                    <div style="display:flex; flex-direction:column; align-items:center; gap:1.6rem; margin-top:1rem;">
-
-                        <!-- Flow steps -->
-                        <div style="display:flex; align-items:center; gap:0.6rem; width:100%;">
-                            <div style="flex:1; text-align:center; background:#1e293b; border:1px solid #334155; border-radius:8px; padding:0.75em 0.5em; font-size:0.72em; color:#cbd5e1;">🖱️ User clicks</div>
-                            <div style="color:var(--accent); font-size:1.4em; animation:spa-pulse 1.4s ease-in-out infinite;">→</div>
-                            <div style="flex:1; text-align:center; background:#1e293b; border:1px solid var(--accent); border-radius:8px; padding:0.75em 0.5em; font-size:0.72em; color:#a5f3fc;">⚛️ React intercepts</div>
-                            <div style="color:var(--accent); font-size:1.4em; animation:spa-pulse 1.4s ease-in-out infinite 0.2s;">→</div>
-                            <div style="flex:1; text-align:center; background:#1e293b; border:1px solid var(--accent); border-radius:8px; padding:0.75em 0.5em; font-size:0.72em; color:#a5f3fc;">📦 Fetch JSON only</div>
-                            <div style="color:var(--accent); font-size:1.4em; animation:spa-pulse 1.4s ease-in-out infinite 0.4s;">→</div>
-                            <div style="flex:1; text-align:center; background:#1e293b; border:1px solid #22c55e; border-radius:8px; padding:0.75em 0.5em; font-size:0.72em; color:#86efac;">✅ Update UI only</div>
-                        </div>
-
-                        <!-- CSR vs SSR -->
-                        <div style="display:flex; gap:1rem; width:100%;">
-                            <div class="card" style="flex:1; font-size:0.72em; border-color:rgba(97,218,251,0.6);">
-                                <p style="margin:0 0 0.25rem; color:var(--accent); font-weight:700;">⚙️ CSR — Client Side Rendering</p>
-                                <p style="margin:0; color:var(--text-soft);">React runs in the browser. JS renders the UI. <strong style="color:#e2e8f0;">This is what the diagram above shows.</strong></p>
-                            </div>
-                            <div class="card" style="flex:1; font-size:0.72em; border-color:rgba(148,163,184,0.3);">
-                                <p style="margin:0 0 0.25rem; color:#94a3b8; font-weight:700;">🖥️ SSR — Server Side Rendering</p>
-                                <p style="margin:0; color:var(--text-soft);">Server renders HTML before sending it. Different flow — covered in <strong style="color:#e2e8f0;">Next.js.</strong></p>
-                            </div>
-                        </div>
-                    </div>
-                    <style>
-                        @keyframes spa-pulse { 0%,100%{opacity:0.35} 50%{opacity:1} }
-                    </style>
-                    <aside class="notes">
-                        Traditional multi-page app: every click = full page reload from server. SPA loads ONE HTML shell, then JS handles all navigation. Mention tradeoffs: initial load can be heavier, SEO requires extra work (hence SSR/Next.js later). CSR is the default for Vite + React. Ask class: "Who has used Gmail or Google Maps?" — those are SPAs.
-                    </aside>
-                </section>
-
-                <section>
-                    <h2 class="slide-title">Why React?</h2>
-                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem; margin-top:0.8rem;">
-                        <div class="card" style="font-size:0.8em;">
-                            <p style="margin:0 0 0.3rem; color:var(--accent); font-size:1.1em;">⚡ Build faster</p>
-                            <p style="margin:0; color:var(--text-soft);">Reusable components — write once, use everywhere.</p>
-                        </div>
-                        <div class="card" style="font-size:0.8em;">
-                            <p style="margin:0 0 0.3rem; color:var(--accent); font-size:1.1em;">🧹 Stay clean</p>
-                            <p style="margin:0; color:var(--text-soft);">Declarative code is easier to read and maintain.</p>
-                        </div>
-                        <div class="card" style="font-size:0.8em;">
-                            <p style="margin:0 0 0.3rem; color:var(--accent); font-size:1.1em;">🔄 Reactive UI</p>
-                            <p style="margin:0; color:var(--text-soft);">State changes update the UI instantly — no manual DOM.</p>
-                        </div>
-                        <div class="card" style="font-size:0.8em;">
-                            <p style="margin:0 0 0.3rem; color:var(--accent); font-size:1.1em;">🌍 Ecosystem</p>
-                            <p style="margin:0; color:var(--text-soft);">Router, DevTools, TypeScript, testing — all ready to use.</p>
+                            <p style="margin:0 0 0.3rem; color:var(--accent); font-weight:700;">Smart Updates</p>
+                            <p style="margin:0; color:var(--text-soft);">Only re-renders what changed</p>
                         </div>
                     </div>
                     <p class="small-text" style="margin-top:0.75rem; text-align:center;">
-                        React is the most widely used UI library — backed by Meta, used at scale worldwide.
+                        The most widely used UI library — backed by Meta, massive ecosystem.
                     </p>
                     <aside class="notes">
-                        Emphasize the job-market angle: React dominates job listings. Ecosystem is massive — React Router, Redux/Zustand, React Query, testing with Vitest/RTL. Compare briefly: Angular = opinionated full framework, Vue = similar but smaller community. React lets you pick your own tools.
+                        Key distinction: React is a LIBRARY, not a framework (unlike Angular). It handles just the View layer. Ecosystem is massive — React Router, Redux/Zustand, React Query, testing with Vitest/RTL. React dominates job listings. Compare briefly: Angular = opinionated full framework, Vue = similar but smaller community.
                     </aside>
                 </section>
+
+
 
                 <section>
                     <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1rem; text-align:center;">
@@ -398,28 +339,12 @@ npm run dev</code></pre>
                     <div style="display:flex; gap:1.5rem; align-items:center; margin-top:0.8rem; overflow:visible;">
                         <img src="https://vitejs.dev/logo.svg" style="width:72px; flex-shrink:0; padding:12px; box-sizing:content-box; overflow:visible; filter:drop-shadow(0 0 16px rgba(255,180,50,0.5));" alt="Vite logo">
                         <div style="border-left:3px solid rgba(97,218,251,0.3); padding-left:1rem;">
-                            <p style="margin:0; font-size:0.78em; color:#e2e8f0;">A <strong style="color:var(--accent);">fast modern build tool</strong> for web apps — replaces the old Create React App.</p>
-                        </div>
-                    </div>
-                    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:0.7rem; margin-top:1rem;">
-                        <div class="card" style="font-size:0.72em; text-align:center;">
-                            <div style="font-size:1.4em; margin-bottom:0.3rem;">⚡</div>
-                            <p style="margin:0 0 0.2rem; color:var(--accent); font-weight:700;">Instant start</p>
-                            <p style="margin:0; color:var(--text-soft);">No waiting for a full bundle before dev server starts</p>
-                        </div>
-                        <div class="card" style="font-size:0.72em; text-align:center;">
-                            <div style="font-size:1.4em; margin-bottom:0.3rem;">🔄</div>
-                            <p style="margin:0 0 0.2rem; color:var(--accent); font-weight:700;">Fast HMR</p>
-                            <p style="margin:0; color:var(--text-soft);">Hot Module Replacement — see changes without full reload</p>
-                        </div>
-                        <div class="card" style="font-size:0.72em; text-align:center;">
-                            <div style="font-size:1.4em; margin-bottom:0.3rem;">📦</div>
-                            <p style="margin:0 0 0.2rem; color:var(--accent); font-weight:700;">Optimised build</p>
-                            <p style="margin:0; color:var(--text-soft);">Production bundle is minified and tree-shaken automatically</p>
+                            <p style="margin:0; font-size:0.82em; color:#e2e8f0;">A <strong style="color:var(--accent);">fast build tool</strong> for React apps. Starts instantly, updates without reload.</p>
+                            <p style="margin:0.4rem 0 0; font-size:0.7em; color:var(--text-soft);">Replaces the old Create React App — much faster.</p>
                         </div>
                     </div>
                     <aside class="notes">
-                        Vite (French for "fast") uses native ES modules in dev — no bundling needed. Only the file you changed gets sent to the browser. In production, it uses Rollup under the hood for optimized output. CRA is deprecated since 2023 — Vite is the recommended replacement. Mention esbuild for dependency pre-bundling (Go-based, extremely fast).
+                        Vite (French for "fast") uses native ES modules in dev — no bundling needed. Only the file you changed gets sent to the browser. CRA is deprecated since 2023 — Vite is the recommended replacement. Students will see HMR in the demo.
                     </aside>
                 </section>
 
@@ -433,114 +358,6 @@ npm run dev</code></pre>
                     </div>
                     <aside class="notes">
                         DEMO: Run `npm create vite@latest demo-app -- --template react-ts` live. Show the generated folder structure: src/App.tsx, main.tsx, vite.config.ts. Edit App.tsx to show HMR in action — change the text and watch the browser update without reload. ~5 minutes.
-                    </aside>
-                </section>
-
-                <section>
-                    <h2 class="slide-title">Your First Function Component</h2>
-                    <div class="two-col" style="margin-top:0.8rem; align-items:center;">
-                        <div style="flex:1;">
-                            <ul>
-                                <li>A function that <span class="highlight">returns JSX</span></li>
-                                <li>Name must start with a <span class="highlight">capital letter</span></li>
-                                <li>Reusable — use <code>&lt;Greeting /&gt;</code> anywhere</li>
-                                <li><code>export default</code> makes it importable</li>
-                            </ul>
-                        </div>
-                        <div style="flex:0.85;">
-                            <pre><code class="tsx" data-line-numbers>
-// Greeting.tsx
-import React from 'react';
-
-function Greeting() {
-  return (
-    &lt;h1&gt;Hello, React! 👋&lt;/h1&gt;
-  );
-}
-
-export default Greeting;
-                            </code></pre>
-                        </div>
-                    </div>
-                    <p class="fragment small-text" style="margin-top:0.6rem;">
-                        💡 Components let you break the UI into small, independent, reusable pieces.
-                    </p>
-                    <aside class="notes">
-                        Stress the naming convention: PascalCase = component (Greeting), camelCase = regular function. React distinguishes components from HTML elements by the capital letter. The `import React` line is no longer needed in React 17+ with the new JSX transform, but shown here for clarity. Ask: "What happens if we name it `greeting` lowercase?" — React treats it as an HTML tag.
-                    </aside>
-                </section>
-
-                <section>
-                    <h2 class="slide-title">JSX</h2>
-                    <div style="display:flex; flex-direction:column; gap:0.7rem; margin-top:0.8rem;">
-                        <div>
-                            <p style="font-size:0.78em; color:var(--accent); text-transform:uppercase; letter-spacing:0.1em; margin:0 0 0.3rem;">✍️ You write</p>
-                            <pre style="margin:0;"><code class="tsx">
-// Greeting.tsx
-function Greeting() {
-  const name = 'React';
-  return &lt;h1&gt;Hello, {name}!&lt;/h1&gt;;
-}
-                            </code></pre>
-                        </div>
-                        <div>
-                            <p style="font-size:0.78em; color:var(--text-soft); text-transform:uppercase; letter-spacing:0.1em; margin:0 0 0.3rem;">⚙️ Under the hood — React 19 JSX transform</p>
-                            <pre style="margin:0;"><code class="tsx">
-import { jsx as _jsx } from 'react/jsx-runtime';
-const name = 'React';
-_jsx("h1", { children: ["Hello, ", name, "!"] });
-                            </code></pre>
-                        </div>
-                    </div>
-                    <aside class="notes">
-                        JSX is NOT HTML — it's syntactic sugar that compiles to function calls. This transformation is done by Babel (or SWC in Vite) at build time — it converts JSX into regular JavaScript function calls. The new JSX transform (React 17+) means you don't need `import React` at the top anymore. We'll cover the key JSX syntax rules on the next slide.
-                    </aside>
-                </section>
-
-                <!-- JSX Rules -->
-                <section>
-                    <div style="display:flex; flex-direction:column; gap:0.8rem;">
-                        <h2 class="slide-title">JSX Rules</h2>
-
-                        <!-- Rule 1: Single root -->
-                        <div class="fragment" style="display:flex; align-items:center; gap:1rem; background:var(--surface); border:1px solid var(--surface-border); border-radius:10px; padding:0.4rem 0.9rem;">
-                            <div style="flex:0 0 220px;">
-                                <strong class="highlight" style="font-size:0.82em;">Single root element</strong>
-                                <p style="margin:0.15rem 0 0; font-size:0.62em; color:var(--text-soft);">Wrap siblings in a <code>&lt;div&gt;</code> or Fragment</p>
-                            </div>
-                            <pre style="margin:0 auto; flex:1; font-size:0.52em; display:flex; align-items:center; justify-content:center;"><code class="tsx">// ❌ Two roots
-return &lt;h1&gt;Hi&lt;/h1&gt; &lt;p&gt;Bye&lt;/p&gt;;
-
-// ✅ Fragment wrapper
-return &lt;&gt;&lt;h1&gt;Hi&lt;/h1&gt;&lt;p&gt;Bye&lt;/p&gt;&lt;/&gt;;</code></pre>
-                        </div>
-
-                        <!-- Rule 2: className & htmlFor -->
-                        <div class="fragment" style="display:flex; align-items:center; gap:1rem; background:var(--surface); border:1px solid var(--surface-border); border-radius:10px; padding:0.4rem 0.9rem;">
-                            <div style="flex:0 0 220px;">
-                                <strong class="highlight" style="font-size:0.82em;">className &amp; htmlFor</strong>
-                                <p style="margin:0.15rem 0 0; font-size:0.62em; color:var(--text-soft);">HTML reserved words are renamed</p>
-                            </div>
-                            <pre style="margin:0 auto; flex:1; font-size:0.52em; display:flex; align-items:center; justify-content:center;"><code class="tsx">&lt;div className="card"&gt;   // ✅
-&lt;div class="card"&gt;      // ❌
-
-&lt;label htmlFor="email"&gt; // ✅
-&lt;label for="email"&gt;    // ❌</code></pre>
-                        </div>
-
-                        <!-- Rule 4: Curly braces -->
-                        <div class="fragment" style="display:flex; align-items:center; gap:1rem; background:var(--surface); border:1px solid var(--surface-border); border-radius:10px; padding:0.4rem 0.9rem;">
-                            <div style="flex:0 0 220px;">
-                                <strong class="highlight" style="font-size:0.82em;">{} for expressions</strong>
-                                <p style="margin:0.15rem 0 0; font-size:0.62em; color:var(--text-soft);">Embed any JS expression</p>
-                            </div>
-                            <pre style="margin:0 auto; flex:1; font-size:0.52em; display:flex; align-items:center; justify-content:center;"><code class="tsx">&lt;h1&gt;{user.name}&lt;/h1&gt;          // ✅
-&lt;p&gt;{2 + 2}&lt;/p&gt;                 // ✅
-&lt;img src={avatarUrl} /&gt;       // ✅</code></pre>
-                        </div>
-                    </div>
-                    <aside class="notes">
-                        Walk through each rule. 1) Single root — JSX compiles to a function call, and a function can only return one value; Fragment avoids extra DOM nodes. 2) All tags must close — unlike HTML, JSX is strict like XML. 3) className/htmlFor — because `class` and `for` are reserved words in JavaScript. 4) Curly braces are the "escape hatch" into JavaScript — any expression works (variables, math, function calls, ternaries) but NOT statements (if/for).
                     </aside>
                 </section>
 
@@ -590,64 +407,117 @@ function App() {
 
 export default App;
                                                 </code></pre>
-                                                <p class="small-text"><code>App</code> is the root — it composes <code>Header</code>, <code>Greeting</code>, and <code>Footer</code> into a single UI tree.</p>
+                                                <p class="small-text"><a href="https://www.att.com" target="_blank" style="color:var(--accent);">att.com</a> </p>
                                         </div>
                                         <aside class="notes">
-                                                Show this in the actual demo project. Open App.tsx and point out: imports at top, function body returns JSX, self-closing tags for components. The wrapping div is needed because JSX must return one root. Mention Fragment shorthand as alternative. Ask students to create their own component file and import it into App.
+                                                Show this in the actual demo project. Open App.tsx and point out: imports at top, function body returns JSX, self-closing tags for components. The wrapping div is needed because JSX must return one root. Mention Fragment shorthand as alternative. Use att.com as a real-world example — point out how the navbar, hero banner, plan cards, and footer could each be their own component file.
                                         </aside>
                                 </section>
 
-                                <!-- EXERCISE SLIDE -->
-                                <section>
-                                        <div style="display:flex; flex-direction:column; gap:1.2rem; align-items:center; text-align:center;">
-                                                <h2 style="margin:0;">&#x1F6D2; Your Turn &mdash; Build a Product Card</h2>
-                                                <p style="margin:0; font-size:0.82em; color:var(--text-soft);">Create a <code>ProductCard</code> component with <strong style="color:var(--accent);">3 sub-components</strong> &mdash; sell the world's most ridiculous product</p>
+                <section>
+                    <h2 class="slide-title">Your First Function Component</h2>
+                    <div class="two-col" style="margin-top:0.8rem; align-items:center;">
+                        <div style="flex:1;">
+                            <ul>
+                                <li>A function that <span class="highlight">returns JSX</span></li>
+                                <li>Name must start with a <span class="highlight">capital letter</span></li>
+                                <li>Reusable — use <code>&lt;Greeting /&gt;</code> anywhere</li>
+                                <li><code>export default</code> makes it importable</li>
+                            </ul>
+                        </div>
+                        <div style="flex:0.85;">
+                            <pre><code class="tsx" data-line-numbers>
+// Greeting.tsx
+import React from 'react';
 
-                                                <div style="display:flex; gap:1rem; align-items:stretch; margin-top:0.4rem;">
-                                                        <div class="card" style="font-size:0.8em; text-align:center; flex:1;">
-                                                                <div style="font-size:1.8em;">&#x2728;</div>
-                                                                <p style="margin:0.3rem 0 0; color:var(--accent); font-weight:700;">ProductTitle.tsx</p>
-                                                                <p style="margin:0.2rem 0 0; color:var(--text-soft);">Returns an <code>&lt;h2&gt;</code> with<br>a ridiculous product name<br><em style="font-size:0.85em;">"Invisible Umbrella 3000"</em></p>
-                                                        </div>
-                                                        <div class="card" style="font-size:0.8em; text-align:center; flex:1;">
-                                                                <div style="font-size:1.8em;">&#x1F5BC;&#xFE0F;</div>
-                                                                <p style="margin:0.3rem 0 0; color:var(--accent); font-weight:700;">ProductImage.tsx</p>
-                                                                <p style="margin:0.2rem 0 0; color:var(--text-soft);">Returns an <code>&lt;img&gt;</code> tag<br>(use any placeholder URL)<br><em style="font-size:0.85em;">or just an emoji &#x1F984;</em></p>
-                                                        </div>
-                                                        <div class="card" style="font-size:0.8em; text-align:center; flex:1;">
-                                                                <div style="font-size:1.8em;">&#x1F4B8;</div>
-                                                                <p style="margin:0.3rem 0 0; color:var(--accent); font-weight:700;">ProductPrice.tsx</p>
-                                                                <p style="margin:0.2rem 0 0; color:var(--text-soft);">Returns a <code>&lt;p&gt;</code> with<br>an absurd price<br><em style="font-size:0.85em;">"Only $9,999,999.99"</em></p>
-                                                        </div>
-                                                </div>
-
-                                                <pre style="margin:0; font-size:0.72em; text-align:left;"><code class="tsx">// ProductCard.tsx
-import ProductTitle from './ProductTitle';
-import ProductImage from './ProductImage';
-import ProductPrice from './ProductPrice';
-
-function ProductCard() {
+function Greeting() {
   return (
-    &lt;div&gt;
-      &lt;ProductTitle /&gt;
-      &lt;ProductImage /&gt;
-      &lt;ProductPrice /&gt;
-    &lt;/div&gt;
+    &lt;h1&gt;Hello, React! 👋&lt;/h1&gt;
   );
 }
 
-export default ProductCard;</code></pre>
+export default Greeting;
+                            </code></pre>
+                        </div>
+                    </div>
+                    <aside class="notes">
+                        Stress the naming convention: PascalCase = component (Greeting), camelCase = regular function. React distinguishes components from HTML elements by the capital letter. The `import React` line is no longer needed in React 17+ with the new JSX transform, but shown here for clarity. Ask: "What happens if we name it `greeting` lowercase?" — React treats it as an HTML tag.
+                    </aside>
+                </section>
 
-                                                <p style="margin:0; font-size:0.72em; color:var(--text-soft);">&#x23F1;&#xFE0F; 5 minutes &mdash; the weirder the product, the better! &#x1F3C6;</p>
+                <section>
+                    <h2 class="slide-title">JSX</h2>
+                    <div style="display:flex; flex-direction:column; gap:0.7rem; margin-top:0.8rem;">
+                        <p style="margin:0; font-size:0.82em; color:var(--text-soft);">Looks like HTML, but it's <strong style="color:var(--accent);">JavaScript</strong> — gets compiled to function calls at build time.</p>
+                        <div>
+                            <p style="font-size:0.78em; color:var(--accent); text-transform:uppercase; letter-spacing:0.1em; margin:0 0 0.3rem;">✍️ You write</p>
+                            <pre style="margin:0;"><code class="tsx">
+// Greeting.tsx
+function Greeting() {
+  const name = 'React';
+  return &lt;h1&gt;Hello, {name}!&lt;/h1&gt;;
+}
+                            </code></pre>
+                        </div>
+                        <div>
+                            <p style="font-size:0.78em; color:var(--text-soft); text-transform:uppercase; letter-spacing:0.1em; margin:0 0 0.3rem;">⚙️ Under the hood — React 19 JSX transform</p>
+                            <pre style="margin:0;"><code class="tsx">
+import { jsx as _jsx } from 'react/jsx-runtime';
+const name = 'React';
+_jsx("h1", { children: ["Hello, ", name, "!"] });
+                            </code></pre>
+                        </div>
+                    </div>
+                    <aside class="notes">
+                        JSX is NOT HTML — it's syntactic sugar that compiles to function calls. This transformation is done by Babel (or SWC in Vite) at build time — it converts JSX into regular JavaScript function calls. The new JSX transform (React 17+) means you don't need `import React` at the top anymore. We'll cover the key JSX syntax rules on the next slide.
+                    </aside>
+                </section>
+
+                <!-- JSX Rules -->
+                <section>
+                    <div style="display:flex; flex-direction:column; gap:0.8rem;">
+                        <h2 class="slide-title">JSX Rules</h2>
+
+                        <!-- Rule 1: Single root -->
+                        <div class="fragment" style="display:flex; align-items:center; gap:1rem; background:var(--surface); border:1px solid var(--surface-border); border-radius:10px; padding:0.4rem 0.9rem;">
+                            <div style="flex:0 0 220px;">
+                                <strong class="highlight" style="font-size:0.82em;">Single root element</strong>
+                                <p style="margin:0.15rem 0 0; font-size:0.62em; color:var(--text-soft);">Wrap siblings in a <code>&lt;div&gt;</code> or Fragment</p>
+                            </div>
+                            <pre style="margin:0 auto; flex:1; font-size:0.52em; display:flex; align-items:center; justify-content:center;"><code class="tsx">// ❌ Two roots
+return &lt;h1&gt;Hi&lt;/h1&gt; &lt;p&gt;Bye&lt;/p&gt;;
+
+// ✅ Fragment wrapper
+return &lt;&gt;&lt;h1&gt;Hi&lt;/h1&gt;&lt;p&gt;Bye&lt;/p&gt;&lt;/&gt;;</code></pre>
+                        </div>
+
+                        <!-- Rule 2: Curly braces -->
+                        <div class="fragment" style="display:flex; align-items:center; gap:1rem; background:var(--surface); border:1px solid var(--surface-border); border-radius:10px; padding:0.4rem 0.9rem;">
+                            <div style="flex:0 0 220px;">
+                                <strong class="highlight" style="font-size:0.82em;">{} for expressions</strong>
+                                <p style="margin:0.15rem 0 0; font-size:0.62em; color:var(--text-soft);">Embed any JS expression</p>
+                            </div>
+                            <pre style="margin:0 auto; flex:1; font-size:0.52em; display:flex; align-items:center; justify-content:center;"><code class="tsx">&lt;h1&gt;{user.name}&lt;/h1&gt;          // ✅
+&lt;p&gt;{2 + 2}&lt;/p&gt;                 // ✅
+&lt;img src={avatarUrl} /&gt;       // ✅</code></pre>
+                        </div>
+                    </div>
+                    <aside class="notes">
+                        Walk through each rule. 1) Single root — JSX compiles to a function call, and a function can only return one value; Fragment avoids extra DOM nodes. 2) Curly braces are the "escape hatch" into JavaScript — any expression works (variables, math, function calls, ternaries) but NOT statements (if/for). Mention className/htmlFor briefly if it comes up naturally during exercises.
+                    </aside>
+                </section>
+
+                                <!-- EXERCISE SLIDE -->
+                                <section>
+                                        <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1.5rem; text-align:center;">
+                                                <h2>Exercise - Build a Product Card</h2>
+                                                <a href="http://localhost:5173/?target=day-1/exercises/build-product-card/starter" target="_blank" style="color:var(--accent); font-size:1.1em;">Open Exercise</a>
                                         </div>
-                                        <aside class="notes">
-                                                Fun exercise &mdash; encourage silly products (Solar-Powered Flashlight, Waterproof Sponge, Diet Water). The real goal is muscle-memory: create file, write function, export, import, compose. Walk around and make sure everyone's dev server is running. If someone finishes early, challenge them to import ProductCard into App.tsx or add a 4th sub-component (ProductReviews.tsx with fake 1-star reviews?).
-                                        </aside>
                                 </section>
 
                                 <section>
                                         <div style="display:flex; flex-direction:column; gap:1rem;">
-                                                <h2 class="slide-title">Props Overview</h2>
+                                                <h2 class="slide-title">Props</h2>
 
                                                 <!-- Flow diagram -->
                                                 <div style="display:flex; align-items:center; justify-content:center; margin:0.2rem 0;">
@@ -761,7 +631,6 @@ export default MyButton;
                                                                 </code></pre>
                                                         </div>
                                                 </div>
-                                                <p class="small-text">React uses <span class="highlight">camelCase</span> prop names and expects a <span class="highlight">function reference</span>, not a string.</p>
                                         </div>
                                         <aside class="notes">
                                                 Key differences from HTML: 1) camelCase (onClick not onclick), 2) Pass a function reference, don't call it, 3) No quotes around the handler. React uses synthetic events that wrap native browser events for cross-browser consistency. The event object is passed automatically as the first argument.
@@ -780,7 +649,7 @@ export default MyButton;
                                                                 <p style="margin:0.15rem 0 0; font-size:0.62em; color:var(--text-soft);">Use camelCase prop names</p>
                                                         </div>
                                                         <pre style="margin:0 auto; flex:1; font-size:0.52em; display:flex; align-items:center; justify-content:center;"><code class="ts">
-&lt;button onchange={fn}&gt;    // ❌
+&lt;button onclick={fn}&gt;    // ❌
 &lt;button onClick={fn}&gt;     // ✅
                                                         </code></pre>
                                                 </div>
@@ -802,42 +671,12 @@ export default MyButton;
                                         </aside>
                                 </section>
 
-                                <!-- SLIDE – Mini Exercise: Props & Event Handlers -->
+                                <!-- EXERCISE SLIDE -->
                                 <section>
-                                        <div style="display:flex; flex-direction:column; gap:0.9rem;">
-                                                <h2 class="slide-title">🛠️ Mini Exercise</h2>
-                                                <p style="margin:0; font-size:0.82em; color:var(--text-soft);">Props + Event Handlers</p>
-
-                                                <div class="card" style="text-align:left; font-size:0.78em;">
-                                                        <strong class="highlight">Task:</strong>
-                                                        <ol style="margin:0.4rem 0 0; padding-left:1.2rem; line-height:1.8;">
-                                                                <li>Create a <code>&lt;ClickLogger /&gt;</code> component</li>
-                                                                <li>It receives a <code>message</code> prop (string)</li>
-                                                                <li>Render a button that, when clicked, logs the <code>message</code> to the console</li>
-                                                                <li>Use <code>&lt;ClickLogger /&gt;</code> in <code>App</code> with different messages</li>
-                                                        </ol>
-                                                </div>
-
-                                                <div class="fragment">
-                                                        <pre style="margin:0; font-size:0.52em;"><code class="ts">
-// ClickLogger.tsx
-function ClickLogger({ message }: { message: string }) {
-  const handleClick = () => {
-    console.log(message);
-  };
-
-  return &lt;button onClick={handleClick}&gt;Log&lt;/button&gt;;
-}
-
-// App.tsx
-&lt;ClickLogger message="Hello!" /&gt;
-&lt;ClickLogger message="Goodbye!" /&gt;
-                                                        </code></pre>
-                                                </div>
+                                        <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1.5rem; text-align:center;">
+                                                <h2>Exercise - Build a Product Card with Props</h2>
+                                                <a href="http://localhost:5173/?target=day-1/exercises/build-product-card-with-prop/starter" target="_blank" style="color:var(--accent); font-size:1.1em;">Open Exercise</a>
                                         </div>
-                                        <aside class="notes">
-                                                Give students 5 minutes. This combines props (passing data down) with event handlers (responding to clicks). Walk around and help. Show the solution after.
-                                        </aside>
                                 </section>
 
                                 <!-- SLIDE 15 – State & useState -->
@@ -1006,6 +845,14 @@ setCount(prev =&gt; prev + 1);
                                         </aside>
                                 </section>
 
+                                <!-- DEMO SLIDE – Product Counter -->
+                                <section>
+                                        <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1.5rem; text-align:center;">
+                                                <h2>Demo - Product Counter</h2>
+                                                <a href="http://localhost:5173/?target=day-1/demo/product-counter" target="_blank" style="color:var(--accent); font-size:1.1em;">Demo</a>
+                                        </div>
+                                </section>
+
                                 <!-- SLIDE 18a – Rule 1: Top Level Only -->
                                 <section>
                                         <div style="display:flex; flex-direction:column; gap:0.4rem;">
@@ -1150,59 +997,22 @@ setItems(items);
                                         </aside>
                                 </section>
 
-                                <!-- SLIDE 20 – Lifting State Up -->
+                                <!-- EXERCISE SLIDE – Podcast Episode Cards -->
                                 <section>
-                                        <div style="display:flex; flex-direction:column; gap:0.8rem;">
-                                                <h2 class="slide-title">Lifting State Up</h2>
-                                                <div class="two-col" style="align-items:flex-start; gap:1.4rem;">
-                                                        <div style="display:flex; flex-direction:column; gap:0.6rem;">
-                                                                <p style="margin:0; font-size:0.84em; color:var(--text-soft);">When two siblings need the same state, <span class="highlight">move it to their common parent</span> and pass it down as props.</p>
-                                                                <svg viewBox="0 0 320 170" width="100%" aria-label="Lifting state up diagram">
-                                                                        <defs>
-                                                                                <marker id="ls-arr" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
-                                                                                        <polygon points="0 0, 8 3, 0 6" fill="#61dafb"/>
-                                                                                </marker>
-                                                                        </defs>
-                                                                        <rect x="95" y="10" width="130" height="44" rx="8" fill="#1e3a4a" stroke="#61dafb" stroke-width="1.6"/>
-                                                                        <text x="160" y="28" fill="#61dafb" text-anchor="middle" font-size="11" font-family="sans-serif" font-weight="bold">Parent</text>
-                                                                        <text x="160" y="44" fill="#c8d2de" text-anchor="middle" font-size="10" font-family="monospace">useState(…)</text>
-                                                                        <line x1="125" y1="54" x2="80"  y2="104" stroke="#61dafb" stroke-width="1.5" stroke-dasharray="4 2" marker-end="url(#ls-arr)"/>
-                                                                        <line x1="195" y1="54" x2="240" y2="104" stroke="#61dafb" stroke-width="1.5" stroke-dasharray="4 2" marker-end="url(#ls-arr)"/>
-                                                                        <rect x="20"  y="106" width="110" height="44" rx="8" fill="#1e3a4a" stroke="rgba(97,218,251,0.5)" stroke-width="1.4"/>
-                                                                        <text x="75"  y="124" fill="#c8d2de" text-anchor="middle" font-size="11" font-family="sans-serif">Child A</text>
-                                                                        <text x="75"  y="140" fill="#c8d2de" text-anchor="middle" font-size="10" font-family="monospace">reads value</text>
-                                                                        <rect x="190" y="106" width="110" height="44" rx="8" fill="#1e3a4a" stroke="rgba(97,218,251,0.5)" stroke-width="1.4"/>
-                                                                        <text x="245" y="124" fill="#c8d2de" text-anchor="middle" font-size="11" font-family="sans-serif">Child B</text>
-                                                                        <text x="245" y="140" fill="#c8d2de" text-anchor="middle" font-size="10" font-family="monospace">calls setter</text>
-                                                                </svg>
-                                                        </div>
-                                                        <div style="display:flex; flex-direction:column; gap:0.4rem;">
-                                                                <span style="font-size:0.68em; text-transform:uppercase; letter-spacing:0.1em; color:var(--accent);">Example</span>
-                                                                <pre style="margin:0;"><code class="ts" data-line-numbers>
-// Parent.tsx
-function Parent() {
-  const [name, setName] = useState('');
-  return (
-    &lt;NameInput value={name} onChange={setName} /&gt;
-    &lt;NameDisplay name={name} /&gt;
-  );
-}
-                                                                </code></pre>
-                                                                <p class="small-text">State lives in <code>Parent</code> — <code>NameInput</code> writes, <code>NameDisplay</code> reads.</p>
-                                                        </div>
+                                        <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1.5rem; text-align:center;">
+                                                <h2>Exercise - Podcast Episode Cards</h2>
+                                                <a href="http://localhost:5173/?target=day-1/exercises/podcast-episode-cards/starter" target="_blank" style="color:var(--accent); font-size:1.1em;">Open Exercise</a>
+                                                <div class="fragment" style="margin-top:1rem;">
+                                                        <p style="font-size:0.85em; color:var(--text-soft);">File to review</p>
+                                                        <a href="http://localhost:5173/?target=day-1/exercises/podcast-episode-cards/solution" target="_blank" style="color:var(--accent); font-size:0.95em;">Open Solution</a>
                                                 </div>
                                         </div>
-                                        <aside class="notes">
-                                                Lifting state up is how siblings share data. Find the closest common ancestor, put useState there, pass value down as props and setter as a callback. This pattern appears everywhere in React apps. Preview: when prop-drilling gets deep, we'll use Context (Day 3).
-                                        </aside>
                                 </section>
 
                                 <!-- CONCLUSION SLIDE -->
                                 <section>
                                         <div style="display:flex; flex-direction:column; align-items:center; gap:1.2rem; text-align:center;">
-                                                <h2 style="margin:0; font-weight:800; color:var(--accent);">Day 1 — Wrap-Up</h2>
-                                                <p style="margin:0; font-size:0.82em; color:var(--text-soft);">What we covered today</p>
-
+                                                <h2 style="margin:0; font-weight:800; color:var(--accent);">What we covered today</h2>
                                                 <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:0.65rem; margin-top:0.4rem; width:100%;">
                                                         <div class="card" style="font-size:0.76em; text-align:center;">
                                                                 <div style="font-size:1.4em; margin-bottom:0.2rem;">⚛️</div>
@@ -1228,11 +1038,6 @@ function Parent() {
                                                                 <div style="font-size:1.4em; margin-bottom:0.2rem;">🗃️</div>
                                                                 <strong class="highlight">State &amp; useState</strong>
                                                                 <p style="margin:0.3rem 0 0; color:var(--text-soft);">Component-owned data, immutable updates, functional setters</p>
-                                                        </div>
-                                                        <div class="card" style="font-size:0.76em; text-align:center;">
-                                                                <div style="font-size:1.4em; margin-bottom:0.2rem;">🔗</div>
-                                                                <strong class="highlight">Lifting State Up</strong>
-                                                                <p style="margin:0.3rem 0 0; color:var(--text-soft);">Sharing state between siblings via a common parent</p>
                                                         </div>
                                                 </div>
 
