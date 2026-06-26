@@ -501,8 +501,8 @@
                 <ul style="font-size: 0.8em">
                   <li>UI library only</li>
                   <li>You configure routing</li>
-                  <li>You handle SEO</li>
-                  <li>You setup build tools</li>
+                  <li>You handle (Search Engine Optimization)</li>
+                  <li><span class="highlight">You setup build tools</span></li>
                   <li>Client-side only</li>
                 </ul>
               </div>
@@ -628,7 +628,11 @@
                   <ul style="font-size: 0.65em; line-height: 1.6">
                     <li>Files in <code>pages/</code> → routes</li>
                     <li>Each file exports a React component</li>
-                    <li>Client-side rendering by default</li>
+                    <li>
+                      <span class="highlight"
+                        >Client-side rendering by default</span
+                      >
+                    </li>
                     <li>
                       Data fetching with
                       <code style="color: var(--accent)"
@@ -691,10 +695,12 @@
                     How it works
                   </h4>
                   <ul style="font-size: 0.65em; line-height: 1.6">
+                    <li>Folders = routes, page.tsx = accessible</li>
                     <li>
-                      Folders = routes, <code>page.tsx</code> = accessible
+                      <span class="highlight"
+                        >Server components by default</span
+                      >
                     </li>
-                    <li>Server components by default</li>
                     <li><code>layout.tsx</code> for nested layouts</li>
                     <li><code>loading.tsx</code> for loading states</li>
                     <li><code>error.tsx</code> for error handling</li>
@@ -717,7 +723,9 @@
                 </p>
                 <ul style="font-size: 0.65em; margin-top: 0.5rem">
                   <li>pages/ directory</li>
-                  <li>Client components by default</li>
+                  <li>
+                    <span class="highlight">Client components by default</span>
+                  </li>
                   <li>getServerSideProps</li>
                   <li>getStaticProps</li>
                 </ul>
@@ -730,12 +738,7 @@
                   background: var(--accent-soft);
                 "
               >
-                <h4>
-                  🆕 App Router
-                  <span style="font-size: 0.6em; color: var(--accent)"
-                    >← We'll use this</span
-                  >
-                </h4>
+                <h4>🆕 App Router</h4>
                 <p style="font-size: 0.75em; color: var(--text-soft)">
                   (Recommended since Next.js 13+)
                 </p>
