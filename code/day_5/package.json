@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev2": "pnpm --workspace-root=false dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"
