@@ -1884,7 +1884,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               </div>
             </div>
 
-            <div class="card" style="margin-top: 1rem">
+            <div class="card">
               <p style="font-size: 0.75em">
                 💡 Use Server Components by default, Client only when needed!
               </p>
@@ -1894,8 +1894,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <!-- Slide 16: Client Components -->
           <section>
             <h3>When to Use Client Components</h3>
-            <div class="card" style="margin-top: 1.5rem">
-              <div class="label">Add 'use client' directive</div>
+            <div class="card">
               <pre><code class="tsx" style="font-size: 0.65em;">'use client';
 
 import { useState } from 'react';
@@ -1915,8 +1914,8 @@ export default function Counter() {
             </div>
 
             <div class="card" style="margin-top: 1rem">
-              <h4 style="font-size: 0.9em">Use Client when you need:</h4>
-              <ul style="font-size: 0.75em">
+              <h4 style="font-size: 0.6em">Use Client when you need:</h4>
+              <ul style="font-size: 0.5em">
                 <li>useState, useEffect, or other hooks</li>
                 <li>Event handlers (onClick, onChange)</li>
                 <li>Browser APIs (localStorage, window)</li>
