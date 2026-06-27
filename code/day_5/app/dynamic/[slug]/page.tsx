@@ -1,10 +1,6 @@
 import Link from "next/link";
 
-export default async function DynamicRoute({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
+export default async function DynamicRoute({ params}: { params: Promise<{ slug: string }>}) {
   const { slug } = await params;
 
   return (

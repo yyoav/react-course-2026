@@ -15,17 +15,11 @@ export default function Home() {
             priority
           />
 
-          <div className="flex flex-col items-center gap-4">
-            <h1 className="text-4xl font-bold tracking-tight text-black dark:text-zinc-50">
-              Next.js App Router Examples
-            </h1>
-            <p className="max-w-2xl text-lg leading-7 text-zinc-600 dark:text-zinc-400">
-              Day 5 - Course Examples
-            </p>
-          </div>
-
+          <h1 className="text-4xl font-bold tracking-tight text-black dark:text-zinc-50">
+            Next.js App Router Examples
+          </h1>
           {/* Examples Menu */}
-          <nav className="w-full mt-12">
+          <nav className="w-full ">
             <h3 className="text-xl font-semibold mb-6 text-black dark:text-zinc-50">
               📚 Course Examples - Day 5
             </h3>
