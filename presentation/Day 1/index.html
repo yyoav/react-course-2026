@@ -729,30 +729,34 @@ export default MyButton;
                                                 <h2 data-id="s16-title" style="margin:0; font-weight:800;">useState in Action</h2>
                                                 <div style="display:flex; gap:1.4rem; align-items:flex-start;">
                                                         <pre data-id="s16-code" style="margin:0; flex:1.4;"><code class="tsx">
-// Counter.tsx
+// ProductCard.tsx
 import { useState } from 'react';
 
-function Counter() {
+function ProductCard() {
   const [count, setCount] = useState(0);
 
+  function handleAddToCart() {
+    setCount(count + 1);
+  }
+
   return (
-    &lt;button onClick={() =&gt; setCount(count + 1)}&gt;
-      Clicked {count} times
+    &lt;button onClick={handleAddToCart}&gt;
+      Add to Cart ({count})
     &lt;/button&gt;
   );
 }
 
-export default Counter;
+export default ProductCard;
                                                         </code></pre>
                                                         <div style="flex:1; display:flex; flex-direction:column; gap:0.6rem; justify-content:center; font-size:0.86em;">
                                                                 <p style="margin:0;">🏁 <strong class="highlight">Initial Render</strong></p>
                                                                 <p style="margin:0; color:var(--text-soft);"><code>useState(0)</code> returns <code>[0, setCount]</code>.</p>
-                                                                <p style="margin:0; color:var(--text-soft);">UI: <em style="color:#fff;">"Clicked 0 times"</em></p>
+                                                                <p style="margin:0; color:var(--text-soft);">UI: <em style="color:#fff;">"Add to Cart (0)"</em></p>
                                                         </div>
                                                 </div>
                                         </div>
                                         <aside class="notes">
-                                                Walk through the Counter step by step. useState(0) sets initial count to 0. The button's onClick fires setCount with count + 1. Show this live in the demo project — students should follow along.
+                                                Walk through the ProductCard step by step. useState(0) sets initial count to 0. The button's onClick calls handleAddToCart which fires setCount with count + 1. Show this live in the demo project — students should follow along.
                                         </aside>
                                 </section>
 
@@ -762,24 +766,28 @@ export default Counter;
                                                 <h2 data-id="s16-title" style="margin:0; font-weight:800;">useState in Action</h2>
                                                 <div style="display:flex; gap:1.4rem; align-items:flex-start;">
                                                         <pre data-id="s16-code" style="margin:0; flex:1.4;"><code class="tsx">
-// Counter.tsx
+// ProductCard.tsx
 import { useState } from 'react';
 
-function Counter() {
+function ProductCard() {
   const [count, setCount] = useState(0);
 
+  function handleAddToCart() {
+    setCount(count + 1);
+  }
+
   return (
-    &lt;button onClick={() =&gt; setCount(count + 1)}&gt;
-      Clicked {count} times
+    &lt;button onClick={handleAddToCart}&gt;
+      Add to Cart ({count})
     &lt;/button&gt;
   );
 }
 
-export default Counter;
+export default ProductCard;
                                                         </code></pre>
                                                         <div style="flex:1; display:flex; flex-direction:column; gap:0.6rem; justify-content:center; font-size:0.86em;">
                                                                 <p style="margin:0;">🖱️ <strong style="color:#f59e0b;">Button Clicked</strong></p>
-                                                                <p style="margin:0; color:var(--text-soft);"><code>setCount(count + 1)</code> fires.</p>
+                                                                <p style="margin:0; color:var(--text-soft);"><code>handleAddToCart()</code> → <code>setCount(count + 1)</code> fires.</p>
                                                                 <p style="margin:0; color:var(--text-soft);">React queues <strong style="color:#fff;">0 → 1</strong> &amp; re-renders.</p>
                                                         </div>
                                                 </div>
@@ -795,31 +803,43 @@ export default Counter;
                                                 <h2 data-id="s16-title" style="margin:0; font-weight:800;">useState in Action</h2>
                                                 <div style="display:flex; gap:1.4rem; align-items:flex-start;">
                                                         <pre data-id="s16-code" style="margin:0; flex:1.4;"><code class="tsx">
-// Counter.tsx
+// ProductCard.tsx
 import { useState } from 'react';
 
-function Counter() {
+function ProductCard() {
   const [count, setCount] = useState(0);
 
+  function handleAddToCart() {
+    setCount(count + 1);
+  }
+
   return (
-    &lt;button onClick={() =&gt; setCount(count + 1)}&gt;
-      Clicked {count} times
+    &lt;button onClick={handleAddToCart}&gt;
+      Add to Cart ({count})
     &lt;/button&gt;
   );
 }
 
-export default Counter;
+export default ProductCard;
                                                         </code></pre>
                                                         <div style="flex:1; display:flex; flex-direction:column; gap:0.6rem; justify-content:center; font-size:0.86em;">
                                                                 <p style="margin:0;">🔄 <strong style="color:#4ade80;">Re-render</strong></p>
                                                                 <p style="margin:0; color:var(--text-soft);"><code>count</code> is now <strong style="color:#fff;">1</strong>.</p>
-                                                                <p style="margin:0; color:var(--text-soft);">UI: <em style="color:#4ade80;">"Clicked 1 times"</em> ✓</p>
+                                                                <p style="margin:0; color:var(--text-soft);">UI: <em style="color:#4ade80;">"Add to Cart (1)"</em> ✓</p>
                                                         </div>
                                                 </div>
                                         </div>
                                         <aside class="notes">
-                                                On re-render, React calls Counter() again. This time useState returns [1, setCount]. The button text updates. This cycle repeats every click. Key insight: the component function runs again from top to bottom on every re-render.
+                                                On re-render, React calls ProductCard() again. This time useState returns [1, setCount]. The button text updates. This cycle repeats every click. Key insight: the component function runs again from top to bottom on every re-render.
                                         </aside>
+                                </section>
+
+                                <!-- DEMO SLIDE – Product Counter -->
+                                <section>
+                                        <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1.5rem; text-align:center;">
+                                                <h2>Demo - Product Counter</h2>
+                                                <a href="http://localhost:5173/?target=day-1/demo/product-counter" target="_blank" style="color:var(--accent); font-size:1.1em;">Demo</a>
+                                        </div>
                                 </section>
 
                                 <!-- SLIDE 17 – Functional Updates -->
@@ -843,14 +863,6 @@ setCount(prev =&gt; prev + 1);
                                         <aside class="notes">
                                                 This trips up many beginners. If you call setCount(count + 1) twice in the same event handler, you get count+1 both times (not count+2) because count is a stale closure. The functional form always receives the actual current value. Rule of thumb: if new state depends on old state, use the functional form.
                                         </aside>
-                                </section>
-
-                                <!-- DEMO SLIDE – Product Counter -->
-                                <section>
-                                        <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1.5rem; text-align:center;">
-                                                <h2>Demo - Product Counter</h2>
-                                                <a href="http://localhost:5173/?target=day-1/demo/product-counter" target="_blank" style="color:var(--accent); font-size:1.1em;">Demo</a>
-                                        </div>
                                 </section>
 
                                 <!-- SLIDE 18a – Rule 1: Top Level Only -->
