@@ -13,7 +13,7 @@ export default function ProductCard() {
   const [count, setCount] = useState(0)
 
   function handleAddToCart() {
-    setCount(prevCount => prevCount + 1)
+    setCount(count + 1);
   }
 
   return (
