@@ -811,24 +811,24 @@ npm run dev
                   <td>Home page</td>
                 </tr>
                 <tr>
-                  <td>app/about/page.tsx</td>
-                  <td>/about</td>
-                  <td>About page</td>
+                  <td>app/basic-routing/page.tsx</td>
+                  <td>/basic-routing</td>
+                  <td>Basic routing page</td>
                 </tr>
                 <tr>
-                  <td>app/blog/page.tsx</td>
-                  <td>/blog</td>
-                  <td>Blog index</td>
-                </tr>
-                <tr>
-                  <td>app/blog/[slug]/page.tsx</td>
-                  <td>/blog/hello</td>
-                  <td>Dynamic route</td>
-                </tr>
-                <tr>
-                  <td>app/dashboard/settings/page.tsx</td>
-                  <td>/dashboard/settings</td>
+                  <td>app/basic-routing/contact/page.tsx</td>
+                  <td>/basic-routing/contact</td>
                   <td>Nested route</td>
+                </tr>
+                <tr>
+                  <td>app/basic-routing/contact/team/page.tsx</td>
+                  <td>/basic-routing/contact/team</td>
+                  <td>Deep nested route</td>
+                </tr>
+                <tr>
+                  <td>app/dynamic/[slug]/page.tsx</td>
+                  <td>/dynamic/my-post</td>
+                  <td>Dynamic route</td>
                 </tr>
               </tbody>
             </table>
@@ -840,29 +840,53 @@ npm run dev
             </div>
           </section>
 
-          <!-- Slide 12: Creating Pages -->
+          <!-- Slide: Exercise 1 — Instructions -->
           <section>
-            <h3>Creating Pages</h3>
+            <h3>🧪 Exercise 1 — Pages & Navigation</h3>
+            <p class="small-text">→ live coding / hands-on</p>
+
+            <div class="card step-card" style="margin-top: 1rem; text-align: left">
+              <p style="font-size: 0.75em; margin-bottom: 0.5rem; color: var(--text-soft)">Phase 1 — Create two new pages</p>
+              <ol style="font-size: 0.8em; line-height: 1.8">
+                <li>Create a <span class="highlight">contact</span> folder under <code>app/basic-routing/</code> with a <code>page.tsx</code></li>
+                <li>Create a <span class="highlight">team</span> folder under <code>app/basic-routing/</code> with a <code>page.tsx</code></li>
+                <li>Navigate to <code>/basic-routing/contact</code> and <code>/basic-routing/team</code></li>
+              </ol>
+              <p style="font-size: 0.75em; margin-top: 1rem; margin-bottom: 0.5rem; color: var(--text-soft)">Phase 2 — Deep (nested) routing</p>
+              <ol start="4" style="font-size: 0.8em; line-height: 1.8">
+                <li>Drag the <span class="highlight">team</span> folder <strong>into</strong> the <span class="highlight">contact</span> folder</li>
+                <li>Navigate to <code>/basic-routing/contact/team</code> — it works!</li>
+              </ol>
+            </div>
+
+            <div class="card" style="margin-top: 1rem">
+              <p style="font-size: 0.7em">⏱️ Time: 20 minutes</p>
+            </div>
+          </section>
+
+          <!-- Slide: Exercise 1 — Code Snippets -->
+          <section>
+            <h3>🧪 Exercise 1 — Pages & Navigation</h3>
             <div class="two-col" style="margin-top: 1.5rem">
               <div>
-                <div class="label">app/page.tsx (Home)</div>
-                <pre><code class="tsx" style="font-size: 0.6em;">export default function Home() {
+                <div class="label">app/basic-routing/contact/page.tsx</div>
+                <pre><code class="tsx" style="font-size: 0.6em;">export default function Contact() {
   return (
     &lt;main&gt;
-      &lt;h1&gt;Welcome to Next.js&lt;/h1&gt;
-      &lt;p&gt;This is the home page&lt;/p&gt;
+      &lt;h1&gt;Contact Us&lt;/h1&gt;
+      &lt;p&gt;Get in touch with our team&lt;/p&gt;
     &lt;/main&gt;
   );
 }</code></pre>
               </div>
 
               <div>
-                <div class="label">app/about/page.tsx</div>
-                <pre><code class="tsx" style="font-size: 0.6em;">export default function About() {
+                <div class="label">app/basic-routing/team/page.tsx</div>
+                <pre><code class="tsx" style="font-size: 0.6em;">export default function Team() {
   return (
     &lt;main&gt;
-      &lt;h1&gt;About Us&lt;/h1&gt;
-      &lt;p&gt;Learn more about us&lt;/p&gt;
+      &lt;h1&gt;Our Team&lt;/h1&gt;
+      &lt;p&gt;Meet the people behind the product&lt;/p&gt;
     &lt;/main&gt;
   );
 }</code></pre>
@@ -871,19 +895,9 @@ npm run dev
 
             <div class="card" style="margin-top: 1rem">
               <p style="font-size: 0.75em">
-                ✨ These are <span class="highlight">Server Components</span> by
-                default (fast!)
+                Phase 2: drag <code>team/</code> into <code>contact/</code> →
+                URL becomes <span class="highlight">/basic-routing/contact/team</span>
               </p>
-            </div>
-          </section>
-
-          <!-- Slide 10: Exercise 1 -->
-          <section>
-            <h3>🧪 Exercise 1 — Pages & Navigation</h3>
-            <p class="small-text">→ live coding / hands-on</p>
-
-            <div class="card" style="margin-top: 1rem">
-              <p style="font-size: 0.7em">⏱️ Time: 20 minutes</p>
             </div>
           </section>
 
