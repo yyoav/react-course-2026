@@ -840,6 +840,138 @@ npm run dev
             </div>
           </section>
 
+          <!-- Slide: What Are Dynamic Routes? -->
+          <section>
+            <h3>What Are Dynamic Routes?</h3>
+            <p class="small-text">
+              Pages that handle <span class="highlight">variable URL segments</span> with the same component
+            </p>
+
+            <div class="two-col" style="margin-top: 1.5rem">
+              <div>
+                <div class="label">Static Routes (one page per path)</div>
+                <pre style="background: rgba(255,100,100,0.08)"><code class="plaintext" style="font-size: 0.6em;">/dynamic/hello-world   → page.tsx
+/dynamic/nextjs-rocks  → page.tsx
+/dynamic/my-post       → page.tsx
+❌ Can't create a file for every slug!</code></pre>
+              </div>
+
+              <div>
+                <div class="label">Dynamic Route (one page, any value)</div>
+                <pre style="background: rgba(97,218,251,0.08)"><code class="plaintext" style="font-size: 0.6em;">/dynamic/[slug]        → page.tsx
+
+✅ /dynamic/hello-world
+✅ /dynamic/nextjs-rocks
+✅ /dynamic/my-post
+All handled by ONE component!</code></pre>
+              </div>
+            </div>
+
+            <div class="card" style="margin-top: 1.5rem">
+              <h4 style="font-size: 0.75em; margin-bottom: 0.5rem">📂 Folder Convention</h4>
+              <pre style="margin: 0"><code class="plaintext" style="font-size: 0.6em;">app/
+└── dynamic/
+    └── [slug]/        ← square brackets = dynamic segment
+        └── page.tsx   ← receives { params: { slug } }</code></pre>
+            </div>
+          </section>
+
+          <!-- Slide: How Params Travel (Server → Client) -->
+          <section>
+            <h3>How Params Travel: Server → Client</h3>
+            <p class="small-text">Understanding the data flow of URL parameters</p>
+
+            <div style="margin-top: 1rem; display: flex; flex-direction: column; gap: 0.7rem;">
+              <div class="step-card" style="display: flex; align-items: center; gap: 0.8rem;">
+                <span style="font-size: 1.2em;">🌐</span>
+                <div style="flex:1">
+                  <strong style="font-size: 0.65em;">1. Browser Request</strong>
+                  <p style="font-size: 0.55em; margin: 0.15rem 0 0;">User visits <code>/dynamic/my-post</code></p>
+                </div>
+              </div>
+
+              <div style="text-align: center; font-size: 1em; color: var(--accent);">⬇️</div>
+
+              <div class="step-card" style="display: flex; align-items: center; gap: 0.8rem;">
+                <span style="font-size: 1.2em;">⚙️</span>
+                <div style="flex:1">
+                  <strong style="font-size: 0.65em;">2. Next.js Server parses the URL</strong>
+                  <p style="font-size: 0.55em; margin: 0.15rem 0 0;">Matches <code>[slug]</code> segment → extracts <code>params = { slug: "my-post" }</code></p>
+                </div>
+              </div>
+
+              <div style="text-align: center; font-size: 1em; color: var(--accent);">⬇️</div>
+
+              <div class="step-card" style="display: flex; align-items: center; gap: 0.8rem;">
+                <span style="font-size: 1.2em;">🖥️</span>
+                <div style="flex:1">
+                  <strong style="font-size: 0.65em;">3. Server Component renders with params</strong>
+                  <p style="font-size: 0.55em; margin: 0.15rem 0 0;">Can fetch data, query DB — <span class="highlight">params always strings</span></p>
+                </div>
+              </div>
+
+              <div style="text-align: center; font-size: 1em; color: var(--accent);">⬇️</div>
+
+              <div class="step-card" style="display: flex; align-items: center; gap: 0.8rem;">
+                <span style="font-size: 1.2em;">📱</span>
+                <div style="flex:1">
+                  <strong style="font-size: 0.65em;">4. HTML sent to client (hydrated if needed)</strong>
+                  <p style="font-size: 0.55em; margin: 0.15rem 0 0;">Client Components can read params via <code>useParams()</code> hook</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Slide: Dynamic Routes Code -->
+          <section>
+            <h3>Dynamic Routes</h3>
+            <p class="small-text">Handle routes with parameters</p>
+
+            <div class="two-col" style="margin-top: 1.5rem">
+              <div>
+                <div class="label">Dynamic slug: app/dynamic/[slug]/page.tsx</div>
+                <pre><code class="tsx" style="font-size: 0.58em;">export default async function DynamicRoute({
+  params,
+}: {
+  params: Promise&lt;{ slug: string }&gt;;
+}) {
+  const { slug } = await params;
+
+  return (
+    &lt;div&gt;
+      &lt;h1&gt;Dynamic Route: {slug}&lt;/h1&gt;
+    &lt;/div&gt;
+  );
+}
+
+// URL: /dynamic/my-post → slug = "my-post"</code></pre>
+              </div>
+
+              <div>
+                <div class="label">Multiple params</div>
+                <pre><code class="tsx" style="font-size: 0.58em;">// app/shop/[category]/[id]/page.tsx
+
+export default async function ShopItem({
+  params,
+}: {
+  params: Promise&lt;{ category: string; id: string }&gt;;
+}) {
+  const { category, id } = await params;
+
+  return (
+    &lt;div&gt;
+      &lt;p&gt;Category: {category}&lt;/p&gt;
+      &lt;p&gt;Product ID: {id}&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}
+
+// URL: /shop/phones/123
+// category = "phones", id = "123"</code></pre>
+              </div>
+            </div>
+          </section>
+
           <!-- Slide: Exercise 1 — Instructions -->
           <section>
             <h3>🧪 Exercise 1 — Pages & Navigation</h3>
@@ -898,137 +1030,6 @@ npm run dev
                 Phase 2: drag <code>team/</code> into <code>contact/</code> →
                 URL becomes <span class="highlight">/basic-routing/contact/team</span>
               </p>
-            </div>
-          </section>
-
-          <!-- Slide: What Are Dynamic Routes? -->
-          <section>
-            <h3>What Are Dynamic Routes?</h3>
-            <p class="small-text">
-              Pages that handle <span class="highlight">variable URL segments</span> with the same component
-            </p>
-
-            <div class="two-col" style="margin-top: 1.5rem">
-              <div>
-                <div class="label">Static Routes (one page per path)</div>
-                <pre style="background: rgba(255,100,100,0.08)"><code class="plaintext" style="font-size: 0.6em;">/product/shoes     → page.tsx
-/product/laptop    → page.tsx
-/product/headset   → page.tsx
-❌ Can't create a file for every product!</code></pre>
-              </div>
-
-              <div>
-                <div class="label">Dynamic Route (one page, any value)</div>
-                <pre style="background: rgba(97,218,251,0.08)"><code class="plaintext" style="font-size: 0.6em;">/product/[id]      → page.tsx
-
-✅ /product/shoes
-✅ /product/laptop
-✅ /product/42
-All handled by ONE component!</code></pre>
-              </div>
-            </div>
-
-            <div class="card" style="margin-top: 1.5rem">
-              <h4 style="font-size: 0.75em; margin-bottom: 0.5rem">📂 Folder Convention</h4>
-              <pre style="margin: 0"><code class="plaintext" style="font-size: 0.6em;">app/
-└── product/
-    └── [id]/          ← square brackets = dynamic segment
-        └── page.tsx   ← receives { params: { id } }</code></pre>
-            </div>
-          </section>
-
-          <!-- Slide: How Params Flow (Server → Client) -->
-          <section>
-            <h3>How Params Travel: Server → Client</h3>
-            <p class="small-text">Understanding the data flow of URL parameters</p>
-
-            <div style="margin-top: 1.5rem; display: flex; flex-direction: column; gap: 1rem;">
-              <div class="step-card" style="display: flex; align-items: center; gap: 1rem;">
-                <span style="font-size: 1.4em;">🌐</span>
-                <div style="flex:1">
-                  <strong style="font-size: 0.75em;">1. Browser Request</strong>
-                  <p style="font-size: 0.65em; margin: 0.2rem 0 0;">User visits <code>/product/42</code></p>
-                </div>
-              </div>
-
-              <div style="text-align: center; font-size: 1.2em; color: var(--accent);">⬇️</div>
-
-              <div class="step-card" style="display: flex; align-items: center; gap: 1rem;">
-                <span style="font-size: 1.4em;">⚙️</span>
-                <div style="flex:1">
-                  <strong style="font-size: 0.75em;">2. Next.js Server parses the URL</strong>
-                  <p style="font-size: 0.65em; margin: 0.2rem 0 0;">Matches <code>[id]</code> segment → extracts <code>params = { id: "42" }</code></p>
-                </div>
-              </div>
-
-              <div style="text-align: center; font-size: 1.2em; color: var(--accent);">⬇️</div>
-
-              <div class="step-card" style="display: flex; align-items: center; gap: 1rem;">
-                <span style="font-size: 1.4em;">🖥️</span>
-                <div style="flex:1">
-                  <strong style="font-size: 0.75em;">3. Server Component renders with params</strong>
-                  <p style="font-size: 0.65em; margin: 0.2rem 0 0;">Can fetch data, query DB — <span class="highlight">params always strings</span></p>
-                </div>
-              </div>
-
-              <div style="text-align: center; font-size: 1.2em; color: var(--accent);">⬇️</div>
-
-              <div class="step-card" style="display: flex; align-items: center; gap: 1rem;">
-                <span style="font-size: 1.4em;">📱</span>
-                <div style="flex:1">
-                  <strong style="font-size: 0.75em;">4. HTML sent to client (hydrated if needed)</strong>
-                  <p style="font-size: 0.65em; margin: 0.2rem 0 0;">Client Components can read params via <code>useParams()</code> hook</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="card" style="margin-top: 1rem">
-              <p style="font-size: 0.65em">
-                💡 <strong>Key point:</strong> params are always <code>string</code> — parse to <code>number</code> if needed: <code>Number(params.id)</code>
-              </p>
-            </div>
-          </section>
-
-          <!-- Slide 11: Dynamic Routes -->
-          <section>
-            <h3>Dynamic Routes</h3>
-            <p class="small-text">Handle routes with parameters</p>
-
-            <div class="two-col" style="margin-top: 1.5rem">
-              <div>
-                <div class="label">Dynamic ID: app/product/[id]/page.tsx</div>
-                <pre><code class="tsx" style="font-size: 0.58em;">interface Params{
-  params: { id: string };
-}
-export default function Product({ params }: Params) {
-  return (
-    &lt;div&gt;
-      &lt;h1&gt;Viewing Product: {params.id}&lt;/h1&gt;
-    &lt;/div&gt;
-  );
-}
-
-// URL: /product/123 → id = "123"</code></pre>
-              </div>
-
-              <div>
-                <div class="label">Multiple params</div>
-                <pre><code class="tsx" style="font-size: 0.58em;">// app/shop/[category]/[id]/page.tsx
- interface Params{
-  params: { category: string; id: string };
-}
-export default function ShopItem({ params }: Params) {
-  return (
-    &lt;div&gt;
-      &lt;p&gt;Category: {params.category}&lt;/p&gt;
-      &lt;p&gt;Product ID: {params.id}&lt;/p&gt;
-    &lt;/div&gt;
-  );
-}
-
-// URL: /shop/phones/123
-// category = "phones", id = "123"</code></pre>
-              </div>
             </div>
           </section>
 
@@ -1803,56 +1804,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </div>
           </section>
 
-          <!-- Slide 14.6: Server Components vs SSR -->
-          <section>
-            <h3>Server Components vs SSR</h3>
-            <p class="small-text">They are NOT the same thing!</p>
-
-            <div style="margin-top: 1rem; text-align: left">
-              <div class="card" style="margin-bottom: 1rem">
-                <h4 style="font-size: 0.8em">Server-Side Rendering (SSR)</h4>
-                <p
-                  style="
-                    font-size: 0.65em;
-                    color: var(--text-soft);
-                    line-height: 1.4;
-                  "
-                >
-                  A technique where a <strong>Client Component</strong> is
-                  pre-rendered into HTML on the server. The JS is still sent to
-                  the browser, and the component "hydrates" to become
-                  interactive.
-                </p>
-              </div>
-
-              <div class="card" style="border-color: var(--accent)">
-                <h4 style="font-size: 0.8em; color: var(--accent)">
-                  React Server Components (RSC)
-                </h4>
-                <p
-                  style="
-                    font-size: 0.65em;
-                    color: var(--text-soft);
-                    line-height: 1.4;
-                  "
-                >
-                  A new type of component that executes <strong>ONLY</strong> on
-                  the server. Its code (JS) is <strong>never</strong> sent to
-                  the browser. It cannot use hooks or state, but it can safely
-                  access databases directly.
-                </p>
-              </div>
-            </div>
-
-            <div class="card" style="margin-top: 1rem; padding: 0.5rem">
-              <p style="font-size: 0.65em; text-align: center">
-                💡 <strong>RSC</strong> reduces bundle size.
-                <strong>SSR</strong> improves initial load time. Next.js uses
-                both!
-              </p>
-            </div>
-          </section>
-
           <!-- Slide 14.7: Mental Shift Model -->
           <section>
             <h3>Mental Shift Model</h3>
@@ -1924,11 +1875,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
             <div class="two-col" style="margin-top: 1.5rem">
               <div class="card">
-                <h4 style="font-size: 0.9em">🖥️ Server Components</h4>
-                <p style="font-size: 0.75em; color: var(--text-soft)">
+                <h4 style="font-size: 0.8em">🖥️ Server Components</h4>
+                <p style="font-size: 0.65em; color: var(--text-soft)">
                   (default)
                 </p>
-                <ul style="font-size: 0.75em; line-height: 1.7">
+                <ul style="font-size: 0.65em; line-height: 1.7">
                   <li>Render on server</li>
                   <li>Can access backend directly</li>
                   <li>No JavaScript to browser</li>
@@ -1938,11 +1889,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               </div>
 
               <div class="card">
-                <h4 style="font-size: 0.9em">💻 Client Components</h4>
-                <p style="font-size: 0.75em; color: var(--text-soft)">
+                <h4 style="font-size: 0.8em">💻 Client Components</h4>
+                <p style="font-size: 0.65em; color: var(--text-soft)">
                   ('use client')
                 </p>
-                <ul style="font-size: 0.75em; line-height: 1.7">
+                <ul style="font-size: 0.65em; line-height: 1.7">
                   <li>Render in browser</li>
                   <li>Can use hooks (useState)</li>
                   <li>Can use event handlers</li>
@@ -1953,8 +1904,98 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </div>
 
             <div class="card">
-              <p style="font-size: 0.75em">
+              <p style="font-size: 0.65em">
                 💡 Use Server Components by default, Client only when needed!
+              </p>
+            </div>
+          </section>
+
+          <!-- Slide 15.5: Server Component Demo 🛠️ -->
+          <section>
+            <h3>Demo 🛠️</h3>
+            <div
+              class="card"
+              style="
+                margin-top: 2rem;
+                padding: 2.5rem;
+                text-align: center;
+                background: var(--accent-soft);
+              "
+            >
+              <p
+                style="
+                  font-size: 1.2em;
+                  margin: 0 0 1rem;
+                  color: var(--accent);
+                  font-weight: bold;
+                "
+              >
+                Open the live demo in the course app
+              </p>
+              <p
+                style="
+                  font-size: 0.9em;
+                  margin: 0;
+                  color: var(--text-soft);
+                  line-height: 1.6;
+                "
+              >
+                Page:
+                <code style="color: var(--accent)">/server-component</code>
+                &nbsp;&nbsp;
+                <code style="color: var(--accent)">/rsc-vs-client</code>
+                &nbsp;&nbsp;
+                <code style="color: var(--accent)">/rsc-vs-ssr</code>
+              </p>
+            </div>
+          </section>
+
+          <!-- Slide: Server Components vs SSR -->
+          <section>
+            <h3>Server Components vs SSR</h3>
+            <p class="small-text">They are NOT the same thing!</p>
+
+            <div style="margin-top: 1rem; text-align: left">
+              <div class="card" style="margin-bottom: 1rem">
+                <h4 style="font-size: 0.8em">Server-Side Rendering (SSR)</h4>
+                <p
+                  style="
+                    font-size: 0.65em;
+                    color: var(--text-soft);
+                    line-height: 1.4;
+                  "
+                >
+                  A technique where a <strong>Client Component</strong> is
+                  pre-rendered into HTML on the server. The JS is still sent to
+                  the browser, and the component "hydrates" to become
+                  interactive.
+                </p>
+              </div>
+
+              <div class="card" style="border-color: var(--accent)">
+                <h4 style="font-size: 0.8em; color: var(--accent)">
+                  React Server Components (RSC)
+                </h4>
+                <p
+                  style="
+                    font-size: 0.65em;
+                    color: var(--text-soft);
+                    line-height: 1.4;
+                  "
+                >
+                  A new type of component that executes <strong>ONLY</strong> on
+                  the server. Its code (JS) is <strong>never</strong> sent to
+                  the browser. It cannot use hooks or state, but it can safely
+                  access databases directly.
+                </p>
+              </div>
+            </div>
+
+            <div class="card" style="margin-top: 1rem; padding: 0.5rem">
+              <p style="font-size: 0.65em; text-align: center">
+                💡 <strong>RSC</strong> reduces bundle size.
+                <strong>SSR</strong> improves initial load time. Next.js uses
+                both!
               </p>
             </div>
           </section>
@@ -2369,19 +2410,19 @@ export default function RealTimeChart() {
             <div
               class="card"
               style="
-                margin-top: 2rem;
-                padding: 2rem;
-                font-size: 0.75em;
+                margin-top: 1.5rem;
+                padding: 1.5rem;
+                font-size: 0.6em;
                 text-align: left;
               "
             >
-              <div style="font-family: monospace; line-height: 2">
+              <div style="font-family: monospace; line-height: 1.8">
                 <div>
                   <strong style="color: var(--accent)"
                     >🤔 Does the data change?</strong
                   >
                 </div>
-                <div style="padding-left: 2rem">
+                <div style="padding-left: 1.5rem">
                   <div>
                     ❌ No →
                     <strong style="color: var(--accent)">Use SSG</strong>
@@ -2391,7 +2432,7 @@ export default function RealTimeChart() {
                     ✅ Yes →
                     <strong style="color: var(--accent)">How often?</strong>
                   </div>
-                  <div style="padding-left: 4rem">
+                  <div style="padding-left: 3rem">
                     <div>
                       ⏰ Every few minutes/hours →
                       <strong style="color: #a78bfa">Use ISR</strong> (with
@@ -2403,7 +2444,7 @@ export default function RealTimeChart() {
                         >Is it public?</strong
                       >
                     </div>
-                    <div style="padding-left: 6rem">
+                    <div style="padding-left: 4.5rem">
                       <div>
                         🌍 Yes, public →
                         <strong style="color: #fbbf24">Use SSR</strong>
@@ -2420,8 +2461,8 @@ export default function RealTimeChart() {
               </div>
             </div>
 
-            <div class="card" style="margin-top: 1rem">
-              <p style="font-size: 0.7em">
+            <div class="card" style="margin-top: 0.8rem">
+              <p style="font-size: 0.6em">
                 <strong>Pro tip:</strong> Start with SSG (default), opt-in to
                 dynamic rendering only when needed!
               </p>
