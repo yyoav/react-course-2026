@@ -901,40 +901,6 @@ npm run dev
             </div>
           </section>
 
-          <!-- Slide 10.5: App vs Pages Coexistence -->
-          <section>
-            <h3>Pages & App Router Coexistence</h3>
-            <p class="small-text">Yes, they can live together!</p>
-            <div
-              class="card"
-              style="margin-top: 1.5rem; background: var(--accent-soft)"
-            >
-              <h4 style="font-size: 0.9em">Gradual Migration</h4>
-              <ul style="font-size: 0.8em; line-height: 1.6">
-                <li>
-                  You can have both <code>app/</code> and <code>pages/</code> in
-                  the same project
-                </li>
-                <li>
-                  Routes in <code>app/</code>
-                  <span style="color: var(--accent)"
-                    >take priority if there is a conflict</span
-                  >
-                </li>
-                <li>Great for migrating old Next.js apps page by page</li>
-                <li>Both share the same build process out of the box</li>
-              </ul>
-            </div>
-            <pre
-              style="margin-top: 1.5rem"
-            ><code class="plaintext" style="font-size: 0.65em;">my-app/
-├── app/
-│   └── dashboard/page.tsx  ← App Router (Modern)
-├── pages/
-│   └── old-dashboard.tsx   ← Pages Router (Legacy)
-</code></pre>
-          </section>
-
           <!-- Slide: What Are Dynamic Routes? -->
           <section>
             <h3>What Are Dynamic Routes?</h3>
