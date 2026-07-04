@@ -59,6 +59,7 @@
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
         width: 100%;
         max-width: none;
+        overflow: hidden;
       }
       .reveal table {
         font-size: 0.75em;
@@ -96,6 +97,7 @@
         border-radius: 12px;
         background: var(--surface);
         backdrop-filter: blur(4px);
+        overflow: hidden;
       }
       .step-card {
         font-size: 0.82em;
@@ -494,7 +496,11 @@
                 React gives you the tools → Next.js gives you the structure
               </p>
             </div>
+          </section>
 
+          <!-- Slide 3b: React vs Next.js -->
+          <section>
+            <h3>React vs Next.js</h3>
             <div class="two-col" style="margin-top: 2rem">
               <div>
                 <h4>React Alone:</h4>
@@ -916,7 +922,6 @@ All handled by ONE component!</code></pre>
                 <span style="font-size: 1.2em;">📱</span>
                 <div style="flex:1">
                   <strong style="font-size: 0.65em;">4. HTML sent to client (hydrated if needed)</strong>
-                  <p style="font-size: 0.55em; margin: 0.15rem 0 0;">Client Components can read params via <code>useParams()</code> hook</p>
                 </div>
               </div>
             </div>
@@ -969,6 +974,42 @@ export default async function ShopItem({
 // URL: /shop/phones/123
 // category = "phones", id = "123"</code></pre>
               </div>
+            </div>
+          </section>
+
+          <!-- Slide 14.2: Demo 🛠️ -->
+          <section>
+            <h3>Demo 🛠️</h3>
+            <div
+              class="card"
+              style="
+                margin-top: 2rem;
+                padding: 2.5rem;
+                text-align: center;
+                background: var(--accent-soft);
+              "
+            >
+              <p
+                style="
+                  font-size: 1.2em;
+                  margin: 0 0 1rem;
+                  color: var(--accent);
+                  font-weight: bold;
+                "
+              >
+                Open the live demo in the course app
+              </p>
+              <p
+                style="
+                  font-size: 0.9em;
+                  margin: 0;
+                  color: var(--text-soft);
+                  line-height: 1.6;
+                "
+              >
+                Page:
+                <code style="color: var(--accent)">/basic-routing</code>
+              </p>
             </div>
           </section>
 
@@ -1033,6 +1074,54 @@ export default async function ShopItem({
             </div>
           </section>
 
+          <!-- Slide: Why are Dynamic Params Async? -->
+          <section>
+            <h3>Why are Params <code>async</code>?</h3>
+            <p class="small-text">New in Next.js 15: Optimizing performance via Streams</p>
+
+            <div class="two-col" style="margin-top: 1rem">
+              <div class="card" style="text-align: left; background: var(--accent-soft)">
+                <h4 style="font-size: 0.85em; color: var(--accent); margin-bottom: 0.5rem">The Problem (Next.js 14)</h4>
+                <p style="font-size: 0.65em; line-height: 1.4">
+                  If <code>params</code> were synchronous, the server had to wait for the entire URL to be resolved before rendering <i>anything</i>.
+                </p>
+              </div>
+
+              <div class="card" style="text-align: left; background: rgba(34, 197, 94, 0.1)">
+                <h4 style="font-size: 0.85em; color: #22c55e; margin-bottom: 0.5rem">The Solution (Next.js 15)</h4>
+                <p style="font-size: 0.65em; line-height: 1.4">
+                  <code>params</code> is a Promise. Next.js starts rendering the <strong>static parts immediately</strong> and pauses only when you <code>await params</code>.
+                </p>
+              </div>
+            </div>
+
+            <svg class="diagram-svg" viewBox="0 0 800 180" style="margin-top: 1rem; width: 100%; border-radius: 8px; background: rgba(0,0,0,0.2);">
+              <!-- Static UI sent first -->
+              <rect x="50" y="40" width="200" height="40" rx="4" fill="rgba(255,255,255,0.1)" stroke="#8fb5d8" stroke-width="2" />
+              <text x="150" y="65" text-anchor="middle" fill="#8fb5d8" font-size="16">1. Send Static UI (Layout)</text>
+
+              <path d="M 260 60 L 320 60" stroke="#888" stroke-width="2" marker-end="url(#arrowhead)" />
+
+              <!-- Wait for params -->
+              <rect x="330" y="40" width="180" height="40" rx="4" fill="rgba(245,158,11,0.2)" stroke="#f59e0b" stroke-width="2" />
+              <text x="420" y="65" text-anchor="middle" fill="#f59e0b" font-size="16">2. await params (Pause)</text>
+
+              <path d="M 520 60 L 580 60" stroke="#888" stroke-width="2" marker-end="url(#arrowhead)" />
+
+              <!-- Stream dynamic data -->
+              <rect x="590" y="40" width="160" height="40" rx="4" fill="rgba(34,197,94,0.2)" stroke="#22c55e" stroke-width="2" />
+              <text x="670" y="65" text-anchor="middle" fill="#22c55e" font-size="16">3. Stream Data UI</text>
+
+              <!-- Line 2 -->
+              <text x="400" y="120" text-anchor="middle" fill="#fff" font-size="20">⚡ Results & Benefits</text>
+              <rect x="150" y="140" width="220" height="30" rx="15" fill="var(--surface)" />
+              <text x="260" y="160" text-anchor="middle" fill="var(--accent)" font-size="14">Faster TTFB (First Byte)</text>
+
+              <rect x="430" y="140" width="220" height="30" rx="15" fill="var(--surface)" />
+              <text x="540" y="160" text-anchor="middle" fill="var(--accent)" font-size="14">Better Static Caching</text>
+            </svg>
+          </section>
+
           <!-- Slide 13: Navigation -->
           <section>
             <h3>Navigation with Link</h3>
@@ -1051,7 +1140,7 @@ export default function Navigation() {
 }</code></pre>
             </div>
 
-            <div class="card" style="margin-top: 1rem">
+            <div class="card" style="margin-top: 0.5rem">
               <h4 style="font-size: 0.6em">Why Link over &lt;a&gt;?</h4>
               <ul style="font-size: 0.5em">
                 <li>✅ Client-side navigation (no page reload)</li>
@@ -1329,42 +1418,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   </div>
                 </div>
               </div>
-            </div>
-          </section>
-
-          <!-- Slide 14.2: Demo 🛠️ -->
-          <section>
-            <h3>Demo 🛠️</h3>
-            <div
-              class="card"
-              style="
-                margin-top: 2rem;
-                padding: 2.5rem;
-                text-align: center;
-                background: var(--accent-soft);
-              "
-            >
-              <p
-                style="
-                  font-size: 1.2em;
-                  margin: 0 0 1rem;
-                  color: var(--accent);
-                  font-weight: bold;
-                "
-              >
-                Open the live demo in the course app
-              </p>
-              <p
-                style="
-                  font-size: 0.9em;
-                  margin: 0;
-                  color: var(--text-soft);
-                  line-height: 1.6;
-                "
-              >
-                Page:
-                <code style="color: var(--accent)">/basic-routing</code>
-              </p>
             </div>
           </section>
 
@@ -1944,8 +1997,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <code style="color: var(--accent)">/server-component</code>
                 &nbsp;&nbsp;
                 <code style="color: var(--accent)">/rsc-vs-client</code>
-                &nbsp;&nbsp;
-                <code style="color: var(--accent)">/rsc-vs-ssr</code>
               </p>
             </div>
           </section>
@@ -2000,9 +2051,101 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </div>
           </section>
 
+          <!-- Slide 15.6: Summary CSR vs SSR vs RSC -->
+          <section>
+            <h3>Summary: CSR vs SSR vs RSC</h3>
+            <p class="small-text">How rendering approaches compare</p>
+
+            <table style="margin-top: 1.5rem; font-size: 0.55em; width: 100%;">
+              <thead>
+                <tr>
+                  <th>Feature</th>
+                  <th><strong style="color: #22c55e">CSR</strong> (Vite/React)</th>
+                  <th><strong style="color: #fbbf24">SSR</strong> (Next.js Client)</th>
+                  <th><strong style="color: var(--accent)">RSC</strong> (Next.js Server)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Initial HTML</strong></td>
+                  <td>Empty <code>&lt;div&gt;</code></td>
+                  <td>Fully rendered</td>
+                  <td>Fully rendered</td>
+                </tr>
+                <tr>
+                  <td><strong>JS Bundle Size</strong></td>
+                  <td>Huge (all components)</td>
+                  <td>Large (needs hydration)</td>
+                  <td><span style="color: var(--accent)">Zero</span> (no JS sent)</td>
+                </tr>
+                <tr>
+                  <td><strong>Initial Load (User)</strong></td>
+                  <td>Blank white screen</td>
+                  <td>Instant visibility</td>
+                  <td>Instant visibility</td>
+                </tr>
+                <tr>
+                  <td><strong>Hooks/Interactivity</strong></td>
+                  <td>✅ Yes</td>
+                  <td>✅ Yes (after hydration)</td>
+                  <td>❌ No</td>
+                </tr>
+                <tr>
+                  <td><strong>Direct DB Access</strong></td>
+                  <td>❌ No (must use API)</td>
+                  <td>❌ No (must use API)</td>
+                  <td>✅ Yes</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="card" style="margin-top: 1rem">
+              <p style="font-size: 0.6em; margin: 0">
+                💡 <strong style="color: var(--accent)">RSC:</strong> Fast and secure, but static.<br/>
+                <strong style="color: #fbbf24">SSR:</strong> The compromise. Fast initial load, then becomes interactive CSR.
+              </p>
+            </div>
+          </section>
+
+          <!-- Slide 15.7: Demo 🛠️ RSC vs SSR -->
+          <section>
+            <h3>Demo 🛠️</h3>
+            <div
+              class="card"
+              style="
+                margin-top: 2rem;
+                padding: 2.5rem;
+                text-align: center;
+                background: var(--accent-soft);
+              "
+            >
+              <p
+                style="
+                  font-size: 1.2em;
+                  margin: 0 0 1rem;
+                  color: var(--accent);
+                  font-weight: bold;
+                "
+              >
+                Open the live demo in the course app
+              </p>
+              <p
+                style="
+                  font-size: 0.9em;
+                  margin: 0;
+                  color: var(--text-soft);
+                  line-height: 1.6;
+                "
+              >
+                Page:
+                <code style="color: var(--accent)">/rsc-vs-ssr</code>
+              </p>
+            </div>
+          </section>
+
           <!-- Slide 16: Client Components -->
           <section>
-            <h3>When to Use Client Components</h3>
+            <h4>When to Use Client Components</h4>
             <div class="card">
               <pre><code class="tsx" style="font-size: 0.65em;">'use client';
 
@@ -2023,8 +2166,8 @@ export default function Counter() {
             </div>
 
             <div class="card" style="margin-top: 1rem">
-              <h4 style="font-size: 0.6em">Use Client when you need:</h4>
-              <ul style="font-size: 0.5em">
+              <h4 style="font-size: 0.4em">Use Client when you need:</h4>
+              <ul style="font-size: 0.4em">
                 <li>useState, useEffect, or other hooks</li>
                 <li>Event handlers (onClick, onChange)</li>
                 <li>Browser APIs (localStorage, window)</li>
@@ -2066,6 +2209,64 @@ export default async function PostsPage() {
               <p style="font-size: 0.75em">
                 ✨ No useEffect, no loading state management - it's automatic!
               </p>
+            </div>
+          </section>
+
+          <!-- Slide: Exercise 2 — Starships Data Fetching -->
+          <section>
+            <h3>🧪 Exercise 2 — Fetching Data</h3>
+            <p class="small-text">Render a list directly from your component</p>
+
+            <div class="two-col" style="margin-top: 1.5rem">
+              <div class="card" style="text-align: left">
+                <h4 style="font-size: 0.85em; margin-bottom: 0.5rem">🎯 Goal</h4>
+                <ol style="font-size: 0.75em; line-height: 1.6; padding-left: 1.2rem; margin: 0">
+                  <li>Create a new folder and <code>page.tsx</code> for <code>/starships</code>.</li>
+                  <li>Use the Star Wars API to fetch a list of starships.</li>
+                  <li>Display the name and model of each starship in a list.</li>
+                </ol>
+              </div>
+
+              <div class="card" style="text-align: left">
+                <h4 style="font-size: 0.85em; margin-bottom: 0.5rem">📋 The Fetch Function</h4>
+                <pre style="margin: 0"><code class="tsx" style="font-size: 0.65em;">async function getStarships() {
+  const res = await fetch('https://swapi.dev/api/starships');
+  return res.json();
+}</code></pre>
+              </div>
+            </div>
+
+            <div class="card" style="margin-top: 1rem">
+              <p style="font-size: 0.7em">⏱️ Time: 15 minutes</p>
+            </div>
+          </section>
+
+          <!-- Slide: Exercise 2 — Solution -->
+          <section>
+            <h3>✅ Exercise 2 — Solution</h3>
+            <div class="card" style="margin-top: 1.5rem">
+              <div class="label">app/starships/page.tsx</div>
+              <pre><code class="tsx" style="font-size: 0.6em;">async function getStarships() {
+  const res = await fetch('https://swapi.dev/api/starships');
+  return res.json();
+}
+
+export default async function StarshipsPage() {
+  const data = await getStarships();
+
+  return (
+    &lt;main&gt;
+      &lt;h1&gt;Star Wars Starships&lt;/h1&gt;
+      &lt;ul&gt;
+        {data.results.map((ship: any) => (
+          &lt;li key={ship.name}&gt;
+            &lt;strong&gt;{ship.name}&lt;/strong&gt; - {ship.model}
+          &lt;/li&gt;
+        ))}
+      &lt;/ul&gt;
+    &lt;/main&gt;
+  );
+}</code></pre>
             </div>
           </section>
 
@@ -2114,6 +2315,247 @@ export default function Home() {
 }</code></pre>
           </section>
 
+          <!-- Slide: Demo Streaming -->
+          <section>
+            <h3>Demo 🛠️</h3>
+            <div
+              class="card"
+              style="
+                margin-top: 2rem;
+                padding: 2.5rem;
+                text-align: center;
+                background: var(--accent-soft);
+              "
+            >
+              <p
+                style="
+                  font-size: 1.2em;
+                  margin: 0 0 1rem;
+                  color: var(--accent);
+                  font-weight: bold;
+                "
+              >
+                Open the live demo in the course app
+              </p>
+              <p
+                style="
+                  font-size: 0.9em;
+                  margin: 0;
+                  color: var(--text-soft);
+                  line-height: 1.6;
+                "
+              >
+                Page:
+                <code style="color: var(--accent)">/streaming-demo</code>
+              </p>
+            </div>
+          </section>
+
+          <!-- Slide 17.6: Server Actions -->
+          <section>
+            <h3>Server Actions</h3>
+            <p class="small-text">
+              Run secure server code directly from components
+            </p>
+
+            <div class="card" style="margin-top: 1rem; text-align: left">
+              <p
+                style="
+                  font-size: 0.65em;
+                  color: var(--text-soft);
+                  line-height: 1.4;
+                "
+              >
+                No absolutely need to write API routes (/api/*) just to handle a
+                form submission.
+              </p>
+            </div>
+
+            <pre
+              style="margin-top: 1rem"
+            ><code class="tsx" style="font-size: 0.58em;">export default function Form() {
+  // This function runs on the SERVER!
+  async function createPost(formData: FormData) {
+    'use server'; // The magic directive ✨
+
+    const title = formData.get('title');
+    await db.post.create({ title }); // Direct DB mutation!
+  }
+
+  return (
+    &lt;form action={createPost}&gt;
+      &lt;input type="text" name="title" /&gt;
+      &lt;button type="submit"&gt;Submit&lt;/button&gt;
+    &lt;/form&gt;
+  );
+}</code></pre>
+          </section>
+
+          <!-- Slide 17.8: Special Files -->
+          <section>
+            <h3>Reserved Filenames</h3>
+            <p class="small-text">Next.js automatically uses these files</p>
+
+            <div class="card" style="margin-top: 1.5rem; text-align: left">
+              <p style="font-size: 0.75em; color: var(--text-soft); line-height: 1.6;">
+                In the App Router, files with specific names have special magical behavior.
+                Next.js wraps your <code>page.tsx</code> with these automatically!
+              </p>
+
+              <table style="margin-top: 1rem; width: 100%; border: none;">
+                <tbody style="font-size: 0.75em; line-height: 1.8;">
+                  <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                    <td style="padding: 0.5rem; color: var(--accent); font-family: monospace;">layout.tsx</td>
+                    <td style="padding: 0.5rem;">Wraps the page (and all children) in shared UI.</td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                    <td style="padding: 0.5rem; color: #f59e0b; font-family: monospace;">loading.tsx</td>
+                    <td style="padding: 0.5rem;">Shown AUTOMATICALLY while <code>page.tsx</code> is fetching data.</td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 0.5rem; color: #ef4444; font-family: monospace;">error.tsx</td>
+                    <td style="padding: 0.5rem;">Catches any errors inside the folder and shows fallback UI.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="card" style="margin-top: 1rem">
+              <p style="font-size: 0.7em">
+                💡 You <strong>never import</strong> these files! Just create them, and Next.js handles the rest.
+              </p>
+            </div>
+          </section>
+
+          <!-- Slide 18: Loading States -->
+          <section>
+            <h3>Loading States</h3>
+            <p class="small-text">Show loading UI while data fetches</p>
+
+            <div class="two-col" style="margin-top: 1.5rem">
+              <div>
+                <div class="label">app/posts/loading.tsx</div>
+                <pre><code class="tsx" style="font-size: 0.65em;">export default function Loading() {
+  return (
+    &lt;div&gt;
+      &lt;p&gt;Loading posts...&lt;/p&gt;
+      &lt;div className="spinner"&gt;&lt;/div&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+              </div>
+
+              <div>
+                <div class="label">app/posts/error.tsx</div>
+                <pre><code class="tsx" style="font-size: 0.65em;">'use client';
+
+export default function Error({
+  error,
+  reset,
+}: {
+  error: Error;
+  reset: () => void;
+}) {
+  return (
+    &lt;div&gt;
+      &lt;h2&gt;Something went wrong!&lt;/h2&gt;
+      &lt;button onClick={reset}&gt;Try again&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+              </div>
+            </div>
+
+            <div class="card" style="margin-top: 1rem">
+              <p style="font-size: 0.5em">
+                💡 Next.js automatically shows loading.tsx while page loads!
+              </p>
+            </div>
+          </section>
+
+          <!-- Slide 20: Metadata & SEO -->
+          <section>
+            <h3>Metadata & SEO</h3>
+            <p class="small-text">Built-in SEO optimization</p>
+
+            <pre
+              style="margin-top: 1.5rem"
+            ><code class="tsx" style="font-size: 0.6em;">// app/about/page.tsx
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'About Us',
+  description: 'Learn more about our company',
+  keywords: ['company', 'about', 'team'],
+  openGraph: {
+    title: 'About Us',
+    description: 'Learn more about our company',
+    images: ['/og-image.jpg'],
+  },
+};
+
+export default function About() {
+  return &lt;h1&gt;About Us&lt;/h1&gt;;
+}</code></pre>
+
+            <div class="card" style="margin-top: 1rem">
+              <p style="font-size: 0.75em">
+                ✨ Next.js automatically generates &lt;meta&gt; tags for SEO!
+              </p>
+            </div>
+          </section>
+
+          <!-- Slide 22: Best Practices -->
+          <section>
+            <h3>Next.js Best Practices</h3>
+
+            <div class="two-col" style="margin-top: 1.5rem">
+              <div class="card">
+                <h4 style="font-size: 0.9em">✅ DO</h4>
+                <ul style="font-size: 0.75em; line-height: 1.7">
+                  <li>Use Server Components by default</li>
+                  <li>Add metadata to all pages</li>
+                  <li>Use next/image for images</li>
+                  <li>Use next/link for navigation</li>
+                  <li>Keep client components small</li>
+                  <li>Use TypeScript</li>
+                </ul>
+              </div>
+
+              <div class="card">
+                <h4 style="font-size: 0.9em">❌ DON'T</h4>
+                <ul style="font-size: 0.75em; line-height: 1.7">
+                  <li>Use &lt;a&gt; tags for internal links</li>
+                  <li>Fetch data in Client Components</li>
+                  <li>Make everything 'use client'</li>
+                  <li>Ignore loading states</li>
+                  <li>Forget error handling</li>
+                  <li>Skip metadata</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <!-- Slide 23: Key Takeaways -->
+          <section>
+            <h4>🧠 Key Takeaways</h4>
+
+            <div class="card" style="margin-top: 1.5rem">
+              <ul class="check-list" style="font-size: 0.7em">
+                <li>
+                  Next.js is a React framework with built-in routing, SSR, and
+                  more
+                </li>
+                <li>App Router uses file-based routing (folder = route)</li>
+                <li>Server Components are the default (fast & SEO-friendly)</li>
+                <li>Use 'use client' only when you need interactivity</li>
+                <li>Data fetching is simple with async/await</li>
+                <li>Built-in loading and error handling</li>
+                <li>Deploy to Vercel with one click</li>
+              </ul>
+            </div>
+          </section>
+
           <!-- Slide 17.2: Static vs Dynamic Rendering -->
           <section>
             <h3>Static Rendering</h3>
@@ -2133,7 +2575,7 @@ export default function Home() {
                 >
                   <li>Pre-rendered at build time.</li>
                   <li>Incredibly fast (served from CDN).</li>
-                  <li>Best for blog posts, documentation, marketing pages.</li>
+                  <li>Best for blog posts, marketing pages.</li>
                 </ul>
               </div>
 
@@ -2185,7 +2627,7 @@ export default function Home() {
                   </td>
                   <td>Build time</td>
                   <td>⚡⚡⚡ Fastest</td>
-                  <td>Blog, docs, landing pages</td>
+                  <td>Blog, landing pages</td>
                 </tr>
                 <tr>
                   <td>
@@ -2269,8 +2711,7 @@ export default function Home() {
                   <li>Same for all users</li>
                   <li>Can be pre-rendered</li>
                   <li>
-                    <strong>Examples:</strong> Blog posts, documentation, about
-                    pages, landing pages
+                    <strong>Examples:</strong> Blog posts, about pages
                   </li>
                 </ul>
                 <pre
@@ -2304,10 +2745,9 @@ export default async function Blog() {
                 >
                   <li>Data changes frequently</li>
                   <li>Personalized per user</li>
-                  <li>Need request data (cookies, headers)</li>
+                  <li>Need request data (cookies)</li>
                   <li>
-                    <strong>Examples:</strong> User dashboards, shopping carts,
-                    social feeds
+                    <strong>Examples:</strong> Dashboards, shopping carts
                   </li>
                 </ul>
                 <pre
@@ -2344,8 +2784,7 @@ export default async function Dashboard() {
                   <li>Content updates occasionally</li>
                   <li>Lots of pages (1000s)</li>
                   <li>
-                    <strong>Examples:</strong> Product pages, news articles,
-                    stock prices
+                    <strong>Examples:</strong> Product pages, news articles
                   </li>
                 </ul>
                 <pre
@@ -2383,8 +2822,7 @@ export default async function Product() {
                   <li>Highly interactive UI</li>
                   <li>No SEO needed</li>
                   <li>
-                    <strong>Examples:</strong> Admin panels, real-time charts,
-                    private notes
+                    <strong>Examples:</strong> Admin panels, real-time charts
                   </li>
                 </ul>
                 <pre
@@ -2469,287 +2907,7 @@ export default function RealTimeChart() {
             </div>
           </section>
 
-          <!-- Slide 17.6: Server Actions -->
-          <section>
-            <h3>Server Actions</h3>
-            <p class="small-text">
-              Run secure server code directly from components
-            </p>
 
-            <div class="card" style="margin-top: 1rem; text-align: left">
-              <p
-                style="
-                  font-size: 0.65em;
-                  color: var(--text-soft);
-                  line-height: 1.4;
-                "
-              >
-                No absolutely need to write API routes (/api/*) just to handle a
-                form submission.
-              </p>
-            </div>
-
-            <pre
-              style="margin-top: 1rem"
-            ><code class="tsx" style="font-size: 0.58em;">export default function Form() {
-  // This function runs on the SERVER!
-  async function createPost(formData: FormData) {
-    'use server'; // The magic directive ✨
-
-    const title = formData.get('title');
-    await db.post.create({ title }); // Direct DB mutation!
-  }
-
-  return (
-    &lt;form action={createPost}&gt;
-      &lt;input type="text" name="title" /&gt;
-      &lt;button type="submit"&gt;Submit&lt;/button&gt;
-    &lt;/form&gt;
-  );
-}</code></pre>
-          </section>
-
-          <!-- Slide 17.4: Next.js Proxy -->
-          <section>
-            <h3>Route Handlers (API Proxy)</h3>
-            <p class="small-text">Building APIs or proxying requests</p>
-
-            <div class="card" style="margin-top: 1rem; text-align: left">
-              <p
-                style="
-                  font-size: 0.65em;
-                  color: var(--text-soft);
-                  line-height: 1.4;
-                "
-              >
-                Use <code>route.ts</code> to handle traditional API requests or
-                proxy to an external backend (to hide API keys).
-              </p>
-            </div>
-
-            <pre
-              style="margin-top: 1rem"
-            ><code class="tsx" style="font-size: 0.58em;">// app/api/weather/route.ts
-import { NextResponse } from 'next/server';
-
-export async function GET(request: Request) {
-  // Use securely stored environment variable
-  const API_KEY = process.env.SECRET_WEATHER_API_KEY;
-
-  const res = await fetch(`https://api.weather.com/v1/...&key=${API_KEY}`);
-  const data = await res.json();
-
-  return NextResponse.json({ data });
-}</code></pre>
-          </section>
-
-          <!-- Slide 18: Loading States -->
-          <section>
-            <h3>Loading States</h3>
-            <p class="small-text">Show loading UI while data fetches</p>
-
-            <div class="two-col" style="margin-top: 1.5rem">
-              <div>
-                <div class="label">app/posts/loading.tsx</div>
-                <pre><code class="tsx" style="font-size: 0.65em;">export default function Loading() {
-  return (
-    &lt;div&gt;
-      &lt;p&gt;Loading posts...&lt;/p&gt;
-      &lt;div className="spinner"&gt;&lt;/div&gt;
-    &lt;/div&gt;
-  );
-}</code></pre>
-              </div>
-
-              <div>
-                <div class="label">app/posts/error.tsx</div>
-                <pre><code class="tsx" style="font-size: 0.65em;">'use client';
-
-export default function Error({
-  error,
-  reset,
-}: {
-  error: Error;
-  reset: () => void;
-}) {
-  return (
-    &lt;div&gt;
-      &lt;h2&gt;Something went wrong!&lt;/h2&gt;
-      &lt;button onClick={reset}&gt;Try again&lt;/button&gt;
-    &lt;/div&gt;
-  );
-}</code></pre>
-              </div>
-            </div>
-
-            <div class="card" style="margin-top: 1rem">
-              <p style="font-size: 0.75em">
-                💡 Next.js automatically shows loading.tsx while page loads!
-              </p>
-            </div>
-          </section>
-
-          <!-- Slide 19: Exercise 2 -->
-          <section>
-            <h3>🧪 Exercise 2 — API Integration</h3>
-            <p class="small-text">Fetch and display data</p>
-
-            <div class="two-col" style="margin-top: 1.5rem">
-              <div class="card">
-                <h4>🎯 Goal</h4>
-                <p style="font-size: 0.85em">Build a users list from an API:</p>
-                <ul style="font-size: 0.8em">
-                  <li>Fetch users from API</li>
-                  <li>Display in a list</li>
-                  <li>Show loading state</li>
-                  <li>Handle errors</li>
-                </ul>
-              </div>
-
-              <div class="card">
-                <h4>📋 API to Use</h4>
-                <pre><code class="plaintext" style="font-size: 0.7em;">https://jsonplaceholder.typicode.com/users</code></pre>
-                <p style="font-size: 0.8em; margin-top: 0.5rem">Create:</p>
-                <ul style="font-size: 0.8em">
-                  <li>app/users/page.tsx</li>
-                  <li>app/users/loading.tsx</li>
-                  <li>app/users/error.tsx</li>
-                </ul>
-              </div>
-            </div>
-
-            <div class="card" style="margin-top: 1rem">
-              <p style="font-size: 0.7em">⏱️ Time: 40 minutes</p>
-            </div>
-          </section>
-
-          <!-- Slide 20: Metadata & SEO -->
-          <section>
-            <h3>Metadata & SEO</h3>
-            <p class="small-text">Built-in SEO optimization</p>
-
-            <pre
-              style="margin-top: 1.5rem"
-            ><code class="tsx" style="font-size: 0.6em;">// app/about/page.tsx
-import { Metadata } from 'next';
-
-export const metadata: Metadata = {
-  title: 'About Us',
-  description: 'Learn more about our company',
-  keywords: ['company', 'about', 'team'],
-  openGraph: {
-    title: 'About Us',
-    description: 'Learn more about our company',
-    images: ['/og-image.jpg'],
-  },
-};
-
-export default function About() {
-  return &lt;h1&gt;About Us&lt;/h1&gt;;
-}</code></pre>
-
-            <div class="card" style="margin-top: 1rem">
-              <p style="font-size: 0.75em">
-                ✨ Next.js automatically generates &lt;meta&gt; tags for SEO!
-              </p>
-            </div>
-          </section>
-
-          <!-- Slide 22: Best Practices -->
-          <section>
-            <h3>Next.js Best Practices</h3>
-
-            <div class="two-col" style="margin-top: 1.5rem">
-              <div class="card">
-                <h4 style="font-size: 0.9em">✅ DO</h4>
-                <ul style="font-size: 0.75em; line-height: 1.7">
-                  <li>Use Server Components by default</li>
-                  <li>Add metadata to all pages</li>
-                  <li>Use next/image for images</li>
-                  <li>Use next/link for navigation</li>
-                  <li>Keep client components small</li>
-                  <li>Use TypeScript</li>
-                </ul>
-              </div>
-
-              <div class="card">
-                <h4 style="font-size: 0.9em">❌ DON'T</h4>
-                <ul style="font-size: 0.75em; line-height: 1.7">
-                  <li>Use &lt;a&gt; tags for internal links</li>
-                  <li>Fetch data in Client Components</li>
-                  <li>Make everything 'use client'</li>
-                  <li>Ignore loading states</li>
-                  <li>Forget error handling</li>
-                  <li>Skip metadata</li>
-                </ul>
-              </div>
-            </div>
-          </section>
-
-          <!-- Slide 23: Key Takeaways -->
-          <section>
-            <h3>🧠 Key Takeaways</h3>
-
-            <div class="card" style="margin-top: 1.5rem">
-              <ul class="check-list">
-                <li>
-                  Next.js is a React framework with built-in routing, SSR, and
-                  more
-                </li>
-                <li>App Router uses file-based routing (folder = route)</li>
-                <li>Server Components are the default (fast & SEO-friendly)</li>
-                <li>Use 'use client' only when you need interactivity</li>
-                <li>Data fetching is simple with async/await</li>
-                <li>Built-in loading and error handling</li>
-                <li>Deploy to Vercel with one click</li>
-              </ul>
-            </div>
-
-            <div class="card" style="margin-top: 1.5rem">
-              <h4 style="font-size: 0.9em">📚 Next Steps:</h4>
-              <ul style="font-size: 0.8em">
-                <li>Explore API Routes (backend endpoints)</li>
-                <li>Learn Server Actions (mutations)</li>
-                <li>Try Middleware (auth, redirects)</li>
-                <li>Build a full-stack app!</li>
-              </ul>
-            </div>
-          </section>
-
-          <!-- Slide 24: Resources -->
-          <section>
-            <h3>Resources</h3>
-
-            <div class="card" style="margin-top: 2rem">
-              <h4>📖 Official Docs:</h4>
-              <ul style="font-size: 0.85em; line-height: 1.8">
-                <li>
-                  <a href="https://nextjs.org/docs" target="_blank"
-                    >nextjs.org/docs</a
-                  >
-                  - Official documentation
-                </li>
-                <li>
-                  <a href="https://nextjs.org/learn" target="_blank"
-                    >nextjs.org/learn</a
-                  >
-                  - Interactive tutorial
-                </li>
-                <li>
-                  <a href="https://vercel.com/templates" target="_blank"
-                    >vercel.com/templates</a
-                  >
-                  - Starter templates
-                </li>
-              </ul>
-            </div>
-
-            <div class="roadmap" style="margin-top: 2rem">
-              <span>Happy Coding!</span>
-              <span>Build Amazing Apps</span>
-              <span>Ship Fast</span>
-            </div>
-          </section>
         </section>
       </div>
     </div>

@@ -49,6 +49,13 @@ export default function Home() {
               </Link>
 
               <Link
+                href="/client-component"
+                className="flex items-center justify-center gap-3 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 px-6 py-4 text-base font-medium text-zinc-900 dark:text-zinc-50 transition-all hover:bg-zinc-50 dark:hover:bg-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700"
+              >
+                <span className="text-2xl">💻</span>
+                Client Component
+              </Link>
+              <Link
                 href="/rsc-vs-client"
                 className="flex items-center justify-center gap-3 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 px-6 py-4 text-base font-medium text-zinc-900 dark:text-zinc-50 transition-all hover:bg-zinc-50 dark:hover:bg-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700"
               >
@@ -64,13 +71,6 @@ export default function Home() {
                 RSC vs SSR
               </Link>
 
-              <Link
-                href="/client-component"
-                className="flex items-center justify-center gap-3 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 px-6 py-4 text-base font-medium text-zinc-900 dark:text-zinc-50 transition-all hover:bg-zinc-50 dark:hover:bg-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700"
-              >
-                <span className="text-2xl">💻</span>
-                Client Component
-              </Link>
 
               <Link
                 href="/data-fetching"
@@ -81,10 +81,18 @@ export default function Home() {
               </Link>
 
               <Link
-                href="/loading-example"
+                href="/streaming-demo"
                 className="flex items-center justify-center gap-3 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 px-6 py-4 text-base font-medium text-zinc-900 dark:text-zinc-50 transition-all hover:bg-zinc-50 dark:hover:bg-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700"
               >
                 <span className="text-2xl">⏳</span>
+                Streaming Demo
+              </Link>
+
+              <Link
+                href="/loading-example"
+                className="flex items-center justify-center gap-3 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 px-6 py-4 text-base font-medium text-zinc-900 dark:text-zinc-50 transition-all hover:bg-zinc-50 dark:hover:bg-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700"
+              >
+                <span className="text-2xl">🔄</span>
                 Loading States
               </Link>
             </div>

@@ -1,20 +1,21 @@
 import Link from "next/link";
 
 // Server Component with async data fetching
-async function getUsers() {
-  const res = await fetch("https://jsonplaceholder.typicode.com/users", {
+async function getStarships() {
+  const res = await fetch("https://swapi.dev/api/starships", {
     cache: "no-store", // Disable caching for demo purposes
   });
 
   if (!res.ok) {
-    throw new Error("Failed to fetch users");
+    throw new Error("Failed to fetch starships");
   }
 
   return res.json();
 }
 
 export default async function DataFetching() {
-  const users = await getUsers();
+  const data = await getStarships();
+  const starships = data.results;
 
   return (
     <div className="min-h-screen bg-zinc-50 dark:bg-black p-8">
@@ -26,7 +27,7 @@ export default async function DataFetching() {
         <div className="space-y-6">
           <div className="bg-indigo-50 dark:bg-indigo-950 border border-indigo-200 dark:border-indigo-800 rounded-lg p-6">
             <h2 className="text-xl font-semibold mb-3 text-indigo-900 dark:text-indigo-100">
-              Fetched {users.length} Users from API
+              Fetched {starships.length} Starships from API
             </h2>
             <div className="space-y-2 text-sm text-indigo-800 dark:text-indigo-200">
               <p>
@@ -38,7 +39,7 @@ export default async function DataFetching() {
               <p>
                 🌐 API:{" "}
                 <code className="bg-indigo-100 dark:bg-indigo-900 px-2 py-1 rounded">
-                  jsonplaceholder.typicode.com/users
+                  swapi.dev/api/starships
                 </code>
               </p>
               <p>
@@ -66,26 +67,26 @@ export default async function DataFetching() {
           </div>
 
           <div className="grid gap-4">
-            {users.map((user: any) => (
+            {starships.map((ship: any) => (
               <div
-                key={user.id}
+                key={ship.name}
                 className="bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg p-4 hover:shadow-md transition-shadow"
               >
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
                     <h3 className="font-semibold text-lg text-zinc-900 dark:text-zinc-50">
-                      {user.name}
+                      {ship.name}
                     </h3>
                     <p className="text-sm text-zinc-600 dark:text-zinc-400">
-                      @{user.username}
+                      Model: {ship.model}
                     </p>
                   </div>
                   <div className="text-right">
                     <p className="text-sm text-zinc-600 dark:text-zinc-400">
-                      {user.email}
+                      Class: {ship.starship_class}
                     </p>
                     <p className="text-xs text-zinc-500 dark:text-zinc-500">
-                      {user.company.name}
+                      Cost: {ship.cost_in_credits} credits
                     </p>
                   </div>
                 </div>
