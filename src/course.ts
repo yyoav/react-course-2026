@@ -73,6 +73,7 @@ export const courseDays: CourseDay[] = [
     dayOrder: 6,
     dayLabel: 'Day 5',
     folderName: 'Day 5',
+    presentationHref: '/presentation/Day%205/index.html',
   },
 ]
 
