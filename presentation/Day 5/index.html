@@ -397,7 +397,7 @@
                     font-weight: 600;
                   "
                 >
-                  Server Actions & APIs
+                  Params (Async)
                 </p>
               </div>
               <div class="card" style="font-size: 0.78em; text-align: center">
@@ -417,7 +417,7 @@
                     font-weight: 600;
                   "
                 >
-                  Loading States
+                  Reserved Files & Suspense
                 </p>
               </div>
               <div class="card" style="font-size: 0.78em; text-align: center">
@@ -437,7 +437,7 @@
                     font-weight: 600;
                   "
                 >
-                  Metadata & Best Practices
+                  Best Practices
                 </p>
               </div>
               <div class="card" style="font-size: 0.78em; text-align: center">
@@ -2473,6 +2473,24 @@ export default function Error({
             </div>
           </section>
 
+          <!-- Slide 19: Loading Demo -->
+          <section>
+            <h3>Demo: Standard vs Streaming</h3>
+            <p class="small-text">Seeing Suspense in Action</p>
+
+             <div class="card" style="margin-top: 2rem">
+                <p style="font-size: 0.9em; margin-bottom: 2rem;">
+                  Let's see the visual difference between standard blocking rendering and React Suspense streaming.
+                </p>
+                <a href="http://localhost:3000/streaming-demo" target="_blank"  style="display: inline-block; padding: 1rem 2rem; background: var(--accent); color: #fff; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 0.8em; margin-bottom: 1rem;">
+                 Open Streaming Demo
+                </a>
+                <p style="font-size: 0.6em; color: var(--text-soft); margin-top: 1rem;">
+                  (Try toggling between 'Standard' and 'Streaming' modes)
+                </p>
+            </div>
+          </section>
+
           <!-- Slide 20: Metadata & SEO -->
           <section>
             <h3>Metadata & SEO</h3>
@@ -2526,13 +2544,27 @@ export default function About() {
                 <h4 style="font-size: 0.9em">❌ DON'T</h4>
                 <ul style="font-size: 0.75em; line-height: 1.7">
                   <li>Use &lt;a&gt; tags for internal links</li>
-                  <li>Fetch data in Client Components</li>
+                  <li>Fetch Component data in Client Components</li>
                   <li>Make everything 'use client'</li>
                   <li>Ignore loading states</li>
                   <li>Forget error handling</li>
-                  <li>Skip metadata</li>
                 </ul>
               </div>
+            </div>
+          </section>
+
+          <!-- Slide 22.5: Next.js Summary -->
+          <section>
+            <h3>Next.js Summary</h3>
+            <div class="card" style="margin-top: 1.5rem">
+              <h4 style="font-size: 0.9em; margin-bottom: 0.5rem;">🌟 Core Concepts</h4>
+              <ul style="font-size: 0.75em; line-height: 1.6; text-align: left;">
+                <li><strong>App Router:</strong> Folder-based routing where only <code>page.tsx</code> is publicly accessible.</li>
+                <li><strong>Rendering:</strong> RSCs (Server) are default for SEO/Performance. CSR (Client) is for interactivity.</li>
+                <li><strong>Data Fetching:</strong> Fetch data on the Server using async/await directly in your components.</li>
+                <li><strong>Params:</strong> Dynamic route params (e.g., <code>[id]</code>) are now <strong>Asynchronous</strong> and must be awaited.</li>
+                <li><strong>Suspense/Streaming:</strong> Use <code>loading.tsx</code> (or Suspense directly) for instant UI while data loads.</li>
+              </ul>
             </div>
           </section>
 
