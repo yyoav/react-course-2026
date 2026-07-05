@@ -1,7 +1,3 @@
-interface ProductDescriptionProps {
-  description: string
-}
-
-export default function ProductDescription({ description }: ProductDescriptionProps) {
-  return <p>{description}</p>
+export default function ProductDescription() {
+  return <p></p>
 }

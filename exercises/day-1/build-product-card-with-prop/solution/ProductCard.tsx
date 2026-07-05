@@ -1,6 +1,7 @@
 import ProductTitle from './ProductTitle'
 import ProductDescription from './ProductDescription'
 import ProductPrice from './ProductPrice'
+import MyButton from './MyButton'
 
  const Product = {
   title: 'Wireless Headphones',
@@ -18,7 +19,7 @@ export default function ProductCard() {
       <ProductTitle title={Product.title} />
       <ProductDescription description={Product.description} />
       <ProductPrice price={Product.price} />
-      <button onClick={handleAddToCart}>Add to Cart</button>
+      <MyButton onClick={handleAddToCart}>Add to Cart</MyButton>
     </article>
   )
 }
