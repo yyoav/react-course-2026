@@ -8,13 +8,14 @@ function UseEffectClock() {
   useEffect(() => {
     console.log("⚠️ Creating new timer...");
     const timer = setInterval(() => {
+      console.log("⏰ Updating time...");
       setTime(new Date());
     }, 1000);
 
-    // return () => {
-    //   console.log("✅ Cleaning up timer...");
-    //   clearInterval(timer);
-    // };
+    return () => {
+      console.log("✅ Cleaning up timer...");
+      clearInterval(timer);
+    };
   }, []);
 
   return (
