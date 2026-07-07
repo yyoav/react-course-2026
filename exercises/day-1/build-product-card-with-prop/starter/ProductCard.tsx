@@ -1,6 +1,7 @@
 import ProductTitle from './ProductTitle'
 import ProductDescription from './ProductDescription'
 import ProductPrice from './ProductPrice'
+import MyButton from './MyButton'
 
 //  const Product = {
 //   title: 'Wireless Headphones',
@@ -13,9 +14,9 @@ export default function ProductCard() {
   return (
     <article className="product-card">
       <ProductTitle title='mock_title' />
-      <ProductDescription description="mock_description" />
-      <ProductPrice price="mock_price" />
-      <button>Add to Cart</button>
+      <ProductDescription />
+      <ProductPrice />
+      <MyButton>Add to Cart</MyButton>
     </article>
   )
 }
