@@ -50,7 +50,7 @@ function KeysExample() {
       <div className="todo-container">
         <div className="todo-list">
           {todos.map((todo) => (
-            <div className="todo-item">
+            <div className="todo-item" key={todo.id}>
               <div className="todo-content">
                 <span className="key-badge">unique key={todo.id}</span>
                 <span className="todo-icon">{todo.icon}</span>
