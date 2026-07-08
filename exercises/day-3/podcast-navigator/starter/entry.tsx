@@ -1,9 +1,7 @@
 import '../PodcastNavigator.css'
 import { meta } from './constants'
 import Preview from './Preview'
-import PodcastList from './PodcastList'
-import EpisodeDetails from './EpisodeDetails'
-import { MemoryRouter, Routes, Route } from 'react-router-dom'
+import { MemoryRouter } from 'react-router-dom'
 // Note: We use MemoryRouter instead of BrowserRouter here because the course
 // runner already uses the real browser URL for navigation (?target=...).
 // MemoryRouter keeps routing state in memory, so it won't conflict with

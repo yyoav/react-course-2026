@@ -3,7 +3,7 @@ import { EPISODES } from './constants'
 
 export default function EpisodeDetails() {
   // TODO: Use the useParams hook to read the episode id from the URL
-  const id = undefined
+  const id = undefined;
 
   const episode = EPISODES.find((ep) => ep.id === id)
 
