@@ -3,12 +3,15 @@ import { meta } from './constants'
 import { MemoryRouter, Routes, Route } from 'react-router-dom'
 import PodcastList from './PodcastList'
 import EpisodeDetails from './EpisodeDetails'
+import Preview from './Preview'
 
 export { meta }
 
 export default function PodcastNavigatorSolution() {
   return (
     <div className="lesson-surface">
+      <Preview />
+
       <section className="lesson-card exercise-preview-card exercise-preview-card-large">
         <p className="eyebrow">Solution</p>
         <h3>Podcast Navigator</h3>
