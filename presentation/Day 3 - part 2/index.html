@@ -1230,6 +1230,39 @@ function Header() {
             </div>
           </section>
 
+          <!-- Slide 12b: Using setTheme from inside a component -->
+          <section>
+            <h3>Sharing state + setter via Context</h3>
+            <p class="small-text">Pass both <span class="highlight">theme</span> and <span class="highlight">setTheme</span> so children can update</p>
+            <pre><code class="tsx" style="font-size: 0.6em;">// Provider passes BOTH value and setter
+function App() {
+  const [theme, setTheme] = useState("dark");
+
+  return (
+    &lt;ThemeContext.Provider value={{ theme, setTheme }}&gt;
+      &lt;Header /&gt;
+      &lt;Content /&gt;
+    &lt;/ThemeContext.Provider&gt;
+  );
+}
+
+// Any child can now READ and UPDATE the theme
+function Header() {
+  const { theme, setTheme } = useContext(ThemeContext);
+
+  const toggleTheme = () =>
+    setTheme(prev => prev === "dark" ? "light" : "dark");
+
+  return (
+    &lt;header className={theme}&gt;
+      &lt;span&gt;Current: {theme}&lt;/span&gt;
+      &lt;button onClick={toggleTheme}&gt;Toggle Theme&lt;/button&gt;
+    &lt;/header&gt;
+  );
+}</code></pre>
+
+          </section>
+
           <!-- Slide 13: Important Concept -->
           <section>
             <h3>Important concept</h3>
@@ -1282,9 +1315,9 @@ function Header() {
             </div>
           </section>
 
-          <!-- Slide 15: Solution -->
+          <!-- Slide 15: Solution - Provider + Custom Hook -->
           <section>
-            <h3>Solution</h3>
+            <h3>Solution: Provider + custom hook</h3>
             <pre><code class="tsx" style="font-size: 0.58em;">import { createContext, useContext, useState } from "react";
 
 const ThemeContext = createContext(null);
@@ -1309,16 +1342,20 @@ export const useTheme = () => {
     throw new Error("useTheme must be used within ThemeProvider");
   }
   return context;
-};
+};</code></pre>
 
-// Wrap your app
-// &lt;ThemeProvider&gt;&lt;App /&gt;&lt;/ThemeProvider&gt;</code></pre>
           </section>
 
           <!-- Slide 16: Usage -->
           <section>
-            <h3>Usage</h3>
-            <pre><code class="tsx">const Button = () => {
+            <h3>Usage: consuming the context</h3>
+            <pre><code class="tsx" style="font-size: 0.65em;">// 1️⃣ Wrap your app once
+&lt;ThemeProvider&gt;
+  &lt;App /&gt;
+&lt;/ThemeProvider&gt;</code></pre>
+
+            <pre style="margin-top: 1rem;"><code class="tsx" style="font-size: 0.65em;">// 2️⃣ Any component inside can read AND update
+const Button = () => {
   const { theme, toggleTheme } = useTheme();
 
   return (
@@ -1336,7 +1373,7 @@ export const useTheme = () => {
               <p style="font-size: 0.8em">Emphasize:</p>
               <ul style="font-size: 0.8em">
                 <li>Custom hook (useTheme) is BEST PRACTICE</li>
-                <li>Avoid deeply nested providers</li>
+                <li>No prop drilling — Button calls <code>toggleTheme</code> directly</li>
                 <li>Re-renders happen when value changes</li>
               </ul>
             </div>
