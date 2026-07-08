@@ -26,8 +26,6 @@ The default launcher lives at `/`, for example `http://localhost:5173/` during l
 npm run course -- day-1/demo/vite-basics
 npm run course -- day-1/exercises/build-product-card/starter
 npm run course -- day-1/exercises/build-product-card/solution
-npm run course -- day-1/exercises/remote-and-screen/starter
-npm run course -- day-1/exercises/remote-and-screen/solution
 npm run course -- day-2/exercises/fetch-and-render-a-list/solution
 ```
 
@@ -89,11 +87,37 @@ export default function Example() {
 
 ## Current seeded targets
 
-- `day-1/demo/vite-basics`
+### Day 1
+- `day-1/demo/product-counter`
 - `day-1/exercises/build-product-card/starter`
 - `day-1/exercises/build-product-card/solution`
-- `day-1/exercises/remote-and-screen/starter`
-- `day-1/exercises/remote-and-screen/solution`
+- `day-1/exercises/build-product-card-with-prop/starter`
+- `day-1/exercises/build-product-card-with-prop/solution`
+- `day-1/exercises/podcast-episode-cards/starter`
+- `day-1/exercises/podcast-episode-cards/solution`
+
+### Day 2
+- `day-2/exercises/fetch-and-render-a-list/starter`
+- `day-2/exercises/fetch-and-render-a-list/solution`
+- `day-2/exercises/starwars-characters/starter`
+- `day-2/exercises/starwars-characters/solution`
+- `day-2/exercises/task-list/starter`
+- `day-2/exercises/task-list/solution`
+
+### Day 3
+- `day-3/exercises/podcast-navigator/starter`
+- `day-3/exercises/podcast-navigator/solution`
+- `day-3-part-2/exercises/zustand-counter/starter`
+- `day-3-part-2/exercises/zustand-counter/solution`
+
+### Day 4
+- `day-4/demo/react-memo`
+- `day-4/demo/use-memo`
+- `day-4/demo/use-callback`
+- `day-4/exercises/filtered-analytics-summary/starter`
+- `day-4/exercises/filtered-analytics-summary/solution`
+- `day-4/exercises/stable-product-rows/starter`
+- `day-4/exercises/stable-product-rows/solution`
 
 ## Build
 
