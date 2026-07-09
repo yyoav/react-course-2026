@@ -2,15 +2,14 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./ContextDemo.css";
 
-// ─── Deeply nested components that RECEIVE props but DON'T USE them ───
-
-function Header({
-  theme,
-  toggleTheme,
-}: {
+type ThemeProps = {
   theme: string;
   toggleTheme: () => void;
-}) {
+};
+
+// ─── Deeply nested components that RECEIVE props but DON'T USE them ───
+
+function Header({ theme, toggleTheme }: ThemeProps) {
   return (
     <header className="prop-drill-header">
       <Navigation theme={theme} toggleTheme={toggleTheme} />
@@ -18,13 +17,7 @@ function Header({
   );
 }
 
-function Navigation({
-  theme,
-  toggleTheme,
-}: {
-  theme: string;
-  toggleTheme: () => void;
-}) {
+function Navigation({ theme, toggleTheme }: ThemeProps) {
   return (
     <nav className="prop-drill-nav">
       <NavActions theme={theme} toggleTheme={toggleTheme} />
@@ -32,13 +25,7 @@ function Navigation({
   );
 }
 
-function NavActions({
-  theme,
-  toggleTheme,
-}: {
-  theme: string;
-  toggleTheme: () => void;
-}) {
+function NavActions({ theme, toggleTheme }: ThemeProps) {
   return (
     <div className="prop-drill-actions">
       <ThemeButton theme={theme} toggleTheme={toggleTheme} />
@@ -46,13 +33,7 @@ function NavActions({
   );
 }
 
-function ThemeButton({
-  theme,
-  toggleTheme,
-}: {
-  theme: string;
-  toggleTheme: () => void;
-}) {
+function ThemeButton({ theme, toggleTheme }: ThemeProps) {
   return (
     <button onClick={toggleTheme} className="toggle-button">
       Switch to {theme === "light" ? "Dark" : "Light"} Mode
