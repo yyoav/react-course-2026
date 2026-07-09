@@ -1819,6 +1819,46 @@ const Button = () => {
             </svg>
           </section>
 
+          <!-- Slide 18c: Context Performance - Code Example -->
+          <section>
+            <h3>Context performance — in code</h3>
+            <pre><code class="tsx" style="font-size: 0.52em;">// ❌ One big context with everything
+const AppContext = createContext(null);
+
+function AppProvider({ children }) {
+  const [user, setUser] = useState({ name: "John", email: "john@ex.com" });
+  const [theme, setTheme] = useState("dark");
+  const [notifications, setNotifications] = useState(5);
+  const [cart, setCart] = useState({ items: [] });
+
+  return (
+    &lt;AppContext.Provider value={{ user, theme, notifications, cart,
+                                   setUser, setTheme, setNotifications, setCart }}&gt;
+      {children}
+    &lt;/AppContext.Provider&gt;
+  );
+}
+
+// Header only needs theme — but re-renders when notifications change!
+function Header() {
+  const { theme } = useContext(AppContext); // 🔄 re-renders on ANY change
+  return &lt;header className={theme}&gt;...&lt;/header&gt;;
+}
+
+// NotificationBell updates notifications → triggers Header + Cart re-render
+function NotificationBell() {
+  const { notifications, setNotifications } = useContext(AppContext);
+  return (
+    &lt;button onClick={() =&gt; setNotifications(n =&gt; n + 1)}&gt;
+      🔔 {notifications}
+    &lt;/button&gt;
+  );
+}</code></pre>
+            <div class="card" style="margin-top: 0.8rem; background: var(--accent-soft)">
+              <p style="font-size: 0.75em">⚠️ Clicking the bell → <code>notifications</code> changes → <strong>Header</strong> and <strong>Cart</strong> re-render even though they only use <code>theme</code> / <code>cart</code></p>
+            </div>
+          </section>
+
           <!-- Slide 19: Provider Hell Problem -->
           <section>
             <h3>The problem: Provider hell 🔥</h3>
