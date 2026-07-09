@@ -21,11 +21,6 @@ function ContextDemo() {
 
         <div className="content-card">
           <div className="plane-section">
-            <img
-              src="https://seatcompare.ai/images/insights/how-to-check-what-plane-youre-flying.png"
-              alt="Airplane"
-              className="plane-image"
-            />
             <h2>Flying with React Context</h2>
             <p>
               Context provides a way to pass data through the component tree

@@ -119,6 +119,7 @@ function App() {
       <section id="examples-menu">
         <h3>📚 Course Examples - Day 3 Part 2</h3>
         <nav>
+          <Link to="/prop-drilling">Prop Drilling - Theme Toggle (re-renders!)</Link>
           <Link to="/context">Context API - Theme Toggle</Link>
           <Link to="/zustand-todo">Zustand - Todo List</Link>
         </nav>
