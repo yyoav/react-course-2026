@@ -589,71 +589,6 @@
             </p>
           </section>
 
-          <!-- Slide 6a: Pages Router Explained -->
-          <section>
-            <h3>📁 Pages Router (Legacy) - AVRAHAM</h3>
-            <p class="small-text">The traditional Next.js routing system</p>
-
-            <div
-              class="two-col"
-              style="margin-top: 1.5rem; align-items: stretch"
-            >
-              <div>
-                <div
-                  class="card"
-                  style="height: 100%; background: var(--accent-soft)"
-                >
-                  <h4 style="font-size: 0.9em; margin-bottom: 1rem">
-                    Directory Structure
-                  </h4>
-                  <pre><code class="plaintext" style="font-size: 0.6em;">my-app/
-├── pages/
-│   ├── index.tsx        ← / route
-│   ├── about.tsx        ← /about
-│   ├── blog/
-│   │   ├── index.tsx    ← /blog
-│   │   └── [slug].tsx   ← /blog/:slug
-│   └── api/
-│       └── hello.ts     ← API route
-├── public/
-├── styles/
-└── package.json</code></pre>
-                </div>
-              </div>
-
-              <div>
-                <div
-                  class="card"
-                  style="height: 100%; background: var(--accent-soft)"
-                >
-                  <h4 style="font-size: 0.9em; margin-bottom: 1rem">
-                    How it works
-                  </h4>
-                  <ul style="font-size: 0.65em; line-height: 1.6">
-                    <li>Files in <code>pages/</code> → routes</li>
-                    <li>Each file exports a React component</li>
-                    <li>
-                      <span class="highlight"
-                        >Client-side rendering by default</span
-                      >
-                    </li>
-                    <li>
-                      Data fetching with
-                      <code style="color: var(--accent)"
-                        >getServerSideProps</code
-                      >
-                    </li>
-                    <li>
-                      Static generation with
-                      <code style="color: var(--accent)">getStaticProps</code>
-                    </li>
-                    <li><code>_app.tsx</code> for global layout</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </section>
-
           <!-- Slide 6c: App Router vs Pages Router -->
           <section>
             <p class="small-text">Next.js has two routing systems</p>
@@ -930,7 +865,7 @@ All handled by ONE component!</code></pre>
 
           <!-- Slide: Dynamic Parameter Extraction -->
           <section>
-            <h3>Dynamic Parameter Extraction</h3>
+            <h4>Dynamic Parameter Extraction</h4>
             <p class="small-text">How Next.js extracts values from URLs</p>
 
             <div class="two-col" style="margin-top: 1rem">
@@ -987,13 +922,13 @@ All handled by ONE component!</code></pre>
               </div>
             </div>
 
-            <div class="card" style="margin-top: 0.7rem">
-              <h4 style="font-size: 0.45em; margin-bottom: 0.3rem">
+            <div class="card" style="margin-top: 1rem">
+              <h4 style="font-size: 0.65em; margin-bottom: 0.5rem">
                 💡 How It Works
               </h4>
               <pre
                 style="margin: 0"
-              ><code class="tsx" style="font-size: 0.5em;">// page.tsx receives params automatically
+              ><code class="tsx" style="font-size: 0.55em;">// page.tsx receives params automatically
 export default async function PostPage({ params }: { params: Promise&lt;{ slug: string }&gt; }) {
   const { slug } = await params;  // "hello-world"
 
@@ -1002,30 +937,102 @@ export default async function PostPage({ params }: { params: Promise&lt;{ slug: 
   return &lt;article&gt;{post.title}&lt;/article&gt;;
 }</code></pre>
             </div>
+          </section>
+
+          <!-- Slide: Params Type Conversion -->
+          <section>
+            <h5>⚠️ Important: Params Are Always Strings</h5>
+            <p class="small-text">Type conversion is needed for numbers</p>
 
             <div
               class="card"
-              style="margin-top: 0.7rem; background: rgba(251, 191, 36, 0.1)"
+              style="margin-top: 2rem; background: rgba(251, 191, 36, 0.1)"
             >
-              <p style="font-size: 0.55em; margin: 0">
-                ⚠️ <strong>Important:</strong> Params are always
-                <strong>strings</strong>. If you need a number, convert it:
-                <code>const id = parseInt(params.id)</code>
+              <h4 style="font-size: 0.5em; margin-bottom: 1rem; color: #f59e0b">
+                The Problem
+              </h4>
+              <p style="font-size: 0.4em; line-height: 1.6">
+                URL segments are always extracted as <strong>strings</strong>.
+                Even if your URL is <code>/products/123</code>, the param will
+                be <code>"123"</code> (string), not <code>123</code> (number).
+              </p>
+            </div>
+
+            <div class="two-col" style="margin-top: 1.5rem">
+              <div class="card" style="background: rgba(239, 68, 68, 0.1)">
+                <h4 style="font-size: 0.75em; margin-bottom: 0.5rem">
+                  ❌ Wrong
+                </h4>
+                <pre
+                  style="margin: 0"
+                ><code class="tsx" style="font-size: 0.6em;">const { id } = await params;
+// id is "123" (string)
+
+if (id > 100) {  // ⚠️ Comparing string!
+  // Unexpected behavior
+}</code></pre>
+              </div>
+
+              <div class="card" style="background: rgba(34, 197, 94, 0.1)">
+                <h4 style="font-size: 0.75em; margin-bottom: 0.5rem">
+                  ✅ Correct
+                </h4>
+                <pre
+                  style="margin: 0"
+                ><code class="tsx" style="font-size: 0.6em;">const { id: idString } = await params;
+const id = parseInt(idString);
+// id is 123 (number)
+
+if (id > 100) {  // ✅ Comparing number
+  // Works as expected
+}</code></pre>
+              </div>
+            </div>
+
+            <div class="card" style="margin-top: 1rem">
+              <p style="font-size: 0.7em; margin: 0">
+                💡 <strong>Tip:</strong> Use <code>parseInt()</code> for
+                integers, <code>parseFloat()</code> for decimals, or
+                <code>Number()</code> for general conversion.
               </p>
             </div>
           </section>
 
           <!-- Slide: Dynamic Routes Code -->
           <section>
-            <h3>Dynamic Routes</h3>
-            <p class="small-text">Handle routes with parameters</p>
+            <h3 style="font-size: 1.8em; margin-bottom: 0.3rem">
+              Dynamic Routes
+            </h3>
+            <p class="small-text" style="margin-bottom: 0.5rem">
+              Handle routes with parameters
+            </p>
 
-            <div class="two-col" style="margin-top: 1.5rem">
-              <div>
-                <div class="label">
+            <div
+              style="
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 1rem;
+                margin-top: 0.8rem;
+                max-width: 85vw;
+                height: 35rem;
+                width: 70rem;
+                position: relative;
+                left: 50%;
+                transform: translateX(-50%);
+              "
+            >
+              <div style="display: flex; flex-direction: column">
+                <div class="label" style="margin-bottom: 0.3rem">
                   Dynamic slug: app/dynamic/[slug]/page.tsx
                 </div>
-                <pre><code class="tsx" style="font-size: 0.58em;">export default async function DynamicRoute({
+                <pre
+                  style="
+                    flex: 1;
+                    margin: 0;
+                    max-height: none;
+                    overflow: visible;
+                  "
+                ><code class="tsx" style="font-size: 0.68em; line-height: 1.4;">export default async function DynamicRoute({
   params,
 }: {
   params: Promise&lt;{ slug: string }&gt;;
@@ -1042,9 +1049,18 @@ export default async function PostPage({ params }: { params: Promise&lt;{ slug: 
 // URL: /dynamic/my-post → slug = "my-post"</code></pre>
               </div>
 
-              <div>
-                <div class="label">Multiple params</div>
-                <pre><code class="tsx" style="font-size: 0.58em;">// app/shop/[category]/[id]/page.tsx
+              <div style="display: flex; flex-direction: column">
+                <div class="label" style="margin-bottom: 0.3rem">
+                  Multiple params
+                </div>
+                <pre
+                  style="
+                    flex: 1;
+                    margin: 0;
+                    max-height: none;
+                    overflow: visible;
+                  "
+                ><code class="tsx" style="font-size: 0.68em; line-height: 1.4;">// app/shop/[category]/[id]/page.tsx
 
 export default async function ShopItem({
   params,
@@ -1201,190 +1217,6 @@ export default async function ShopItem({
             </div>
           </section>
 
-          <!-- Slide: Why are Dynamic Params Async? -->
-          <section>
-            <h3>Why are Params <code>async</code>? AVRAHAM</h3>
-            <p class="small-text">
-              New in Next.js 15: Optimizing performance via Streams
-            </p>
-
-            <div class="two-col" style="margin-top: 1rem">
-              <div
-                class="card"
-                style="text-align: left; background: var(--accent-soft)"
-              >
-                <h4
-                  style="
-                    font-size: 0.85em;
-                    color: var(--accent);
-                    margin-bottom: 0.5rem;
-                  "
-                >
-                  The Problem (Next.js 14)
-                </h4>
-                <p style="font-size: 0.65em; line-height: 1.4">
-                  If <code>params</code> were synchronous, the server had to
-                  wait for the entire URL to be resolved before rendering
-                  <i>anything</i>.
-                </p>
-              </div>
-
-              <div
-                class="card"
-                style="text-align: left; background: rgba(34, 197, 94, 0.1)"
-              >
-                <h4
-                  style="
-                    font-size: 0.85em;
-                    color: #22c55e;
-                    margin-bottom: 0.5rem;
-                  "
-                >
-                  The Solution (Next.js 15)
-                </h4>
-                <p style="font-size: 0.65em; line-height: 1.4">
-                  <code>params</code> is a Promise. Next.js starts rendering the
-                  <strong>static parts immediately</strong> and pauses only when
-                  you <code>await params</code>.
-                </p>
-              </div>
-            </div>
-
-            <svg
-              class="diagram-svg"
-              viewBox="0 0 800 180"
-              style="
-                margin-top: 1rem;
-                width: 100%;
-                border-radius: 8px;
-                background: rgba(0, 0, 0, 0.2);
-              "
-            >
-              <!-- Static UI sent first -->
-              <rect
-                x="50"
-                y="40"
-                width="200"
-                height="40"
-                rx="4"
-                fill="rgba(255,255,255,0.1)"
-                stroke="#8fb5d8"
-                stroke-width="2"
-              />
-              <text
-                x="150"
-                y="65"
-                text-anchor="middle"
-                fill="#8fb5d8"
-                font-size="16"
-              >
-                1. Send Static UI (Layout)
-              </text>
-
-              <path
-                d="M 260 60 L 320 60"
-                stroke="#888"
-                stroke-width="2"
-                marker-end="url(#arrowhead)"
-              />
-
-              <!-- Wait for params -->
-              <rect
-                x="330"
-                y="40"
-                width="180"
-                height="40"
-                rx="4"
-                fill="rgba(245,158,11,0.2)"
-                stroke="#f59e0b"
-                stroke-width="2"
-              />
-              <text
-                x="420"
-                y="65"
-                text-anchor="middle"
-                fill="#f59e0b"
-                font-size="16"
-              >
-                2. await params (Pause)
-              </text>
-
-              <path
-                d="M 520 60 L 580 60"
-                stroke="#888"
-                stroke-width="2"
-                marker-end="url(#arrowhead)"
-              />
-
-              <!-- Stream dynamic data -->
-              <rect
-                x="590"
-                y="40"
-                width="160"
-                height="40"
-                rx="4"
-                fill="rgba(34,197,94,0.2)"
-                stroke="#22c55e"
-                stroke-width="2"
-              />
-              <text
-                x="670"
-                y="65"
-                text-anchor="middle"
-                fill="#22c55e"
-                font-size="16"
-              >
-                3. Stream Data UI
-              </text>
-
-              <!-- Line 2 -->
-              <text
-                x="400"
-                y="120"
-                text-anchor="middle"
-                fill="#fff"
-                font-size="20"
-              >
-                ⚡ Results & Benefits
-              </text>
-              <rect
-                x="150"
-                y="140"
-                width="220"
-                height="30"
-                rx="15"
-                fill="var(--surface)"
-              />
-              <text
-                x="260"
-                y="160"
-                text-anchor="middle"
-                fill="var(--accent)"
-                font-size="14"
-              >
-                Faster TTFB (First Byte)
-              </text>
-
-              <rect
-                x="430"
-                y="140"
-                width="220"
-                height="30"
-                rx="15"
-                fill="var(--surface)"
-              />
-              <text
-                x="540"
-                y="160"
-                text-anchor="middle"
-                fill="var(--accent)"
-                font-size="14"
-              >
-                Better Static Caching
-              </text>
-            </svg>
-          </section>
-
           <!-- Slide 13: Navigation -->
           <section>
             <h3>Navigation with Link</h3>
@@ -1409,6 +1241,138 @@ export default function Navigation() {
                 <li>✅ Client-side navigation (no page reload)</li>
                 <li>✅ Faster transitions</li>
               </ul>
+            </div>
+          </section>
+
+          <!-- Slide: Root Layout -->
+          <section>
+            <h3>Root Layout</h3>
+            <p class="small-text">
+              The top-level layout that wraps your entire app
+            </p>
+
+            <div
+              class="card"
+              style="
+                margin-top: 1.5rem;
+                text-align: left;
+                background: var(--accent-soft);
+              "
+            >
+              <h4
+                style="
+                  font-size: 0.85em;
+                  margin-bottom: 0.8rem;
+                  color: var(--accent);
+                "
+              >
+                📁 app/layout.tsx
+              </h4>
+              <p
+                style="
+                  font-size: 0.75em;
+                  line-height: 1.7;
+                  margin-bottom: 0.8rem;
+                "
+              >
+                The Root Layout is <strong>required</strong> in every Next.js
+                app. It defines the outermost HTML structure that wraps all
+                pages.
+              </p>
+              <ul style="font-size: 0.75em; line-height: 1.7">
+                <li>
+                  Must return <code>&lt;html&gt;</code> and
+                  <code>&lt;body&gt;</code> tags
+                </li>
+                <li>
+                  Receives a <code>children</code> prop — this is where your
+                  page content renders
+                </li>
+                <li>
+                  Applied to <strong>every page</strong> in your application
+                </li>
+                <li>
+                  Perfect place for global navigation, footer, fonts, and
+                  analytics
+                </li>
+                <li>
+                  Does <strong>not re-render</strong> when users navigate
+                  between pages
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- Slide: Layout Benefits -->
+          <section>
+            <h3 style="font-size: 1.6em">Layout Benefits</h3>
+            <p class="small-text" style="font-size: 0.6em">
+              Why layouts are powerful in Next.js
+            </p>
+
+            <div class="two-col" style="margin-top: 1.5rem; gap: 0.8rem">
+              <div class="card" style="background: rgba(34, 197, 94, 0.1)">
+                <h4 style="font-size: 0.7em; margin-bottom: 0.4rem">
+                  💡 Common Use Cases
+                </h4>
+                <ul style="font-size: 0.65em; line-height: 1.6">
+                  <li>Global navigation bar</li>
+                  <li>Footer</li>
+                  <li>Analytics scripts</li>
+                  <li>Global styles/fonts</li>
+                  <li>Theme providers</li>
+                  <li>Authentication wrappers</li>
+                </ul>
+              </div>
+
+              <div class="card" style="background: rgba(251, 191, 36, 0.1)">
+                <h4 style="font-size: 0.7em; margin-bottom: 0.4rem">
+                  ⚡ Performance Note
+                </h4>
+                <p
+                  style="
+                    font-size: 0.65em;
+                    line-height: 1.6;
+                    margin: 0 0 0.8rem;
+                  "
+                >
+                  Because layouts don't re-render on navigation, your
+                  header/footer stay mounted, making page transitions instant
+                  and smooth.
+                </p>
+                <p
+                  style="
+                    font-size: 0.6em;
+                    line-height: 1.5;
+                    margin: 0;
+                    color: var(--accent);
+                  "
+                >
+                  💡 This means no "flash" when navigating between pages — the
+                  layout stays constant while only the page content changes.
+                </p>
+              </div>
+            </div>
+
+            <div
+              class="card"
+              style="
+                margin-top: 1rem;
+                background: rgba(97, 218, 251, 0.15);
+                border: 2px solid var(--accent);
+              "
+            >
+              <p
+                style="
+                  font-size: 0.6em;
+                  margin: 0;
+                  text-align: center;
+                  color: var(--accent);
+                "
+              >
+                📝 <strong>Note to self:</strong> Show code example from
+                <code>code/day_5/app/layout.tsx</code>
+              </p>
             </div>
           </section>
 
@@ -1628,7 +1592,43 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
             <div class="card" style="margin-top: 1rem">
               <p style="font-size: 0.75em">
-                💡 Layout wraps all pages automatically - no need to import!
+                💡 Layout wraps all APP automatically - no need to import!
+              </p>
+            </div>
+          </section>
+
+          <!-- Slide 14.05: Demo 🛠️ Layouts -->
+          <section>
+            <h3>Demo 🛠️</h3>
+            <div
+              class="card"
+              style="
+                margin-top: 2rem;
+                padding: 2.5rem;
+                text-align: center;
+                background: var(--accent-soft);
+              "
+            >
+              <p
+                style="
+                  font-size: 1.2em;
+                  margin: 0 0 1rem;
+                  color: var(--accent);
+                  font-weight: bold;
+                "
+              >
+                Open the live demo in the course app
+              </p>
+              <p
+                style="
+                  font-size: 0.9em;
+                  margin: 0;
+                  color: var(--text-soft);
+                  line-height: 1.6;
+                "
+              >
+                Explore how layouts work:
+                <code style="color: var(--accent)">app/layout.tsx</code>
               </p>
             </div>
           </section>
@@ -1638,8 +1638,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <h3>Nested Layouts</h3>
             <p class="small-text">Layouts can be nested per route</p>
 
-            <div class="two-col" style="margin-top: 1.5rem">
-              <div class="card" style="text-align: left">
+            <div class="two-col" style="margin-top: 3rem; gap: 2rem">
+              <div
+                class="card"
+                style="
+                  text-align: left;
+                  transform: scale(1);
+                  transform-origin: top center;
+                "
+              >
                 <h4 style="font-size: 0.9em">File Structure</h4>
                 <pre><code class="plaintext" style="font-size: 0.6em;">app/
 ├── layout.tsx         ← Root (Applies to all)
@@ -1649,7 +1656,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     └── page.tsx       ← Basic Routing page</code></pre>
               </div>
 
-              <div class="card" style="text-align: left">
+              <div
+                class="card"
+                style="
+                  text-align: left;
+                  transform: scale(1);
+                  transform-origin: top center;
+                "
+              >
                 <h4 style="font-size: 0.9em">Result</h4>
                 <div
                   style="
@@ -2052,6 +2066,81 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </svg>
           </section>
 
+          <!-- Slide 14.45: What is Hydration? -->
+          <section>
+            <h3 style="font-size: 1.5em">What is Hydration? 💧</h3>
+            <p class="small-text" style="font-size: 0.6em">
+              Making static HTML interactive
+            </p>
+
+            <div
+              class="card"
+              style="
+                margin-top: 1rem;
+                text-align: left;
+                background: rgba(97, 218, 251, 0.1);
+              "
+            >
+              <h4
+                style="
+                  font-size: 0.7em;
+                  margin-bottom: 0.5rem;
+                  color: var(--accent);
+                "
+              >
+                The Process
+              </h4>
+              <p style="font-size: 0.6em; line-height: 1.5; margin-bottom: 0">
+                React "wakes up" server HTML by attaching events & state.
+              </p>
+            </div>
+
+            <div class="two-col" style="margin-top: 1rem; gap: 0.8rem">
+              <div class="card" style="background: rgba(251, 191, 36, 0.1)">
+                <h4 style="font-size: 0.65em; margin-bottom: 0.3rem">
+                  1️⃣ Server sends HTML
+                </h4>
+                <p style="font-size: 0.55em; line-height: 1.5">
+                  Server renders HTML. User sees content but can't interact yet.
+                </p>
+              </div>
+
+              <div class="card" style="background: rgba(97, 218, 251, 0.1)">
+                <h4 style="font-size: 0.65em; margin-bottom: 0.3rem">
+                  2️⃣ React hydrates
+                </h4>
+                <p style="font-size: 0.55em; line-height: 1.5">
+                  React loads & attaches event handlers (onClick, etc.).
+                </p>
+              </div>
+
+              <div class="card" style="background: rgba(34, 197, 94, 0.1)">
+                <h4 style="font-size: 0.65em; margin-bottom: 0.3rem">
+                  3️⃣ Fully interactive
+                </h4>
+                <p style="font-size: 0.55em; line-height: 1.5">
+                  Page becomes fully interactive. All features work.
+                </p>
+              </div>
+
+              <div class="card" style="background: rgba(139, 92, 246, 0.1)">
+                <h4 style="font-size: 0.65em; margin-bottom: 0.3rem">
+                  ⚡ Best of Both
+                </h4>
+                <p style="font-size: 0.55em; line-height: 1.5">
+                  Fast initial load + Full interactivity.
+                </p>
+              </div>
+            </div>
+
+            <div class="card" style="margin-top: 0.8rem">
+              <p style="font-size: 0.6em; margin: 0">
+                💡 React expects server & client HTML to match. Mismatches =
+                hydration errors.
+              </p>
+            </div>
+          </section>
+
           <!-- Slide 14.5: Client vs Server Rendering -->
           <section>
             <h3>Client vs Server Rendering</h3>
@@ -2184,7 +2273,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
           <!-- Slide 15: Server Components -->
           <section>
-            <h3>Server Components</h3>
             <p class="small-text">The default in Next.js App Router</p>
 
             <div class="two-col" style="margin-top: 1.5rem">
@@ -2258,56 +2346,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <code style="color: var(--accent)">/server-component</code>
                 &nbsp;&nbsp;
                 <code style="color: var(--accent)">/rsc-vs-client</code>
-              </p>
-            </div>
-          </section>
-
-          <!-- Slide: Server Components vs SSR -->
-          <section>
-            <h3>Server Components vs SSR - avraham</h3>
-            <p class="small-text">They are NOT the same thing!</p>
-
-            <div style="margin-top: 1rem; text-align: left">
-              <div class="card" style="margin-bottom: 1rem">
-                <h4 style="font-size: 0.8em">Server-Side Rendering (SSR)</h4>
-                <p
-                  style="
-                    font-size: 0.65em;
-                    color: var(--text-soft);
-                    line-height: 1.4;
-                  "
-                >
-                  A technique where a <strong>Client Component</strong> is
-                  pre-rendered into HTML on the server. The JS is still sent to
-                  the browser, and the component "hydrates" to become
-                  interactive.
-                </p>
-              </div>
-
-              <div class="card" style="border-color: var(--accent)">
-                <h4 style="font-size: 0.8em; color: var(--accent)">
-                  React Server Components (RSC)
-                </h4>
-                <p
-                  style="
-                    font-size: 0.65em;
-                    color: var(--text-soft);
-                    line-height: 1.4;
-                  "
-                >
-                  A new type of component that executes <strong>ONLY</strong> on
-                  the server. Its code (JS) is <strong>never</strong> sent to
-                  the browser. It cannot use hooks or state, but it can safely
-                  access databases directly.
-                </p>
-              </div>
-            </div>
-
-            <div class="card" style="margin-top: 1rem; padding: 0.5rem">
-              <p style="font-size: 0.65em; text-align: center">
-                💡 <strong>RSC</strong> reduces bundle size.
-                <strong>SSR</strong> improves initial load time. Next.js uses
-                both!
               </p>
             </div>
           </section>
@@ -2562,7 +2600,7 @@ export default async function StarshipsPage() {
 
           <!-- Slide 17.1: Streaming -->
           <section>
-            <h3>Data Fetching & Streaming</h3>
+            <h3>Data Fetching</h3>
             <p class="small-text">
               Show UI immediately while data continues to load
             </p>
