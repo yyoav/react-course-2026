@@ -43,6 +43,21 @@
   line-height: 1.5;
 }
 
+.arena-stage-file-path {
+  margin: 0;
+  padding: 6px 10px;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 10px;
+  background: rgba(8, 15, 30, 0.55);
+}
+
+.arena-stage-file-path code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 12px;
+  color: #9fc6ea;
+  word-break: break-all;
+}
+
 .arena-stage-switcher {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

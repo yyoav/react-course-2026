@@ -208,7 +208,36 @@
             text-shadow: 0 0 32px rgba(97,218,251,0.5);
         }
         .demo-slide p { color: var(--text-soft); font-size: 0.95em; margin: 0; }
+        .demo-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            margin-top: 0.5rem;
+            padding: 0.5rem 1.1rem;
+            border-radius: 999px;
+            background: var(--accent-soft);
+            color: var(--accent);
+            font-size: 0.55em;
+            font-weight: 700;
+            text-decoration: none;
+            border: 1px solid rgba(97, 218, 251, 0.4);
+        }
+        .demo-link:hover { background: rgba(97, 218, 251, 0.24); }
         .reveal .controls { color: var(--accent) !important; }
+
+        /* Auto-play word reveal (no clicks needed) */
+        .auto-reveal .auto-word { opacity: 0; }
+        .reveal section.present.auto-reveal .auto-word {
+            animation: autoWordIn 0.8s ease forwards;
+        }
+        .reveal section.present.auto-reveal .auto-word:nth-of-type(1) { animation-delay: 0.5s; }
+        .reveal section.present.auto-reveal .auto-word:nth-of-type(2) { animation-delay: 1.8s; }
+        .reveal section.present.auto-reveal .auto-word:nth-of-type(3) { animation-delay: 3.1s; }
+        .reveal section.present.auto-reveal .auto-word:nth-of-type(4) { animation-delay: 4.4s; }
+        @keyframes autoWordIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body>
@@ -429,6 +458,7 @@ function Parent() {
                         <span class="demo-icon">🛠️</span>
                         <h2>Demo Time</h2>
                         <p>React.memo in action</p>
+                        <a class="demo-link" href="/?target=day-4/demo/react-memo" target="_blank" rel="noopener">▶ Open demo</a>
                     </div>
                     <aside class="notes">
                         Live demo: wrap a heavy component in React.memo, show the console.log only fires when props actually change.
@@ -535,6 +565,7 @@ function Dashboard({ products }: { products: Product[] }) {
                         <span class="demo-icon">🛠️</span>
                         <h2>Demo Time</h2>
                         <p>React.memo + useCallback</p>
+                        <a class="demo-link" href="/?target=day-4/demo/use-callback" target="_blank" rel="noopener">▶ Open demo</a>
                     </div>
                     <aside class="notes">
                         Live demo: Dashboard with search input + memoized ProductTable. Show that typing only re-renders Dashboard, not ProductTable. Remove useCallback and show memo breaks.
@@ -573,6 +604,18 @@ function Dashboard({ products }: { products: Product[] }) {
                   );
                 }
                 -->
+
+                <section data-background="linear-gradient(135deg, #10281a 0%, #0a3026 60%, #0d3320 100%)">
+                    <div class="demo-slide">
+                        <span class="demo-icon">🧩</span>
+                        <h2>Exercise</h2>
+                        <p>Stable Product Rows — apply React.memo + useCallback</p>
+                        <a class="demo-link" href="/?target=day-4/exercises/stable-product-rows/starter" target="_blank" rel="noopener">▶ Open exercise</a>
+                    </div>
+                    <aside class="notes">
+                        Hands-on exercise: the product rows re-render on every tick. Students figure out how to stop the unnecessary re-renders using React.memo and useCallback before we move on to useMemo.
+                    </aside>
+                </section>
 
                 <section>
                     <h2 class="slide-title">What Is useMemo?</h2>
@@ -654,6 +697,7 @@ function Stats({ n }: { n: number }) {
                         <span class="demo-icon">🛠️</span>
                         <h2>Demo Time</h2>
                         <p>useMemo — caching expensive calculations</p>
+                        <a class="demo-link" href="/?target=day-4/demo/use-memo" target="_blank" rel="noopener">▶ Open demo</a>
                     </div>
                     <aside class="notes">
                         Live demo: show useMemo with the filtered product list. Comment out useMemo, show the calculation running on every keystroke. Re-add it and show it only runs when deps change.
@@ -676,16 +720,27 @@ function Stats({ n }: { n: number }) {
                     </aside>
                 </section>
 
+                <section data-background="linear-gradient(135deg, #10281a 0%, #0a3026 60%, #0d3320 100%)">
+                    <div class="demo-slide">
+                        <span class="demo-icon">🧩</span>
+                        <h2>Exercise</h2>
+                        <p>Filtered Analytics Summary — memoize the expensive computation</p>
+                        <a class="demo-link" href="/?target=day-4/exercises/filtered-analytics-summary/starter" target="_blank" rel="noopener">▶ Open exercise</a>
+                    </div>
+                    <aside class="notes">
+                        Hands-on exercise: the analytics summary recalculates on every tick. Students work out how to recompute it only when the filter changes, using useMemo.
+                    </aside>
+                </section>
+
                 <section>
                     <h2 class="slide-title">Common Mistakes</h2>
                     <ul>
-                        <li>Overusing memo hooks</li>
-                        <li>Missing dependencies</li>
-                        <li>Optimizing too early</li>
                         <li>Memoizing everything "just in case"</li>
+                        <li>Missing dependencies in the deps array</li>
+                        <li>Optimizing before measuring</li>
                     </ul>
                     <aside class="notes">
-                        Common pitfalls: wrapping everything in memo/useMemo adds complexity without benefit. Missing deps leads to stale closures. Always profile before optimizing.
+                        Common pitfalls: wrapping everything in memo/useMemo adds complexity and cost without benefit. Missing deps leads to stale closures. Passing a fresh object/array/function each render silently defeats React.memo. Always profile before optimizing.
                     </aside>
                 </section>
 
@@ -701,15 +756,14 @@ function Stats({ n }: { n: number }) {
                     </aside>
                 </section>
 
-                <section>
+                <section class="auto-reveal">
                     <h2 style="font-size:2.4em; margin:0;">
-                        <span class="fragment fade-in-then-semi-out" style="display:inline-block;">memo</span>
-                        <span class="fragment fade-in-then-semi-out" style="display:inline-block;">&nbsp;+ useMemo</span>
-                        <span class="fragment fade-in-then-semi-out" style="display:inline-block;">&nbsp;+ useCallback</span>
-                        <span class="fragment fade-in" style="display:inline-block;">&nbsp;= 🗑️</span>
+                        <span class="auto-word" style="display:inline-block;">memo</span>
+                        <span class="auto-word" style="display:inline-block;">&nbsp;+ useCallback</span>
+                        <span class="auto-word" style="display:inline-block;">&nbsp;+ useMemo</span>
+                        <span class="auto-word" style="display:inline-block;">&nbsp;= 🗑️</span>
                     </h2>
-                    <p class="fragment" style="font-size:1.3em; margin-top:1.2rem; color:var(--accent); font-weight:700;">Meet React Compiler.</p>
-                    <p class="fragment small-text" style="margin-top:0.6rem;">It does all of this for you at build time.<br>But understanding the "why" still matters.</p>
+                    <p class="fragment" style="font-size:2.4em; margin-top:1.4rem; color:var(--accent); font-weight:800; text-shadow:0 0 32px rgba(97,218,251,0.55);">Meet React Compiler.</p>
                     <aside class="notes">
                         Humorous pivot — everything we just learned can be handled automatically by the compiler. But the mental model is still essential for debugging and writing correct code.
                     </aside>
@@ -718,6 +772,7 @@ function Stats({ n }: { n: number }) {
                 <section>
                     <div style="display:flex; flex-direction:column; gap:0.8rem;">
                         <h2 style="margin:0; font-size:1.9em; font-weight:800;">React Compiler</h2>
+                        <p class="small-text" style="margin:0;">Introduced in React 19</p>
                         <div class="two-col">
                             <div style="display:flex; flex-direction:column; gap:0.6rem;">
                                 <div class="card" style="font-size:0.82em;">
@@ -835,6 +890,7 @@ export default {
                         <span class="demo-icon">🛠️</span>
                         <h2>Demo Time</h2>
                         <p>React Compiler in action</p>
+                        <a class="demo-link" href="https://playground.react.dev/" target="_blank" rel="noopener">▶ Open React Playground</a>
                     </div>
                     <aside class="notes">
                         Live demo: show a component without manual memoization, enable the compiler, and show that re-renders are automatically skipped.
@@ -851,6 +907,122 @@ export default {
                     </ul>
                     <aside class="notes">
                         The compiler is powerful but not magic. It won't help in every case, not every project can upgrade immediately, and knowing what happens under the hood makes you a better developer.
+                    </aside>
+                </section>
+
+                <section>
+                    <div style="display:flex; flex-direction:column; gap:0.8rem;">
+                        <h2 style="margin:0; font-size:1.9em; font-weight:800;">What Else Is New in React 19?</h2>
+                        <p class="small-text" style="margin:0;">Beyond the compiler — quality-of-life upgrades that simplify everyday development.</p>
+                        <div class="two-col" style="margin-top:0.6rem; align-items:stretch;">
+                            <div class="card" style="font-size:0.82em; display:flex; align-items:center; justify-content:center; text-align:center;">
+                                <strong class="highlight">🔗 The <code>use</code> Hook</strong>
+                            </div>
+                            <div class="card" style="font-size:0.82em; display:flex; align-items:center; justify-content:center; text-align:center;">
+                                <strong class="highlight">🧩 Simplified Context</strong>
+                            </div>
+                            <div class="card" style="font-size:0.82em; display:flex; align-items:center; justify-content:center; text-align:center;">
+                                <strong class="highlight">📄 Document Metadata</strong>
+                            </div>
+                        </div>
+                    </div>
+                    <aside class="notes">
+                        React 19 ships more than the compiler. Over the next few slides we'll look at three everyday improvements: the use hook, simplified context, and native document metadata.
+                    </aside>
+                </section>
+
+                <section>
+                    <h2 class="slide-title">The New <code>use</code> Hook</h2>
+                    <p class="small-text" style="margin:0 0 1rem;">Resolve promises <span class="highlight">directly in render</span> — no more <code>useEffect</code> + <code>useState</code> for simple fetches. Pairs with <code>&lt;Suspense&gt;</code>.</p>
+                    <div class="two-col">
+                        <div>
+                            <p class="small-text" style="margin:0 0 0.4rem;"><strong>Before (Older React)</strong></p>
+                            <pre style="margin:0;"><code class="tsx" style="font-size:0.62em; line-height:1.35;">function Profile({ id }) {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() =&gt; {
+    fetchUser(id).then((u) =&gt; {
+      setData(u);
+      setLoading(false);
+    });
+  }, [id]);
+
+  if (loading) return &lt;Spinner /&gt;;
+  return &lt;h1&gt;{data.name}&lt;/h1&gt;;
+}</code></pre>
+                        </div>
+                        <div>
+                            <p class="small-text" style="margin:0 0 0.4rem;"><strong class="highlight">After (React 19)</strong></p>
+                            <pre style="margin:0;"><code class="tsx" style="font-size:0.62em; line-height:1.35;">function Profile({ userPromise }) {
+  const data = use(userPromise);
+  return &lt;h1&gt;{data.name}&lt;/h1&gt;;
+}
+
+// Parent
+&lt;Suspense fallback={&lt;Spinner /&gt;}&gt;
+  &lt;Profile userPromise={fetchUser(id)} /&gt;
+&lt;/Suspense&gt;</code></pre>
+                        </div>
+                    </div>
+                    <p class="small-text" style="margin:1rem 0 0;"><span class="highlight">&lt;Suspense&gt;</span> lets a component "wait" for async work — it shows a <code>fallback</code> (e.g. a spinner) until the data is ready, then renders the real content.</p>
+                    <aside class="notes">
+                        The use hook lets you read a promise during render. Suspense handles the loading state, so you delete the useEffect/useState boilerplate entirely.
+                    </aside>
+                </section>
+
+                <section>
+                    <h2 class="slide-title">Simplified Context</h2>
+                    <p class="small-text" style="margin:0 0 1rem;">Goodbye <code>.Provider</code> — render the context object <span class="highlight">directly as the component</span>.</p>
+                    <div class="two-col">
+                        <div>
+                            <p class="small-text" style="margin:0 0 0.4rem;"><strong>Before (Older React)</strong></p>
+                            <pre style="margin:0;"><code class="tsx" style="font-size:0.7em; line-height:1.4;">&lt;ThemeContext.Provider value={theme}&gt;
+  &lt;App /&gt;
+&lt;/ThemeContext.Provider&gt;</code></pre>
+                        </div>
+                        <div>
+                            <p class="small-text" style="margin:0 0 0.4rem;"><strong class="highlight">After (React 19)</strong></p>
+                            <pre style="margin:0;"><code class="tsx" style="font-size:0.7em; line-height:1.4;">&lt;ThemeContext value={theme}&gt;
+  &lt;App /&gt;
+&lt;/ThemeContext&gt;</code></pre>
+                        </div>
+                    </div>
+                    <aside class="notes">
+                        You can now use the context object itself as the provider. Less nesting, less ceremony — the .Provider suffix is no longer required.
+                    </aside>
+                </section>
+
+                <section>
+                    <h2 class="slide-title">Native Document Metadata</h2>
+                    <p class="small-text" style="margin:0 0 1rem;">React <span class="highlight">hoists</span> <code>&lt;title&gt;</code>, <code>&lt;meta&gt;</code> and <code>&lt;link&gt;</code> to <code>&lt;head&gt;</code> — no <code>document.title</code>, no <code>react-helmet</code>.</p>
+                    <div class="two-col">
+                        <div>
+                            <p class="small-text" style="margin:0 0 0.4rem;"><strong>Before (Older React)</strong></p>
+                            <pre style="margin:0;"><code class="tsx" style="font-size:0.66em; line-height:1.4;">function Home() {
+  useEffect(() =&gt; {
+    document.title = "Home";
+  }, []);
+
+  return &lt;h1&gt;Home&lt;/h1&gt;;
+}</code></pre>
+                        </div>
+                        <div>
+                            <p class="small-text" style="margin:0 0 0.4rem;"><strong class="highlight">After (React 19)</strong></p>
+                            <pre style="margin:0;"><code class="tsx" style="font-size:0.66em; line-height:1.4;">function Home() {
+  return (
+    &lt;&gt;
+      &lt;title&gt;Home&lt;/title&gt;
+      &lt;meta name="description"
+            content="Welcome" /&gt;
+      &lt;h1&gt;Home&lt;/h1&gt;
+    &lt;/&gt;
+  );
+}</code></pre>
+                        </div>
+                    </div>
+                    <aside class="notes">
+                        Render title, meta and link tags anywhere in your tree — React automatically moves them into the document head. No third-party libraries needed.
                     </aside>
                 </section>
 
