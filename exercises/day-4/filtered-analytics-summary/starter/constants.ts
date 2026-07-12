@@ -12,7 +12,8 @@ export const meta: CourseTargetMeta = {
 }
 
 export const starterTasks = [
-  'Wrap the computeSummary call in useMemo so it only recalculates when filteredEvents changes.',
+  'computeSummary runs on every tick, even when the filtered events are unchanged — can you avoid the extra work?',
+  'How could you recalculate the summary only when the filter actually changes?',
 ]
 
 export const starterHint =

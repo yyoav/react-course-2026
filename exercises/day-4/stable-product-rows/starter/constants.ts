@@ -19,8 +19,8 @@ export const meta: CourseTargetMeta = {
 }
 
 export const starterTasks = [
-  'Wrap ProductRow in React.memo so it only rerenders when its props change.',
-  'Wrap the removeProduct handler in useCallback so the reference stays stable.',
+  'ProductRow rerenders on every tick, even when its props are unchanged — can you stop that?',
+  'The removeProduct handler gets a new reference each render. What could keep it stable?',
 ]
 
 export const starterHint =
