@@ -65,15 +65,6 @@ export default function Home() {
               </Link>
 
               <Link
-                href="/rsc-vs-ssr"
-                className="flex items-center justify-center gap-3 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 px-6 py-4 text-base font-medium text-zinc-900 dark:text-zinc-50 transition-all hover:bg-zinc-50 dark:hover:bg-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700"
-              >
-                <span className="text-2xl">🧩</span>
-                RSC vs SSR
-              </Link>
-
-
-              <Link
                 href="/data-fetching"
                 className="flex items-center justify-center gap-3 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 px-6 py-4 text-base font-medium text-zinc-900 dark:text-zinc-50 transition-all hover:bg-zinc-50 dark:hover:bg-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700"
               >
