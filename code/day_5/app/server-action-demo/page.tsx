@@ -1,8 +1,21 @@
+import { readFile, writeFile } from "node:fs/promises";
+import path from "node:path";
 import { revalidatePath } from "next/cache";
-import { cookies } from "next/headers";
 import Link from "next/link";
 
-const messageCookie = "server-action-message";
+const messageFilePath = path.join(process.cwd(), "data", "shoutout.txt");
+
+async function readShoutout() {
+  try {
+    return await readFile(messageFilePath, "utf8");
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code === "ENOENT") {
+      return null;
+    }
+
+    throw error;
+  }
+}
 
 async function saveShoutout(formData: FormData) {
   "use server";
@@ -13,21 +26,13 @@ async function saveShoutout(formData: FormData) {
     return;
   }
 
-  const cookieStore = await cookies();
-
-  cookieStore.set(messageCookie, message.trim().slice(0, 120), {
-    httpOnly: true,
-    sameSite: "lax",
-    maxAge: 60 * 60 * 24,
-    path: "/server-action-demo",
-  });
+  await writeFile(messageFilePath, message.trim().slice(0, 120), "utf8");
 
   revalidatePath("/server-action-demo");
 }
 
 export default async function ServerActionDemo() {
-  const cookieStore = await cookies();
-  const savedMessage = cookieStore.get(messageCookie)?.value;
+  const savedMessage = await readShoutout();
 
   return (
     <main className="min-h-screen bg-zinc-950 px-6 py-16 text-zinc-50">
@@ -39,8 +44,9 @@ export default async function ServerActionDemo() {
           Send a shoutout without an API route
         </h1>
         <p className="mt-4 text-lg leading-8 text-zinc-300">
-          Submit the form and watch the server validate and save your message.
-          There is no client fetch and no <code>/api</code> endpoint.
+          Submit the form and watch the server validate and save your message
+          in a text file. There is no client fetch and no <code>/api</code>
+          endpoint.
         </p>
 
         <form
@@ -71,7 +77,8 @@ export default async function ServerActionDemo() {
             </button>
           </div>
           <p className="mt-3 text-xs text-zinc-500">
-            The <code>saveShoutout</code> function runs on the server.
+            The <code>saveShoutout</code> function runs on the server and writes
+            to <code>data/shoutout.txt</code>.
           </p>
         </form>
 
