@@ -6,6 +6,7 @@ export interface LessonStage {
   badge: string
   title: string
   summary: string
+  filePath?: string
 }
 
 interface TeachingSwitchesOverlayProps {
@@ -37,6 +38,9 @@ export const TeachingSwitchesOverlay = memo(function TeachingSwitchesOverlay(pro
             <p className="arena-kicker">Teaching switches</p>
             <h3>Problem vs Solution</h3>
             <p>{selectedStage.summary}</p>
+            {selectedStage.filePath && (
+              <p className="arena-stage-file-path"><code>{selectedStage.filePath}</code></p>
+            )}
           </div>
 
           <div className="arena-stage-switcher" role="tablist" aria-label="Toggle between problem and solution">

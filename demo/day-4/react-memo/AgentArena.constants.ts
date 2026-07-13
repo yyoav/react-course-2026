@@ -21,6 +21,7 @@ export const lessonStages = [
     badge: 'A',
     title: 'Problem',
     summary: 'AgentCard is a normal component — every token tick rerenders all 3 cards.',
+    filePath: 'demo/day-4/react-memo/AgentCard.tsx → AgentCard',
     useMemoCard: false,
   },
   {
@@ -28,6 +29,7 @@ export const lessonStages = [
     badge: 'B',
     title: 'Solution',
     summary: 'AgentCard is wrapped with React.memo — unchanged cards skip rerendering.',
+    filePath: 'demo/day-4/react-memo/AgentCard.tsx → memo(AgentCard)',
     useMemoCard: true,
   },
 ]

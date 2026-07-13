@@ -21,6 +21,7 @@ export const lessonStages = [
     badge: 'A',
     title: 'Problem',
     summary: 'A fresh terminate handler is created on every render — this breaks React.memo.',
+    filePath: 'demo/day-4/use-callback/AgentArena.tsx → unstableTerminateAgent',
     useStableHandler: false,
   },
   {
@@ -28,6 +29,7 @@ export const lessonStages = [
     badge: 'B',
     title: 'Solution',
     summary: 'The terminate handler is stabilized with useCallback and a functional state update.',
+    filePath: 'demo/day-4/use-callback/AgentArena.tsx → stableTerminateAgent',
     useStableHandler: true,
   },
 ]

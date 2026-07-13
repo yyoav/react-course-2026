@@ -46,6 +46,7 @@ export const lessonStages = [
     badge: 'A',
     title: 'Problem',
     summary: "findNthPrime runs on every render (every 80ms!) even when agents haven't changed.",
+    filePath: 'demo/day-4/use-memo/AgentArena.tsx → findNthPrime(primeIndex)',
     useMemoized: false,
   },
   {
@@ -53,6 +54,7 @@ export const lessonStages = [
     badge: 'B',
     title: 'Solution',
     summary: 'findNthPrime is wrapped in useMemo — only recomputes when agents.length changes.',
+    filePath: 'demo/day-4/use-memo/AgentArena.tsx → useMemo(() => findNthPrime(primeIndex))',
     useMemoized: true,
   },
 ]
