@@ -216,7 +216,6 @@
     <div class="reveal">
       <div class="slides">
         <section>
-          <!-- Slide 1: Title -->
           <section>
             <div
               style="
@@ -2350,9 +2349,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </div>
           </section>
 
-          <!-- Slide 15.6: Summary CSR vs SSR vs RSC -->
+          <!-- Slide 15.6: Summary CSR vs SSR -->
           <section>
-            <h3>Summary: CSR vs SSR vs RSC</h3>
+            <h3>Summary: CSR vs SSR</h3>
             <p class="small-text">How rendering approaches compare</p>
 
             <table style="margin-top: 1.5rem; font-size: 0.55em; width: 100%">
@@ -2363,11 +2362,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     <strong style="color: #22c55e">CSR</strong> (Vite/React)
                   </th>
                   <th>
-                    <strong style="color: #fbbf24">SSR</strong> (Next.js Client)
-                  </th>
-                  <th>
-                    <strong style="color: var(--accent)">RSC</strong> (Next.js
-                    Server)
+                    <strong style="color: #fbbf24">SSR</strong> (Next.js)
                   </th>
                 </tr>
               </thead>
@@ -2376,50 +2371,43 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   <td><strong>Initial HTML</strong></td>
                   <td>Empty <code>&lt;div&gt;</code></td>
                   <td>Fully rendered</td>
-                  <td>Fully rendered</td>
                 </tr>
                 <tr>
                   <td><strong>JS Bundle Size</strong></td>
-                  <td>Huge (all components)</td>
-                  <td>Large (needs hydration)</td>
-                  <td>
-                    <span style="color: var(--accent)">Zero</span> (no JS sent)
-                  </td>
+                  <td>All components are sent to the browser</td>
+                  <td>Client components are sent for hydration</td>
                 </tr>
                 <tr>
                   <td><strong>Initial Load (User)</strong></td>
-                  <td>Blank white screen</td>
-                  <td>Instant visibility</td>
-                  <td>Instant visibility</td>
+                  <td>UI appears after JavaScript loads</td>
+                  <td>HTML is visible immediately</td>
                 </tr>
                 <tr>
                   <td><strong>Hooks/Interactivity</strong></td>
                   <td>✅ Yes</td>
-                  <td>✅ Yes (after hydration)</td>
-                  <td>❌ No</td>
+                  <td>✅ Yes after hydration</td>
                 </tr>
                 <tr>
                   <td><strong>Direct DB Access</strong></td>
-                  <td>❌ No (must use API)</td>
-                  <td>❌ No (must use API)</td>
-                  <td>✅ Yes</td>
+                  <td>❌ No — use an API or server</td>
+                  <td>✅ Server-rendered code can access the database</td>
                 </tr>
               </tbody>
             </table>
 
             <div class="card" style="margin-top: 1rem">
               <p style="font-size: 0.6em; margin: 0">
-                💡 <strong style="color: var(--accent)">RSC:</strong> Fast and
-                secure, but static.<br />
-                <strong style="color: #fbbf24">SSR:</strong> The compromise.
-                Fast initial load, then becomes interactive CSR.
+                💡 <strong style="color: #22c55e">CSR:</strong> The browser
+                renders the UI and provides interactivity.<br />
+                <strong style="color: #fbbf24">SSR:</strong> The server sends
+                the initial HTML, then client JavaScript can hydrate interactive
+                parts.
               </p>
             </div>
           </section>
 
-          <!-- Slide 15.7: Demo 🛠️ RSC vs SSR -->
-          <section>
-            <h3>Demo 🛠️</h3>
+  <section>
+            <h3>Demo 🛠️: SSR vs CSR</h3>
             <div
               class="card"
               style="
@@ -2437,7 +2425,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   font-weight: bold;
                 "
               >
-                Open the live demo in the course app
+                Open the SSR vs CSR exercise in the course app
               </p>
               <p
                 style="
@@ -2448,11 +2436,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 "
               >
                 Page:
-                <code style="color: var(--accent)">/rsc-vs-ssr</code>
+                <code style="color: var(--accent)">/ssr-vs-csr</code>
+              </p>
+              <p
+                class="small-text"
+                style="margin: 1rem 0 0; line-height: 1.5"
+              >
+                Compare the server-rendered time with the live client clock,
+                then click the counter to see client-side interactivity.
               </p>
             </div>
           </section>
-
           <!-- Slide 16: Client Components -->
           <section>
             <h4>When to Use Client Components</h4>
@@ -2600,7 +2594,7 @@ export default async function StarshipsPage() {
 
           <!-- Slide 17.1: Streaming -->
           <section>
-            <h3>Data Fetching</h3>
+            <h3>Streaming Data with Suspense</h3>
             <p class="small-text">
               Show UI immediately while data continues to load
             </p>
@@ -2623,7 +2617,7 @@ export default async function StarshipsPage() {
             <pre
               style="margin-top: 1rem"
             ><code class="tsx" style="font-size: 0.58em;">import { Suspense } from 'react';
-import { PostFeed, WeatherWidget } from './components';
+import { PostFeed } from './components';
 
 export default function Home() {
   return (
@@ -2634,11 +2628,22 @@ export default function Home() {
       &lt;Suspense fallback={&lt;p&gt;Loading generic feed...&lt;/p&gt;}&gt;
         &lt;PostFeed /&gt;
       &lt;/Suspense&gt;
-
-      &lt;Suspense fallback={&lt;p&gt;Loading weather...&lt;/p&gt;}&gt;
-        &lt;WeatherWidget /&gt;
-      &lt;/Suspense&gt;
     &lt;/main&gt;
+  );
+}
+
+// This async Server Component streams its content
+export async function PostFeed() {
+  const posts = await fetch('https://api.example.com/posts')
+    .then((res) =&gt; res.json());
+
+  return (
+    &lt;section&gt;
+      &lt;h2&gt;Latest Posts&lt;/h2&gt;
+      {posts.map((post) =&gt; (
+        &lt;article key={post.id}&gt;{post.title}&lt;/article&gt;
+      ))}
+    &lt;/section&gt;
   );
 }</code></pre>
           </section>
@@ -2687,17 +2692,58 @@ export default function Home() {
             </p>
 
             <div class="card" style="margin-top: 1rem; text-align: left">
+              <h4 style="font-size: 0.8em; color: var(--accent); margin: 0 0 0.5rem">
+                The idea
+              </h4>
               <p
                 style="
                   font-size: 0.65em;
                   color: var(--text-soft);
                   line-height: 1.4;
+                  margin: 0 0 0.7rem;
                 "
               >
-                No absolutely need to write API routes (/api/*) just to handle a
-                form submission.
+                A Server Action is a server function that a form or button can
+                call directly. Next.js sends the input to the server and runs
+                the function there.
+              </p>
+              <h4 style="font-size: 0.8em; color: var(--accent); margin: 0 0 0.5rem">
+                Why use it instead of REST?
+              </h4>
+              <ul
+                style="
+                  font-size: 0.65em;
+                  color: var(--text-soft);
+                  line-height: 1.4;
+                  margin: 0;
+                  padding-left: 1.2rem;
+                "
+              >
+                <li>Less code for mutations inside one Next.js app.</li>
+                <li>No separate API route, fetch call, or JSON plumbing.</li>
+                <li>Useful for forms that only this app needs to submit.</li>
+              </ul>
+              <p
+                style="
+                  font-size: 0.6em;
+                  color: var(--text-soft);
+                  line-height: 1.4;
+                  margin: 0.7rem 0 0;
+                "
+              >
+                Use REST instead when other apps, mobile clients, or third-party
+                consumers need the same API. Always validate input and check
+                permissions in either approach.
               </p>
             </div>
+          </section>
+
+          <!-- Slide 17.7: Server Actions Code -->
+          <section>
+            <h3>Server Actions: Form Example</h3>
+            <p class="small-text">
+              Submit a form directly to a server-side function
+            </p>
 
             <pre
               style="margin-top: 1rem"
@@ -2717,6 +2763,49 @@ export default function Home() {
     &lt;/form&gt;
   );
 }</code></pre>
+          </section>
+
+          <!-- Slide 17.8: Server Actions Demo -->
+          <section>
+            <h3>Demo 🛠️: Server Actions</h3>
+            <div
+              class="card"
+              style="
+                margin-top: 2rem;
+                padding: 2.5rem;
+                text-align: center;
+                background: var(--accent-soft);
+              "
+            >
+              <p
+                style="
+                  font-size: 1.2em;
+                  margin: 0 0 1rem;
+                  color: var(--accent);
+                  font-weight: bold;
+                "
+              >
+                Try the Server Action in the course app
+              </p>
+              <p
+                style="
+                  font-size: 0.9em;
+                  margin: 0;
+                  color: var(--text-soft);
+                  line-height: 1.6;
+                "
+              >
+                Page:
+                <code style="color: var(--accent)">/server-action-demo</code>
+              </p>
+              <p
+                class="small-text"
+                style="margin: 1rem 0 0; line-height: 1.5"
+              >
+                Submit a shoutout and see it saved by a server function without
+                a separate API route.
+              </p>
+            </div>
           </section>
 
           <!-- Slide 17.8: Special Files -->
@@ -2841,76 +2930,49 @@ export default function Error({
             </div>
           </section>
 
-          <!-- Slide 19: Loading Demo -->
+          <!-- Slide 18.1: Loading States Demo -->
           <section>
-            <h3>Demo: Standard vs Streaming</h3>
-            <p class="small-text">Seeing Suspense in Action</p>
-
-            <div class="card" style="margin-top: 2rem">
-              <p style="font-size: 0.9em; margin-bottom: 2rem">
-                Let's see the visual difference between standard blocking
-                rendering and React Suspense streaming.
-              </p>
-              <a
-                href="http://localhost:3000/streaming-demo"
-                target="_blank"
-                style="
-                  display: inline-block;
-                  padding: 1rem 2rem;
-                  background: var(--accent);
-                  color: #fff;
-                  text-decoration: none;
-                  border-radius: 8px;
-                  font-weight: bold;
-                  font-size: 0.8em;
-                  margin-bottom: 1rem;
-                "
-              >
-                Open Streaming Demo
-              </a>
+            <h3>Demo 🛠️: Loading States</h3>
+            <div
+              class="card"
+              style="
+                margin-top: 2rem;
+                padding: 2.5rem;
+                text-align: center;
+                background: var(--accent-soft);
+              "
+            >
               <p
                 style="
-                  font-size: 0.6em;
-                  color: var(--text-soft);
-                  margin-top: 1rem;
+                  font-size: 1.2em;
+                  margin: 0 0 1rem;
+                  color: var(--accent);
+                  font-weight: bold;
                 "
               >
-                (Try toggling between 'Standard' and 'Streaming' modes)
+                Try the loading state in the course app
+              </p>
+              <p
+                style="
+                  font-size: 0.9em;
+                  margin: 0;
+                  color: var(--text-soft);
+                  line-height: 1.6;
+                "
+              >
+                Page:
+                <code style="color: var(--accent)">/loading-example</code>
+              </p>
+              <p
+                class="small-text"
+                style="margin: 1rem 0 0; line-height: 1.5"
+              >
+                Navigate to the page and watch the loading UI appear while the
+                data is being fetched.
               </p>
             </div>
           </section>
 
-          <!-- Slide 20: Metadata & SEO -->
-          <section>
-            <h3>Metadata & SEO</h3>
-            <p class="small-text">Built-in SEO optimization</p>
-
-            <pre
-              style="margin-top: 1.5rem"
-            ><code class="tsx" style="font-size: 0.6em;">// app/about/page.tsx
-import { Metadata } from 'next';
-
-export const metadata: Metadata = {
-  title: 'About Us',
-  description: 'Learn more about our company',
-  keywords: ['company', 'about', 'team'],
-  openGraph: {
-    title: 'About Us',
-    description: 'Learn more about our company',
-    images: ['/og-image.jpg'],
-  },
-};
-
-export default function About() {
-  return &lt;h1&gt;About Us&lt;/h1&gt;;
-}</code></pre>
-
-            <div class="card" style="margin-top: 1rem">
-              <p style="font-size: 0.75em">
-                ✨ Next.js automatically generates &lt;meta&gt; tags for SEO!
-              </p>
-            </div>
-          </section>
 
           <!-- Slide 22: Best Practices -->
           <section>
@@ -3195,7 +3257,23 @@ export default async function Dashboard() {
   return &lt;Dashboard data={data} /&gt;
 }</code></pre>
               </div>
+            </div>
+          </section>
 
+          <!-- Slide 17.5: When to Use Each Strategy Continued -->
+          <section>
+            <h3>Which Strategy Should I Use? (continued)</h3>
+            <p class="small-text">Decision guide for data fetching</p>
+
+            <div
+              style="
+                margin-top: 1.5rem;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem;
+                font-size: 0.75em;
+              "
+            >
               <div
                 class="card"
                 style="text-align: left; background: rgba(167, 139, 250, 0.14)"
@@ -3276,72 +3354,7 @@ export default function RealTimeChart() {
             </div>
           </section>
 
-          <!-- Slide 17.5: Quick Decision Tree -->
-          <section>
-            <h3>Quick Decision Tree</h3>
-            <p class="small-text">Choose your rendering strategy</p>
 
-            <div
-              class="card"
-              style="
-                margin-top: 1.5rem;
-                padding: 1.5rem;
-                font-size: 0.6em;
-                text-align: left;
-              "
-            >
-              <div style="font-family: monospace; line-height: 1.8">
-                <div>
-                  <strong style="color: var(--accent)"
-                    >🤔 Does the data change?</strong
-                  >
-                </div>
-                <div style="padding-left: 1.5rem">
-                  <div>
-                    ❌ No →
-                    <strong style="color: var(--accent)">Use SSG</strong>
-                    (static generation)
-                  </div>
-                  <div>
-                    ✅ Yes →
-                    <strong style="color: var(--accent)">How often?</strong>
-                  </div>
-                  <div style="padding-left: 3rem">
-                    <div>
-                      ⏰ Every few minutes/hours →
-                      <strong style="color: #a78bfa">Use ISR</strong> (with
-                      revalidate)
-                    </div>
-                    <div>
-                      👤 Per user/request →
-                      <strong style="color: var(--accent)"
-                        >Is it public?</strong
-                      >
-                    </div>
-                    <div style="padding-left: 4.5rem">
-                      <div>
-                        🌍 Yes, public →
-                        <strong style="color: #fbbf24">Use SSR</strong>
-                        (server-side)
-                      </div>
-                      <div>
-                        🔒 No, private →
-                        <strong style="color: #fb923c">Use CSR</strong>
-                        (client-side)
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="card" style="margin-top: 0.8rem">
-              <p style="font-size: 0.6em">
-                <strong>Pro tip:</strong> Start with SSG (default), opt-in to
-                dynamic rendering only when needed!
-              </p>
-            </div>
-          </section>
         </section>
       </div>
     </div>
