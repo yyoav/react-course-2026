@@ -249,8 +249,9 @@
                         <div>
                             <h1>Day 4</h1>
                             <h3>Performance Optimization</h3>
-                            <p>Memoization, Rendering, and React Compiler</p>
+                            <p>Memoization, Rendering, the React Compiler &amp; What's New in React 19</p>
                             <span class="badge">Measure, then optimize</span>
+                            <span class="badge">React 19</span>
                         </div>
                         <div class="hero-visual">
                             <svg class="diagram-svg" viewBox="0 0 520 220" role="img" aria-label="Performance chart illustration">
@@ -900,13 +901,24 @@ export default {
                 <section>
                     <h2 class="slide-title">Why We Still Need the Hooks</h2>
                     <ul>
-                        <li>Not all projects can adopt the compiler yet</li>
-                        <li>The compiler optimizes what it can prove is safe — edge cases remain</li>
-                        <li>Understanding the "why" helps you debug when things go wrong</li>
                         <li>Legacy codebases and libraries still rely on manual memoization</li>
+                        <li>Understanding the "why" helps you debug when things go wrong</li>
+                        <li>React Compiler runs only on components that follow React's rules</li>
                     </ul>
                     <aside class="notes">
-                        The compiler is powerful but not magic. It won't help in every case, not every project can upgrade immediately, and knowing what happens under the hood makes you a better developer.
+                        Manual memoization is still everywhere in legacy code and third-party libraries. Knowing why hooks work the way they do makes you a better debugger. And the compiler is not magic — it can only optimize components that obey React's rules.
+                    </aside>
+                </section>
+
+                <section>
+                    <h2 class="slide-title">React Rules the Compiler Checks</h2>
+                    <ul>
+                        <li>Only call Hooks at the top level of components and custom Hooks</li>
+                        <li>Props and state are immutable; never mutate them directly</li>
+                        <li>No side effects during render — use <code>useEffect</code> for side effects</li>
+                    </ul>
+                    <aside class="notes">
+                        The compiler can only optimize code that follows React's rules. If a component breaks purity, mutates state, or calls hooks conditionally, the compiler skips it or produces a warning. Following these rules is not just good practice — it unlocks automatic memoization.
                     </aside>
                 </section>
 
@@ -1023,6 +1035,19 @@ export default {
                     </div>
                     <aside class="notes">
                         Render title, meta and link tags anywhere in your tree — React automatically moves them into the document head. No third-party libraries needed.
+                    </aside>
+                </section>
+
+                <section>
+                    <h2 class="slide-title">Day 4 Summary</h2>
+                    <ul class="check-list">
+                        <li>Memoization: cache values and functions to avoid unnecessary work</li>
+                        <li>React.memo, useCallback, useMemo — use when you have a real perf problem</li>
+                        <li>React Compiler automates memoization when you follow React's rules</li>
+                        <li>React 19 brings the <code>use</code> hook, simpler Context, and native document metadata</li>
+                    </ul>
+                    <aside class="notes">
+                        Recap the main takeaways: memoization is a powerful tool but not a default, the compiler is the future but requires clean React code, and React 19 has quality-of-life improvements. Measure first, optimize second.
                     </aside>
                 </section>
 
