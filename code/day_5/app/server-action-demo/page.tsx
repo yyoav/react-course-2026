@@ -17,7 +17,7 @@ async function readShoutout() {
   }
 }
 
-async function saveShoutout(formData: FormData) {
+async function saveShoutout(formData: FormData): Promise<void> {
   "use server";
 
   const message = formData.get("message");
