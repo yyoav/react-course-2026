@@ -765,9 +765,9 @@ npm run dev
                   <td>Deep nested route</td>
                 </tr>
                 <tr>
-                  <td>app/dynamic/[slug]/page.tsx</td>
-                  <td>/dynamic/my-post</td>
-                  <td>Dynamic route</td>
+                  <td>app/post/[slug]/page.tsx</td>
+                  <td>/post/my-post</td>
+                  <td>post route</td>
                 </tr>
               </tbody>
             </table>
@@ -819,7 +819,7 @@ All handled by ONE component!</code></pre>
               <pre
                 style="margin: 0"
               ><code class="plaintext" style="font-size: 0.6em;">app/
-└── dynamic/
+└── post/
     └── [slug]/        ← square brackets = dynamic segment
         └── page.tsx   ← receives { params: { slug } }</code></pre>
             </div>
@@ -1022,7 +1022,7 @@ if (id > 100) {  // ✅ Comparing number
             >
               <div style="display: flex; flex-direction: column">
                 <div class="label" style="margin-bottom: 0.3rem">
-                  Dynamic slug: app/dynamic/[slug]/page.tsx
+                  Dynamic slug: app/post/[slug]/page.tsx
                 </div>
                 <pre
                   style="
@@ -1045,7 +1045,7 @@ if (id > 100) {  // ✅ Comparing number
   );
 }
 
-// URL: /dynamic/my-post → slug = "my-post"</code></pre>
+// URL: /post/my-post → slug = "my-post"</code></pre>
               </div>
 
               <div style="display: flex; flex-direction: column">
