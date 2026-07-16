@@ -37,7 +37,7 @@ export default function FilteredAnalyticsSummarySolution() {
     (e) => filter === 'all' || e.category === filter
   )
 
-  const summary = useMemo(() => computeSummary(filteredEvents), [filter])
+  const summary = useMemo(() => computeSummary(filteredEvents), [filteredEvents])
 
   return (
     <div className="lesson-surface">
